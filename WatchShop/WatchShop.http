@@ -1,0 +1,6 @@
+@WatchShop_HostAddress = http://localhost:5004
+
+GET {{WatchShop_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,7 @@
+.containerAdmin{
+    display: flex;
+}
+
+.othersAdmin{
+    flex: 4;
+}
