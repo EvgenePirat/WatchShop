@@ -7,13 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Entities\Identities\" />
-    <Folder Include="Domain\Enums\" />
     <Folder Include="Domain\RepositoryContracts\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="ServiceContracts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
   </ItemGroup>
 
 </Project>
