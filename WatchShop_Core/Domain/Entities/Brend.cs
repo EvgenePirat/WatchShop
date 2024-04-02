@@ -13,7 +13,7 @@ namespace WatchShop_Core.Domain.Entities
         [StringLength(50)]
         public string? Name { get; set; }
 
-        [StringLength(500)]
+        [MaxLength(500)]
         public string? Description { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace WatchShop_Core.Domain.Entities
         [Required]
         public MechanismTypeEnum Name { get; set; }
 
-        [StringLength(500)]
+        [MaxLength(500)]
         public string? Description { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace WatchShop_Core.Domain.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50)]
         public string? NameModel { get; set; }
 
         [Required]
@@ -24,7 +24,7 @@ namespace WatchShop_Core.Domain.Entities
         [Required]
         public double Price { get; set; }
 
-        [StringLength(500)]
+        [MaxLength(500)]
         public string? Description { get; set; }
 
         [Required]
@@ -60,5 +60,27 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("MechanismType")]
         public MechanismType? MechanismType { get; set; }
 
+        [Required]
+        public byte GlassTypeId { get; set; }
+
+        [ForeignKey("GlassTypeId")]
+        public GlassType? GlassType { get; set; }
+
+        [Required]
+        public int ClockFaceId { get; set; }
+
+        [ForeignKey("ClockFaceId")]
+        public ClockFace? ClockFace { get; set; }
+
+        public IEnumerable<WatchAdditionalCharacteristics>? WatchAdditionalCharacteristics { get; set; }
+
+        [Required]
+        public int FrameId { get; set; }
+
+        [ForeignKey("FrameId")]
+        public Frame? Frame { get; set; }
+
+        [Required]
+        public IEnumerable<Cart>? Carts { get; set; }
     }
 }

@@ -26,5 +26,8 @@ namespace WatchShop_Core.Domain.Entities
 
         [ForeignKey("OrderStatusId")]
         public OrderStatus? OrderStatus { get; set; }
+
+        [Required]
+        public IEnumerable<Cart>? Carts { get; set; }
     }
 }
