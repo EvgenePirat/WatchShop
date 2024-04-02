@@ -57,7 +57,7 @@ namespace WatchShop_Core.Domain.Entities
         [Required]
         public byte MechanismTypeId { get; set; }
 
-        [ForeignKey("MechanismType")]
+        [ForeignKey("MechanismTypeId")]
         public MechanismType? MechanismType { get; set; }
 
         [Required]

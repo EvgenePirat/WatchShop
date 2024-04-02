@@ -18,4 +18,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WatchShop_Core\WatchShop_Core.csproj" />
+    <ProjectReference Include="..\WatchShop_Infrastructure\WatchShop_Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
