@@ -16,6 +16,6 @@ namespace WatchShop_Core.Domain.Entities
         [MaxLength(500)]
         public string? Description { get; set; }
 
-        public IEnumerable<WatchAdditionalCharacteristics>? WatchAdditionalCharacteristics { get; set; }
+        public IEnumerable<WatchAdditionalCharacteristic>? WatchAdditionalCharacteristics { get; set; }
     }
 }

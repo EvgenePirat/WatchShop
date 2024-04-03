@@ -36,22 +36,22 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<StrapMaterial> StrapMaterials { get; set; }
         public DbSet<Style> Styles { get; set; }
         public DbSet<Watch> Watches { get; set; }
-        public DbSet<WatchAdditionalCharacteristics> WatchAdditionalCharacteristics { get; set; }
+        public DbSet<WatchAdditionalCharacteristic> WatchAdditionalCharacteristics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<WatchAdditionalCharacteristics>()
+            builder.Entity<WatchAdditionalCharacteristic>()
                 .HasKey(wac => new { wac.WatchId, wac.AdditionalCharacteristicsId });
 
-            builder.Entity<WatchAdditionalCharacteristics>()
+            builder.Entity<WatchAdditionalCharacteristic>()
                 .HasOne(wac => wac.Watch)
                 .WithMany(watch => watch.WatchAdditionalCharacteristics)
                 .HasForeignKey(wac => wac.WatchId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<WatchAdditionalCharacteristics>()
+            builder.Entity<WatchAdditionalCharacteristic>()
                 .HasOne(wac => wac.AdditionalCharacteristics)
                 .WithMany(ach => ach.WatchAdditionalCharacteristics)
                 .HasForeignKey(wac => wac.AdditionalCharacteristicsId)

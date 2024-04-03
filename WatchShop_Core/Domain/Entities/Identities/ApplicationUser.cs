@@ -17,5 +17,7 @@ namespace WatchShop_Core.Domain.Entities.Identities
         public string? Phone { get; set; }
 
         public DateOnly? DateOfBorthd { get; set; }
+
+        public IEnumerable<WatchComment>? Comments { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("watch_additional_characteristics")]
-    public class WatchAdditionalCharacteristics
+    public class WatchAdditionalCharacteristic
     {
         public int WatchId { get; set; }
 
