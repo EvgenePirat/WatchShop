@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("countries")]
     public class Country
     {
         [Key]
@@ -10,5 +12,7 @@ namespace WatchShop_Core.Domain.Entities
 
         [Required]
         public CountryEnum Name { get; set; }
+
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

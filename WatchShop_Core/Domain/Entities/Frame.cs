@@ -4,6 +4,7 @@ using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("Frames")]
     public class Frame
     {
         [Key]
@@ -31,6 +32,8 @@ namespace WatchShop_Core.Domain.Entities
         public int DimensionsId { get; set; }
 
         [ForeignKey("DimensionsId")]
-        public Dimensions? Dimensions { get; set; }
+        public Dimension? Dimensions { get; set; }
+
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

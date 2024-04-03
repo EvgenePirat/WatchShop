@@ -22,7 +22,7 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<ClockFace> ClockFace { get; set; }
         public DbSet<ClockFaceColor> ClockFaceColor { get; set; }
         public DbSet<Country> Country { get; set; }
-        public DbSet<Dimensions> Dimensions { get; set; }
+        public DbSet<Dimension> Dimensions { get; set; }
         public DbSet<Frame> Frames { get; set; }
         public DbSet<FrameColor> FrameColors { get; set; }
         public DbSet<FrameMaterial> FrameMaterials { get; set; }
@@ -43,7 +43,7 @@ namespace WatchShop_Infrastructure.DbContext
             base.OnModelCreating(builder);
 
             builder.Entity<WatchAdditionalCharacteristics>()
-                .HasKey(wac => new { wac.WatchId, wac.AdditionalCharacteristicId });
+                .HasKey(wac => new { wac.WatchId, wac.AdditionalCharacteristicsId });
 
             builder.Entity<WatchAdditionalCharacteristics>()
                 .HasOne(wac => wac.Watch)
@@ -52,9 +52,9 @@ namespace WatchShop_Infrastructure.DbContext
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<WatchAdditionalCharacteristics>()
-                .HasOne(wac => wac.AdditionalCharacteristic)
-                .WithMany()
-                .HasForeignKey(wac => wac.AdditionalCharacteristicId)
+                .HasOne(wac => wac.AdditionalCharacteristics)
+                .WithMany(ach => ach.WatchAdditionalCharacteristics)
+                .HasForeignKey(wac => wac.AdditionalCharacteristicsId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Cart>()

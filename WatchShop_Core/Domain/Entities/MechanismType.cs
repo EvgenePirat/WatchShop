@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("mechanism_types")]
     public class MechanismType
     {
         [Key]
@@ -18,5 +15,7 @@ namespace WatchShop_Core.Domain.Entities
 
         [MaxLength(500)]
         public string? Description { get; set; }
+
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

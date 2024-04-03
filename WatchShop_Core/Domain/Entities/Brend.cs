@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Index("Name", IsUnique = true)]
+    [Table("brends")]
     public class Brend
     {
         [Key]
@@ -15,5 +17,7 @@ namespace WatchShop_Core.Domain.Entities
 
         [MaxLength(500)]
         public string? Description { get; set; }
+
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

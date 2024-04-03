@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
-    public class Dimensions
+    [Table("dimensions")]
+    public class Dimension
     {
         [Key]
         public int Id { get; set; }
@@ -18,5 +20,7 @@ namespace WatchShop_Core.Domain.Entities
 
         [Required]
         public CaseDiameter CaseDiameter { get; set; }
+
+        public IEnumerable<Frame>? Frames { get; set; }
     }
 }

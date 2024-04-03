@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("clock_faces")]
     public class ClockFace
     {
         [Key]
@@ -26,5 +27,6 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("ClockFaceColorId")]
         public ClockFaceColor? ClockFaceColor { get; set; }
 
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

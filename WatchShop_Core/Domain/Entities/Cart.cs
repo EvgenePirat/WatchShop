@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("carts")]
     public class Cart
     {
         public int WatchId { get; set; }

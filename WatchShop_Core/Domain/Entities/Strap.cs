@@ -4,6 +4,7 @@ using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
+    [Table("straps")]
     public class Strap
     {
         [Key]
@@ -17,5 +18,7 @@ namespace WatchShop_Core.Domain.Entities
 
         [ForeignKey("StrapMaterialId")]
         public StrapMaterial? StrapMaterial { get; set; }
+
+        public IEnumerable<Watch>? Watches { get; set; }
     }
 }

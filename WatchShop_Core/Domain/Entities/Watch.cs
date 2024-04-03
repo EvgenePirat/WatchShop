@@ -6,6 +6,7 @@ using WatchShop_Core.Domain.Enums;
 namespace WatchShop_Core.Domain.Entities
 {
     [Index("NameModel", IsUnique = true)]
+    [Table("watches")]
     public class Watch
     {
         [Key]
