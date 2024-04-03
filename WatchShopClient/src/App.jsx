@@ -15,7 +15,7 @@ import Blog from "./pages/Blog"
 import BlogDetails from "./pages/BlogDetails"
 import Contact from "./pages/Contact"
 import Error from "./pages/Error"
-import HomeAdmin from "./admin/pages/HomeAdmin"
+import Admin from "./admin/pages/Admin"
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/doorShop" element={<DoorShop/>}/>
-        <Route path="/admin" element={<HomeAdmin/>}/>
+        <Route path="/admin" element={<Admin/>}/>
         <Route path="/" element={<JewelleryShop/>}/>
         <Route path="/cakeShop" element={<CakeShop/>}/>
         <Route path="/shop" element={<Shop/>}/>

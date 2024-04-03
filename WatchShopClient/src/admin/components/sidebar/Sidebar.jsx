@@ -38,11 +38,11 @@ function Sidebar() {
                     </li>
                     <li className="sidebarListItemAdmin">
                         <StorefrontIcon className='sidebarIcon' />
-                        Products
+                        Watches
                     </li>
                     <li className="sidebarListItemAdmin">
                         <CategoryIcon className='sidebarIcon' />
-                        Categories
+                        Brends
                     </li>
                     <li className="sidebarListItemAdmin">
                         <CommentIcon className='sidebarIcon' />
