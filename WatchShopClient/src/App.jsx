@@ -16,6 +16,8 @@ import BlogDetails from "./pages/BlogDetails"
 import Contact from "./pages/Contact"
 import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
+import Home from '../src/admin/pages/Home'
+import UserList from '../src/admin/pages/UserList'
 
 function App() {
 
@@ -23,7 +25,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/doorShop" element={<DoorShop/>}/>
-        <Route path="/admin" element={<Admin/>}/>
         <Route path="/" element={<JewelleryShop/>}/>
         <Route path="/cakeShop" element={<CakeShop/>}/>
         <Route path="/shop" element={<Shop/>}/>
@@ -37,6 +38,10 @@ function App() {
         <Route path="/blog" element={<Blog/>}/>
         <Route path="/blogDetails" element={<BlogDetails/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path="/admin" element={<Admin />}>
+            <Route index element={<Home />} />
+            <Route path="users" element={<UserList />} />
+        </Route>
         <Route path="*" element={<Error/>}/>
       </Routes>
     </Router>

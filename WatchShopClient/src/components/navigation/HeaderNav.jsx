@@ -43,7 +43,7 @@ const HeaderNav = ({position}) => {
                 </ul>
             </li>
             <li className="fz-nav-item"><Link to="/contact" className="fz-nav-link">Contact</Link></li>
-            <li className="fz-nav-item"><Link to="/admin" className="fz-nav-link">Admin</Link></li>
+            <li className="fz-nav-item"><Link to="/admin/" className="fz-nav-link">Admin</Link></li>
         </ul>
     </nav>
   )
