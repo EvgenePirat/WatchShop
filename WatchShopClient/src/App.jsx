@@ -18,6 +18,7 @@ import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
 import Home from '../src/admin/pages/Home'
 import UserList from '../src/admin/pages/UserList'
+import UserEdit from "./admin/pages/UserEdit"
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin" element={<Admin />}>
             <Route index element={<Home />} />
             <Route path="users" element={<UserList />} />
+            <Route path="user/:id" element={<UserEdit />} />
         </Route>
         <Route path="*" element={<Error/>}/>
       </Routes>

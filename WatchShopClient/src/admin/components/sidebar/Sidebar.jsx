@@ -7,6 +7,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import CategoryIcon from '@mui/icons-material/Category';
 import CommentIcon from '@mui/icons-material/Comment';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -17,7 +18,7 @@ function Sidebar() {
                 <ul className='sidebarListAdmin'>
                     <li className="sidebarListItemAdmin">
                         <LineStyleIcon className='sidebarIcon' />
-                        Home
+                        <Link to="/admin" >Home</Link>
                     </li>
                     <li className="sidebarListItemAdmin">
                         <ShoppingBagIcon className='sidebarIcon' />
@@ -33,8 +34,10 @@ function Sidebar() {
                 <h3 className="sidebarTitle">Quick Menu</h3>
                 <ul className='sidebarListAdmin'>
                     <li className="sidebarListItemAdmin">
-                        <PermIdentityIcon className='sidebarIcon' />
-                        Users
+                        <Link to="/admin/users" > 
+                            <PermIdentityIcon className='sidebarIcon' />
+                            Users
+                        </Link>
                     </li>
                     <li className="sidebarListItemAdmin">
                         <StorefrontIcon className='sidebarIcon' />
