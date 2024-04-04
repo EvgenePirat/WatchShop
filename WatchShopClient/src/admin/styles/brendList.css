@@ -1,0 +1,38 @@
+.brendList{
+    flex: 4;
+}
+
+.brendTitle{
+    padding: 10px;
+    font-size: 30px;
+}
+.brendTitle{
+    padding: 20px;
+    font-size: 30px;
+}
+
+.brendTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brendAddButton{
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 1500px) {
+    .brendTitleContainer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .brendAddButton{
+      margin-top: 10px;
+    }
+  }

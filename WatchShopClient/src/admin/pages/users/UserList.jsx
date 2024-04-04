@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/userList.css'
+import '../../styles/userList.css'
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -54,7 +54,7 @@ const rows = [
 
 function UserList() {
   return (
-    <div style={{ height: '700px', width: '80%' }}>
+    <div style={{ width: '80%', alignItems:"end" }}>
           <DataGrid
             rows={rows}
             columns={columns}

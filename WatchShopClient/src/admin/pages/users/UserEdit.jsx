@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/userEdit.css'
+import '../../styles/userEdit.css'
 
 function UserEdit() {
   return (

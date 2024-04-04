@@ -43,10 +43,13 @@ function Sidebar() {
                         <StorefrontIcon className='sidebarIcon' />
                         Watches
                     </li>
-                    <li className="sidebarListItemAdmin">
-                        <CategoryIcon className='sidebarIcon' />
-                        Brends
-                    </li>
+                    <Link to="/admin/brends" className="sidebarListItemAdmin">
+                        <li>
+                            <CategoryIcon className='sidebarIcon' />
+                            Brends
+                        </li>
+                    </Link>
+
                     <li className="sidebarListItemAdmin">
                         <CommentIcon className='sidebarIcon' />
                         Comments

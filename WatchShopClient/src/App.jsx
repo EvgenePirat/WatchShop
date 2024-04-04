@@ -17,8 +17,10 @@ import Contact from "./pages/Contact"
 import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
 import Home from '../src/admin/pages/Home'
-import UserList from '../src/admin/pages/UserList'
-import UserEdit from "./admin/pages/UserEdit"
+import UserList from '../src/admin/pages/users/UserList'
+import UserEdit from "./admin/pages/users/UserEdit"
+import BrendList from "./admin/pages/brends/BrendList"
+import CreateBrend from "./admin/pages/brends/CreateBrend"
 
 function App() {
 
@@ -43,6 +45,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="users" element={<UserList />} />
             <Route path="user/:id" element={<UserEdit />} />
+            <Route path="brends" element={<BrendList />} />
+            <Route path="brend/create" element={<CreateBrend />} />
         </Route>
         <Route path="*" element={<Error/>}/>
       </Routes>

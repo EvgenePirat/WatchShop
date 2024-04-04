@@ -1,0 +1,72 @@
+.createBrend{
+    flex: 4;
+    margin: 70px;
+    -webkit-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.addBrendForm {
+    margin-top: 10px;
+  }
+  
+  .addBrendItem {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .textAreaBrendStyle{
+    border: 1px solid rgb(72, 63, 63);
+    min-height: 130px;
+  }
+
+  .inputBrendStyle{
+    border: 1px solid rgb(72, 63, 63);
+  }
+  
+  .addBrendItem > label {
+    color: gray;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .addBrendItem > input {
+    padding: 10px;
+  }
+  
+  .addBrendItem > textarea {
+    padding: 10px;
+  }
+
+  .brendContainerButtons{
+    justify-content: space-between;
+  }
+  
+  .addBrendButton {
+    margin-top: 10px;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+
+  .backBrendButton{
+    padding: 7px 10px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    margin-left: 40px;
+    font-weight: 600;
+    cursor: pointer;
+  }
