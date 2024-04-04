@@ -6,3 +6,61 @@
     padding: 20px;
     margin-top: 20px;
 }
+
+.widgetLrTitle{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.widgetLrImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.widgetLrDate, .widgetLrAmount{
+    font-weight: 300;
+}
+
+.widgetLrButtonApproved{
+    background-color: green;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+}
+
+.widgetLrButtonPending{
+    background-color: yellow;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+}
+
+.widgetLrButtonDeclined{
+    background-color: red;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+}
+
+.widgetLrTable{
+    width: 100%;
+    border-spacing: 20px;
+
+}
+
+.widgetLrTt{
+    margin: 20px 0px;
+}
+
+.widgetLrTh{
+    text-align: left;
+}
+
+.widgetlgUser{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
