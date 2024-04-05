@@ -6,25 +6,47 @@ const brendApi = createApi({
         baseUrl:"https://localhost:7103/api/brend/"
     }),
     tagTypes: ["Brends"],
-    endpoints: (buiilder) => ({
-        getBrends: buiilder.query({
+    endpoints: (builder) => ({
+        getBrends: builder.query({
             query: () => ({
                 url:"all",
                 method: "GET"
             }),
             providesTags: ["Brends"],
         }),
-        getBrendById: buiilder.query({
+        getBrendById: builder.query({
             query: (id) => ({
                 url:`${id}`,
                 method: "GET"
             }),
             providesTags: ["Brends"],
+        }),
+        addNewBrend: builder.mutation({
+            query: (newBrend) => ({
+                url: "",
+                method:"POST",
+                body: newBrend,
+            }),
+            invalidatesTags:["Brends"]
+        }),
+        updateBrend: builder.mutation({
+            query: (brend) => ({
+                url:`${brend.id}`,
+                method: "PUT",
+                body: brend,
+            }),
+            invalidatesTags:["Brends"],
+        }),
+        deleteBrend: builder.mutation({
+            query: (id) => ({
+                url:`${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags:["Brends"],
         })
-
     }),
 });
 
-export const {useGetBrendsQuery, useGetBrendByIdQuery} = brendApi;
+export const {useGetBrendsQuery, useGetBrendByIdQuery, useAddNewBrendMutation, useUpdateBrendMutation, useDeleteBrendMutation} = brendApi;
 
 export default brendApi;

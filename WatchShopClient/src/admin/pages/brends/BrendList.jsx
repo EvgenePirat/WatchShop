@@ -3,33 +3,51 @@ import '../../styles/BrendList.css'
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link, NavLink } from 'react-router-dom';
-import { useGetBrendsQuery } from '../../../apis/admin/brendApi';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDeleteBrendMutation, useGetBrendsQuery } from '../../../apis/admin/brendApi';
+import toast, { Toaster } from 'react-hot-toast';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'name', headerName: 'Name', width: 150 },
-  { field: 'description', headerName: 'Description', width: 300 },
-  {
-    field: "action",
-    headerName: "Action",
-    width: 150,
-    renderCell: (params) => {
-      return (
-        <>
-        <Link to={"/admin/user/"+params.row.id}>
-          <EditIcon className='userListButtonEdit' />
-        </Link>
-          <DeleteIcon className='userListButtonDelete' />
-        </>
-      )
-    }
-  }
-];
 function BrendList() {
 
   const {data, isLoading} = useGetBrendsQuery(null)
+  const [deleteBrendMutation] = useDeleteBrendMutation();
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'name', headerName: 'Name', width: 150 },
+    { field: 'description', headerName: 'Description', width: 300 },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+          <Link to={"/admin/user/"+params.row.id}>
+            <EditIcon className='userListButtonEdit' />
+          </Link>
+            <button onClick={() => handleDeleteBrend(params.row.id)}><DeleteIcon className='userListButtonDelete' /></button>
+          </>
+        )
+      }
+    }
+  ];
+
+  const handleDeleteBrend = async (id) => {
+
+      const result = deleteBrendMutation(id)
+
+      result.then(response => {
+        
+        if (response.data.isSuccess) {
+          toast.success(response.data.result)
+        } else {
+          toast.error('brend is not deleted')
+        }
+      })
+
+
+  }
 
   if(isLoading){
     return <div>Loading...</div>
@@ -47,13 +65,15 @@ function BrendList() {
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 15 },
+              paginationModel: { page: 0, pageSize: 10 },
             },
           }}
+          disableRowSelectionOnClick
           pageSizeOptions={[15, 10]}
           checkboxSelection
         />
       </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   )
 }
