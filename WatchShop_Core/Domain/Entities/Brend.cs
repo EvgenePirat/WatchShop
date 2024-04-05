@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Index("Name", IsUnique = true)]
     [Table("brends")]
-    public class Brend
+    public class Brend : IEntity
     {
         [Key]
         public int Id { get; set; }

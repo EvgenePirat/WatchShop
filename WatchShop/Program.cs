@@ -1,7 +1,12 @@
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using WatchShop_Core.DependencyResolvers;
 using WatchShop_Infrastructure.DbContext;
+using WatchShop_Infrastructure.DependencyResolvers;
+using WatchShop_UI.DependencyResolve;
+using WatchShop_UI.Utilities.Middleware.ExceptionsHandlers;
 
 namespace WatchShop
 {
@@ -15,7 +20,27 @@ namespace WatchShop
                     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionBaseDate")));
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+                cors =>
+                {
+                    cors.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .SetIsOriginAllowed((_) => true)
+                        .AllowCredentials();
+                }));
+
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(
+                containerBuilder => containerBuilder.RegisterModule(new BusinessModule()));
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(
+                containerBuilder => containerBuilder.RegisterModule(new MappersModules()));
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(
+                containerBuilder => containerBuilder.RegisterModule(new DataModule()));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -27,6 +52,10 @@ namespace WatchShop
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
 
