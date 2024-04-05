@@ -13,12 +13,16 @@ import 'swiper/scss/pagination';
 import 'react-toastify/dist/ReactToastify.css';
 import { FarzaaContextProvider } from './context/FarzaaContext.jsx'
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import store from './Storage/Redux/store.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FarzaaContextProvider>
-      <App />
-      <ToastContainer/>
-    </FarzaaContextProvider>
+    <Provider store={store}>
+      <FarzaaContextProvider>
+        <App />
+        <ToastContainer/>
+      </FarzaaContextProvider>
+    </Provider>
   </React.StrictMode>,
 )
