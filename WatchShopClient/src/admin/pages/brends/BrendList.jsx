@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
-import '../../styles/BrendList.css'
+import '../../styles/brend/BrendList.css'
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import { useDeleteBrendMutation, useGetBrendsQuery } from '../../../apis/admin/brendApi';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function BrendList() {
 
   const {data, isLoading} = useGetBrendsQuery(null)
   const [deleteBrendMutation] = useDeleteBrendMutation();
+  const navigate = useNavigate();
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -23,9 +25,7 @@ function BrendList() {
       renderCell: (params) => {
         return (
           <>
-          <Link to={"/admin/user/"+params.row.id}>
-            <EditIcon className='userListButtonEdit' />
-          </Link>
+            <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/brend/"+params.row.id, {state: {brend: params.row}})} />
             <button onClick={() => handleDeleteBrend(params.row.id)}><DeleteIcon className='userListButtonDelete' /></button>
           </>
         )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "../../styles/createBrend.css"
+import "../../styles/brend/createBrend.css"
 import { useAddNewBrendMutation } from '../../../apis/admin/brendApi';
 import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
