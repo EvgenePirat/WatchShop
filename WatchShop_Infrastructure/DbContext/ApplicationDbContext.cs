@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Emit;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.Entities.Identities;
 using WatchShop_Core.Domain.Enums;
@@ -75,6 +72,101 @@ namespace WatchShop_Infrastructure.DbContext
                 .Property(cart => cart.Count)
                 .IsRequired();
 
+            builder.Entity<Country>().HasData(Enum.GetValues(typeof(CountryEnum))
+                .Cast<CountryEnum>()
+                .Select((value, index) => new Country
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<AdditionalCharacteristics>().HasData(Enum.GetValues(typeof(AdditionalCharacteristicsEnum))
+                .Cast<AdditionalCharacteristicsEnum>()
+                .Select((value, index) => new AdditionalCharacteristics
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<IndicationKind>().HasData(Enum.GetValues(typeof(IndicationKindEnum))
+                .Cast<IndicationKindEnum>()
+                .Select((value, index) => new IndicationKind
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<IndicationType>().HasData(Enum.GetValues(typeof(IndicationTypeEnum))
+                .Cast<IndicationTypeEnum>()
+                .Select((value, index) => new IndicationType
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<ClockFaceColor>().HasData(Enum.GetValues(typeof(ClockFaceColorEnum))
+                .Cast<ClockFaceColorEnum>()
+                .Select((value, index) => new ClockFaceColor
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<FrameColor>().HasData(Enum.GetValues(typeof(FrameColorEnum))
+                .Cast<FrameColorEnum>()
+                .Select((value, index) => new FrameColor
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<FrameMaterial>().HasData(Enum.GetValues(typeof(FrameMaterialEnum))
+                .Cast<FrameMaterialEnum>()
+                .Select((value, index) => new FrameMaterial
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<GlassType>().HasData(Enum.GetValues(typeof(GlassTypeEnum))
+                .Cast<GlassTypeEnum>()
+                .Select((value, index) => new GlassType
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<MechanismType>().HasData(Enum.GetValues(typeof(MechanismTypeEnum))
+                .Cast<MechanismTypeEnum>()
+                .Select((value, index) => new MechanismType
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<OrderStatus>().HasData(Enum.GetValues(typeof(OrderStatusEnum))
+                .Cast<OrderStatusEnum>()
+                .Select((value, index) => new OrderStatus
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<StrapMaterial>().HasData(Enum.GetValues(typeof(StrapMaterialEnum))
+                .Cast<StrapMaterialEnum>()
+                .Select((value, index) => new StrapMaterial
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
+
+            builder.Entity<Style>().HasData(Enum.GetValues(typeof(StyleEnum))
+                .Cast<StyleEnum>()
+                .Select((value, index) => new Style
+                {
+                    Id = (byte)(index + 1),
+                    Name = value
+                }));
         }
     }
 }
