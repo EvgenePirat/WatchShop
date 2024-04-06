@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.Entities.Identities;
+using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Infrastructure.DbContext
 {
