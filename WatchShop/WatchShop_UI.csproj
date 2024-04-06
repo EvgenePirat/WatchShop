@@ -22,4 +22,8 @@
     <ProjectReference Include="..\WatchShop_Infrastructure\WatchShop_Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Watches\Request\" />
+  </ItemGroup>
+
 </Project>
