@@ -1,4 +1,4 @@
-﻿namespace WatchShop_Core.Domain.Enums
+﻿namespace WatchShop_Core.Models.Enums
 {
     public enum Gender
     {
