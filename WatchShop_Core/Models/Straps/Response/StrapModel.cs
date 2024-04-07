@@ -10,8 +10,6 @@ namespace WatchShop_Core.Models.Straps.Response
 
         public StrapEnum Name { get; set; }
 
-        public byte StrapMaterialId { get; set; }
-
         public StrapMaterialModel? StrapMaterial { get; set; }
     }
 }

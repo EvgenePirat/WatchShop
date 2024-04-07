@@ -23,7 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\Countries\Request\" />
+    <Folder Include="Dtos\GlassTypes\Request\" />
+    <Folder Include="Dtos\MechanismTypes\Request\" />
+    <Folder Include="Dtos\StrapMaterials\Request\" />
+    <Folder Include="Dtos\Straps\Request\" />
+    <Folder Include="Dtos\Styles\Request\" />
     <Folder Include="Dtos\Watches\Request\" />
+    <Folder Include="Dtos\ClockFaces\" />
   </ItemGroup>
 
 </Project>
