@@ -16,4 +16,24 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\AdditionalCharacteristics\Request\" />
+    <Folder Include="Models\ClockFaceColors\Request\" />
+    <Folder Include="Models\ClockFaces\Request\" />
+    <Folder Include="Models\Countries\Request\" />
+    <Folder Include="Models\Dimensions\Request\" />
+    <Folder Include="Models\FrameColors\Request\" />
+    <Folder Include="Models\FrameMaterials\Request\" />
+    <Folder Include="Models\Frames\Request\" />
+    <Folder Include="Models\GlassTypes\Request\" />
+    <Folder Include="Models\IndicationKinds\Response\" />
+    <Folder Include="Models\IndicationTypes\Request\" />
+    <Folder Include="Models\MechanismTypes\Request\" />
+    <Folder Include="Models\StrapMaterials\Request\" />
+    <Folder Include="Models\Straps\Request\" />
+    <Folder Include="Models\Styles\Request\" />
+    <Folder Include="Models\WatchAdditionalCharacteristics\Request\" />
+    <Folder Include="Models\Watches\Request\" />
+  </ItemGroup>
+
 </Project>
