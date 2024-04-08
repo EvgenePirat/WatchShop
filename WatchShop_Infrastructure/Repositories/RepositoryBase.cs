@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Infrastructure.DbContext;
+using WatchShop_Infrastructure.Utilities;
 
 namespace WatchShop_Infrastructure.Repositories
 {
@@ -26,9 +28,9 @@ namespace WatchShop_Infrastructure.Repositories
             dbTable.Remove(entity);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync(params Expression<Func<TEntity, object>>[] includes)
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            return await _context.Set<TEntity>().IncludeMultiple(includes).ToListAsync();
         }
 
         public void Update(TEntity entity)
