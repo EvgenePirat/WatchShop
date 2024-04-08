@@ -1,6 +1,6 @@
 ﻿using WatchShop_Core.Models.Enums;
 
-namespace WatchShop_Core.Models.IndicationKinds.Request
+namespace WatchShop_Core.Models.IndicationKinds.Response
 {
     public class IndicationKindModel
     {

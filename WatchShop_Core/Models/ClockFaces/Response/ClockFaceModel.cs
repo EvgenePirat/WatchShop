@@ -1,5 +1,5 @@
 ﻿using WatchShop_Core.Models.ClockFaceColors.Response;
-using WatchShop_Core.Models.IndicationKinds.Request;
+using WatchShop_Core.Models.IndicationKinds.Response;
 using WatchShop_Core.Models.IndicationTypes.Response;
 
 namespace WatchShop_Core.Models.ClockFaces.Response
