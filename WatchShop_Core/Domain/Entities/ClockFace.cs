@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("clock_faces")]
-    public class ClockFace
+    public class ClockFace : IEntity
     {
         [Key]
         public int Id { get; set; }

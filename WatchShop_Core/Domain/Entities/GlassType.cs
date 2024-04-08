@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("glass_types")]
-    public class GlassType
+    public class GlassType : IEntity
     {
         [Key]
         public byte Id { get; set; }

@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Entities.Identities;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("watch_comments")]
-    public class WatchComment
+    public class WatchComment : IEntity
     {
         [Key]
         public Guid Id { get; set; }

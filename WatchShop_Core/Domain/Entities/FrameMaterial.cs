@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("frame_materials")]
-    public class FrameMaterial
+    public class FrameMaterial : IEntity
     {
         [Key]
         public byte Id { get; set; }
