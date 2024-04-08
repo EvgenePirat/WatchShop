@@ -1,4 +1,5 @@
-﻿using WatchShop_UI.Dtos.Enums;
+﻿using System.Text.Json.Serialization;
+using WatchShop_UI.Dtos.Enums;
 
 namespace WatchShop_UI.Dtos.Dimensions.Response
 {
@@ -14,6 +15,7 @@ namespace WatchShop_UI.Dtos.Dimensions.Response
 
         public double? Weight { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public CaseDiameter CaseDiameter { get; set; }
     }
 }

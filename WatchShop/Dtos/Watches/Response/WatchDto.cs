@@ -1,4 +1,5 @@
-﻿using WatchShop_UI.Dtos.Brends.Response;
+﻿using System.Text.Json.Serialization;
+using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.ClockFaces.Response;
 using WatchShop_UI.Dtos.Countries.Response;
 using WatchShop_UI.Dtos.Enums;
@@ -16,14 +17,17 @@ namespace WatchShop_UI.Dtos.Watches.Response
         public int Id { get; set; }
         public string NameModel { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Gender Gender { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public GuaranteeMonth Guarantee { get; set; }
 
         public double Price { get; set; }
 
         public string? Description { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public TimeFormat TimeFormat { get; set; }
 
         public BrendDto Brend { get; set; }

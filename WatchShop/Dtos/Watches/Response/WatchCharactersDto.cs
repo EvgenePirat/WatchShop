@@ -1,43 +1,58 @@
-﻿using WatchShop_UI.Dtos.Enums;
+﻿using WatchShop_Core.Models.Brends.Response;
+using WatchShop_UI.Dtos.AdditionalCharacteristics.Response;
+using WatchShop_UI.Dtos.Brends.Response;
+using WatchShop_UI.Dtos.ClockFaceColors.Response;
+using WatchShop_UI.Dtos.Countries.Response;
+using WatchShop_UI.Dtos.Enums;
+using WatchShop_UI.Dtos.FrameColors.Response;
+using WatchShop_UI.Dtos.FrameMaterials.Response;
+using WatchShop_UI.Dtos.GlassTypes.Response;
+using WatchShop_UI.Dtos.IndicationKinds.Response;
+using WatchShop_UI.Dtos.IndicationTypes.Response;
+using WatchShop_UI.Dtos.MechanismTypes.Response;
+using WatchShop_UI.Dtos.StrapMaterials.Response;
+using WatchShop_UI.Dtos.Styles.Response;
 
 namespace WatchShop_UI.Dtos.Products.Response
 {
     public class WatchCharactersDto
     {
-        public string[] AdditionalCharacteristicsEnum { get; } = Enum.GetNames<AdditionalCharacteristicsEnum>();
+        public IEnumerable<AdditionalCharacteristicDto> AdditionalCharacteristics { get; set; }
 
-        public string[] CaseDiameter { get; } = Enum.GetNames<CaseDiameter>();
+        public IEnumerable<StrapMaterialDto> StrapMaterials { get; set; }
 
-        public string[] CaseShape { get;  } = Enum.GetNames<CaseShape>();
+        public string[] StrapEnums { get; } = Enum.GetNames<StrapEnum>();
 
-        public string[] ClockFaceColorEnum { get;  } = Enum.GetNames<ClockFaceColorEnum>();
+        public string[] CaseDiameterEnums { get; set; } = Enum.GetNames<CaseDiameter>();
 
-        public string[] CountryEnum { get; } = Enum.GetNames<CountryEnum>();
+        public string[] CaseShapeEnums { get; set; } = Enum.GetNames<CaseShape>();
 
-        public string[] FrameColorEnum { get;} = Enum.GetNames<FrameColorEnum>();
+        public IEnumerable<ClockFaceColorDto> ClockFaceColors { get; set; }
 
-        public string[] FrameMaterialEnum { get;} = Enum.GetNames<FrameMaterialEnum>();
+        public IEnumerable<BrendDto> Brends { get; set; }
 
-        public string[] Gender { get; } = Enum.GetNames<Gender>();
+        public IEnumerable<CountryDto> Countries { get; set; }
 
-        public string[] GlassTypeEnum { get; } = Enum.GetNames<GlassTypeEnum>();
+        public IEnumerable<FrameColorDto> FrameColors { get; set; }
 
-        public string[] GuaranteeMonth { get; } = Enum.GetNames<GuaranteeMonth>();
+        public IEnumerable<FrameMaterialDto> FrameMaterials { get; set; }
 
-        public string[] IndicationKindEnum { get; } = Enum.GetNames<IndicationKindEnum>();
+        public string[] GenderEnums { get; set; } = Enum.GetNames<Gender>();
 
-        public string[] IndicationTypeEnum { get; } = Enum.GetNames<IndicationTypeEnum>();
+        public IEnumerable<GlassTypeDto> GlassTypes { get; set; }
 
-        public string[] MechanismTypeEnum { get; } = Enum.GetNames<MechanismTypeEnum>();
+        public string[] GuaranteeMonth { get; set; } = Enum.GetNames<GuaranteeMonth>();
 
-        public string[] StrapEnum { get; } = Enum.GetNames<StrapEnum>();
+        public IEnumerable<IndicationKindDto> IndicationKinds { get; set; }
 
-        public string[] StrapMaterialEnum { get; } = Enum.GetNames<StrapMaterialEnum>();
+        public IEnumerable<IndicationTypeDto> IndicationTypes { get; set; }
 
-        public string[] StyleEnum { get; } = Enum.GetNames<StyleEnum>();
+        public IEnumerable<MechanismTypeDto> MechanismTypes { get; set; }
 
-        public string[] TimeFormat { get; } = Enum.GetNames<TimeFormat>();
+        public IEnumerable<StyleDto> Styles { get; set; }
 
-        public string[] WaterResistance { get; } = Enum.GetNames<WaterResistance>();
+        public string[] TimeFormatEnums { get; set; } = Enum.GetNames<TimeFormat>();
+
+        public string[] WaterResistanceEnums { get; set; } = Enum.GetNames<WaterResistance>();
     }
 }
