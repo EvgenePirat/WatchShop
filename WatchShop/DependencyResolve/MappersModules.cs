@@ -15,6 +15,41 @@ namespace WatchShop_UI.DependencyResolve
                 cfg.AddProfile(new BrendModelProfile());
                 cfg.AddProfile(new BrendDtoProfile());
 
+                cfg.AddProfile(new AdditionalCharacteristicsModelProfile());
+                cfg.AddProfile(new AdditionalCharacteristicDtoProfile());
+
+                cfg.AddProfile(new ClockFaceColorModelProfile());
+                cfg.AddProfile(new ClockFaceColorDtoProfile());
+
+                cfg.AddProfile(new CountryModelProfile());
+                cfg.AddProfile(new CountryDtoProfile());
+
+                cfg.AddProfile(new FrameColorModelProfile());
+                cfg.AddProfile(new FrameColorDtoProfile());
+
+                cfg.AddProfile(new FrameMaterialModelProfile());
+                cfg.AddProfile(new FrameMaterialDtoProfile());
+
+                cfg.AddProfile(new GlassTypeModelProfile());
+                cfg.AddProfile(new GlassTypeDtoProfile());
+
+                cfg.AddProfile(new IndicationKindModelProfile());
+                cfg.AddProfile(new IndicationKindDtoProfile());
+
+                cfg.AddProfile(new IndicationTypeModelProfile());
+                cfg.AddProfile(new IndicationTypeDtoProfile());
+
+                cfg.AddProfile(new MechanismTypeModelProfile());
+                cfg.AddProfile(new MechanismTypeDtoProfile());
+
+                cfg.AddProfile(new StrapMaterialModelProfile());
+                cfg.AddProfile(new StrapMaterialDtoProfile());
+
+                cfg.AddProfile(new StyleModelProfile());
+                cfg.AddProfile(new StyleDtoProfile());
+
+                cfg.AddProfile(new WatchCharactersDtoProfile());
+
 
             })).SingleInstance();
 
