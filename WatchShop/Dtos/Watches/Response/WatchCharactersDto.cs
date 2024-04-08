@@ -2,7 +2,7 @@
 
 namespace WatchShop_UI.Dtos.Products.Response
 {
-    public class WatchCharacters
+    public class WatchCharactersDto
     {
         public string[] AdditionalCharacteristicsEnum { get; } = Enum.GetNames<AdditionalCharacteristicsEnum>();
 
