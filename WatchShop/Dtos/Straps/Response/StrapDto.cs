@@ -1,5 +1,4 @@
-﻿using WatchShop_Core.Models.StrapMaterials.Response;
-using WatchShop_UI.Dtos.Enums;
+﻿using WatchShop_UI.Dtos.Enums;
 using WatchShop_UI.Dtos.StrapMaterials.Response;
 
 namespace WatchShop_UI.Dtos.Straps.Response

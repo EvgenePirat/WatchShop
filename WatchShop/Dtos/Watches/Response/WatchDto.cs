@@ -1,13 +1,4 @@
-﻿using WatchShop_Core.Models.Brends.Response;
-using WatchShop_Core.Models.ClockFaces.Response;
-using WatchShop_Core.Models.Countries.Response;
-using WatchShop_Core.Models.Frames.Response;
-using WatchShop_Core.Models.GlassTypes.Response;
-using WatchShop_Core.Models.MechanismTypes.Response;
-using WatchShop_Core.Models.Straps.Response;
-using WatchShop_Core.Models.Styles.Response;
-using WatchShop_Core.Models.WatchAdditionalCharacteristics.Response;
-using WatchShop_UI.Dtos.Brends.Response;
+﻿using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.ClockFaces.Response;
 using WatchShop_UI.Dtos.Countries.Response;
 using WatchShop_UI.Dtos.Enums;

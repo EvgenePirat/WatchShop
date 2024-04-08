@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.ServiceContracts;
-using WatchShop_UI.Dtos.Products.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 
 namespace WatchShop_UI.Controllers
