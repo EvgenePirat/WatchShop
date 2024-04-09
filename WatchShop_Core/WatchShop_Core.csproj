@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\AdditionalCharacteristics\Request\" />
     <Folder Include="Models\ClockFaceColors\Request\" />
     <Folder Include="Models\Countries\Request\" />
     <Folder Include="Models\FrameColors\Request\" />
@@ -28,7 +27,6 @@
     <Folder Include="Models\MechanismTypes\Request\" />
     <Folder Include="Models\StrapMaterials\Request\" />
     <Folder Include="Models\Styles\Request\" />
-    <Folder Include="Models\WatchAdditionalCharacteristics\Request\" />
   </ItemGroup>
 
 </Project>

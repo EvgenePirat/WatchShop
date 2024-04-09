@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Core.Exceptions;
 using WatchShop_Core.Models.AdditionalCharacteristics.Response;
@@ -13,6 +14,7 @@ using WatchShop_Core.Models.IndicationTypes.Response;
 using WatchShop_Core.Models.MechanismTypes.Response;
 using WatchShop_Core.Models.StrapMaterials.Response;
 using WatchShop_Core.Models.Styles.Response;
+using WatchShop_Core.Models.Watches.Request;
 using WatchShop_Core.Models.Watches.Response;
 using WatchShop_Core.ServiceContracts;
 
@@ -27,6 +29,58 @@ namespace WatchShop_Core.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public async Task<WatchModel> CreateWatchAsync(CreateWatchModel createWatch)
+        {
+            var transaction = await _unitOfWork.BeginTransactionDbContextAsync();
+
+            try
+            {
+                var watch = _mapper.Map<Watch>(createWatch);
+
+                Watch? checkWatch = await _unitOfWork.WatchRepository.FindByNameModelAsync(createWatch.NameModel);
+
+                if (checkWatch != null)
+                {
+                    throw new WatchArgumentException("Watch with model name already exist");
+                }
+
+                _unitOfWork.WatchRepository.Add(watch);
+
+                await _unitOfWork.SaveAsync();
+
+                transaction.Commit();
+
+                return _mapper.Map<WatchModel>(watch);
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new WatchArgumentException(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<WatchModel>> GetAllWatchesAsync()
+        {
+            var watches = await _unitOfWork.WatchRepository.GetAllAsync(
+                w => w.WatchAdditionalCharacteristics, 
+                w => w.Brend, 
+                w => w.ClockFace, 
+                w => w.ClockFace.ClockFaceColor, 
+                w => w.ClockFace.IndicationKind, 
+                w => w.ClockFace.IndicationType, 
+                w => w.Country, 
+                w => w.Frame, 
+                w => w.Frame.Dimensions, 
+                w => w.Frame.FrameMaterial, 
+                w => w.Frame.FrameColor, 
+                w => w.GlassType, 
+                w => w.MechanismType, 
+                w => w.Strap, 
+                w => w.Style, 
+                w => w.Strap.StrapMaterial);
+            return _mapper.Map<IEnumerable<WatchModel>>(watches);
         }
 
         public async Task<WatchCharactersModel> GetWatchCharactersAsync()
