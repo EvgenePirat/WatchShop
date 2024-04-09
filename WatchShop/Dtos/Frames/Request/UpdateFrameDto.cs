@@ -8,9 +8,9 @@ namespace WatchShop_UI.Dtos.Frames.Request
     {
         public int Id { get; set; }
 
-        public CaseShape CaseShape { get; set; }
+        public string CaseShape { get; set; }
 
-        public WaterResistance WaterResistance { get; set; }
+        public string WaterResistance { get; set; }
 
         public byte FrameMaterialId { get; set; }
 

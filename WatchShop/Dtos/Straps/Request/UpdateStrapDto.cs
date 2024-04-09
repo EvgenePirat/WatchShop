@@ -6,7 +6,7 @@ namespace WatchShop_UI.Dtos.Straps.Request
     {
         public int Id { get; set; }
 
-        public StrapEnum Name { get; set; }
+        public string Name { get; set; }
 
         public byte StrapMaterialId { get; set; }
     }

@@ -14,6 +14,6 @@ namespace WatchShop_UI.Dtos.Dimensions.Request
 
         public double? Weight { get; set; }
 
-        public CaseDiameter CaseDiameter { get; set; }
+        public string CaseDiameter { get; set; }
     }
 }

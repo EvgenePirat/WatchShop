@@ -12,15 +12,15 @@ namespace WatchShop_UI.Dtos.Watches.Request
     {
         public string NameModel { get; set; }
 
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
 
-        public GuaranteeMonth Guarantee { get; set; }
+        public string Guarantee { get; set; }
 
         public double Price { get; set; }
 
         public string? Description { get; set; }
 
-        public TimeFormat TimeFormat { get; set; }
+        public string TimeFormat { get; set; }
 
         public int BrendId { get; set; }
 
