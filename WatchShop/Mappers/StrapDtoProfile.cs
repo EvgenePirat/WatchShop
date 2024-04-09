@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public StrapDtoProfile()
         {
             CreateMap<CreateStrapDto, CreateStrapModel>();
+            CreateMap<UpdateStrapDto, UpdateStrapModel>();
             CreateMap<StrapModel, StrapDto>();
         }
     }

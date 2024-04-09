@@ -10,6 +10,7 @@ namespace WatchShop_Core.Mappers
         public WatchModelProfile()
         {
             CreateMap<CreateWatchModel, Watch>();
+            CreateMap<UpdateWatchModel, Watch>();
             CreateMap<Watch, WatchModel>();
         }
     }

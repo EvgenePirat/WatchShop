@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public DimensionDtoProfile()
         {
             CreateMap<CreateDimensionDto, CreateDimensionModel>();
+            CreateMap<UpdateDimensionDto, UpdateDimensionModel>();
             CreateMap<DimensionModel, DimensionDto>();
         }
     }

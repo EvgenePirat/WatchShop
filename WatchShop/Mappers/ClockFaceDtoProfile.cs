@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public ClockFaceDtoProfile()
         {
             CreateMap<CreateClockFaceDto, CreateClockFaceModel>();
+            CreateMap<UpdateClockFaceDto, UpdateClockFaceModel>();
             CreateMap<ClockFaceModel, ClockFaceDto>();
         }
     }

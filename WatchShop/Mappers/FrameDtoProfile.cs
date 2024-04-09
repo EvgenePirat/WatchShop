@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public FrameDtoProfile()
         {
             CreateMap<CreateFrameDto, CreateFrameModel>();
+            CreateMap<UpdateFrameDto, UpdateFrameModel>();
             CreateMap<FrameModel, FrameDto>();
         }
     }

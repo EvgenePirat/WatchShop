@@ -12,6 +12,7 @@ namespace WatchShop_UI.Mappers
         public WatchDtoProfile()
         {
             CreateMap<CreateWatchDto, CreateWatchModel>();
+            CreateMap<UpdateWatchDto, UpdateWatchModel>();
             CreateMap<WatchModel, WatchDto>();
         }
     }
