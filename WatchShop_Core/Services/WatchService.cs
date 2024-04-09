@@ -83,6 +83,12 @@ namespace WatchShop_Core.Services
             return _mapper.Map<IEnumerable<WatchModel>>(watches);
         }
 
+        public async Task<WatchModel> GetByNameModel(string nameModel)
+        {
+            var watch = await _unitOfWork.WatchRepository.FindByNameModelAsync(nameModel);
+            return _mapper.Map<WatchModel>(watch);
+        }
+
         public async Task<WatchCharactersModel> GetWatchCharactersAsync()
         {
             WatchCharactersModel watchCharacters = new();
@@ -108,6 +114,37 @@ namespace WatchShop_Core.Services
             }
 
             return watchCharacters;
+        }
+
+        public async Task<WatchModel> UpdateWatch(int watchId, UpdateWatchModel updateWatch)
+        {
+            Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("watch by id not found");
+
+            watchFromDb = SetDataForUpdate(watchFromDb, _mapper.Map<Watch>(updateWatch));
+
+            _unitOfWork.WatchRepository.Update(watchFromDb);
+
+            return _mapper.Map<WatchModel>(watchFromDb);     
+        }
+
+        private Watch SetDataForUpdate(Watch watchToUpdate, Watch watchWithNewData)
+        {
+            watchToUpdate.BrendId = watchWithNewData.BrendId;
+            watchToUpdate.ClockFace = watchWithNewData.ClockFace;
+            watchToUpdate.CountryId = watchWithNewData.CountryId;
+            watchToUpdate.Description = watchWithNewData.Description;
+            watchToUpdate.Frame = watchWithNewData.Frame;
+            watchToUpdate.Gender = watchWithNewData.Gender;
+            watchToUpdate.GlassTypeId = watchWithNewData.GlassTypeId;
+            watchToUpdate.Guarantee = watchWithNewData.Guarantee;
+            watchToUpdate.MechanismTypeId = watchWithNewData.MechanismTypeId;
+            watchToUpdate.NameModel = watchWithNewData.NameModel;
+            watchToUpdate.Price = watchWithNewData.Price;
+            watchToUpdate.Strap = watchWithNewData.Strap;
+            watchToUpdate.StyleId = watchWithNewData.StyleId;
+            watchToUpdate.TimeFormat = watchWithNewData.TimeFormat;
+            
+            return watchToUpdate;
         }
     }
 }
