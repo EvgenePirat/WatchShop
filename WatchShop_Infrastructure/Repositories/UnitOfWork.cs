@@ -52,6 +52,9 @@ namespace WatchShop_Infrastructure.Repositories
         private IRepositoryBase<StrapMaterial> _strapMaterialRepositoryBase;
         public IRepositoryBase<StrapMaterial> IStrapMaterialRepositoryBase => _strapMaterialRepositoryBase ??= new RepositoryBase<StrapMaterial>(_context);
 
+        private IWatchRepository _watchRepository;
+        public IWatchRepository WatchRepository => _watchRepository ??= new WatchRepository(_context);
+
         public async Task<IDbContextTransaction> BeginTransactionDbContextAsync()
         {
             return await _context.Database.BeginTransactionAsync();
