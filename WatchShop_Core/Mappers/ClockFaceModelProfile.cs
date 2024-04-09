@@ -11,6 +11,7 @@ namespace WatchShop_Core.Mappers
         {
             CreateMap<CreateClockFaceModel, ClockFace>();
             CreateMap<ClockFace, ClockFaceModel>();
+            CreateMap<UpdateClockFaceModel, ClockFace>();
         }
     }
 }

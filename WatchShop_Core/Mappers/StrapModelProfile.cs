@@ -11,6 +11,7 @@ namespace WatchShop_Core.Mappers
         {
             CreateMap<Strap, StrapModel>();
             CreateMap<CreateStrapModel, Strap>();
+            CreateMap<UpdateStrapModel, Strap>();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace WatchShop_Core.Mappers
         {
             CreateMap<CreateFrameModel, Frame>();
             CreateMap<Frame, FrameModel>();
+            CreateMap<UpdateFrameModel, Frame>();
         }
     }
 }

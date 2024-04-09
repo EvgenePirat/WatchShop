@@ -11,6 +11,7 @@ namespace WatchShop_Core.Mappers
         {
             CreateMap<CreateDimensionModel, Dimension>();
             CreateMap<Dimension, DimensionModel>();
+            CreateMap<UpdateDimensionModel, Dimension>();
         }
     }
 }
