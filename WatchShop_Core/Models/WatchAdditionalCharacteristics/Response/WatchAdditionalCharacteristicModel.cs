@@ -4,6 +4,6 @@ namespace WatchShop_Core.Models.WatchAdditionalCharacteristics.Response
 {
     public class WatchAdditionalCharacteristicModel
     {
-        public AdditionalCharacteristicModel AdditionalCharacteristics { get; set; }
+        public int AdditionalCharacteristicsId { get; set; }
     }
 }

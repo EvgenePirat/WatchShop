@@ -2,6 +2,7 @@
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Request;
 using WatchShop_Core.Models.Straps.Request;
+using WatchShop_Core.Models.WatchAdditionalCharacteristics.Request;
 
 namespace WatchShop_Core.Models.Watches.Request
 {
@@ -34,5 +35,7 @@ namespace WatchShop_Core.Models.Watches.Request
         public CreateClockFaceModel ClockFace { get; set; }
 
         public CreateFrameModel? Frame { get; set; }
+
+        public IEnumerable<CreateWatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
     }
 }
