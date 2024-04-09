@@ -2,11 +2,10 @@
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Request;
 using WatchShop_Core.Models.Straps.Request;
-using WatchShop_Core.Models.WatchAdditionalCharacteristics.Request;
 
 namespace WatchShop_Core.Models.Watches.Request
 {
-    public class CreateWatchModel
+    public class UpdateWatchModel
     {
         public string NameModel { get; set; }
 
@@ -24,7 +23,7 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public byte StyleId { get; set; }
 
-        public CreateStrapModel Strap { get; set; }
+        public UpdateStrapModel? Strap { get; set; }
 
         public byte CountryId { get; set; }
 
@@ -32,10 +31,8 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public byte GlassTypeId { get; set; }
 
-        public CreateClockFaceModel ClockFace { get; set; }
+        public UpdateClockFaceModel ClockFace { get; set; }
 
-        public CreateFrameModel Frame { get; set; }
-
-        public IEnumerable<CreateWatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
+        public UpdateFrameModel Frame { get; set; }
     }
 }
