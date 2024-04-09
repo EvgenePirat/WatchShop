@@ -135,5 +135,25 @@ namespace WatchShop_UI.Controllers
 
             return Ok(response);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<ApiResponse>> DeleteWatchByIdAsync(int id)
+        {
+            _logger.LogInformation("{controller}.{method} - DELETE, delete watch by id, Task started",
+                nameof(WatchController), nameof(DeleteWatchByIdAsync));
+
+            await _watchService.DeleteWatchByIdAsync(id);
+
+            ApiResponse response = new ApiResponse()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Result = $"Watch by id = {id} was delete"
+            };
+
+            _logger.LogInformation("{controller}.{method} - DELETE, delete watch by id, Result - Ok, Task ended",
+                nameof(WatchController), nameof(DeleteWatchByIdAsync));
+
+            return Ok(response);
+        }
     }
 }

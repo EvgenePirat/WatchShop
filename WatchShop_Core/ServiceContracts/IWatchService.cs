@@ -11,5 +11,6 @@ namespace WatchShop_Core.ServiceContracts
         public Task<IEnumerable<WatchModel>> GetAllWatchesAsync();
         public Task<WatchModel> GetByNameModelAsync(string nameModel);
         public Task<WatchModel> UpdateWatchAsync(int watchId, UpdateWatchModel updateWatch);
+        public Task DeleteWatchByIdAsync(int watchId);
     }
 }

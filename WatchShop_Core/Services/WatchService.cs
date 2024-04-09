@@ -61,6 +61,13 @@ namespace WatchShop_Core.Services
             }
         }
 
+        public async Task DeleteWatchByIdAsync(int watchId)
+        {
+            Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("Watch by id not found for delete");
+            _unitOfWork.WatchRepository.Delete(watchFromDb);
+            await _unitOfWork.SaveAsync();
+        }
+
         public async Task<IEnumerable<WatchModel>> GetAllWatchesAsync()
         {
             var watches = await _unitOfWork.WatchRepository.GetAllAsync(
@@ -126,7 +133,7 @@ namespace WatchShop_Core.Services
 
             await _unitOfWork.SaveAsync();
 
-            return _mapper.Map<WatchModel>(watchFromDb);     
+            return _mapper.Map<WatchModel>(await _unitOfWork.WatchRepository.GetByIdAsync(watchId));     
         }
 
         private Watch SetDataForUpdate(Watch watchToUpdate, Watch watchWithNewData)
