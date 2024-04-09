@@ -9,7 +9,7 @@ namespace WatchShop_Core.ServiceContracts
         public Task<WatchCharactersModel> GetWatchCharactersAsync();
         public Task<WatchModel> CreateWatchAsync(CreateWatchModel createWatch);
         public Task<IEnumerable<WatchModel>> GetAllWatchesAsync();
-        public Task<WatchModel> GetByNameModel(string nameModel);
-        public Task<WatchModel> UpdateWatch(int watchId, UpdateWatchModel updateWatch);
+        public Task<WatchModel> GetByNameModelAsync(string nameModel);
+        public Task<WatchModel> UpdateWatchAsync(int watchId, UpdateWatchModel updateWatch);
     }
 }

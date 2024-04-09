@@ -23,7 +23,7 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public byte StyleId { get; set; }
 
-        public UpdateStrapModel? Strap { get; set; }
+        public UpdateStrapModel Strap { get; set; }
 
         public byte CountryId { get; set; }
 

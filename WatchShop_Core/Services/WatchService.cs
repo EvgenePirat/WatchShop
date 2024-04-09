@@ -83,9 +83,9 @@ namespace WatchShop_Core.Services
             return _mapper.Map<IEnumerable<WatchModel>>(watches);
         }
 
-        public async Task<WatchModel> GetByNameModel(string nameModel)
+        public async Task<WatchModel> GetByNameModelAsync(string nameModel)
         {
-            var watch = await _unitOfWork.WatchRepository.FindByNameModelAsync(nameModel);
+            var watch = await _unitOfWork.WatchRepository.FindByNameModelAsync(nameModel) ?? throw new WatchArgumentException("watch by name model not found");
             return _mapper.Map<WatchModel>(watch);
         }
 
@@ -116,7 +116,7 @@ namespace WatchShop_Core.Services
             return watchCharacters;
         }
 
-        public async Task<WatchModel> UpdateWatch(int watchId, UpdateWatchModel updateWatch)
+        public async Task<WatchModel> UpdateWatchAsync(int watchId, UpdateWatchModel updateWatch)
         {
             Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("watch by id not found");
 
@@ -124,23 +124,36 @@ namespace WatchShop_Core.Services
 
             _unitOfWork.WatchRepository.Update(watchFromDb);
 
+            await _unitOfWork.SaveAsync();
+
             return _mapper.Map<WatchModel>(watchFromDb);     
         }
 
         private Watch SetDataForUpdate(Watch watchToUpdate, Watch watchWithNewData)
         {
             watchToUpdate.BrendId = watchWithNewData.BrendId;
-            watchToUpdate.ClockFace = watchWithNewData.ClockFace;
+            watchToUpdate.ClockFace.IndicationKindId = watchWithNewData.ClockFace.IndicationKindId;
+            watchToUpdate.ClockFace.IndicationTypeId = watchWithNewData.ClockFace.IndicationTypeId;
+            watchToUpdate.ClockFace.ClockFaceColorId = watchWithNewData.ClockFace.ClockFaceColorId;
             watchToUpdate.CountryId = watchWithNewData.CountryId;
             watchToUpdate.Description = watchWithNewData.Description;
-            watchToUpdate.Frame = watchWithNewData.Frame;
+            watchToUpdate.Frame.CaseShape = watchWithNewData.Frame.CaseShape;
+            watchToUpdate.Frame.FrameColorId = watchWithNewData.Frame.FrameColorId;
+            watchToUpdate.Frame.FrameMaterialId = watchWithNewData.Frame.FrameMaterialId;
+            watchToUpdate.Frame.WaterResistance = watchWithNewData.Frame.WaterResistance;
+            watchToUpdate.Frame.Dimensions.Length = watchWithNewData.Frame.Dimensions.Length;
+            watchToUpdate.Frame.Dimensions.Thickness = watchWithNewData.Frame.Dimensions.Thickness;
+            watchToUpdate.Frame.Dimensions.Weight = watchWithNewData.Frame.Dimensions.Weight;
+            watchToUpdate.Frame.Dimensions.Width = watchWithNewData.Frame.Dimensions.Width;
+            watchToUpdate.Frame.Dimensions.CaseDiameter = watchWithNewData.Frame.Dimensions.CaseDiameter;
             watchToUpdate.Gender = watchWithNewData.Gender;
             watchToUpdate.GlassTypeId = watchWithNewData.GlassTypeId;
             watchToUpdate.Guarantee = watchWithNewData.Guarantee;
             watchToUpdate.MechanismTypeId = watchWithNewData.MechanismTypeId;
             watchToUpdate.NameModel = watchWithNewData.NameModel;
             watchToUpdate.Price = watchWithNewData.Price;
-            watchToUpdate.Strap = watchWithNewData.Strap;
+            watchToUpdate.Strap.Name = watchWithNewData.Strap.Name;
+            watchToUpdate.Strap.StrapMaterialId = watchWithNewData.Strap.StrapMaterialId;
             watchToUpdate.StyleId = watchWithNewData.StyleId;
             watchToUpdate.TimeFormat = watchWithNewData.TimeFormat;
             
