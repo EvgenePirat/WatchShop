@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using WatchShop_Core.Models.AdditionalCharacteristics.Request;
 using WatchShop_Core.Models.AdditionalCharacteristics.Response;
+using WatchShop_UI.Dtos.AdditionalCharacteristics.Request;
 using WatchShop_UI.Dtos.AdditionalCharacteristics.Response;
 
 namespace WatchShop_UI.Mappers
@@ -9,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public AdditionalCharacteristicDtoProfile()
         {
             CreateMap<AdditionalCharacteristicModel, AdditionalCharacteristicDto>();
+            CreateMap<CreateAdditionalCharacteristicDto, CreateAdditionalCharacteristicModel>();
         }
     }
 }
