@@ -89,5 +89,51 @@ namespace WatchShop_UI.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<ApiResponse>> UpdateWatchAsync(int id, UpdateWatchDto updateWatch)
+        {
+            _logger.LogInformation("{controller}.{method} - PUT, update exist watch, Task started",
+                nameof(WatchController), nameof(UpdateWatchAsync));
+
+            var model = _mapper.Map<UpdateWatchModel>(updateWatch);
+
+            var result = await _watchService.UpdateWatchAsync(id, model);
+
+            var mappedResult = _mapper.Map<WatchDto>(result);
+
+            ApiResponse response = new ApiResponse()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Result = mappedResult
+            };
+
+            _logger.LogInformation("{controller}.{method} - PUT, update exist watch, Result - Ok, Task ended",
+                nameof(WatchController), nameof(UpdateWatchAsync));
+
+            return Ok(response);
+        }
+
+        [HttpGet("{nameModel}")]
+        public async Task<ActionResult<ApiResponse>> GetWatchByNameModelAsync(string nameModel)
+        {
+            _logger.LogInformation("{controller}.{method} - GET, get watch by name model, Task started",
+                nameof(WatchController), nameof(GetWatchByNameModelAsync));
+
+            var result = await _watchService.GetByNameModelAsync(nameModel);
+
+            var mappedResult = _mapper.Map<WatchDto>(result);
+
+            ApiResponse response = new ApiResponse()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Result = mappedResult
+            };
+
+            _logger.LogInformation("{controller}.{method} - Get, get watch by name model, Result - Ok, Task ended",
+                nameof(WatchController), nameof(GetWatchByNameModelAsync));
+
+            return Ok(response);
+        }
     }
 }
