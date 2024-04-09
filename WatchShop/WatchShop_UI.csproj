@@ -23,23 +23,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\AdditionalCharacteristics\Request\" />
     <Folder Include="Dtos\ClockFaceColors\Request\" />
-    <Folder Include="Dtos\ClockFaces\Request\" />
     <Folder Include="Dtos\Countries\Request\" />
-    <Folder Include="Dtos\Dimensions\Request\" />
     <Folder Include="Dtos\FrameColors\Request\" />
     <Folder Include="Dtos\FrameMaterials\Request\" />
-    <Folder Include="Dtos\Frames\Request\" />
     <Folder Include="Dtos\GlassTypes\Request\" />
     <Folder Include="Dtos\IndicationKinds\Request\" />
     <Folder Include="Dtos\IndicationTypes\Request\" />
     <Folder Include="Dtos\MechanismTypes\Request\" />
     <Folder Include="Dtos\StrapMaterials\Request\" />
-    <Folder Include="Dtos\Straps\Request\" />
     <Folder Include="Dtos\Styles\Request\" />
-    <Folder Include="Dtos\WatchAdditionalCharacteristics\Request\" />
-    <Folder Include="Dtos\Watches\Request\" />
   </ItemGroup>
 
 </Project>

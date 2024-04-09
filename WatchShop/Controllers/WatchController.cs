@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using WatchShop_Core.Models.Watches.Request;
 using WatchShop_Core.ServiceContracts;
 using WatchShop_UI.Dtos.Products.Response;
+using WatchShop_UI.Dtos.Watches.Request;
+using WatchShop_UI.Dtos.Watches.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 
 namespace WatchShop_UI.Controllers
@@ -22,10 +25,10 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpGet("characteristic")]
-        public async Task<ActionResult<ApiResponse>> GetWatchCharacteristic()
+        public async Task<ActionResult<ApiResponse>> GetWatchCharacteristicAsync()
         {
             _logger.LogInformation("{controller}.{method} - Get, get watch characteristic, Task started",
-                nameof(WatchController), nameof(GetWatchCharacteristic));
+                nameof(WatchController), nameof(GetWatchCharacteristicAsync));
 
             var result = await _watchService.GetWatchCharactersAsync();
             var mappedResult = _mapper.Map<WatchCharactersDto>(result);
@@ -37,7 +40,52 @@ namespace WatchShop_UI.Controllers
             };
 
             _logger.LogInformation("{controller}.{method} - Get, get watch characteristic, Result - Ok, Task ended",
-                nameof(WatchController), nameof(GetWatchCharacteristic));
+                nameof(WatchController), nameof(GetWatchCharacteristicAsync));
+
+            return Ok(response);
+        }
+
+        [HttpGet("all")]
+        public async Task<ActionResult<ApiResponse>> GetAllWatches()
+        {
+            _logger.LogInformation("{controller}.{method} - Get, get all watches, Task started",
+                nameof(WatchController), nameof(GetAllWatches));
+
+            var result = await _watchService.GetAllWatchesAsync();
+            var mappedResult = _mapper.Map<IEnumerable<WatchDto>>(result);
+
+            ApiResponse response = new ApiResponse()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Result = mappedResult
+            };
+
+            _logger.LogInformation("{controller}.{method} - Get, get all watches, Result - Ok, Task ended",
+                nameof(WatchController), nameof(GetAllWatches));
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ApiResponse>> CreateWatchAsync(CreateWatchDto watchDto)
+        {
+            _logger.LogInformation("{controller}.{method} - POST, create new watch, Task started",
+                nameof(WatchController), nameof(CreateWatchAsync));
+
+            var model = _mapper.Map<CreateWatchModel>(watchDto);
+
+            var result = await _watchService.CreateWatchAsync(model);
+
+            var mappedResult = _mapper.Map<WatchDto>(result);
+
+            ApiResponse response = new ApiResponse()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Result = mappedResult
+            };
+
+            _logger.LogInformation("{controller}.{method} - POST, create new watch, Result - Ok, Task ended",
+                nameof(WatchController), nameof(CreateWatchAsync));
 
             return Ok(response);
         }
