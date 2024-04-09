@@ -4,6 +4,6 @@ namespace WatchShop_UI.Dtos.WatchAdditionalCharacteristics.Response
 {
     public class WatchAdditionalCharacteristicDto
     {
-        public AdditionalCharacteristicDto AdditionalCharacteristics { get; set; }
+        public int AdditionalCharacteristicsId { get; set; }
     }
 }
