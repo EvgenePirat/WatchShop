@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/userList.css'
+import '../../styles/user/userList.css'
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';

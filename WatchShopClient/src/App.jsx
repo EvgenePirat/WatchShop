@@ -21,6 +21,7 @@ import UserList from '../src/admin/pages/users/UserList'
 import UserEdit from "./admin/pages/users/UserEdit"
 import BrendList from "./admin/pages/brends/BrendList"
 import CreateBrend from "./admin/pages/brends/CreateBrend"
+import Brend from "./admin/pages/brends/Brend"
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
             <Route path="users" element={<UserList />} />
             <Route path="user/:id" element={<UserEdit />} />
             <Route path="brends" element={<BrendList />} />
+            <Route path="brend/:id" element={<Brend />} />
             <Route path="brend/create" element={<CreateBrend />} />
         </Route>
         <Route path="*" element={<Error/>}/>

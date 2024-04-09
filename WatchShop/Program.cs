@@ -21,14 +21,16 @@ namespace WatchShop
 
             builder.Services.AddControllers();
 
-            builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
-                cors =>
-                {
-                    cors.AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .SetIsOriginAllowed((_) => true)
-                        .AllowCredentials();
-                }));
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:5173")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -55,7 +57,7 @@ namespace WatchShop
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
-            app.UseCors();
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseHttpsRedirection();
 
