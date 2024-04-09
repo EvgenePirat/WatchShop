@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Models.AdditionalCharacteristics.Request;
 using WatchShop_Core.Models.AdditionalCharacteristics.Response;
 
 namespace WatchShop_Core.Mappers
@@ -9,6 +10,7 @@ namespace WatchShop_Core.Mappers
         public AdditionalCharacteristicsModelProfile()
         {
             CreateMap<AdditionalCharacteristics, AdditionalCharacteristicModel>();
+            CreateMap<CreateAdditionalCharacteristicModel, AdditionalCharacteristics>();
         }
     }
 }
