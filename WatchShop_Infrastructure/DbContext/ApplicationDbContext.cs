@@ -47,13 +47,13 @@ namespace WatchShop_Infrastructure.DbContext
                 .HasOne(wac => wac.Watch)
                 .WithMany(watch => watch.WatchAdditionalCharacteristics)
                 .HasForeignKey(wac => wac.WatchId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<WatchAdditionalCharacteristic>()
                 .HasOne(wac => wac.AdditionalCharacteristics)
                 .WithMany(ach => ach.WatchAdditionalCharacteristics)
                 .HasForeignKey(wac => wac.AdditionalCharacteristicsId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Cart>()
                 .HasKey(cart => new { cart.OrderId, cart.WatchId });

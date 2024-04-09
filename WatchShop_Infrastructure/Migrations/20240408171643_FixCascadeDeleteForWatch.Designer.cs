@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchShop_Infrastructure.DbContext;
 
@@ -11,9 +12,11 @@ using WatchShop_Infrastructure.DbContext;
 namespace WatchShop_Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408171643_FixCascadeDeleteForWatch")]
+    partial class FixCascadeDeleteForWatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1307,11 +1310,8 @@ namespace WatchShop_Infrastructure.Migrations
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<byte>("Id")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("Name")
                         .HasColumnType("int");
@@ -1484,8 +1484,8 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StrapId")
-                        .HasColumnType("int");
+                    b.Property<byte>("StrapId")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte>("StyleId")
                         .HasColumnType("tinyint");

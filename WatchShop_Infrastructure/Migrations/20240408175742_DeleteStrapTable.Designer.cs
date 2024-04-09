@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchShop_Infrastructure.DbContext;
 
@@ -11,9 +12,11 @@ using WatchShop_Infrastructure.DbContext;
 namespace WatchShop_Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408175742_DeleteStrapTable")]
+    partial class DeleteStrapTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1305,27 +1308,6 @@ namespace WatchShop_Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("StrapMaterialId")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StrapMaterialId");
-
-                    b.ToTable("straps");
-                });
-
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.StrapMaterial", b =>
                 {
                     b.Property<byte>("Id")
@@ -1337,68 +1319,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("strap_materials");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = (byte)1,
-                            Name = 0
-                        },
-                        new
-                        {
-                            Id = (byte)2,
-                            Name = 1
-                        },
-                        new
-                        {
-                            Id = (byte)3,
-                            Name = 2
-                        },
-                        new
-                        {
-                            Id = (byte)4,
-                            Name = 3
-                        },
-                        new
-                        {
-                            Id = (byte)5,
-                            Name = 4
-                        },
-                        new
-                        {
-                            Id = (byte)6,
-                            Name = 5
-                        },
-                        new
-                        {
-                            Id = (byte)7,
-                            Name = 6
-                        },
-                        new
-                        {
-                            Id = (byte)8,
-                            Name = 7
-                        },
-                        new
-                        {
-                            Id = (byte)9,
-                            Name = 8
-                        },
-                        new
-                        {
-                            Id = (byte)10,
-                            Name = 9
-                        },
-                        new
-                        {
-                            Id = (byte)11,
-                            Name = 10
-                        },
-                        new
-                        {
-                            Id = (byte)12,
-                            Name = 11
-                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Style", b =>
@@ -1484,9 +1404,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StrapId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("StyleId")
                         .HasColumnType("tinyint");
 
@@ -1509,8 +1426,6 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("NameModel")
                         .IsUnique();
-
-                    b.HasIndex("StrapId");
 
                     b.HasIndex("StyleId");
 
@@ -1704,17 +1619,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
-                {
-                    b.HasOne("WatchShop_Core.Domain.Entities.StrapMaterial", "StrapMaterial")
-                        .WithMany("Straps")
-                        .HasForeignKey("StrapMaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("StrapMaterial");
-                });
-
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Watch", b =>
                 {
                     b.HasOne("WatchShop_Core.Domain.Entities.Brend", "Brend")
@@ -1753,12 +1657,6 @@ namespace WatchShop_Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WatchShop_Core.Domain.Entities.Strap", "Strap")
-                        .WithMany("Watches")
-                        .HasForeignKey("StrapId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WatchShop_Core.Domain.Entities.Style", "Style")
                         .WithMany("Watches")
                         .HasForeignKey("StyleId")
@@ -1776,8 +1674,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Navigation("GlassType");
 
                     b.Navigation("MechanismType");
-
-                    b.Navigation("Strap");
 
                     b.Navigation("Style");
                 });
@@ -1893,16 +1789,6 @@ namespace WatchShop_Infrastructure.Migrations
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.OrderStatus", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
-                {
-                    b.Navigation("Watches");
-                });
-
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.StrapMaterial", b =>
-                {
-                    b.Navigation("Straps");
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Style", b =>

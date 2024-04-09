@@ -6,7 +6,7 @@ namespace WatchShop_Core.Models.Straps.Response
 {
     public class StrapModel
     {
-        public byte Id { get; set; }
+        public int Id { get; set; }
 
         public StrapEnum Name { get; set; }
 

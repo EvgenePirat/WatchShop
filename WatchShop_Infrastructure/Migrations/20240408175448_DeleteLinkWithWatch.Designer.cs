@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchShop_Infrastructure.DbContext;
 
@@ -11,9 +12,11 @@ using WatchShop_Infrastructure.DbContext;
 namespace WatchShop_Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240408175448_DeleteLinkWithWatch")]
+    partial class DeleteLinkWithWatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1307,11 +1310,8 @@ namespace WatchShop_Infrastructure.Migrations
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<byte>("Id")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("Name")
                         .HasColumnType("int");
@@ -1484,9 +1484,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StrapId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("StyleId")
                         .HasColumnType("tinyint");
 
@@ -1509,8 +1506,6 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("NameModel")
                         .IsUnique();
-
-                    b.HasIndex("StrapId");
 
                     b.HasIndex("StyleId");
 
@@ -1707,7 +1702,7 @@ namespace WatchShop_Infrastructure.Migrations
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
                     b.HasOne("WatchShop_Core.Domain.Entities.StrapMaterial", "StrapMaterial")
-                        .WithMany("Straps")
+                        .WithMany()
                         .HasForeignKey("StrapMaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1753,12 +1748,6 @@ namespace WatchShop_Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WatchShop_Core.Domain.Entities.Strap", "Strap")
-                        .WithMany("Watches")
-                        .HasForeignKey("StrapId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WatchShop_Core.Domain.Entities.Style", "Style")
                         .WithMany("Watches")
                         .HasForeignKey("StyleId")
@@ -1776,8 +1765,6 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Navigation("GlassType");
 
                     b.Navigation("MechanismType");
-
-                    b.Navigation("Strap");
 
                     b.Navigation("Style");
                 });
@@ -1893,16 +1880,6 @@ namespace WatchShop_Infrastructure.Migrations
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.OrderStatus", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
-                {
-                    b.Navigation("Watches");
-                });
-
-            modelBuilder.Entity("WatchShop_Core.Domain.Entities.StrapMaterial", b =>
-                {
-                    b.Navigation("Straps");
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Style", b =>

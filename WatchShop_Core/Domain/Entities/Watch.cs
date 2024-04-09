@@ -45,7 +45,7 @@ namespace WatchShop_Core.Domain.Entities
         public Style? Style { get; set; }
 
         [Required]
-        public byte StrapId { get; set; }
+        public int StrapId { get; set; }
 
         [ForeignKey("StrapId")]
         public Strap? Strap { get; set; }

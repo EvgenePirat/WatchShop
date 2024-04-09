@@ -9,7 +9,7 @@ namespace WatchShop_Core.Domain.Entities
     public class Strap : IEntity
     {
         [Key]
-        public byte Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public StrapEnum Name { get; set; }
