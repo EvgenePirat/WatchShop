@@ -30,7 +30,8 @@ namespace WatchShop_Infrastructure.Repositories
                 w => w.MechanismType, 
                 w => w.Strap, 
                 w => w.Style, 
-                w => w.Strap.StrapMaterial)
+                w => w.Strap.StrapMaterial,
+                w => w.Images)
                 .FirstOrDefaultAsync(b => b.NameModel.ToLower() == nameModel.ToLower());
         }
 
@@ -52,7 +53,8 @@ namespace WatchShop_Infrastructure.Repositories
                 w => w.MechanismType,
                 w => w.Strap,
                 w => w.Style,
-                w => w.Strap.StrapMaterial)
+                w => w.Strap.StrapMaterial,
+                w => w.Images)
                 .FirstOrDefaultAsync(b => b.Id == id);
         }
     }
