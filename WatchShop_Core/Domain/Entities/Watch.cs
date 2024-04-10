@@ -86,5 +86,7 @@ namespace WatchShop_Core.Domain.Entities
         public IEnumerable<Cart>? Carts { get; set; }
 
         public IEnumerable<WatchComment>? Comments { get; set; }
+
+        public IEnumerable<Image> Images { get; set; }
     }
 }
