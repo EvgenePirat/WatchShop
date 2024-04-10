@@ -14,6 +14,12 @@ const watchApi = createApi({
             }),
             providesTags: ["Watches"],
         }),
+        getWatchCharacteristics: builder.query({
+            query: () => ({
+                url:"characteristic",
+                method: "GET"
+            })
+        }),
         getWatchByNameModel: builder.query({
             query: (nameModel) => ({
                 url:`${nameModel}`,
@@ -47,6 +53,6 @@ const watchApi = createApi({
     }),
 });
 
-export const {useGetWatchesQuery, useGetWatchByNameModelQuery, useAddNewWatchMutation, useUpdateWatchMutation, useDeleteWatchMutation} = watchApi;
+export const {useGetWatchesQuery, useGetWatchCharacteristicsQuery, useGetWatchByNameModelQuery, useAddNewWatchMutation, useUpdateWatchMutation, useDeleteWatchMutation} = watchApi;
 
 export default watchApi;
