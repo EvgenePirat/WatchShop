@@ -11,6 +11,10 @@ namespace WatchShop_Core.Domain.RepositoryContracts
     public interface IUnitOfWork
     {
         IRepositoryBase<Country> ICountryRepositoryBase { get; }
+        IRepositoryBase<Strap> IStrapRepositoryBase { get; }
+        IRepositoryBase<Frame> IFrameRepositoryBase { get; }
+        IRepositoryBase<ClockFace> IClockFaceRepositoryBase { get; }
+        IRepositoryBase<Dimension> IDimensionRepositoryBase { get; }
         IRepositoryBase<FrameColor> IFrameColorRepositoryBase { get; }
         IRepositoryBase<FrameMaterial> IFrameMaterialRepositoryBase { get; }
         IRepositoryBase<GlassType> IGlassTypeRepositoryBase { get; }

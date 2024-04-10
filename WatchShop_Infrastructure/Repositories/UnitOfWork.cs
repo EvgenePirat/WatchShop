@@ -55,6 +55,18 @@ namespace WatchShop_Infrastructure.Repositories
         private IWatchRepository _watchRepository;
         public IWatchRepository WatchRepository => _watchRepository ??= new WatchRepository(_context);
 
+        private IRepositoryBase<Strap> _strapRepositoryBase;
+        public IRepositoryBase<Strap> IStrapRepositoryBase => _strapRepositoryBase ??= new RepositoryBase<Strap>(_context);
+
+        private IRepositoryBase<Frame> _frameRepositoryBase;
+        public IRepositoryBase<Frame> IFrameRepositoryBase => _frameRepositoryBase ??= new RepositoryBase<Frame>(_context);
+
+        private IRepositoryBase<ClockFace> _clockFaceRepositoryBase;
+        public IRepositoryBase<ClockFace> IClockFaceRepositoryBase => _clockFaceRepositoryBase ??= new RepositoryBase<ClockFace>(_context);
+
+        private IRepositoryBase<Dimension> _dimensionRepositoryBase;
+        public IRepositoryBase<Dimension> IDimensionRepositoryBase => _dimensionRepositoryBase ??= new RepositoryBase<Dimension>(_context);
+
         public async Task<IDbContextTransaction> BeginTransactionDbContextAsync()
         {
             return await _context.Database.BeginTransactionAsync();
