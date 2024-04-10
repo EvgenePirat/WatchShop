@@ -11,6 +11,7 @@ namespace WatchShop_Core.DependencyResolvers
         {
             builder.RegisterType<BrendService>().As<IBrendService>();
             builder.RegisterType<WatchService>().As<IWatchService>();
+            builder.RegisterType<BlobService>().As<IBlobService>();
         }
     }
 }
