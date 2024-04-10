@@ -1,6 +1,7 @@
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Azure.Storage.Blobs;
 using Microsoft.EntityFrameworkCore;
 using WatchShop_Core.DependencyResolvers;
 using WatchShop_Infrastructure.DbContext;
@@ -18,6 +19,8 @@ namespace WatchShop
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionBaseDate")));
+
+            builder.Services.AddSingleton(u => new BlobServiceClient(builder.Configuration.GetConnectionString("StorageAccount")));
 
             builder.Services.AddControllers();
 

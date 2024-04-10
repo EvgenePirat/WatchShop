@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Models.Watches.Request;
 using WatchShop_Core.ServiceContracts;
 using WatchShop_UI.Dtos.Products.Response;
@@ -67,7 +68,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApiResponse>> CreateWatchAsync(CreateWatchDto watchDto)
+        public async Task<ActionResult<ApiResponse>> CreateWatchAsync([FromForm]CreateWatchDto watchDto)
         {
             _logger.LogInformation("{controller}.{method} - POST, create new watch, Task started",
                 nameof(WatchController), nameof(CreateWatchAsync));
