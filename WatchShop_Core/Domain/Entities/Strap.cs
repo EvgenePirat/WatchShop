@@ -20,6 +20,6 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("StrapMaterialId")]
         public StrapMaterial? StrapMaterial { get; set; }
 
-        public IEnumerable<Watch>? Watches { get; set; }
+        public Watch Watch { get; set; }
     }
 }

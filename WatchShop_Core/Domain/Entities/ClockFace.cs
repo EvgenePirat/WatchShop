@@ -28,6 +28,6 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("ClockFaceColorId")]
         public ClockFaceColor? ClockFaceColor { get; set; }
 
-        public IEnumerable<Watch>? Watches { get; set; }
+        public Watch Watch { get; set; }
     }
 }
