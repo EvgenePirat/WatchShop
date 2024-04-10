@@ -12,6 +12,7 @@ namespace WatchShop_Infrastructure.DbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
+        public DbSet<Image> Images { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ApplicationRole> Roles {  get; set; }
         public DbSet<Brend> Brends { get; set; }
@@ -39,6 +40,12 @@ namespace WatchShop_Infrastructure.DbContext
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Watch>()
+                .HasMany(w => w.Images)
+                .WithOne(i => i.Watch)
+                .HasForeignKey(i => i.WatchId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<WatchAdditionalCharacteristic>()
                 .HasKey(wac => new { wac.WatchId, wac.AdditionalCharacteristicsId });
