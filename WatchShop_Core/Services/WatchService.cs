@@ -33,8 +33,6 @@ namespace WatchShop_Core.Services
 
         public async Task<WatchModel> CreateWatchAsync(CreateWatchModel createWatch)
         {
-            var transaction = await _unitOfWork.BeginTransactionDbContextAsync();
-
             try
             {
                 var watch = _mapper.Map<Watch>(createWatch);
@@ -50,13 +48,10 @@ namespace WatchShop_Core.Services
 
                 await _unitOfWork.SaveAsync();
 
-                transaction.Commit();
-
                 return _mapper.Map<WatchModel>(watch);
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
                 throw new WatchArgumentException(ex.Message);
             }
         }
@@ -64,6 +59,10 @@ namespace WatchShop_Core.Services
         public async Task DeleteWatchByIdAsync(int watchId)
         {
             Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("Watch by id not found for delete");
+            _unitOfWork.IStrapRepositoryBase.Delete(watchFromDb.Strap);
+            _unitOfWork.IDimensionRepositoryBase.Delete(watchFromDb.Frame.Dimensions);
+            _unitOfWork.IFrameRepositoryBase.Delete(watchFromDb.Frame);
+            _unitOfWork.IClockFaceRepositoryBase.Delete(watchFromDb.ClockFace);
             _unitOfWork.WatchRepository.Delete(watchFromDb);
             await _unitOfWork.SaveAsync();
         }
