@@ -1,10 +1,12 @@
 ﻿using System.Text.Json.Serialization;
+using WatchShop_Core.Models.Images.Response;
 using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.ClockFaces.Response;
 using WatchShop_UI.Dtos.Countries.Response;
 using WatchShop_UI.Dtos.Enums;
 using WatchShop_UI.Dtos.Frames.Response;
 using WatchShop_UI.Dtos.GlassTypes.Response;
+using WatchShop_UI.Dtos.Images.Response;
 using WatchShop_UI.Dtos.MechanismTypes.Response;
 using WatchShop_UI.Dtos.Straps.Response;
 using WatchShop_UI.Dtos.Styles.Response;
@@ -47,5 +49,7 @@ namespace WatchShop_UI.Dtos.Watches.Response
         public FrameDto Frame { get; set; }
 
         public IEnumerable<WatchAdditionalCharacteristicDto>? WatchAdditionalCharacteristics { get; set; }
+
+        public IEnumerable<ImageDto> Images { get; set; }
     }
 }
