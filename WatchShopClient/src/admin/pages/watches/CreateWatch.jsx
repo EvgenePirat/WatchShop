@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/watch/createWatch.css'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
@@ -6,7 +6,7 @@ import { useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../.
 
 const watch = {
    nameModel : "",
-   Gender: "",
+   gender: "",
    guarantee: "",
    price: 0,
    description: "",
@@ -49,19 +49,63 @@ function CreateWatch() {
   const { data, isLoading} = useGetWatchCharacteristicsQuery(null);
 
   const [addNewWatchMutation] = useAddNewWatchMutation();
-
-  if(isLoading){
-    return <div>Loading...</div>
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  } else {
+    console.log(newWatch)
   }
-  else{
-    console.log(data)
+
+  useEffect(() => {
+    setNewWatch(mapApiDataToWatchModel(data.result))
+  },[data])
+
+
+  function mapApiDataToWatchModel(apiData) {
+    return {
+      nameModel: "",
+      gender: apiData.genderEnums[0] || "",
+      guarantee: apiData.guaranteeMonth[0] || "",
+      price: 0,
+      description: "",
+      timeFormat: apiData.timeFormatEnums[0] || "",
+      brendId: apiData.brends[0].id || 1,
+      styleId: apiData.styles[0].id || 1,
+      strap: {
+        name: apiData.strapEnums[0] || "",
+        strapMaterialId: apiData.strapMaterials[0].id || 1
+      },
+      countryId: apiData.countries[0].id || 1,
+      mechanismTypeId: apiData.mechanismTypes[0].id || 1,
+      glassTypeId: apiData.glassTypes[0].id || 1,
+      clockFace: {
+        indicationTypeId: apiData.indicationTypes[0].id || 1,
+        indicationKindId: apiData.indicationKinds[0].id || 1,
+        clockFaceColorId: apiData.clockFaceColors[0].id || 1
+      },
+      frame: {
+        caseShape: apiData.caseShapeEnums[0] || "",
+        waterResistance: apiData.waterResistanceEnums[0] || "",
+        frameMaterialId: apiData.frameMaterials[0].id || 1,
+        frameColorId: apiData.frameColors[0].id || 1,
+        dimensions: {
+          length:  0,
+          thickness:  0,
+          width:  0,
+          weight:  0,
+          caseDiameter: apiData.caseDiameterEnums[0] || ""
+        }
+      },
+      watchAdditionalCharacteristics: [],
+      files:  []
+    };
   }
 
   const handleSubmit = async (e) => {
       e.preventDefault();
 
       console.log(newWatch)
-      const resultOperation = await addNewWatchMutation(newWatch).unwrap();
+      const resultOperation = await addNewWatchMutation(newWatch);
 
       console.log(resultOperation)
 
@@ -70,7 +114,7 @@ function CreateWatch() {
         // else
         //     toast.error('Watch is not add');
       
-      setNewWatch(watch)      
+      //setNewWatch(watch)      
   }
 
   const handleFileChange = (event) => {
@@ -120,8 +164,8 @@ function CreateWatch() {
                 </div>
 
                 <div className="addWatchItem">
-                  <label htmlFor="genders">Gender:</label>
-                  <select id="genders" name="genders" value={newWatch.Gender}  onChange={(e) => setNewWatch((prev) => ({...prev,Gender: e.target.value}))}>
+                  <label htmlFor="gender">Gender:</label>
+                  <select id="gender" name="gender" value={newWatch.gender} onChange={(e) => setNewWatch((prev) => ({...prev,gender: e.target.value}))}>
                     {data.result.genderEnums.map((index, gender) => (
                       <option key={gender} value={index}>{index}</option>
                     ))}
@@ -148,7 +192,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="brends">Brends:</label>
-                  <select id="brends" name="brends"  onChange={(e) => setNewWatch((prev) => ({...prev,brendId: e.target.value}))}>
+                  <select id="brends" name="brends"  onChange={(e) => setNewWatch((prev) => ({...prev,brendId: parseInt(e.target.value)}))}>
                     {data.result.brends.map((brend) => (
                       <option key={brend.id} value={brend.id}>{brend.name}</option>
                     ))}
@@ -157,7 +201,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="styles">Styles:</label>
-                  <select id="styles" name="styles" value={newWatch.styleId}  onChange={(e) => setNewWatch((prev) => ({...prev,styleId: e.target.value}))}>
+                  <select id="styles" name="styles" value={newWatch.styleId}  onChange={(e) => setNewWatch((prev) => ({...prev,styleId: parseInt(e.target.value)}))}>
                     {data.result.styles.map((style) => (
                       <option key={style.id} value={style.id}>{style.name}</option>
                     ))}
@@ -175,7 +219,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="strapMaterials">Strap Material:</label>
-                  <select id="strapMaterials" name="strapMaterials" value={newWatch.strap.strapMaterialId}  onChange={(e) => setNewWatch((prev) => ({...prev,strap: {...prev.strap, strapMaterialId : e.target.value}}))}>
+                  <select id="strapMaterials" name="strapMaterials" value={newWatch.strap.strapMaterialId}  onChange={(e) => setNewWatch((prev) => ({...prev,strap: {...prev.strap, strapMaterialId : parseInt(e.target.value)}}))}>
                     {data.result.strapMaterials.map((strapMaterial) => (
                       <option key={strapMaterial.id} value={strapMaterial.id}>{strapMaterial.name}</option>
                     ))}
@@ -193,7 +237,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="mechanismTypes">Mechanism Type:</label>
-                  <select id="mechanismTypes" name="mechanismTypes" value={newWatch.mechanismTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,mechanismTypeId: e.target.value}))}>
+                  <select id="mechanismTypes" name="mechanismTypes" value={newWatch.mechanismTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,mechanismTypeId: parseInt(e.target.value)}))}>
                     {data.result.mechanismTypes.map((mechanismType) => (
                       <option key={mechanismType.id} value={mechanismType.id}>{mechanismType.name}</option>
                     ))}
@@ -202,7 +246,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="glassTypes">Glass Type:</label>
-                  <select id="glassTypes" name="glassTypes" value={newWatch.glassTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,glassTypeId: e.target.value}))}>
+                  <select id="glassTypes" name="glassTypes" value={newWatch.glassTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,glassTypeId: parseInt(e.target.value)}))}>
                     {data.result.glassTypes.map((glassType) => (
                       <option key={glassType.id} value={glassType.id}>{glassType.name}</option>
                     ))}
@@ -211,7 +255,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="indicationKinds">ClockFace Indication Kind:</label>
-                  <select id="indicationKinds" name="indicationKinds" value={newWatch.clockFace.indicationKindId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, indicationKindId : e.target.value}}))}>
+                  <select id="indicationKinds" name="indicationKinds" value={newWatch.clockFace.indicationKindId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, indicationKindId : parseInt(e.target.value)}}))}>
                     {data.result.indicationKinds.map((indicationKind) => (
                       <option key={indicationKind.id} value={indicationKind.id}>{indicationKind.name}</option>
                     ))}
@@ -220,7 +264,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="indicationTypes">ClockFace Indication Type:</label>
-                  <select id="indicationTypes" name="indicationKinds" value={newWatch.clockFace.indicationTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, indicationTypeId : e.target.value}}))}>
+                  <select id="indicationTypes" name="indicationKinds" value={newWatch.clockFace.indicationTypeId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, indicationTypeId : parseInt(e.target.value)}}))}>
                     {data.result.indicationTypes.map((indicationType) => (
                       <option key={indicationType.id} value={indicationType.id}>{indicationType.name}</option>
                     ))}
@@ -229,7 +273,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="clockFaceColors">ClockFace Color:</label>
-                  <select id="clockFaceColors" name="indicationKinds" value={newWatch.clockFace.clockFaceColorId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, clockFaceColorId : e.target.value}}))}>
+                  <select id="clockFaceColors" name="indicationKinds" value={newWatch.clockFace.clockFaceColorId}  onChange={(e) => setNewWatch((prev) => ({...prev,clockFace: {...prev.clockFace, clockFaceColorId : parseInt(e.target.value)}}))}>
                     {data.result.clockFaceColors.map((clockFaceColor) => (
                       <option key={clockFaceColor.id} value={clockFaceColor.id}>{clockFaceColor.name}</option>
                     ))}
@@ -256,7 +300,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="frameColors">Frame Color:</label>
-                  <select id="frameColors" name="frameColors" value={newWatch.frame.frameColorId}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, frameColorId : e.target.value}}))}>
+                  <select id="frameColors" name="frameColors" value={newWatch.frame.frameColorId}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, frameColorId : parseInt(e.target.value)}}))}>
                     {data.result.frameColors.map((frameColor) => (
                       <option key={frameColor.id} value={frameColor.id}>{frameColor.name}</option>
                     ))}
@@ -265,7 +309,7 @@ function CreateWatch() {
 
                 <div className="addWatchItem">
                   <label htmlFor="frameMaterials">Frame Material:</label>
-                  <select id="frameMaterials" name="frameMaterials" value={newWatch.frame.frameMaterialId}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, frameMaterialId : e.target.value}}))}>
+                  <select id="frameMaterials" name="frameMaterials" value={newWatch.frame.frameMaterialId}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, frameMaterialId : parseInt(e.target.value)}}))}>
                     {data.result.frameMaterials.map((frameMaterial) => (
                       <option key={frameMaterial.id} value={frameMaterial.id}>{frameMaterial.name}</option>
                     ))}
