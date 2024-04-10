@@ -40,8 +40,10 @@ function Sidebar() {
                         </Link>
                     </li>
                     <li className="sidebarListItemAdmin">
-                        <StorefrontIcon className='sidebarIcon' />
-                        Watches
+                        <Link to="/admin/watches">
+                            <StorefrontIcon className='sidebarIcon' />
+                            Watches
+                        </Link>
                     </li>
                     <Link to="/admin/brends" className="sidebarListItemAdmin">
                         <li>
