@@ -4,6 +4,7 @@ using WatchShop_Core.Models.Countries.Response;
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Response;
 using WatchShop_Core.Models.GlassTypes.Response;
+using WatchShop_Core.Models.Images.Response;
 using WatchShop_Core.Models.MechanismTypes.Response;
 using WatchShop_Core.Models.Straps.Response;
 using WatchShop_Core.Models.Styles.Response;
@@ -44,5 +45,7 @@ namespace WatchShop_Core.Models.Watches.Response
         public FrameModel? Frame { get; set; }
 
         public IEnumerable<WatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
+
+        public IEnumerable<ImageModel> Images { get; set; }
     }
 }

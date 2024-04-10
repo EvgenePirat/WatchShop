@@ -1,4 +1,5 @@
-﻿using WatchShop_Core.Models.ClockFaces.Request;
+﻿using Microsoft.AspNetCore.Http;
+using WatchShop_Core.Models.ClockFaces.Request;
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Request;
 using WatchShop_Core.Models.Straps.Request;
@@ -37,5 +38,7 @@ namespace WatchShop_Core.Models.Watches.Request
         public CreateFrameModel Frame { get; set; }
 
         public IEnumerable<CreateWatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
+
+        public IFormFile[] Files { get; set; }
     }
 }
