@@ -4,6 +4,7 @@
     background-color: rgb(209, 209, 224);
     position: sticky;
     top: 50px;
+    max-width: 250px;
 }
 
 .sidebarWrapperAdmin{
