@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Core.Exceptions;
@@ -24,11 +26,15 @@ namespace WatchShop_Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IBlobService _blobService;
+        private const string Storage_Container_Name = "myrestorand";
 
-        public WatchService(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public WatchService(IBlobService blobService, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _blobService = blobService;
         }
 
         public async Task<WatchModel> CreateWatchAsync(CreateWatchModel createWatch)
@@ -40,20 +46,40 @@ namespace WatchShop_Core.Services
                 Watch? checkWatch = await _unitOfWork.WatchRepository.FindByNameModelAsync(createWatch.NameModel);
 
                 if (checkWatch != null)
-                {
                     throw new WatchArgumentException("Watch with model name already exist");
-                }
+
+                watch.Images = await SavePhotos(createWatch.Files, createWatch.NameModel);
 
                 _unitOfWork.WatchRepository.Add(watch);
 
                 await _unitOfWork.SaveAsync();
 
-                return _mapper.Map<WatchModel>(watch);
+                return _mapper.Map<WatchModel>(await _unitOfWork.WatchRepository.GetByIdAsync(watch.Id));
             }
             catch (Exception ex)
             {
                 throw new WatchArgumentException(ex.Message);
             }
+        }
+
+
+        private async Task<List<Image>> SavePhotos(IFormFile[] files, string nameModel)
+        {
+            List<Image> photos = new List<Image>();
+
+            foreach (var file in files)
+            {
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(nameModel)}";
+
+                Image imageToSave = new()
+                {
+                    Path = await _blobService.UploadBlob(fileName, Storage_Container_Name, file),
+                    UploadDateTime = DateTime.Now,
+                };
+                photos.Add(imageToSave);
+            }
+
+            return photos;
         }
 
         public async Task DeleteWatchByIdAsync(int watchId)

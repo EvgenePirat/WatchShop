@@ -9,6 +9,8 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,6 +24,7 @@
     <Folder Include="Models\FrameColors\Request\" />
     <Folder Include="Models\FrameMaterials\Request\" />
     <Folder Include="Models\GlassTypes\Request\" />
+    <Folder Include="Models\Images\Request\" />
     <Folder Include="Models\IndicationKinds\Request\" />
     <Folder Include="Models\IndicationTypes\Request\" />
     <Folder Include="Models\MechanismTypes\Request\" />
