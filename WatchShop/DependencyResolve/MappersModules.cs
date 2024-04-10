@@ -15,6 +15,9 @@ namespace WatchShop_UI.DependencyResolve
                 cfg.AddProfile(new BrendModelProfile());
                 cfg.AddProfile(new BrendDtoProfile());
 
+                cfg.AddProfile(new ImageModelProfile());
+                cfg.AddProfile(new ImageDtoProfile());
+
                 cfg.AddProfile(new WatchAdditionalCharacteristicDtoProfile());
                 cfg.AddProfile(new WatchAdditionalCharacteristicModelProfile());
 
