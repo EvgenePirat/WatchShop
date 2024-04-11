@@ -28,6 +28,7 @@
     <Folder Include="Models\IndicationKinds\Request\" />
     <Folder Include="Models\IndicationTypes\Request\" />
     <Folder Include="Models\MechanismTypes\Request\" />
+    <Folder Include="Models\OrderStatuses\Request\" />
     <Folder Include="Models\StrapMaterials\Request\" />
     <Folder Include="Models\Styles\Request\" />
   </ItemGroup>

@@ -1,32 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using WatchShop_Core.Domain.Entities;
-using WatchShop_Core.Models.AdditionalCharacteristics.Response;
-using WatchShop_Core.Models.IndicationKinds.Response;
-using WatchShop_Core.Models.IndicationTypes.Response;
-using WatchShop_Core.Models.MechanismTypes.Response;
-using WatchShop_Core.Models.Styles.Response;
 
 namespace WatchShop_Core.Domain.RepositoryContracts
 {
     public interface IUnitOfWork
     {
-        IRepositoryBase<Country> ICountryRepositoryBase { get; }
-        IRepositoryBase<Strap> IStrapRepositoryBase { get; }
-        IRepositoryBase<Frame> IFrameRepositoryBase { get; }
-        IRepositoryBase<ClockFace> IClockFaceRepositoryBase { get; }
-        IRepositoryBase<Dimension> IDimensionRepositoryBase { get; }
-        IRepositoryBase<FrameColor> IFrameColorRepositoryBase { get; }
-        IRepositoryBase<FrameMaterial> IFrameMaterialRepositoryBase { get; }
-        IRepositoryBase<GlassType> IGlassTypeRepositoryBase { get; }
-        IRepositoryBase<IndicationKind> IIndicationKindRepositoryBase { get; }
-        IRepositoryBase<IndicationType> IIndicationTypeRepositoryBase { get; }
-        IRepositoryBase<MechanismType> IMechanismTypeRepositoryBase { get; }
-        IRepositoryBase<Style> IStyleRepositoryBase { get; }
-        IRepositoryBase<AdditionalCharacteristics> IAdditionalCharacteristicsRepositoryBase { get; }
-        IRepositoryBase<StrapMaterial> IStrapMaterialRepositoryBase { get; }
+        IRepositoryBase<Country> CountryRepositoryBase { get; }
+        IRepositoryBase<Strap> StrapRepositoryBase { get; }
+        IRepositoryBase<Frame> FrameRepositoryBase { get; }
+        IRepositoryBase<ClockFace> ClockFaceRepositoryBase { get; }
+        IRepositoryBase<Dimension> DimensionRepositoryBase { get; }
+        IRepositoryBase<FrameColor> FrameColorRepositoryBase { get; }
+        IRepositoryBase<FrameMaterial> FrameMaterialRepositoryBase { get; }
+        IRepositoryBase<GlassType> GlassTypeRepositoryBase { get; }
+        IRepositoryBase<IndicationKind> IndicationKindRepositoryBase { get; }
+        IRepositoryBase<IndicationType> IndicationTypeRepositoryBase { get; }
+        IRepositoryBase<MechanismType> MechanismTypeRepositoryBase { get; }
+        IRepositoryBase<Style> StyleRepositoryBase { get; }
+        IRepositoryBase<AdditionalCharacteristics> AdditionalCharacteristicsRepositoryBase { get; }
+        IRepositoryBase<StrapMaterial> StrapMaterialRepositoryBase { get; }
+        IRepositoryBase<OrderStatus> OrderStatusRepositoryBase { get; }
 
-        IBrendRepository BrendRepository { get; }
+        IBrendRepository IBrendRepository { get; }
         IWatchRepository WatchRepository { get; }
+        IOrderRepository OrderRepository { get; }
         IClockFaceColorRepository ClockFaceColorRepository { get; }
         Task SaveAsync();
         Task<IDbContextTransaction> BeginTransactionDbContextAsync();

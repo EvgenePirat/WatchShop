@@ -41,6 +41,12 @@ namespace WatchShop_Infrastructure.DbContext
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Order>()
+                .HasMany(o => o.Carts)
+                .WithOne(c => c.Order)
+                .HasForeignKey(c => c.WatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Watch>()
                 .HasMany(w => w.Images)
                 .WithOne(i => i.Watch)
@@ -173,6 +179,14 @@ namespace WatchShop_Infrastructure.DbContext
                 {
                     Id = (byte)(index + 1),
                     Name = value
+                }));
+
+            builder.Entity<ApplicationRole>().HasData(Enum.GetValues(typeof(RoleEnum))
+                .Cast<RoleEnum>()
+                .Select((value, index) => new ApplicationRole
+                {
+                    Id = Guid.NewGuid(),
+                    Name = value.ToString()
                 }));
         }
     }
