@@ -50,15 +50,18 @@ function CreateWatch() {
 
   const [addNewWatchMutation] = useAddNewWatchMutation();
   
+  useEffect(() => {
+    if (!isLoading && data) {
+      setNewWatch(mapApiDataToWatchModel(data.result));
+    }
+  }, [isLoading, data]);
+
   if (isLoading) {
     return <div>Loading...</div>;
-  } else {
+  }
+  else{
     console.log(newWatch)
   }
-
-  useEffect(() => {
-    setNewWatch(mapApiDataToWatchModel(data.result))
-  },[data])
 
 
   function mapApiDataToWatchModel(apiData) {
