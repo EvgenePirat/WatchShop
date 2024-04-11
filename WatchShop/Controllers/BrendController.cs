@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.Models.Brends.Request;
 using WatchShop_Core.ServiceContracts;
 using WatchShop_UI.Dtos.Brends.Reequest;
 using WatchShop_UI.Dtos.Brends.Response;
+using WatchShop_UI.Dtos.Enums;
 using WatchShop_UI.Utilities.GeneralResponse;
 
 namespace WatchShop_UI.Controllers
