@@ -10,6 +10,7 @@
     <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
@@ -28,6 +29,7 @@
     <Folder Include="Models\IndicationKinds\Request\" />
     <Folder Include="Models\IndicationTypes\Request\" />
     <Folder Include="Models\MechanismTypes\Request\" />
+    <Folder Include="Models\OrderStatuses\Request\" />
     <Folder Include="Models\StrapMaterials\Request\" />
     <Folder Include="Models\Styles\Request\" />
   </ItemGroup>

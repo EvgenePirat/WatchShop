@@ -85,10 +85,10 @@ namespace WatchShop_Core.Services
         public async Task DeleteWatchByIdAsync(int watchId)
         {
             Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("Watch by id not found for delete");
-            _unitOfWork.IStrapRepositoryBase.Delete(watchFromDb.Strap);
-            _unitOfWork.IDimensionRepositoryBase.Delete(watchFromDb.Frame.Dimensions);
-            _unitOfWork.IFrameRepositoryBase.Delete(watchFromDb.Frame);
-            _unitOfWork.IClockFaceRepositoryBase.Delete(watchFromDb.ClockFace);
+            _unitOfWork.StrapRepositoryBase.Delete(watchFromDb.Strap);
+            _unitOfWork.DimensionRepositoryBase.Delete(watchFromDb.Frame.Dimensions);
+            _unitOfWork.FrameRepositoryBase.Delete(watchFromDb.Frame);
+            _unitOfWork.ClockFaceRepositoryBase.Delete(watchFromDb.ClockFace);
             _unitOfWork.WatchRepository.Delete(watchFromDb);
             await _unitOfWork.SaveAsync();
         }
@@ -129,17 +129,17 @@ namespace WatchShop_Core.Services
             try
             {
                 watchCharacters.ClockFaceColors = _mapper.Map<IEnumerable<ClockFaceColorModel>>(await _unitOfWork.ClockFaceColorRepository.GetAllAsync());
-                watchCharacters.Countries = _mapper.Map<IEnumerable<CountryModel>>(await _unitOfWork.ICountryRepositoryBase.GetAllAsync());
-                watchCharacters.FrameColors =  _mapper.Map<IEnumerable<FrameColorModel>>(await _unitOfWork.IFrameColorRepositoryBase.GetAllAsync());
-                watchCharacters.FrameMaterials = _mapper.Map<IEnumerable<FrameMaterialModel>>(await _unitOfWork.IFrameMaterialRepositoryBase.GetAllAsync());
-                watchCharacters.GlassTypes = _mapper.Map<IEnumerable<GlassTypeModel>>(await _unitOfWork.IGlassTypeRepositoryBase.GetAllAsync());
-                watchCharacters.IndicationKinds = _mapper.Map<IEnumerable<IndicationKindModel>>(await _unitOfWork.IIndicationKindRepositoryBase.GetAllAsync());
-                watchCharacters.IndicationTypes = _mapper.Map<IEnumerable<IndicationTypeModel>>(await _unitOfWork.IIndicationTypeRepositoryBase.GetAllAsync());
-                watchCharacters.MechanismTypes = _mapper.Map<IEnumerable<MechanismTypeModel>>(await _unitOfWork.IMechanismTypeRepositoryBase.GetAllAsync());
-                watchCharacters.Styles = _mapper.Map<IEnumerable<StyleModel>>(await _unitOfWork.IStyleRepositoryBase.GetAllAsync());
-                watchCharacters.AdditionalCharacteristics = _mapper.Map<IEnumerable<AdditionalCharacteristicModel>>(await _unitOfWork.IAdditionalCharacteristicsRepositoryBase.GetAllAsync());
-                watchCharacters.StrapMaterials = _mapper.Map<IEnumerable<StrapMaterialModel>>(await _unitOfWork.IStrapMaterialRepositoryBase.GetAllAsync());
-                watchCharacters.Brends = _mapper.Map<IEnumerable<BrendModel>>(await _unitOfWork.BrendRepository.GetAllAsync());
+                watchCharacters.Countries = _mapper.Map<IEnumerable<CountryModel>>(await _unitOfWork.CountryRepositoryBase.GetAllAsync());
+                watchCharacters.FrameColors =  _mapper.Map<IEnumerable<FrameColorModel>>(await _unitOfWork.FrameColorRepositoryBase.GetAllAsync());
+                watchCharacters.FrameMaterials = _mapper.Map<IEnumerable<FrameMaterialModel>>(await _unitOfWork.FrameMaterialRepositoryBase.GetAllAsync());
+                watchCharacters.GlassTypes = _mapper.Map<IEnumerable<GlassTypeModel>>(await _unitOfWork.GlassTypeRepositoryBase.GetAllAsync());
+                watchCharacters.IndicationKinds = _mapper.Map<IEnumerable<IndicationKindModel>>(await _unitOfWork.IndicationKindRepositoryBase.GetAllAsync());
+                watchCharacters.IndicationTypes = _mapper.Map<IEnumerable<IndicationTypeModel>>(await _unitOfWork.IndicationTypeRepositoryBase.GetAllAsync());
+                watchCharacters.MechanismTypes = _mapper.Map<IEnumerable<MechanismTypeModel>>(await _unitOfWork.MechanismTypeRepositoryBase.GetAllAsync());
+                watchCharacters.Styles = _mapper.Map<IEnumerable<StyleModel>>(await _unitOfWork.StyleRepositoryBase.GetAllAsync());
+                watchCharacters.AdditionalCharacteristics = _mapper.Map<IEnumerable<AdditionalCharacteristicModel>>(await _unitOfWork.AdditionalCharacteristicsRepositoryBase.GetAllAsync());
+                watchCharacters.StrapMaterials = _mapper.Map<IEnumerable<StrapMaterialModel>>(await _unitOfWork.StrapMaterialRepositoryBase.GetAllAsync());
+                watchCharacters.Brends = _mapper.Map<IEnumerable<BrendModel>>(await _unitOfWork.IBrendRepository.GetAllAsync());
             }
             catch(Exception ex)
             {
