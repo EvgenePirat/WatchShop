@@ -143,6 +143,313 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("additional_characteristics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = 17
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = 18
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = 19
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = 20
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = 21
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = 22
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = 23
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = 24
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = 25
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = 26
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = 27
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = 28
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = 29
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = 30
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = 31
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = 32
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = 33
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = 34
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = 35
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = 36
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = 37
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = 38
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = 39
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = 40
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = 41
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = 42
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = 43
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = 44
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = 45
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = 46
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = 47
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Name = 48
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Name = 49
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Name = 50
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Name = 51
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Name = 52
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Name = 53
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Name = 54
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Name = 55
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Name = 56
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Name = 57
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Name = 58
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Name = 59
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Name = 60
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Name = 61
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Brend", b =>
@@ -227,6 +534,73 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("clock_face_colors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = (byte)9,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = (byte)10,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = (byte)11,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = (byte)12,
+                            Name = 11
+                        },
+                        new
+                        {
+                            Id = (byte)13,
+                            Name = 12
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Country", b =>
@@ -240,6 +614,103 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = (byte)9,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = (byte)10,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = (byte)11,
+                            Name = 11
+                        },
+                        new
+                        {
+                            Id = (byte)12,
+                            Name = 12
+                        },
+                        new
+                        {
+                            Id = (byte)13,
+                            Name = 13
+                        },
+                        new
+                        {
+                            Id = (byte)14,
+                            Name = 14
+                        },
+                        new
+                        {
+                            Id = (byte)15,
+                            Name = 15
+                        },
+                        new
+                        {
+                            Id = (byte)16,
+                            Name = 16
+                        },
+                        new
+                        {
+                            Id = (byte)17,
+                            Name = 17
+                        },
+                        new
+                        {
+                            Id = (byte)18,
+                            Name = 18
+                        },
+                        new
+                        {
+                            Id = (byte)19,
+                            Name = 19
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Dimension", b =>
@@ -315,6 +786,103 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("frame_colors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = (byte)9,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = (byte)10,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = (byte)11,
+                            Name = 11
+                        },
+                        new
+                        {
+                            Id = (byte)12,
+                            Name = 12
+                        },
+                        new
+                        {
+                            Id = (byte)13,
+                            Name = 13
+                        },
+                        new
+                        {
+                            Id = (byte)14,
+                            Name = 14
+                        },
+                        new
+                        {
+                            Id = (byte)15,
+                            Name = 15
+                        },
+                        new
+                        {
+                            Id = (byte)16,
+                            Name = 16
+                        },
+                        new
+                        {
+                            Id = (byte)17,
+                            Name = 17
+                        },
+                        new
+                        {
+                            Id = (byte)18,
+                            Name = 18
+                        },
+                        new
+                        {
+                            Id = (byte)19,
+                            Name = 19
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.FrameMaterial", b =>
@@ -328,6 +896,88 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("frame_materials");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = (byte)9,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = (byte)10,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = (byte)11,
+                            Name = 11
+                        },
+                        new
+                        {
+                            Id = (byte)12,
+                            Name = 12
+                        },
+                        new
+                        {
+                            Id = (byte)13,
+                            Name = 13
+                        },
+                        new
+                        {
+                            Id = (byte)14,
+                            Name = 14
+                        },
+                        new
+                        {
+                            Id = (byte)15,
+                            Name = 15
+                        },
+                        new
+                        {
+                            Id = (byte)16,
+                            Name = 16
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.GlassType", b =>
@@ -345,6 +995,23 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("glass_types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 3
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Identities.ApplicationRole", b =>
@@ -373,6 +1040,18 @@ namespace WatchShop_Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f64b874a-5d61-492e-bba3-871b13bd8d7b"),
+                            Name = "Client"
+                        },
+                        new
+                        {
+                            Id = new Guid("04d1c2c1-39fd-4570-a02a-c060e1c4578f"),
+                            Name = "RoleAdmin"
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", b =>
@@ -452,6 +1131,31 @@ namespace WatchShop_Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UploadDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WatchId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WatchId");
+
+                    b.ToTable("images");
+                });
+
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.IndicationKind", b =>
                 {
                     b.Property<byte>("Id")
@@ -463,6 +1167,48 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("indication_kinds");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 7
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.IndicationType", b =>
@@ -476,6 +1222,23 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("indication_types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 3
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.MechanismType", b =>
@@ -493,6 +1256,23 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("mechanism_types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Order", b =>
@@ -533,12 +1313,42 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("order_statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 4
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
-                    b.Property<byte>("Id")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Name")
                         .HasColumnType("int");
@@ -564,6 +1374,68 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("strap_materials");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = (byte)5,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = (byte)6,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = (byte)7,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = (byte)8,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = (byte)9,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = (byte)10,
+                            Name = 9
+                        },
+                        new
+                        {
+                            Id = (byte)11,
+                            Name = 10
+                        },
+                        new
+                        {
+                            Id = (byte)12,
+                            Name = 11
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Style", b =>
@@ -581,6 +1453,28 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("styles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = (byte)1,
+                            Name = 0
+                        },
+                        new
+                        {
+                            Id = (byte)2,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = (byte)4,
+                            Name = 3
+                        });
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Watch", b =>
@@ -627,8 +1521,8 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<byte>("StrapId")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("StrapId")
+                        .HasColumnType("int");
 
                     b.Property<byte>("StyleId")
                         .HasColumnType("tinyint");
@@ -640,7 +1534,8 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("BrendId");
 
-                    b.HasIndex("ClockFaceId");
+                    b.HasIndex("ClockFaceId")
+                        .IsUnique();
 
                     b.HasIndex("CountryId");
 
@@ -653,7 +1548,8 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasIndex("NameModel")
                         .IsUnique();
 
-                    b.HasIndex("StrapId");
+                    b.HasIndex("StrapId")
+                        .IsUnique();
 
                     b.HasIndex("StyleId");
 
@@ -828,6 +1724,17 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Navigation("FrameMaterial");
                 });
 
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Image", b =>
+                {
+                    b.HasOne("WatchShop_Core.Domain.Entities.Watch", "Watch")
+                        .WithMany("Images")
+                        .HasForeignKey("WatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Watch");
+                });
+
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Order", b =>
                 {
                     b.HasOne("WatchShop_Core.Domain.Entities.OrderStatus", "OrderStatus")
@@ -867,8 +1774,8 @@ namespace WatchShop_Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("WatchShop_Core.Domain.Entities.ClockFace", "ClockFace")
-                        .WithMany("Watches")
-                        .HasForeignKey("ClockFaceId")
+                        .WithOne("Watch")
+                        .HasForeignKey("WatchShop_Core.Domain.Entities.Watch", "ClockFaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -897,8 +1804,8 @@ namespace WatchShop_Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("WatchShop_Core.Domain.Entities.Strap", "Strap")
-                        .WithMany("Watches")
-                        .HasForeignKey("StrapId")
+                        .WithOne("Watch")
+                        .HasForeignKey("WatchShop_Core.Domain.Entities.Watch", "StrapId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -930,13 +1837,13 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasOne("WatchShop_Core.Domain.Entities.AdditionalCharacteristics", "AdditionalCharacteristics")
                         .WithMany("WatchAdditionalCharacteristics")
                         .HasForeignKey("AdditionalCharacteristicsId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WatchShop_Core.Domain.Entities.Watch", "Watch")
                         .WithMany("WatchAdditionalCharacteristics")
                         .HasForeignKey("WatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AdditionalCharacteristics");
@@ -975,7 +1882,8 @@ namespace WatchShop_Infrastructure.Migrations
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.ClockFace", b =>
                 {
-                    b.Navigation("Watches");
+                    b.Navigation("Watch")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.ClockFaceColor", b =>
@@ -1040,7 +1948,8 @@ namespace WatchShop_Infrastructure.Migrations
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
-                    b.Navigation("Watches");
+                    b.Navigation("Watch")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.StrapMaterial", b =>
@@ -1058,6 +1967,8 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Images");
 
                     b.Navigation("WatchAdditionalCharacteristics");
                 });

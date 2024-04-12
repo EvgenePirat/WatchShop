@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Index("NameModel", IsUnique = true)]
     [Table("watches")]
-    public class Watch
+    public class Watch : IEntity
     {
         [Key]
         public int Id { get; set; }
@@ -44,7 +45,7 @@ namespace WatchShop_Core.Domain.Entities
         public Style? Style { get; set; }
 
         [Required]
-        public byte StrapId { get; set; }
+        public int StrapId { get; set; }
 
         [ForeignKey("StrapId")]
         public Strap? Strap { get; set; }
@@ -85,5 +86,7 @@ namespace WatchShop_Core.Domain.Entities
         public IEnumerable<Cart>? Carts { get; set; }
 
         public IEnumerable<WatchComment>? Comments { get; set; }
+
+        public IEnumerable<Image> Images { get; set; }
     }
 }

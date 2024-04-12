@@ -22,4 +22,19 @@
     <ProjectReference Include="..\WatchShop_Infrastructure\WatchShop_Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\ClockFaceColors\Request\" />
+    <Folder Include="Dtos\Countries\Request\" />
+    <Folder Include="Dtos\FrameColors\Request\" />
+    <Folder Include="Dtos\FrameMaterials\Request\" />
+    <Folder Include="Dtos\GlassTypes\Request\" />
+    <Folder Include="Dtos\Images\Request\" />
+    <Folder Include="Dtos\IndicationKinds\Request\" />
+    <Folder Include="Dtos\IndicationTypes\Request\" />
+    <Folder Include="Dtos\MechanismTypes\Request\" />
+    <Folder Include="Dtos\OrderStatuses\Request\" />
+    <Folder Include="Dtos\StrapMaterials\Request\" />
+    <Folder Include="Dtos\Styles\Request\" />
+  </ItemGroup>
+
 </Project>

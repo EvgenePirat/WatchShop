@@ -1,0 +1,91 @@
+.creatWatch{
+    flex: 4;
+    margin: 70px;
+    -webkit-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.addWatchForm {
+    margin-top: 10px;
+  }
+  
+  .addWatchItem {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .textAreaWatchStyle{
+    border: 1px solid rgb(72, 63, 63);
+    min-height: 130px;
+  }
+
+  .inputWatchStyle{
+    border: 1px solid rgb(72, 63, 63);
+  }
+  
+  .addWatchItem > label {
+    color: gray;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .addWatchItem > input {
+    padding: 10px;
+  }
+  
+  .addWatchItem > textarea {
+    padding: 10px;
+  }
+
+  .watchContainerButtons{
+    justify-content: space-between;
+  }
+  
+  .addWatchButton {
+    margin-top: 10px;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+
+  .backWatchButton{
+    padding: 7px 10px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    margin-left: 40px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .characteristics-container {
+    max-height: 300px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding: 10px;
+  }
+  
+  .characteristics-container p {
+    margin-bottom: 10px; 
+  }
+  
+  .characteristics-item {
+    margin-bottom: 5px;
+  }
+  
+  .characteristics-item label {
+    margin-left: 5px;
+  }

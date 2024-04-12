@@ -10,6 +10,9 @@ namespace WatchShop_Core.DependencyResolvers
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<BrendService>().As<IBrendService>();
+            builder.RegisterType<WatchService>().As<IWatchService>();
+            builder.RegisterType<BlobService>().As<IBlobService>();
+            builder.RegisterType<OrderService>().As<IOrderService>();
         }
     }
 }

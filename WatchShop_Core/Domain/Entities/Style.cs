@@ -1,12 +1,13 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("styles")]
-    public class Style
+    public class Style : IEntity
     {
         [Key]
         public byte Id { get; set; }

@@ -22,6 +22,9 @@ import UserEdit from "./admin/pages/users/UserEdit"
 import BrendList from "./admin/pages/brends/BrendList"
 import CreateBrend from "./admin/pages/brends/CreateBrend"
 import Brend from "./admin/pages/brends/Brend"
+import WatchList from "./admin/pages/watches/WatchList"
+import Watch from "./admin/pages/watches/Watch"
+import CreateWatch from "./admin/pages/watches/CreateWatch"
 
 function App() {
 
@@ -49,6 +52,9 @@ function App() {
             <Route path="brends" element={<BrendList />} />
             <Route path="brend/:id" element={<Brend />} />
             <Route path="brend/create" element={<CreateBrend />} />
+            <Route path="watches" element={<WatchList />} />
+            <Route path="watch/:id" element={<Watch />} />
+            <Route path="watch/create" element={<CreateWatch />} />
         </Route>
         <Route path="*" element={<Error/>}/>
       </Routes>

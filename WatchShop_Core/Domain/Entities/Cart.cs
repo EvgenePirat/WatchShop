@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("carts")]
-    public class Cart
+    public class Cart : IEntity
     {
         public int WatchId { get; set; }
 

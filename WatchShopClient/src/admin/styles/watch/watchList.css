@@ -1,0 +1,35 @@
+.watchList{
+    flex: 4;
+}
+
+
+.watchTitle{
+    padding: 20px;
+    font-size: 30px;
+}
+
+.watchTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.watchAddButton{
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 1500px) {
+    .watchTitleContainer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .watchAddButton{
+      margin-top: 10px;
+    }
+  }

@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Entities.Identities;
 
 namespace WatchShop_Core.Domain.Entities
 {
     [Table("orders")]
-    public class Order
+    public class Order : IEntity
     {
         [Key]
         public Guid Id { get; set; }
