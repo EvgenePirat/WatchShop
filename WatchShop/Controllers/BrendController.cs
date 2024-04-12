@@ -70,7 +70,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ApiResponse>> UpdateBrendAsync(int id, [FromBody] UpdateBrendDto dto, CancellationToken ct)
+        public async Task<ActionResult<ApiResponse>> UpdateBrendAsync(int id, [FromBody] UpdateBrendDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update Brend, Task started",
                 nameof(BrendController), nameof(UpdateBrendAsync));
@@ -94,10 +94,10 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteBrend(int id, CancellationToken ct)
+        public async Task<IActionResult> DeleteBrendAsync(int id)
         {
             _logger.LogInformation("{controller}.{method} - Delete, delete brend, Task started",
-                nameof(BrendController), nameof(DeleteBrend));
+                nameof(BrendController), nameof(DeleteBrendAsync));
 
             await _brendService.DeleteBrendAsync(id);
 
@@ -108,7 +108,7 @@ namespace WatchShop_UI.Controllers
             };
 
             _logger.LogInformation("{controller}.{method} - Delete, delete brend, Result - Ok, Task ended",
-                nameof(BrendController), nameof(DeleteBrend));
+                nameof(BrendController), nameof(DeleteBrendAsync));
 
             return Ok(response);
         }
