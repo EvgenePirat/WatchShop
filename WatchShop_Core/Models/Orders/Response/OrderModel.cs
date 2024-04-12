@@ -16,5 +16,7 @@ namespace WatchShop_Core.Models.Orders.Response
         public OrderStatusModel OrderStatus { get; set; }
 
         public IEnumerable<CartModel>? Carts { get; set; }
+
+        public string? Comment { get; set; }
     }
 }
