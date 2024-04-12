@@ -13,6 +13,8 @@ namespace WatchShop_Core.DependencyResolvers
             builder.RegisterType<WatchService>().As<IWatchService>();
             builder.RegisterType<BlobService>().As<IBlobService>();
             builder.RegisterType<OrderService>().As<IOrderService>();
+            builder.RegisterType<AuthenticateService>().As<IAuthenticateService>();
+            builder.RegisterType<JwtService>().As<IJwtService>();
         }
     }
 }

@@ -5,8 +5,8 @@ namespace WatchShop_Core.ServiceContracts
 {
     public interface IAuthenticateService
     {
-        Task<AuthResponseModel> Login(LoginModel model);
+        Task<AuthResponseModel> LoginAsync(LoginModel model);
 
-        Task<AuthResponseModel> Register(RegisterModel model);
+        Task<RegisterResponseModel> RegisterAsync(RegisterModel model);
     }
 }

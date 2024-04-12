@@ -13,6 +13,7 @@ namespace WatchShop_UI.Mappers
             CreateMap<LoginDto, LoginModel>();
             CreateMap<RegisterDto, RegisterModel>();
             CreateMap<AuthResponseModel, AuthResponseDto>();
+            CreateMap<RegisterResponseModel, RegisterResponseDto>();
         }
     }
 }
