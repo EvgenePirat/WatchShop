@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Domain.Entities.Identities;
 using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Infrastructure.DbContext;
 
@@ -72,6 +73,12 @@ namespace WatchShop_Infrastructure.Repositories
 
         private IRepositoryBase<OrderStatus> _orderStatusRepositoryBase;
         public IRepositoryBase<OrderStatus> OrderStatusRepositoryBase => _orderStatusRepositoryBase ??= new RepositoryBase<OrderStatus>(_context);
+
+        private IRepositoryBase<ApplicationUser> _applicationUserRepositoryBase;
+        public IRepositoryBase<ApplicationUser> ApplicationUserRepositoryBase => _applicationUserRepositoryBase ??= new RepositoryBase<ApplicationUser>(_context);
+
+        private IRepositoryBase<ApplicationRole> _applicationRoleRepositoryBase;
+        public IRepositoryBase<ApplicationRole> ApplicationRoleRepositoryBase => _applicationRoleRepositoryBase ??= new RepositoryBase<ApplicationRole>(_context);
 
         public async Task<IDbContextTransaction> BeginTransactionDbContextAsync()
         {

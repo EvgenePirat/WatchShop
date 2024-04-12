@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Domain.Entities.Identities;
 
 namespace WatchShop_Core.Domain.RepositoryContracts
 {
     public interface IUnitOfWork
     {
         IRepositoryBase<Country> CountryRepositoryBase { get; }
+        IRepositoryBase<ApplicationUser> ApplicationUserRepositoryBase { get; }
+        IRepositoryBase<ApplicationRole> ApplicationRoleRepositoryBase { get; }
         IRepositoryBase<Strap> StrapRepositoryBase { get; }
         IRepositoryBase<Frame> FrameRepositoryBase { get; }
         IRepositoryBase<ClockFace> ClockFaceRepositoryBase { get; }
