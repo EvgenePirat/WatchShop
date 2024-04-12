@@ -33,6 +33,7 @@ namespace WatchShop_UI.Utilities.Middleware.ExceptionsHandlers
             var response = exception switch
             {
                 BrendArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
+                UserArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 WatchArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 ImageArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 OrderArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
