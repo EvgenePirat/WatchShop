@@ -180,14 +180,6 @@ namespace WatchShop_Infrastructure.DbContext
                     Id = (byte)(index + 1),
                     Name = value
                 }));
-
-            builder.Entity<ApplicationRole>().HasData(Enum.GetValues(typeof(RoleEnum))
-                .Cast<RoleEnum>()
-                .Select((value, index) => new ApplicationRole
-                {
-                    Id = Guid.NewGuid(),
-                    Name = value.ToString()
-                }));
         }
     }
 }
