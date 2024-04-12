@@ -7,7 +7,6 @@ namespace WatchShop_Core.Domain.RepositoryContracts
     public interface IUnitOfWork
     {
         IRepositoryBase<Country> CountryRepositoryBase { get; }
-        IRepositoryBase<ApplicationUser> ApplicationUserRepositoryBase { get; }
         IRepositoryBase<ApplicationRole> ApplicationRoleRepositoryBase { get; }
         IRepositoryBase<Strap> StrapRepositoryBase { get; }
         IRepositoryBase<Frame> FrameRepositoryBase { get; }
@@ -24,6 +23,7 @@ namespace WatchShop_Core.Domain.RepositoryContracts
         IRepositoryBase<StrapMaterial> StrapMaterialRepositoryBase { get; }
         IRepositoryBase<OrderStatus> OrderStatusRepositoryBase { get; }
 
+        IUserRepository UserRepository { get; }
         IBrendRepository IBrendRepository { get; }
         IWatchRepository WatchRepository { get; }
         IOrderRepository OrderRepository { get; }
