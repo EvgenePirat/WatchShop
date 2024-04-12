@@ -18,6 +18,9 @@ namespace WatchShop_UI.DependencyResolve
                 cfg.AddProfile(new OrderDtoProfile());
                 cfg.AddProfile(new OrderModelProfile());
 
+                cfg.AddProfile(new UserDtoProfile());
+                cfg.AddProfile(new UserModelProfile());
+
                 cfg.AddProfile(new OrderStatusDtoProfile());
                 cfg.AddProfile(new OrderStatusModelProfile());
 
