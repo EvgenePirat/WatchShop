@@ -3,6 +3,7 @@ import '../../styles/watch/createWatch.css'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
+import axios from 'axios';
 
 const watch = {
    nameModel : "",
@@ -59,9 +60,6 @@ function CreateWatch() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  else{
-    console.log(newWatch)
-  }
 
 
   function mapApiDataToWatchModel(apiData) {
@@ -108,9 +106,67 @@ function CreateWatch() {
       e.preventDefault();
 
       console.log(newWatch)
-      const resultOperation = await addNewWatchMutation(newWatch);
 
-      console.log(resultOperation)
+      const formData = new FormData();
+
+      formData.append('nameModel', newWatch.nameModel);
+      formData.append('gender', newWatch.gender);
+      formData.append('guarantee', newWatch.guarantee);
+      formData.append('price', newWatch.price);
+      formData.append('description', newWatch.description);
+      formData.append('timeFormat', newWatch.timeFormat);
+      formData.append('brendId', newWatch.brendId);
+      formData.append('styleId', newWatch.styleId);
+      formData.append('countryId', newWatch.countryId);
+      formData.append('mechanismTypeId', newWatch.mechanismTypeId);
+      formData.append('glassTypeId', newWatch.glassTypeId);
+
+      formData.append('strap.name', newWatch.strap.name);
+      formData.append('strap.strapMaterialId', newWatch.strap.strapMaterialId);
+
+      formData.append('clockFace.indicationTypeId', newWatch.clockFace.indicationTypeId);
+      formData.append('clockFace.indicationKindId', newWatch.clockFace.indicationKindId);
+      formData.append('clockFace.clockFaceColorId', newWatch.clockFace.clockFaceColorId);
+
+      // Заполнение данных о корпусе
+      formData.append('frame.caseShape', newWatch.frame.caseShape);
+      formData.append('frame.waterResistance', newWatch.frame.waterResistance);
+      formData.append('frame.frameMaterialId', newWatch.frame.frameMaterialId);
+      formData.append('frame.frameColorId', newWatch.frame.frameColorId);
+      formData.append('frame.dimensions.length', newWatch.frame.dimensions.length);
+      formData.append('frame.dimensions.thickness', newWatch.frame.dimensions.thickness);
+      formData.append('frame.dimensions.width', newWatch.frame.dimensions.width);
+      formData.append('frame.dimensions.weight', newWatch.frame.dimensions.weight);
+      formData.append('frame.dimensions.caseDiameter', newWatch.frame.dimensions.caseDiameter);
+
+      newWatch.watchAdditionalCharacteristics.forEach((char, index) => {
+        formData.append(`watchAdditionalCharacteristics[${index}]`, { AdditionalCharacteristicsId : char});
+      });
+
+      newWatch.files.forEach((file, index) => {
+        formData.append(`files[${index}]`, file);
+      });
+
+      for (const entry of formData.entries()) {
+        console.log(entry);
+      }
+
+      try {
+        const response = await axios.post('https://localhost:7103/api/watch/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+  
+        console.log('Response from server:', response);
+      } catch (error) {
+        console.error('Error while creating watch:', error);
+      }
+
+
+      //const resultOperation = await addNewWatchMutation(newWatch);
+
+      //console.log(resultOperation)
 
         // if(resultOperation.data.isSuccess)
         //     toast.success('Watch is add');
