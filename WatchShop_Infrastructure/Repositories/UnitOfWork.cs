@@ -74,11 +74,11 @@ namespace WatchShop_Infrastructure.Repositories
         private IRepositoryBase<OrderStatus> _orderStatusRepositoryBase;
         public IRepositoryBase<OrderStatus> OrderStatusRepositoryBase => _orderStatusRepositoryBase ??= new RepositoryBase<OrderStatus>(_context);
 
-        private IRepositoryBase<ApplicationUser> _applicationUserRepositoryBase;
-        public IRepositoryBase<ApplicationUser> ApplicationUserRepositoryBase => _applicationUserRepositoryBase ??= new RepositoryBase<ApplicationUser>(_context);
-
         private IRepositoryBase<ApplicationRole> _applicationRoleRepositoryBase;
         public IRepositoryBase<ApplicationRole> ApplicationRoleRepositoryBase => _applicationRoleRepositoryBase ??= new RepositoryBase<ApplicationRole>(_context);
+
+        private IUserRepository _userRepository;
+        public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context);
 
         public async Task<IDbContextTransaction> BeginTransactionDbContextAsync()
         {
