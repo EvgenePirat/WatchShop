@@ -28,7 +28,7 @@ namespace WatchShop_Core.Services
 
         public async Task<AuthResponseModel> LoginAsync(LoginModel model)
         {
-            var users = await _unitOfWork.ApplicationUserRepositoryBase.GetAllAsync();
+            var users = await _unitOfWork.UserRepository.GetAllAsync();
 
             var userExist = users.FirstOrDefault(u => u.UserName.ToLower() == model.Username.ToLower());
 
@@ -48,7 +48,7 @@ namespace WatchShop_Core.Services
 
         public async Task<RegisterResponseModel> RegisterAsync(RegisterModel model)
         {
-            var users = await _unitOfWork.ApplicationUserRepositoryBase.GetAllAsync();
+            var users = await _unitOfWork.UserRepository.GetAllAsync();
 
             var userExist = users.FirstOrDefault(u => u.UserName.ToLower() == model.Username.ToLower());
 
