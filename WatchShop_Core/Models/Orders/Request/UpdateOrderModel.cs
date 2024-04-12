@@ -11,5 +11,7 @@ namespace WatchShop_Core.Models.Orders.Request
         public byte OrderStatusId { get; set; }
 
         public IEnumerable<UpdateCartModel> Carts { get; set; }
+
+        public string? Comment { get; set; }
     }
 }
