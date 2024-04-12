@@ -16,5 +16,7 @@ namespace WatchShop_UI.Dtos.Orders.Response
         public OrderStatusDto OrderStatus { get; set; }
 
         public IEnumerable<CartDto>? Carts { get; set; }
+
+        public string? Comment { get; set; }
     }
 }

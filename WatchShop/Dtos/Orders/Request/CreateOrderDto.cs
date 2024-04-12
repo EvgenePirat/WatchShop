@@ -9,5 +9,7 @@ namespace WatchShop_UI.Dtos.Orders.Request
         public Guid UserId { get; set; }
 
         public IEnumerable<CreateCartDto> Carts { get; set; }
+
+        public string? Comment { get; set; }
     }
 }

@@ -39,6 +39,6 @@ namespace WatchShop_UI.Dtos.Watches.Request
 
         public IEnumerable<CreateWatchAdditionalCharacteristicDto>? WatchAdditionalCharacteristics { get; set; }
 
-        public IFormFile[] Files { get; set; }
+        public IFormFile[]? Files { get; set; }
     }
 }
