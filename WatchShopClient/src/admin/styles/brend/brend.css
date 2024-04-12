@@ -40,15 +40,15 @@
     margin-left: 20px;
   }
   
-  .userShowUsername {
+  .brendShowUsername {
     font-weight: 600;
   }
   
-  .userShowUserTitle {
+  .brendShowUserTitle {
     font-weight: 300;
   }
   
-  .userShowBottom{
+  .brendShowBottom{
       margin-top: 20px;
   }
   
@@ -65,7 +65,7 @@
       color: #444;
   }
   
-  .userShowIcon{
+  .brendShowIcon{
       font-size: 16px !important;
   }
   
@@ -73,24 +73,24 @@
       margin-left: 30px;
   }
   
-  .userUpdateTitle{
+  .brendUpdateTitle{
       font-size: 24px;
       font-weight: 600;
   }
   
-  .userUpdateForm{
+  .brendUpdateForm{
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
   }
   
-  .userUpdateItem{
+  .brendUpdateItem{
       display: flex;
       flex-direction: column;
       margin-top: 10px;
   }
   
-  .userUpdateItem>label{
+  .brendUpdateItem>label{
       margin-bottom: 5px;
       font-size: 14px;
   }
@@ -108,18 +108,18 @@
     height: 100px;
   }
   
-  .userUpdateRight{
+  .brendUpdateRight{
       display: flex;
       flex-direction: column;
       justify-content: space-between;
   }
   
-  .userUpdateUpload{
+  .brendUpdateUpload{
       display: flex;
       align-items: center;
   }
   
-  .userUpdateImg{
+  .brendUpdateImg{
       width: 100px;
       height: 100px;
       border-radius: 10px;
@@ -127,11 +127,11 @@
       margin-right: 20px;
   }
   
-  .userUpdateIcon{
+  .brendUpdateIcon{
       cursor: pointer;
   }
   
-  .userUpdateButton{
+  .brendUpdateButton{
       border-radius: 5px;
       border: none;
       padding: 5px;

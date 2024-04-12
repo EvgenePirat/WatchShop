@@ -52,6 +52,9 @@ function BrendList() {
   if(isLoading){
     return <div>Loading...</div>
   }
+  else{
+    console.log(data)
+  }
 
   return (
     <div className='brendList'>

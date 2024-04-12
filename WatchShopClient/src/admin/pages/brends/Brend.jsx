@@ -32,18 +32,18 @@ function Brend() {
   return (
     <div className='brendAdmin'> 
 <div className="brendTitleContainerEdit">
-        <h1 className="userTitle">Edit Brend</h1>
+        <h1 className="brendTitle">Edit Brend</h1>
       </div>
       <div className="brendContainer">
         <div className="brendShow">
-            <span className="userUpdateTitle">Details</span>
-          <div className="userShowBottom">
+            <span className="brendUpdateTitle">Details</span>
+          <div className="brendShowBottom">
             <span className="brendShowTitle">Brend Name</span>
             <div className="brendShowInfo">
               <span className="brendShowInfoTitle">{currentName}</span>
             </div>
           </div>
-          <div className="userShowBottom">
+          <div className="brendShowBottom">
             <span className="brendShowTitle">Brend Description</span>
             <div className="brendShowInfo">
               <span className="brendShowInfoTitle">{currentDescription}</span>
@@ -51,10 +51,10 @@ function Brend() {
           </div>
         </div>
         <div className="brendUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm" onSubmit={handleUpdateBrend}>
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
+          <span className="brendUpdateTitle">Edit</span>
+          <form className="brendUpdateForm" onSubmit={handleUpdateBrend}>
+            <div className="brendUpdateLeft">
+              <div className="brendUpdateItem">
                 <label>Name</label>
                 <input
                   type="text"
@@ -64,7 +64,7 @@ function Brend() {
                   onChange={(e) => setUpdateName(e.target.value)}
                 />
               </div>
-              <div className="userUpdateItem">
+              <div className="brendUpdateItem">
                 <label>Description</label>
                 <textarea
                   type="text"
@@ -74,7 +74,7 @@ function Brend() {
                   onChange={(e) => setUpdateDescription(e.target.value)}
                 />
               </div>
-              <button className="userUpdateButton">Update</button>
+              <button className="brendUpdateButton">Update</button>
             </div>
           </form>
           <Toaster position="bottom-right" reverseOrder={false} />
