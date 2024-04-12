@@ -31,5 +31,8 @@ namespace WatchShop_Core.Domain.Entities
 
         [Required]
         public IEnumerable<Cart>? Carts { get; set; }
+
+        [StringLength(100)]
+        public string? Comment { get; set; }
     }
 }
