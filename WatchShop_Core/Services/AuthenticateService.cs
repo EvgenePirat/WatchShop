@@ -77,7 +77,7 @@ namespace WatchShop_Core.Services
 
                 await _userManager.AddToRoleAsync(user, model.Role.ToString());
 
-                return new RegisterResponseModel() { Username = user.UserName, Password = model.Password, Role = model.Role.ToString() };
+                return new RegisterResponseModel() { Username = user.UserName, Role = model.Role.ToString() };
             }
             catch (Exception ex)
             {

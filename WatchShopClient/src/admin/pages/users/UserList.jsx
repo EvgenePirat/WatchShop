@@ -4,25 +4,24 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
+import { useDeleteUserMutation, useGetUsersQuery } from '../../../apis/admin/userApi';
+import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
+function UserList() {
+
+  const {data, isLoading} = useGetUsersQuery(null)
+  const [deleteUserMutation] = useDeleteUserMutation();
+  const navigate = useNavigate();
+
+  
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'firstName', headerName: 'First name', width: 200 },
-  { field: 'lastName', headerName: 'Last name', width: 200 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 200,
-    valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-  },
+  { field: 'userName', headerName: 'Username', width: 150 },
+  { field: 'fullName', headerName: 'Full name', width: 170, renderCell: (params) => (params.value ? params.value : '-') },
+  { field: 'email', headerName: 'Email', width: 130, renderCell: (params) => (params.value ? params.value : '-') },
+  { field: 'city', headerName: 'City', width: 100, renderCell: (params) => (params.value ? params.value : '-') },
+  { field: 'role', headerName: 'Role', width: 80 },
   {
     field: "action",
     headerName: "Action",
@@ -30,43 +29,56 @@ const columns = [
     renderCell: (params) => {
       return (
         <>
-        <Link to={"/admin/user/"+params.row.id}>
-          <EditIcon className='userListButtonEdit' />
-        </Link>
-          <DeleteIcon className='userListButtonDelete' />
+          <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/user/"+params.row.id, {state: {user: params.row}})} />
+          <button onClick={() => handleDeleteUser(params.row.id)}><DeleteIcon className='userListButtonDelete' /></button>
         </>
       )
     }
   }
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+  const handleDeleteUser = async (id) => {
 
-function UserList() {
+    const result = deleteUserMutation(id)
+
+    result.then(response => {
+      
+      if (response.data.isSuccess) {
+        toast.success(response.data.result)
+      } else {
+        toast.error('user is not deleted')
+      }
+    })
+  }
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }else{
+    console.log(data)
+  }
+
   return (
-    <div style={{ width: '80%', alignItems:"end" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-          />
-      </div>
+    <div className='userList'>
+    <div className='userTitleContainer'>
+      <h3 className="userTitle">Users</h3>
+      <button className='userAddButton'><Link to="/admin/user/create">Add New</Link></button>
+    </div>
+    <div style={{ width: '100%', alignItems: 'end'}}>
+      <DataGrid
+        rows={data.result}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        disableRowSelectionOnClick
+        pageSizeOptions={[15, 10]}
+        checkboxSelection
+      />
+    </div>
+    <Toaster position="bottom-right" reverseOrder={false} />
+  </div>
   )
 }
 

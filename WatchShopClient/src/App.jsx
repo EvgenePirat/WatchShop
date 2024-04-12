@@ -18,13 +18,14 @@ import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
 import Home from '../src/admin/pages/Home'
 import UserList from '../src/admin/pages/users/UserList'
-import UserEdit from "./admin/pages/users/UserEdit"
 import BrendList from "./admin/pages/brends/BrendList"
 import CreateBrend from "./admin/pages/brends/CreateBrend"
 import Brend from "./admin/pages/brends/Brend"
 import WatchList from "./admin/pages/watches/WatchList"
 import Watch from "./admin/pages/watches/Watch"
 import CreateWatch from "./admin/pages/watches/CreateWatch"
+import User from "./admin/pages/users/User"
+import CreateUser from "./admin/pages/users/CreateUser"
 
 function App() {
 
@@ -48,7 +49,8 @@ function App() {
         <Route path="/admin" element={<Admin />}>
             <Route index element={<Home />} />
             <Route path="users" element={<UserList />} />
-            <Route path="user/:id" element={<UserEdit />} />
+            <Route path="user/:id" element={<User />} />
+            <Route path="user/create" element={<CreateUser />} />
             <Route path="brends" element={<BrendList />} />
             <Route path="brend/:id" element={<Brend />} />
             <Route path="brend/create" element={<CreateBrend />} />

@@ -1,0 +1,72 @@
+.createUser{
+    flex: 4;
+    margin: 70px;
+    -webkit-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    box-shadow: 5px -4px 34px -14px rgba(0,0,0,0.75);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.addUserForm {
+    margin-top: 10px;
+  }
+  
+  .addUserItem {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .textAreaUserStyle{
+    border: 1px solid rgb(72, 63, 63);
+    min-height: 130px;
+  }
+
+  .inputUserStyle{
+    border: 1px solid rgb(72, 63, 63);
+  }
+  
+  .addUserItem > label {
+    color: gray;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .addUserItem > input {
+    padding: 10px;
+  }
+  
+  .addUserItem > textarea {
+    padding: 10px;
+  }
+
+  .userContainerButtons{
+    justify-content: space-between;
+  }
+  
+  .addUserButton {
+    margin-top: 10px;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+
+  .backUserButton{
+    padding: 7px 10px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    margin-left: 40px;
+    font-weight: 600;
+    cursor: pointer;
+  }
