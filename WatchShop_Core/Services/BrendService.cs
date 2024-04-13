@@ -45,10 +45,10 @@ namespace WatchShop_Core.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<IEnumerable<BrendModel>> GetAllBrendsAsync()
+        public async Task<IEnumerable<BrendAllModel>> GetAllBrendsAsync()
         {
-            var brends = await _unitOfWork.IBrendRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<BrendModel>>(brends);
+            var brends = await _unitOfWork.IBrendRepository.GetAllAsync(b => b.Watches);
+            return _mapper.Map<IEnumerable<BrendAllModel>>(brends);
         }
 
         public async Task<BrendModel?> GetBrendByIdAsync(int id)

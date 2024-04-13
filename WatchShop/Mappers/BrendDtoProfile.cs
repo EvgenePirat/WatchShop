@@ -13,6 +13,7 @@ namespace WatchShop_UI.Mappers
             CreateMap<CreateBrendDto, CreateBrendModel>();
             CreateMap<UpdateBrendDto, UpdateBrendModel>();
             CreateMap<BrendModel, BrendDto>();
+            CreateMap<BrendAllModel, BrendAllDto>();
         }
     }
 }
