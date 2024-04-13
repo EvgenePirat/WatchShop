@@ -17,6 +17,12 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public string? Description { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public TimeFormat TimeFormat { get; set; }
 
         public int BrendId { get; set; }

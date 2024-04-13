@@ -28,6 +28,12 @@ namespace WatchShop_Core.Models.Watches.Response
 
         public TimeFormat TimeFormat { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public BrendModel Brend { get; set; }
 
         public StyleModel Style { get; set; }
