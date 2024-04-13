@@ -2397,6 +2397,10 @@ img {
   }
 }
 
+.fz-logo{
+  height: 70px;
+}
+
 a.fz-hamburger {
   height: 40px;
   border: 1px solid #d9d9d9;

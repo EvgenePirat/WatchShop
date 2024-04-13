@@ -1,8 +1,6 @@
 
 import { BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import DoorShop from "./pages/DoorShop"
 import JewelleryShop from "./pages/JewelleryShop"
-import CakeShop from "./pages/CakeShop"
 import Shop from "./pages/Shop"
 import ShopDetails from "./pages/ShopDetails"
 import About from "./pages/About"
@@ -32,9 +30,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/doorShop" element={<DoorShop/>}/>
         <Route path="/" element={<JewelleryShop/>}/>
-        <Route path="/cakeShop" element={<CakeShop/>}/>
         <Route path="/shop" element={<Shop/>}/>
         <Route path="/shopDetails" element={<ShopDetails/>}/>
         <Route path="/about" element={<About/>}/>

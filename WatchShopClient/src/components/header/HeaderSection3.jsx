@@ -27,7 +27,7 @@ const HeaderSection3 = () => {
                 <div className="fz-header-left-content d-flex align-items-center">
                     <div className="fz-logo-container">
                         <Link to="/">
-                            <img src="assets/images/logo.png" alt="logo" className="fz-logo"/>
+                            <img src="assets/images/watch_shop_logo.jpg" alt="logo" className="fz-logo"/>
                         </Link>
                     </div>
                     <HeaderCategoryArea header={''} title={''}/>

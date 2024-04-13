@@ -1,8 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FarzaaContext } from '../../context/FarzaaContext'
+import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 
 const HeaderCategoryArea = ({header,title}) => {
+
+    const {data, isLoading} = useGetBrendsQuery(null)
+
+    useEffect(() => {
+        
+    })
+
+
+    if(!isLoading){
+        return <div>Loading...</div>
+    }
+
+
     const {
         isCategoryOpen,
         handleCategoryBtn,
