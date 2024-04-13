@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/watch/createWatch.css'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
+import { useAddNewImagesMutation, useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
 import axios from 'axios';
 
 const watch = {
@@ -39,8 +39,7 @@ const watch = {
       caseDiameter : ""
     }
    },
-   watchAdditionalCharacteristics : [],
-   files: []
+   watchAdditionalCharacteristics : []
 }
 
 function CreateWatch() {
@@ -48,8 +47,10 @@ function CreateWatch() {
   const navigate = useNavigate();
   const [newWatch, setNewWatch] = useState(watch)
   const { data, isLoading} = useGetWatchCharacteristicsQuery(null);
+  const [images, setImages] = useState([])
 
   const [addNewWatchMutation] = useAddNewWatchMutation();
+  const [addNewImagesMutation] = useAddNewImagesMutation();
   
   useEffect(() => {
     if (!isLoading && data) {
@@ -97,8 +98,7 @@ function CreateWatch() {
           caseDiameter: apiData.caseDiameterEnums[0] || ""
         }
       },
-      watchAdditionalCharacteristics: [],
-      files:  []
+      watchAdditionalCharacteristics: []
     };
   }
 
@@ -107,6 +107,7 @@ function CreateWatch() {
 
       console.log(newWatch)
 
+      
       const formData = new FormData();
 
       formData.append('nameModel', newWatch.nameModel);
@@ -128,7 +129,6 @@ function CreateWatch() {
       formData.append('clockFace.indicationKindId', newWatch.clockFace.indicationKindId);
       formData.append('clockFace.clockFaceColorId', newWatch.clockFace.clockFaceColorId);
 
-      // Заполнение данных о корпусе
       formData.append('frame.caseShape', newWatch.frame.caseShape);
       formData.append('frame.waterResistance', newWatch.frame.waterResistance);
       formData.append('frame.frameMaterialId', newWatch.frame.frameMaterialId);
@@ -139,24 +139,14 @@ function CreateWatch() {
       formData.append('frame.dimensions.weight', newWatch.frame.dimensions.weight);
       formData.append('frame.dimensions.caseDiameter', newWatch.frame.dimensions.caseDiameter);
 
-      newWatch.watchAdditionalCharacteristics.forEach((char, index) => {
-        formData.append(`watchAdditionalCharacteristics[${index}]`, { AdditionalCharacteristicsId : char});
-      });
-
-      newWatch.files.forEach((file, index) => {
-        formData.append(`files[${index}]`, file);
-      });
-
-      for (const entry of formData.entries()) {
-        console.log(entry);
+      for (let i = 0; i < images.length; i++) {
+        formData.append('photos', images[i]);
       }
 
       try {
-        const response = await axios.post('https://localhost:7103/api/watch/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
+        const response = addNewWatchMutation(formData)
+
+        console.log(response)
   
         console.log('Response from server:', response);
       } catch (error) {
@@ -176,12 +166,8 @@ function CreateWatch() {
       //setNewWatch(watch)      
   }
 
-  const handleFileChange = (event) => {
-    const filesArray = Array.from(event.target.files);
-    setNewWatch(prevWatch => ({
-      ...prevWatch,
-      files: [...prevWatch.files, ...filesArray]
-    }));
+  const handleFileChange = (e) => {
+    setImages([...images, ...e.target.files]);
   };
 
   const handleCharacteristicChange = (event) => {
@@ -428,11 +414,11 @@ function CreateWatch() {
 
                   <div>
                     <p>Selected Files:</p>
-                    <ul>
-                      {newWatch.files.map((file, index) => (
+                    {/* <ul>
+                      {images.map((file, index) => (
                         <li key={index} value={index}>{file.name}</li>
                       ))}
-                    </ul>
+                    </ul> */}
 
                   </div>
                 </div>
