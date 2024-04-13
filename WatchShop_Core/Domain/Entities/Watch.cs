@@ -24,7 +24,15 @@ namespace WatchShop_Core.Domain.Entities
         public GuaranteeMonth Guarantee { get; set; }
 
         [Required]
+        public WatchState State { get; set; }
+
+        [Required]
         public double Price { get; set; }
+
+        [Required]
+        public bool IsDiscounted { get; set; } = false;
+
+        public double? DiscountPrice { get; set; }
 
         [MaxLength(500)]
         public string? Description { get; set; }
