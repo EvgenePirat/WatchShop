@@ -74,7 +74,7 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("ClockFaceId")]
         public ClockFace? ClockFace { get; set; }
 
-        public IEnumerable<WatchAdditionalCharacteristic>? WatchAdditionalCharacteristics { get; set; }
+        public List<WatchAdditionalCharacteristic>? WatchAdditionalCharacteristics { get; set; } = new List<WatchAdditionalCharacteristic>();
 
         [Required]
         public int FrameId { get; set; }

@@ -37,7 +37,7 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public CreateFrameModel Frame { get; set; }
 
-        public IEnumerable<CreateWatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
+        public List<int> WatchAdditionalCharacteristicsList { get; set; }
 
         public IFormFile[] Files { get; set; }
     }

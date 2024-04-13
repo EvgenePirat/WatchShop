@@ -37,8 +37,8 @@ namespace WatchShop_UI.Dtos.Watches.Request
 
         public CreateFrameDto? Frame { get; set; }
 
-        public List<IFormFile> Photos { get; set; }
+        public List<IFormFile> Files { get; set; }
 
-        //public IEnumerable<CreateWatchAdditionalCharacteristicDto>? WatchAdditionalCharacteristics { get; set; }
+        public List<int> WatchAdditionalCharacteristicsList { get; set; }
     }
 }

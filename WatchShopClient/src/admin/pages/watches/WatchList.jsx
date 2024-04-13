@@ -45,7 +45,7 @@ function WatchList() {
       
       const handleDeleteWatch = async (id) => {
 
-        const result = deleteBrendMutation(id)
+        const result = deleteWatchMutation(id)
   
         result.then(response => {
           

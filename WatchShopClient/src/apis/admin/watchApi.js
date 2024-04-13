@@ -27,14 +27,6 @@ const watchApi = createApi({
             }),
             providesTags: ["Watches"],
         }),
-        addNewImages: builder.mutation({
-            query: (photos) => ({
-                url: "photos",
-                method:"POST",
-                body: photos,
-            }),
-            invalidatesTags:["Watches"]
-        }),
         addNewWatch: builder.mutation({
             query: (newWatch) => ({
                 url: "",
@@ -61,6 +53,6 @@ const watchApi = createApi({
     }),
 });
 
-export const {useGetWatchesQuery, useGetWatchCharacteristicsQuery, useGetWatchByNameModelQuery,useAddNewImagesMutation, useAddNewWatchMutation, useUpdateWatchMutation, useDeleteWatchMutation} = watchApi;
+export const {useGetWatchesQuery, useGetWatchCharacteristicsQuery, useGetWatchByNameModelQuery, useAddNewWatchMutation, useUpdateWatchMutation, useDeleteWatchMutation} = watchApi;
 
 export default watchApi;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/watch/createWatch.css'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
-import { useAddNewImagesMutation, useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
+import { useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
 import axios from 'axios';
 
 const watch = {
@@ -48,9 +48,9 @@ function CreateWatch() {
   const [newWatch, setNewWatch] = useState(watch)
   const { data, isLoading} = useGetWatchCharacteristicsQuery(null);
   const [images, setImages] = useState([])
+  const [watchAdditionalCharacteristics, setWatchAdditionalCharacteristics] = useState([])
 
   const [addNewWatchMutation] = useAddNewWatchMutation();
-  const [addNewImagesMutation] = useAddNewImagesMutation();
   
   useEffect(() => {
     if (!isLoading && data) {
@@ -139,31 +139,38 @@ function CreateWatch() {
       formData.append('frame.dimensions.weight', newWatch.frame.dimensions.weight);
       formData.append('frame.dimensions.caseDiameter', newWatch.frame.dimensions.caseDiameter);
 
+      watchAdditionalCharacteristics.forEach(e => console.log(e))
+
+      watchAdditionalCharacteristics.forEach((char, index) => {
+        formData.append(`WatchAdditionalCharacteristicsList[${index}]`, char);
+      });
+
       for (let i = 0; i < images.length; i++) {
-        formData.append('photos', images[i]);
+        formData.append('files', images[i]);
       }
 
       try {
-        const response = addNewWatchMutation(formData)
+        const response = await addNewWatchMutation(formData)
 
         console.log(response)
+
+        if(response.data.isSuccess)
+            toast.success('Watch is add');
+        else
+            toast.error('Watch is not add');
+      
+        setNewWatch(watch)      
+        setImages([])
+        setWatchAdditionalCharacteristics([])
   
         console.log('Response from server:', response);
       } catch (error) {
+        toast.error("Error after save");
         console.error('Error while creating watch:', error);
       }
 
 
       //const resultOperation = await addNewWatchMutation(newWatch);
-
-      //console.log(resultOperation)
-
-        // if(resultOperation.data.isSuccess)
-        //     toast.success('Watch is add');
-        // else
-        //     toast.error('Watch is not add');
-      
-      //setNewWatch(watch)      
   }
 
   const handleFileChange = (e) => {
@@ -172,18 +179,14 @@ function CreateWatch() {
 
   const handleCharacteristicChange = (event) => {
     const characteristicId = parseInt(event.target.value);
-    if (event.target.checked) {
-      setNewWatch((prev) => ({
-        ...prev,
-        watchAdditionalCharacteristics: [...prev.watchAdditionalCharacteristics, characteristicId]
-      }));
-    } else {
-      setNewWatch((prev) => ({
-        ...prev,
-        watchAdditionalCharacteristics: prev.watchAdditionalCharacteristics.filter(id => id !== characteristicId)
-      }));
-    }
-};
+    setWatchAdditionalCharacteristics((prevCharacteristics) => {
+      if (event.target.checked) {
+        return [...prevCharacteristics, characteristicId];
+      } else {
+        return prevCharacteristics.filter((id) => id !== characteristicId);
+      }
+    });
+  };
 
 
 
@@ -398,7 +401,7 @@ function CreateWatch() {
                         type="checkbox"
                         id={`characteristic-${characteristic.id}`}
                         value={characteristic.id}
-                        checked={newWatch.watchAdditionalCharacteristics.includes(characteristic.id)}
+                        checked={watchAdditionalCharacteristics.includes(characteristic.id)}
                         onChange={handleCharacteristicChange}
                       />
                       <label htmlFor={`characteristic-${characteristic.id}`}>{characteristic.name}</label>

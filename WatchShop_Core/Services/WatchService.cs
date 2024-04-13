@@ -50,6 +50,11 @@ namespace WatchShop_Core.Services
 
                 watch.Images = await SavePhotos(createWatch.Files, createWatch.NameModel);
 
+                for(int i = 0; i < createWatch.WatchAdditionalCharacteristicsList.Count; i++)
+                {
+                    watch.WatchAdditionalCharacteristics.Add(new WatchAdditionalCharacteristic() { AdditionalCharacteristicsId = createWatch.WatchAdditionalCharacteristicsList[i] });
+                }
+
                 _unitOfWork.WatchRepository.Add(watch);
 
                 await _unitOfWork.SaveAsync();
