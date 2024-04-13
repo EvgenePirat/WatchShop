@@ -103,6 +103,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.img-cart-most-popular-watch{
+  max-height: 280px;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
