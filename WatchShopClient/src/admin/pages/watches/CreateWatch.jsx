@@ -19,6 +19,9 @@ const watch = {
      strapMaterialId : 1
    },
    countryId : 1,
+   isDiscounted: false,
+   state : "",
+   discountPrice : 0,
    mechanismTypeId : 1,
    glassTypeId : 1,
    clockFace : {
@@ -78,6 +81,9 @@ function CreateWatch() {
         strapMaterialId: apiData.strapMaterials[0].id || 1
       },
       countryId: apiData.countries[0].id || 1,
+      isDiscounted: false,
+      state : apiData.watchStateEnums[0] || "",
+      discountPrice : 0,
       mechanismTypeId: apiData.mechanismTypes[0].id || 1,
       glassTypeId: apiData.glassTypes[0].id || 1,
       clockFace: {
@@ -117,6 +123,9 @@ function CreateWatch() {
       formData.append('description', newWatch.description);
       formData.append('timeFormat', newWatch.timeFormat);
       formData.append('brendId', newWatch.brendId);
+      formData.append('isDiscounted', newWatch.isDiscounted);
+      formData.append('state', newWatch.state);
+      formData.append('DiscountPrice', newWatch.discountPrice);
       formData.append('styleId', newWatch.styleId);
       formData.append('countryId', newWatch.countryId);
       formData.append('mechanismTypeId', newWatch.mechanismTypeId);
@@ -204,6 +213,25 @@ function CreateWatch() {
                 <div className="addWatchItem">
                   <label htmlFor='price'>Price</label>
                     <input id='price' type="number" className='inputWatchStyle' value={newWatch.price} onChange={(e) => setNewWatch((prev) => ({...prev,price: e.target.value}))}/>
+                </div>
+
+                <div className="addWatchItem">
+                  <label htmlFor="stateWatch">State:</label>
+                  <select id="stateWatch" name="state" value={newWatch.state} onChange={(e) => setNewWatch((prev) => ({...prev,state: e.target.value}))}>
+                    {data.result.watchStateEnums.map((index, state) => (
+                      <option key={state} value={index}>{index}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="addWatchItem">
+                    <label>Is Discounted</label>
+                    <input type="checkbox" checked={newWatch.isDiscounted} onChange={(e) => setNewWatch((prev) => ({...prev,isDiscounted: e.target.checked}))}/>
+                </div>
+
+                <div className="addWatchItem">
+                  <label htmlFor='discountprice'>Discount Price</label>
+                    <input id='discountprice' type="number" className='inputWatchStyle' value={newWatch.discountPrice} onChange={(e) => setNewWatch((prev) => ({...prev,discountPrice: e.target.value}))}/>
                 </div>
 
                 <div className="addBrendItem">
