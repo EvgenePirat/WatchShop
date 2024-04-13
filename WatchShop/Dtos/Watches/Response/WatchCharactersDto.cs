@@ -27,6 +27,8 @@ namespace WatchShop_UI.Dtos.Products.Response
 
         public string[] CaseShapeEnums { get; set; } = Enum.GetNames<CaseShape>();
 
+        public string[] WatchStateEnums { get; set; } = Enum.GetNames<WatchState>();
+
         public IEnumerable<ClockFaceColorDto> ClockFaceColors { get; set; }
 
         public IEnumerable<BrendDto> Brends { get; set; }

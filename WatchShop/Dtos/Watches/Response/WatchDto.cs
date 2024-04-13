@@ -27,6 +27,13 @@ namespace WatchShop_UI.Dtos.Watches.Response
 
         public double Price { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public string? Description { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
