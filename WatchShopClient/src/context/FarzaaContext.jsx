@@ -1,6 +1,7 @@
 import { allCakeList, allProductList, blogList, ornamentList } from '../data/Data';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux'
 
 const FarzaaContext = createContext();
 
@@ -567,8 +568,10 @@ useEffect(() => {
     toast.error("Item deleted from wishlist!");
   };
 
+  const watchItems = useSelector((state) => state.watchItemsStore.watchItems);
+
   const addToJeweleryWishlist = (itemId) => {
-    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
+    const itemToAdd = watchItems.find(item => item.id === itemId);
 
     if (itemToAdd) {
       if (!jeweleryWishlist.some(item => item.id === itemId)) {

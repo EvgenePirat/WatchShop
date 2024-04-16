@@ -31,6 +31,7 @@ namespace WatchShop_Infrastructure.Repositories
                 w => w.Strap, 
                 w => w.Style, 
                 w => w.Strap.StrapMaterial,
+                w => w.Comments,
                 w => w.Images)
                 .FirstOrDefaultAsync(b => b.NameModel.ToLower() == nameModel.ToLower());
         }
@@ -51,6 +52,7 @@ namespace WatchShop_Infrastructure.Repositories
                 w => w.Frame.FrameColor,
                 w => w.GlassType,
                 w => w.MechanismType,
+                w => w.Comments,
                 w => w.Strap,
                 w => w.Style,
                 w => w.Strap.StrapMaterial,

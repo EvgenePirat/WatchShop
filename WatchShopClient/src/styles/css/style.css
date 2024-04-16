@@ -103,6 +103,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.img-cart-most-popular-watch{
+  max-height: 280px;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -2395,6 +2399,10 @@ img {
   .fz-logo-container img {
     width: 110px;
   }
+}
+
+.fz-logo{
+  height: 70px;
 }
 
 a.fz-hamburger {

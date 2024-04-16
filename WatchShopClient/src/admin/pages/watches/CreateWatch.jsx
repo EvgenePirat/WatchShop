@@ -19,6 +19,9 @@ const watch = {
      strapMaterialId : 1
    },
    countryId : 1,
+   isDiscounted: false,
+   state : "",
+   discountPrice : 0,
    mechanismTypeId : 1,
    glassTypeId : 1,
    clockFace : {
@@ -39,8 +42,7 @@ const watch = {
       caseDiameter : ""
     }
    },
-   watchAdditionalCharacteristics : [],
-   files: []
+   watchAdditionalCharacteristics : []
 }
 
 function CreateWatch() {
@@ -48,6 +50,8 @@ function CreateWatch() {
   const navigate = useNavigate();
   const [newWatch, setNewWatch] = useState(watch)
   const { data, isLoading} = useGetWatchCharacteristicsQuery(null);
+  const [images, setImages] = useState([])
+  const [watchAdditionalCharacteristics, setWatchAdditionalCharacteristics] = useState([])
 
   const [addNewWatchMutation] = useAddNewWatchMutation();
   
@@ -77,6 +81,9 @@ function CreateWatch() {
         strapMaterialId: apiData.strapMaterials[0].id || 1
       },
       countryId: apiData.countries[0].id || 1,
+      isDiscounted: false,
+      state : apiData.watchStateEnums[0] || "",
+      discountPrice : 0,
       mechanismTypeId: apiData.mechanismTypes[0].id || 1,
       glassTypeId: apiData.glassTypes[0].id || 1,
       clockFace: {
@@ -97,8 +104,7 @@ function CreateWatch() {
           caseDiameter: apiData.caseDiameterEnums[0] || ""
         }
       },
-      watchAdditionalCharacteristics: [],
-      files:  []
+      watchAdditionalCharacteristics: []
     };
   }
 
@@ -107,6 +113,7 @@ function CreateWatch() {
 
       console.log(newWatch)
 
+      
       const formData = new FormData();
 
       formData.append('nameModel', newWatch.nameModel);
@@ -116,6 +123,9 @@ function CreateWatch() {
       formData.append('description', newWatch.description);
       formData.append('timeFormat', newWatch.timeFormat);
       formData.append('brendId', newWatch.brendId);
+      formData.append('isDiscounted', newWatch.isDiscounted);
+      formData.append('state', newWatch.state);
+      formData.append('DiscountPrice', newWatch.discountPrice);
       formData.append('styleId', newWatch.styleId);
       formData.append('countryId', newWatch.countryId);
       formData.append('mechanismTypeId', newWatch.mechanismTypeId);
@@ -128,7 +138,6 @@ function CreateWatch() {
       formData.append('clockFace.indicationKindId', newWatch.clockFace.indicationKindId);
       formData.append('clockFace.clockFaceColorId', newWatch.clockFace.clockFaceColorId);
 
-      // Заполнение данных о корпусе
       formData.append('frame.caseShape', newWatch.frame.caseShape);
       formData.append('frame.waterResistance', newWatch.frame.waterResistance);
       formData.append('frame.frameMaterialId', newWatch.frame.frameMaterialId);
@@ -139,65 +148,54 @@ function CreateWatch() {
       formData.append('frame.dimensions.weight', newWatch.frame.dimensions.weight);
       formData.append('frame.dimensions.caseDiameter', newWatch.frame.dimensions.caseDiameter);
 
-      newWatch.watchAdditionalCharacteristics.forEach((char, index) => {
-        formData.append(`watchAdditionalCharacteristics[${index}]`, { AdditionalCharacteristicsId : char});
+      watchAdditionalCharacteristics.forEach(e => console.log(e))
+
+      watchAdditionalCharacteristics.forEach((char, index) => {
+        formData.append(`WatchAdditionalCharacteristicsList[${index}]`, char);
       });
 
-      newWatch.files.forEach((file, index) => {
-        formData.append(`files[${index}]`, file);
-      });
-
-      for (const entry of formData.entries()) {
-        console.log(entry);
+      for (let i = 0; i < images.length; i++) {
+        formData.append('files', images[i]);
       }
 
       try {
-        const response = await axios.post('https://localhost:7103/api/watch/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
+        const response = await addNewWatchMutation(formData)
+
+        console.log(response)
+
+        if(response.data.isSuccess)
+            toast.success('Watch is add');
+        else
+            toast.error('Watch is not add');
+      
+        setNewWatch(watch)      
+        setImages([])
+        setWatchAdditionalCharacteristics([])
   
         console.log('Response from server:', response);
       } catch (error) {
+        toast.error("Error after save");
         console.error('Error while creating watch:', error);
       }
 
 
       //const resultOperation = await addNewWatchMutation(newWatch);
-
-      //console.log(resultOperation)
-
-        // if(resultOperation.data.isSuccess)
-        //     toast.success('Watch is add');
-        // else
-        //     toast.error('Watch is not add');
-      
-      //setNewWatch(watch)      
   }
 
-  const handleFileChange = (event) => {
-    const filesArray = Array.from(event.target.files);
-    setNewWatch(prevWatch => ({
-      ...prevWatch,
-      files: [...prevWatch.files, ...filesArray]
-    }));
+  const handleFileChange = (e) => {
+    setImages([...images, ...e.target.files]);
   };
 
   const handleCharacteristicChange = (event) => {
     const characteristicId = parseInt(event.target.value);
-    if (event.target.checked) {
-      setNewWatch((prev) => ({
-        ...prev,
-        watchAdditionalCharacteristics: [...prev.watchAdditionalCharacteristics, characteristicId]
-      }));
-    } else {
-      setNewWatch((prev) => ({
-        ...prev,
-        watchAdditionalCharacteristics: prev.watchAdditionalCharacteristics.filter(id => id !== characteristicId)
-      }));
-    }
-};
+    setWatchAdditionalCharacteristics((prevCharacteristics) => {
+      if (event.target.checked) {
+        return [...prevCharacteristics, characteristicId];
+      } else {
+        return prevCharacteristics.filter((id) => id !== characteristicId);
+      }
+    });
+  };
 
 
 
@@ -215,6 +213,25 @@ function CreateWatch() {
                 <div className="addWatchItem">
                   <label htmlFor='price'>Price</label>
                     <input id='price' type="number" className='inputWatchStyle' value={newWatch.price} onChange={(e) => setNewWatch((prev) => ({...prev,price: e.target.value}))}/>
+                </div>
+
+                <div className="addWatchItem">
+                  <label htmlFor="stateWatch">State:</label>
+                  <select id="stateWatch" name="state" value={newWatch.state} onChange={(e) => setNewWatch((prev) => ({...prev,state: e.target.value}))}>
+                    {data.result.watchStateEnums.map((index, state) => (
+                      <option key={state} value={index}>{index}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="addWatchItem">
+                    <label>Is Discounted</label>
+                    <input type="checkbox" checked={newWatch.isDiscounted} onChange={(e) => setNewWatch((prev) => ({...prev,isDiscounted: e.target.checked}))}/>
+                </div>
+
+                <div className="addWatchItem">
+                  <label htmlFor='discountprice'>Discount Price</label>
+                    <input id='discountprice' type="number" className='inputWatchStyle' value={newWatch.discountPrice} onChange={(e) => setNewWatch((prev) => ({...prev,discountPrice: e.target.value}))}/>
                 </div>
 
                 <div className="addBrendItem">
@@ -412,7 +429,7 @@ function CreateWatch() {
                         type="checkbox"
                         id={`characteristic-${characteristic.id}`}
                         value={characteristic.id}
-                        checked={newWatch.watchAdditionalCharacteristics.includes(characteristic.id)}
+                        checked={watchAdditionalCharacteristics.includes(characteristic.id)}
                         onChange={handleCharacteristicChange}
                       />
                       <label htmlFor={`characteristic-${characteristic.id}`}>{characteristic.name}</label>
@@ -428,11 +445,11 @@ function CreateWatch() {
 
                   <div>
                     <p>Selected Files:</p>
-                    <ul>
-                      {newWatch.files.map((file, index) => (
+                    {/* <ul>
+                      {images.map((file, index) => (
                         <li key={index} value={index}>{file.name}</li>
                       ))}
-                    </ul>
+                    </ul> */}
 
                   </div>
                 </div>

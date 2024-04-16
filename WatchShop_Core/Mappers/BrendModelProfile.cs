@@ -12,6 +12,7 @@ namespace WatchShop_Core.Mappers
             CreateMap<CreateBrendModel, Brend>();
             CreateMap<UpdateBrendModel, Brend>();
             CreateMap<Brend, BrendModel>();
+            CreateMap<Brend, BrendAllModel>().ForMember(dest => dest.CountWatches, opt => opt.MapFrom(src => src.Watches.Count()));
         }
     }
 }

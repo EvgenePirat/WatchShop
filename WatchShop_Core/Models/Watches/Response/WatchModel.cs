@@ -1,5 +1,7 @@
-﻿using WatchShop_Core.Models.Brends.Response;
+﻿using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Models.Brends.Response;
 using WatchShop_Core.Models.ClockFaces.Response;
+using WatchShop_Core.Models.Comments.Response;
 using WatchShop_Core.Models.Countries.Response;
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Response;
@@ -28,6 +30,12 @@ namespace WatchShop_Core.Models.Watches.Response
 
         public TimeFormat TimeFormat { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public BrendModel Brend { get; set; }
 
         public StyleModel Style { get; set; }
@@ -47,5 +55,7 @@ namespace WatchShop_Core.Models.Watches.Response
         public IEnumerable<WatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
 
         public IEnumerable<ImageModel> Images { get; set; }
+
+        public IEnumerable<CommentModel>? Comments { get; set; }
     }
 }

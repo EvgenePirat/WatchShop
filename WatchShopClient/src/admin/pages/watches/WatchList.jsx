@@ -27,7 +27,7 @@ function WatchList() {
         { field: 'glassType', headerName: 'Glass Type', width: 100, valueGetter:(value, row) => `${row.glassType.name}` }, 
         { field: 'mechanismType', headerName: 'Mechanism Type', width: 130, valueGetter:(value, row) => `${row.mechanismType.name}` }, 
         { field: 'strap', headerName: 'Strap Name', width: 100, valueGetter:(value, row) => `${row.strap.name}` }, 
-        { field: 'strap.strapMaterial', headerName: 'Strap Material', width: 100, valueGetter:(value, row) => `${row.strap.strapMaterial.name}` }, 
+        { field: 'strap.strapMaterial', headerName: 'Discount', width: 100, valueGetter:(value, row) => `${row.isDiscounted}` }, 
         {
           field: "action",
           headerName: "Action",
@@ -45,14 +45,14 @@ function WatchList() {
       
       const handleDeleteWatch = async (id) => {
 
-        const result = deleteBrendMutation(id)
+        const result = deleteWatchMutation(id)
   
         result.then(response => {
           
           if (response.data.isSuccess) {
             toast.success(response.data.result)
           } else {
-            toast.error('brend is not deleted')
+            toast.error('watch is not deleted')
           }
         })
   

@@ -1,0 +1,22 @@
+.commentList{
+    flex: 4;
+}
+
+.commentTitle{
+    padding: 20px;
+    font-size: 30px;
+}
+
+.commentTitleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 1500px) {
+    .commentTitleContainer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+  }

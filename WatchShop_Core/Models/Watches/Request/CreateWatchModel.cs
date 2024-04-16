@@ -25,6 +25,12 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public byte StyleId { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public CreateStrapModel Strap { get; set; }
 
         public byte CountryId { get; set; }
@@ -37,7 +43,7 @@ namespace WatchShop_Core.Models.Watches.Request
 
         public CreateFrameModel Frame { get; set; }
 
-        public IEnumerable<CreateWatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
+        public List<int> WatchAdditionalCharacteristicsList { get; set; }
 
         public IFormFile[] Files { get; set; }
     }

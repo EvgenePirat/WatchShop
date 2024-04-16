@@ -24,7 +24,15 @@ namespace WatchShop_Core.Domain.Entities
         public GuaranteeMonth Guarantee { get; set; }
 
         [Required]
+        public WatchState State { get; set; }
+
+        [Required]
         public double Price { get; set; }
+
+        [Required]
+        public bool IsDiscounted { get; set; } = false;
+
+        public double? DiscountPrice { get; set; }
 
         [MaxLength(500)]
         public string? Description { get; set; }
@@ -74,7 +82,7 @@ namespace WatchShop_Core.Domain.Entities
         [ForeignKey("ClockFaceId")]
         public ClockFace? ClockFace { get; set; }
 
-        public IEnumerable<WatchAdditionalCharacteristic>? WatchAdditionalCharacteristics { get; set; }
+        public List<WatchAdditionalCharacteristic>? WatchAdditionalCharacteristics { get; set; } = new List<WatchAdditionalCharacteristic>();
 
         [Required]
         public int FrameId { get; set; }

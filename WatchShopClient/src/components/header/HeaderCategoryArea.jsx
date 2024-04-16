@@ -1,8 +1,11 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
+import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 
-const HeaderCategoryArea = ({header,title}) => {
+const HeaderCategoryArea = ({header}) => {
+
+    const {data, isLoading} = useGetBrendsQuery(null)
+
     const {
         isCategoryOpen,
         handleCategoryBtn,
@@ -12,47 +15,46 @@ const HeaderCategoryArea = ({header,title}) => {
     <div className={`fz-category-area ${header}`} ref={categoryBtnRef}>
         <button className="fz-category-btn" onClick={handleCategoryBtn}>
             <i className="fa-solid fa-grid"></i>
-            <span className={title}>Category</span>
+            <span>Brends</span>
         </button>
 
         <div className={`fz-category-menu ${isCategoryOpen? 'open':''}`}>
             <div className="row gx-3 gx-md-5 gy-5">
+            {isLoading ? (
+            <div>Loading...</div>
+        ) : data ? (
+            <React.Fragment>
                 <div className="col-md-4 col-6">
                     <ul className="fz-category-list">
-                        <li><Link to="/shop">Rings (29)</Link></li>
-                        <li><Link to="/shop">Earrings (47)</Link></li>
-                        <li><Link to="/shop">Necklaces (68)</Link></li>
-                        <li><Link to="/shop">locket (44)</Link></li>
-                        <li><Link to="/shop">Bangle (12)</Link></li>
-                        <li><Link to="/shop">Bolo tie (48)</Link></li>
-                        <li><Link to="/shop">Brooch (64)</Link></li>
-                        <li><Link to="/shop">Body Piercing (56)</Link></li>
+                        {data.result.length > 0 && 
+                            data.result.slice(0, Math.ceil(data.result.length / 3)).map((brend, index) => (
+                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                            ))
+                        }
                     </ul>
                 </div>
                 <div className="col-md-4 col-6">
                     <ul className="fz-category-list">
-                        <li><Link to="/shop">Rings (29)</Link></li>
-                        <li><Link to="/shop">Earrings (47)</Link></li>
-                        <li><Link to="/shop">Necklaces (68)</Link></li>
-                        <li><Link to="/shop">locket (44)</Link></li>
-                        <li><Link to="/shop">Bangle (12)</Link></li>
-                        <li><Link to="/shop">Bolo tie (48)</Link></li>
-                        <li><Link to="/shop">Brooch (64)</Link></li>
-                        <li><Link to="/shop">Body Piercing (56)</Link></li>
+                        {data.result.length > 0 && 
+                            data.result.slice(Math.ceil(data.result.length / 3), Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
+                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                            ))
+                        }
                     </ul>
                 </div>
                 <div className="col-md-4 col-6">
                     <ul className="fz-category-list">
-                        <li><Link to="/shop">Rings (29)</Link></li>
-                        <li><Link to="/shop">Earrings (47)</Link></li>
-                        <li><Link to="/shop">Necklaces (68)</Link></li>
-                        <li><Link to="/shop">locket (44)</Link></li>
-                        <li><Link to="/shop">Bangle (12)</Link></li>
-                        <li><Link to="/shop">Bolo tie (48)</Link></li>
-                        <li><Link to="/shop">Brooch (64)</Link></li>
-                        <li><Link to="/shop">Body Piercing (56)</Link></li>
+                        {data.result.length > 0 && 
+                            data.result.slice(Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
+                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                            ))
+                        }
                     </ul>
                 </div>
+            </React.Fragment>
+        ) : (
+            <div>No data available.</div>
+        )}
             </div>
         </div>
     </div>

@@ -1,8 +1,6 @@
 
 import { BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import DoorShop from "./pages/DoorShop"
 import JewelleryShop from "./pages/JewelleryShop"
-import CakeShop from "./pages/CakeShop"
 import Shop from "./pages/Shop"
 import ShopDetails from "./pages/ShopDetails"
 import About from "./pages/About"
@@ -26,15 +24,14 @@ import Watch from "./admin/pages/watches/Watch"
 import CreateWatch from "./admin/pages/watches/CreateWatch"
 import User from "./admin/pages/users/User"
 import CreateUser from "./admin/pages/users/CreateUser"
+import CommentList from "./admin/pages/comments/CommentList"
 
 function App() {
 
   return (
     <Router>
       <Routes>
-        <Route path="/doorShop" element={<DoorShop/>}/>
         <Route path="/" element={<JewelleryShop/>}/>
-        <Route path="/cakeShop" element={<CakeShop/>}/>
         <Route path="/shop" element={<Shop/>}/>
         <Route path="/shopDetails" element={<ShopDetails/>}/>
         <Route path="/about" element={<About/>}/>
@@ -48,6 +45,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/admin" element={<Admin />}>
             <Route index element={<Home />} />
+            <Route path="comments" element={<CommentList />} />
             <Route path="users" element={<UserList />} />
             <Route path="user/:id" element={<User />} />
             <Route path="user/create" element={<CreateUser />} />

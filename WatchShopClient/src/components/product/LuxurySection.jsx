@@ -15,7 +15,7 @@ const LuxurySection = () => {
             <div className="fz-2-section-heading">
                 <div className="row gy-4 align-items-center justify-content-between">
                     <div className="col-md-6">
-                        <h2 className="fz-section-title">Most Luxury Jewelry</h2>
+                        <h2 className="fz-section-title">Most Luxury Watches</h2>
                     </div>
                     <div className="col-md-6">
                         <Nav 

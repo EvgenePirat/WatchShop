@@ -1,7 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Models.Images.Response;
 using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.ClockFaces.Response;
+using WatchShop_UI.Dtos.Comments.Response;
 using WatchShop_UI.Dtos.Countries.Response;
 using WatchShop_UI.Dtos.Enums;
 using WatchShop_UI.Dtos.Frames.Response;
@@ -27,6 +29,13 @@ namespace WatchShop_UI.Dtos.Watches.Response
 
         public double Price { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public WatchState State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public string? Description { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -51,5 +60,7 @@ namespace WatchShop_UI.Dtos.Watches.Response
         public IEnumerable<WatchAdditionalCharacteristicDto>? WatchAdditionalCharacteristics { get; set; }
 
         public IEnumerable<ImageDto> Images { get; set; }
+
+        public IEnumerable<CommentDto>? Comments { get; set; }
     }
 }

@@ -55,7 +55,7 @@ namespace WatchShop_UI.Controllers
 
             var result = await _brendService.GetAllBrendsAsync();
 
-            var mappedResult = _mapper.Map<IEnumerable<BrendDto>>(result);
+            var mappedResult = _mapper.Map<IEnumerable<BrendAllDto>>(result);
 
             ApiResponse response = new ApiResponse()
             {

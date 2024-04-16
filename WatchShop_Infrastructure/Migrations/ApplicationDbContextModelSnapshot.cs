@@ -1487,6 +1487,9 @@ namespace WatchShop_Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<double?>("DiscountPrice")
+                        .HasColumnType("float");
+
                     b.Property<int>("FrameId")
                         .HasColumnType("int");
 
@@ -1499,6 +1502,9 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<int>("Guarantee")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDiscounted")
+                        .HasColumnType("bit");
+
                     b.Property<byte>("MechanismTypeId")
                         .HasColumnType("tinyint");
 
@@ -1509,6 +1515,9 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
 
                     b.Property<int>("StrapId")
                         .HasColumnType("int");
@@ -1573,6 +1582,9 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

@@ -28,6 +28,9 @@ namespace WatchShop_Core.Domain.Entities
         public string? Comment { get; set; }
 
         [Required]
+        public int Grade { get; set; }
+
+        [Required]
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -21,6 +21,12 @@ namespace WatchShop_UI.Dtos.Watches.Request
 
         public string TimeFormat { get; set; }
 
+        public bool IsDiscounted { get; set; } = false;
+
+        public string State { get; set; }
+
+        public double? DiscountPrice { get; set; }
+
         public int BrendId { get; set; }
 
         public byte StyleId { get; set; }
@@ -37,8 +43,8 @@ namespace WatchShop_UI.Dtos.Watches.Request
 
         public CreateFrameDto? Frame { get; set; }
 
-        public IEnumerable<CreateWatchAdditionalCharacteristicDto>? WatchAdditionalCharacteristics { get; set; }
+        public List<IFormFile> Files { get; set; }
 
-        public IFormFile[]? Files { get; set; }
+        public List<int> WatchAdditionalCharacteristicsList { get; set; }
     }
 }
