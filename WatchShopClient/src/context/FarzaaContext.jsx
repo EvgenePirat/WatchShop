@@ -1,7 +1,8 @@
-import { allCakeList, allProductList, blogList, ornamentList } from '../data/Data';
+import { allCakeList, blogList } from '../data/Data';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useGetWatchesQuery } from '../apis/admin/watchApi';
 
 const FarzaaContext = createContext();
 
@@ -19,6 +20,9 @@ const FarzaaContextProvider = ({ children }) => {
   const handleCartClose = () => setShowCart(false);
   const handleCartShow = () => setShowCart(true);
 
+  const { data, isLoading } = useGetWatchesQuery()
+  const [watches, setWatches] = useState()
+
 
   // Video Modal
   const [showVideo, setShowVideo] = useState(false);
@@ -33,6 +37,20 @@ const FarzaaContextProvider = ({ children }) => {
     setIsCategoryOpen((prevState) => !prevState)
   }
   const categoryBtnRef = useRef(null);
+
+  
+  useEffect(() => {
+    if (!isLoading && data) {
+      setWatches(data.result);
+    }
+  }, [isLoading, data]);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setJeweleryArray(watches);
+      setFilteredProducts(watches);
+    }
+  }, [watches]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -142,10 +160,15 @@ const FarzaaContextProvider = ({ children }) => {
     setPrice(newPrice);
   };
 
+  const dispatch = useDispatch();
+  const watchesList = useSelector(state => state.watches);
 
   // All Product Filter
-  const [filteredProducts, setFilteredProducts] = useState(allProductList);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
+
+  console.log(filteredProducts)
+
   // Handle sort
   const handleSortChange = (event) => {
     const value = event.target.value;
@@ -178,9 +201,9 @@ const FarzaaContextProvider = ({ children }) => {
   // category handle method
   const handleCategoryFilter = (category) => {
     if (category === null) {
-      setFilteredProducts(allProductList); // Show all products
+      setFilteredProducts(jeweleryArray); // Show all products
     } else {
-      const filtered = allProductList.filter(product => product.category === category);
+      const filtered = jeweleryArray.filter(product => product.category === category);
       setFilteredProducts(filtered);
     }
     setCurrentPage(1);
@@ -188,7 +211,7 @@ const FarzaaContextProvider = ({ children }) => {
 
   // Price Filter
   const handlePriceFilter = () => {
-    const filtered = allProductList.filter(product => product.price >= price[0] && product.price <= price[1]);
+    const filtered = jeweleryArray.filter(product => product.price >= price[0] && product.price <= price[1]);
     setFilteredProducts(filtered);
   };
 
@@ -203,7 +226,7 @@ const FarzaaContextProvider = ({ children }) => {
   };
 
   const performSearch = (term) => {
-    const filtered = allProductList.filter(product =>
+    const filtered = jeweleryArray.filter(product =>
       product.name.toLowerCase().includes(term.toLowerCase())
     );
     setSearchedProducts(filtered);
@@ -214,7 +237,7 @@ const FarzaaContextProvider = ({ children }) => {
       setFilteredProducts(searchedProducts);
       setCurrentPage(1); // Reset pagination when search changes
     } else {
-      setFilteredProducts(allProductList);
+      setFilteredProducts(jeweleryArray);
     }
   }, [searchedProducts, searchTerm]);
  // Tag Filter
@@ -227,22 +250,6 @@ const FarzaaContextProvider = ({ children }) => {
       setSelectedTags([...selectedTags, tag]);
     }
   };
-
-  // Filter products based on selected tags
-  const filteredByTags = selectedTags.length === 0
-  ? allProductList
-  : allProductList.filter(product => selectedTags.includes(product.category));
-
-  useEffect(() => {
-    if (selectedTags.length > 0) {
-      const filteredByTags = allProductList.filter(product => selectedTags.includes(product.category));
-      setFilteredProducts(filteredByTags);
-      setCurrentPage(1); // Reset pagination when tags change
-    } else {
-      setFilteredProducts(allProductList);
-    }
-  }, [selectedTags]);
-  
 // Pagination
 const productsPerPage = 9;
 const [currentPage, setCurrentPage] = useState(1);
@@ -305,7 +312,7 @@ useEffect(() => {
   // Add to Cart
   const addToCart = (itemId) => {
     // Find the item from allProductList using itemId
-    const itemToAdd = allProductList.find(item => item.id === itemId);
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
 
     if (itemToAdd) {
       const existingItemIndex = cartItems.findIndex(item => item.id === itemId);
@@ -332,7 +339,7 @@ useEffect(() => {
 
       }
     } else {
-      toast.warning('Item not found in allProductList.');
+      toast.warning('Item not found in watchesList.');
     }
   };
 
@@ -549,7 +556,7 @@ useEffect(() => {
 }, [searchQuery, selectedBlogTags, activeBlogCategory]);
 
   // jewelery shop
-  const [jeweleryArray, setJeweleryArray] = useState(ornamentList);
+  const [jeweleryArray, setJeweleryArray] = useState([]);
   const [jeweleryWishlist, setJeweleryWishlist] = useState([]);
   const wishlistJewelleryItemAmount = jeweleryWishlist.reduce((total, item) => total + item.quantity, 0);
 
@@ -568,10 +575,8 @@ useEffect(() => {
     toast.error("Item deleted from wishlist!");
   };
 
-  const watchItems = useSelector((state) => state.watchItemsStore.watchItems);
-
   const addToJeweleryWishlist = (itemId) => {
-    const itemToAdd = watchItems.find(item => item.id === itemId);
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
 
     if (itemToAdd) {
       if (!jeweleryWishlist.some(item => item.id === itemId)) {
@@ -636,7 +641,7 @@ useEffect(() => {
   };
   // Add to cart in jewelery shop
   const addToJeweleryCart = (itemId) => {
-    const itemToAdd = ornamentList.find(item => item.id === itemId);
+    const itemToAdd = watches.find(item => item.id === itemId);
 
     if (itemToAdd) {
       const existingItemIndex = jeweleryAddToCart.findIndex(item => item.id === itemId);
@@ -980,7 +985,6 @@ useEffect(() => {
       slides,
       selectedTags,
       handleTagSelection,
-      filteredByTags,
       selectedBlogTags,
       handleBlogTagSelection,
       wishlistItemAmount,

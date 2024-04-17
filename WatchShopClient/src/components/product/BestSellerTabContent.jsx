@@ -1,21 +1,18 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 const BestSellerTabContent = () => {
-
-    const watchItems = useSelector((state) => state.watchItemsStore.watchItems);
-
-    console.log(watchItems)
 
     const {
         addToJeweleryWishlist,
         addToJeweleryCart,
+        jeweleryArray,
     } = useContext(FarzaaContext)
+
   return (
     <div className="row gy-4 gx-3 justify-content-center">
-        {watchItems.filter((item) => item.state === "BEST_SELLER").slice(0, 8).map((item) => (
+        {jeweleryArray.filter((item) => item.state === "BEST_SELLER").slice(0, 8).map((item) => (
             <div className="col-xl-3 col-md-4 col-6 col-xxs-12" key={item.id}>
                 <div className="fz-2-single-product">
                     <div className="fz-2-single-product-img">
