@@ -1,5 +1,7 @@
-﻿using WatchShop_Core.Models.Brends.Response;
+﻿using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Models.Brends.Response;
 using WatchShop_Core.Models.ClockFaces.Response;
+using WatchShop_Core.Models.Comments.Response;
 using WatchShop_Core.Models.Countries.Response;
 using WatchShop_Core.Models.Enums;
 using WatchShop_Core.Models.Frames.Response;
@@ -53,5 +55,7 @@ namespace WatchShop_Core.Models.Watches.Response
         public IEnumerable<WatchAdditionalCharacteristicModel>? WatchAdditionalCharacteristics { get; set; }
 
         public IEnumerable<ImageModel> Images { get; set; }
+
+        public IEnumerable<CommentModel>? Comments { get; set; }
     }
 }
