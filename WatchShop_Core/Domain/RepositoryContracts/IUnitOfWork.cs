@@ -27,6 +27,7 @@ namespace WatchShop_Core.Domain.RepositoryContracts
         IBrendRepository IBrendRepository { get; }
         IWatchRepository WatchRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IWatchCommentRepository WatchCommentRepository { get; }
         IClockFaceColorRepository ClockFaceColorRepository { get; }
         Task SaveAsync();
         Task<IDbContextTransaction> BeginTransactionDbContextAsync();

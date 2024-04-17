@@ -80,6 +80,9 @@ namespace WatchShop_Infrastructure.Repositories
         private IUserRepository _userRepository;
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context);
 
+        private IWatchCommentRepository _watchCommentRepository;
+        public IWatchCommentRepository WatchCommentRepository => _watchCommentRepository ??= new WatchCommentRepository(_context);
+
         public async Task<IDbContextTransaction> BeginTransactionDbContextAsync()
         {
             return await _context.Database.BeginTransactionAsync();
