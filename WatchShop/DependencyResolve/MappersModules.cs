@@ -83,6 +83,9 @@ namespace WatchShop_UI.DependencyResolve
                 cfg.AddProfile(new StyleModelProfile());
                 cfg.AddProfile(new StyleDtoProfile());
 
+                cfg.AddProfile(new CommentDtoProfile());
+                cfg.AddProfile(new CommentModelProfile());
+
                 cfg.AddProfile(new WatchCharactersDtoProfile());
 
 
