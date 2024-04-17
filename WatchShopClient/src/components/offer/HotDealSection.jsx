@@ -6,9 +6,8 @@ import { useSelector } from 'react-redux'
 
 const HotDealSection = () => {
 
-    const watchItems = useSelector((state) => state.watchItemsStore.watchItems);
+    const {addToWishlist,addToCart,jeweleryArray} = useContext(FarzaaContext)
 
-    const {addToJeweleryWishlist,addToJeweleryCart,jeweleryArray} = useContext(FarzaaContext)
   return (
     <section className="fz-2-hot-deal-section">
         <div className="container">
@@ -25,7 +24,7 @@ const HotDealSection = () => {
 
             <div className="fz-hot-deal-products">
                 <div className="row gy-md-4 gy-1 gx-3 justify-content-center">
-                    {watchItems.filter((item) => item.isDiscounted == true).sort(() => Math.random() - 0.5).slice(0,4).map((item) => (
+                    {jeweleryArray.filter((item) => item.isDiscounted == true).sort(() => Math.random() - 0.5).slice(0,4).map((item) => (
                         <div className="col-xl-3 col-md-4 col-6 col-xxs-12" key={item.id}>
                             <div className="fz-2-single-product">
                                 <div className="fz-2-single-product-img">
@@ -34,11 +33,11 @@ const HotDealSection = () => {
                                     <div className="fz-2-single-product-actions">
                                         <button 
                                         className="fz-add-to-cart-btn"
-                                        onClick={() => addToJeweleryCart(item.id)}
+                                        onClick={() => addToCart(item.id)}
                                         >Add to cart</button>
                                         <button 
                                         className="fz-add-to-wishlist"
-                                        onClick={() => addToJeweleryWishlist(item.id)}
+                                        onClick={() => addToWishlist(item.id)}
                                         >{item.isInWishlist? (<i className="fa-solid fa-heart"></i>):(<i className="fa-regular fa-heart"></i>)}</button>
                                     </div>
                                 </div>

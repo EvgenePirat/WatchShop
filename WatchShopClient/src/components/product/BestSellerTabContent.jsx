@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 const BestSellerTabContent = () => {
 
     const {
-        addToJeweleryWishlist,
-        addToJeweleryCart,
+        addToWishlist,
+        addToCart,
         jeweleryArray,
     } = useContext(FarzaaContext)
 
@@ -21,11 +21,11 @@ const BestSellerTabContent = () => {
                         <div className="fz-2-single-product-actions">
                             <button 
                             className="fz-add-to-cart-btn"
-                            onClick={() => addToJeweleryCart(item.id)}
+                            onClick={() => addToCart(item.id)}
                             >Add to cart</button>
                             <button 
                             className="fz-add-to-wishlist"
-                            onClick={() => addToJeweleryWishlist(item.id)}
+                            onClick={() => addToWishlist(item.id)}
                             >{item.isInWishlist? (<i className="fa-solid fa-heart"></i>):(<i className="fa-regular fa-heart"></i>)}</button>
                         </div>
                     </div>

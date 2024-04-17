@@ -11,14 +11,14 @@ const HeaderSection3 = () => {
         handleWishlistShow,
         handleCartShow,
         isHeaderFixed,
-        jeweleryWishlist,
-        jeweleryAddToCart,
-        jeweleryCartItemAmount,
-        handleRemoveJeweleryItemWishlist,
-        handleRemoveJeweleryCartItem,
-        handleJeweleryCartQuantityChange,
+        wishlist,
+        cartItems,
+        cartItemAmount,
+        handleRemoveItemWishlist,
+        handleRemoveItem,
+        handleQuantityChange,
         handleSidebarOpen,
-        wishlistJewelleryItemAmount
+        wishlistItemAmount
     } = useContext(FarzaaContext)
   return (
     <header className={`fz-header-section fz-2-header-section to-be-fixed ${isHeaderFixed? 'fixed':''}`}>
@@ -44,13 +44,13 @@ const HeaderSection3 = () => {
                         <li>
                             <a role="button" className="fz-header-wishlist-btn d-none d-lg-block" onClick={handleWishlistShow}>
                                 <i className="fa-light fa-heart"></i>
-                                <span className='count'>{wishlistJewelleryItemAmount}</span>
+                                <span className='count'>{wishlistItemAmount}</span>
                             </a>
                         </li>
                         <li>
                             <a role="button" className="fz-header-cart-btn d-none d-lg-block" onClick={handleCartShow}>
                                 <i className="fa-light fa-cart-shopping"></i>
-                                <span className="count">{jeweleryCartItemAmount}</span>
+                                <span className="count">{cartItemAmount}</span>
                             </a>
                         </li>
                         <li><Link to="/account" className="d-none d-lg-block"><i className="fa-light fa-user"></i></Link></li>
@@ -59,8 +59,8 @@ const HeaderSection3 = () => {
                 </div>
             </div>
         </div>
-        <WishlistModal wishlistArray={jeweleryWishlist} removeItem={handleRemoveJeweleryItemWishlist}/>
-        <CartModal cartArray={jeweleryAddToCart} remove={handleRemoveJeweleryCartItem} quantity={handleJeweleryCartQuantityChange}/>
+        <WishlistModal wishlistArray={wishlist} removeItem={handleRemoveItemWishlist}/>
+        <CartModal cartArray={cartItems} remove={handleRemoveItem} quantity={handleQuantityChange}/>
     </header>
   )
 }

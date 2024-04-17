@@ -8,9 +8,8 @@ const NewTabContent = () => {
     const watchItems = useSelector((state) => state.watchItemsStore.watchItems);
 
     const {
-        randomizedItems,
-        addToJeweleryWishlist,
-        addToJeweleryCart,
+        addToWishlist,
+        addToCart,
     } = useContext(FarzaaContext)
   return (
     <div className="row gy-4 gx-3 justify-content-center">
@@ -23,12 +22,12 @@ const NewTabContent = () => {
                         <div className="fz-2-single-product-actions">
                             <button 
                             className="fz-add-to-cart-btn"
-                            onClick={() => addToJeweleryCart(item.id)}
+                            onClick={() => addToCart(item.id)}
                             >Add to cart</button>
                             <button 
                             className="fz-add-to-wishlist"
                             onClick={() => {
-                                addToJeweleryWishlist(item.id)
+                                addToWishlist(item.id)
                                 }}
                             >{item.isInWishlist? (<i className="fa-solid fa-heart"></i>):(<i className="fa-regular fa-heart"></i>)}</button>
                         </div>
