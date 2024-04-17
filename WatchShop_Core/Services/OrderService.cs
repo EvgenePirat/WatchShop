@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Domain.Enums;
 using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Core.Exceptions;
 using WatchShop_Core.Models.Orders.Request;
@@ -18,6 +19,8 @@ namespace WatchShop_Core.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+
         public async Task<OrderModel> CreateOrderAsync(CreateOrderModel model)
         {
             var mappedEntity = _mapper.Map<Order>(model);
@@ -47,7 +50,7 @@ namespace WatchShop_Core.Services
 
         public async Task<IEnumerable<OrderModel>> GetAllOrdersAsync()
         {
-            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus);
+            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus, o => o.Carts);
             return _mapper.Map<IEnumerable<OrderModel>>(orders);
         }
 
@@ -61,6 +64,31 @@ namespace WatchShop_Core.Services
         {
             var orders = await _unitOfWork.OrderRepository.FindOrdersByUserNameAsync(username);
             return _mapper.Map<IEnumerable<OrderModel>>(orders);
+        }
+
+        public async Task<OrderModel> UpdateOrderStatusAsync(Guid id, string newOrderStatus)
+        {
+            var orderToUpdate = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+
+            if (orderToUpdate == null)
+                throw new OrderArgumentException($"Order by id {id} not found for update");
+
+            var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
+            
+            try
+            {
+                var newStatusName = Enum.Parse<OrderStatusEnum>(newOrderStatus);
+
+                orderToUpdate.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name == newStatusName).Id;
+
+                await _unitOfWork.SaveAsync();
+
+                return _mapper.Map<OrderModel>(orderToUpdate);
+            }
+            catch(Exception ex)
+            {
+                throw new OrderStatusArgumentException(ex.Message);
+            }
         }
     }
 }
