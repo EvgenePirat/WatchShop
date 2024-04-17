@@ -36,10 +36,23 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<Style> Styles { get; set; }
         public DbSet<Watch> Watches { get; set; }
         public DbSet<WatchAdditionalCharacteristic> WatchAdditionalCharacteristics { get; set; }
+        public DbSet<WatchComment> WatchComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Watch>()
+                .HasMany(w => w.Comments)
+                .WithOne(c => c.Watch)
+                .HasForeignKey(c => c.WatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(w => w.Comments)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Order>()
                 .HasMany(o => o.Carts)
