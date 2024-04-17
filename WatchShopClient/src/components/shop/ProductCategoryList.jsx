@@ -1,39 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FarzaaContext } from '../../context/FarzaaContext';
-import { allProductList } from '../../data/Data';
-
-const categories = [
-    { name: null, label: 'All Door' },
-    { name: 'Plastic Door', label: 'Plastic Door' },
-    { name: 'Wooden Door', label: 'Wooden Door' },
-    { name: 'Double Layer Door', label: 'Double layer Door' },
-    { name: 'Chinese Door', label: 'Chinese Door' },
-    { name: 'Steel Door', label: 'Steel Door' },
-    { name: 'Solid Color Door', label: 'Solid Color Door' },
-    { name: 'Panel Door', label: 'Panel door' },
-    { name: 'Security Door', label: 'Security door' }
-];
+import { useGetBrendsQuery } from '../../apis/admin/brendApi';
 
 const ProductCategoryList = () => {
-    const { handleCategoryFilter } = useContext(FarzaaContext);
-    const [activeCategory, setActiveCategory] = useState(null);
+    const { handleCategoryFilter, jeweleryArray } = useContext(FarzaaContext);
+    const [activeBrend, setActiveBrend] = useState(null);
 
-    const handleCategoryClick = (category) => {
-        handleCategoryFilter(category);
-        setActiveCategory(category);
+    const {data, isLoading} = useGetBrendsQuery();
+    const [brends, setBrends] = useState([])
+
+    useEffect(() => {
+        if (!isLoading && data) {
+          setBrends(data.result);
+        }
+      }, [isLoading, data]);
+
+    const handleBrendClick = (brend) => {
+        handleCategoryFilter(brend);
+        setActiveBrend(brend);
     };
 
     return (
         <section className="sidebar-single-area product-categories-area">
-            <h3 className="sidebar-single-area__title">Product categories</h3>
+            <h3 className="sidebar-single-area__title">Watch Brends</h3>
             <ul className="product-categories">
-                {categories.map(categoryObj => (
+                {brends.map(brend => (
                     <li
-                        key={categoryObj.name}
-                        onClick={() => handleCategoryClick(categoryObj.name)}
-                        className={activeCategory === categoryObj.name ? 'active' : ''}
+                        key={brend.id}
+                        onClick={() => handleBrendClick(brend.name)}
+                        className={activeBrend === brend.name ? 'active' : ''}
                     >
-                        {categoryObj.label} ({categoryObj.name === null ? allProductList.length : allProductList.filter(product => product.category === categoryObj.name).length})
+                        {brend.name} ({brend.name === null ? jeweleryArray.length : jeweleryArray.filter(watch => watch.brend.name === brend.name).length})
                     </li>
                 ))}
             </ul>

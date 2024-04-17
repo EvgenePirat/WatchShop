@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
+import cartImage from '../../../public/assets/images/card-img-1.png'
 
 const ProductContainer = () => {
     const {
@@ -22,7 +23,7 @@ const ProductContainer = () => {
              <div className="col-xl-4 col-md-4 col-6 col-xxs-12" key={item.id}>
                 <div className="fz-1-single-product">
                     <div className="fz-single-product__img">
-                        <img src={item.imgSrc} alt={item.name}/>
+                        <img src={item.images.length > 0 ? item.images[0].path : cartImage} alt={item.nameModel}/>
                         <div className="fz-single-product__actions">
                             <button 
                             className="fz-add-to-wishlist-btn"
@@ -39,17 +40,12 @@ const ProductContainer = () => {
                                 <span className="btn-txt">add To cart</span>
                                 <span className="btn-icon"><i className="fa-light fa-cart-shopping"></i></span>
                             </button>
-
-                            <button className="fz-add-to-compare-btn">
-                                <span className="btn-txt">select to compare</span>
-                                <span className="btn-icon"><i className="fa-light fa-arrow-right-arrow-left"></i></span>
-                            </button>
                         </div>
                     </div>
 
                     <div className="fz-single-product__txt">
-                        <span className="fz-single-product__category list-view-text">{item.category}</span>
-                        <Link to="/shopDetails" className="fz-single-product__title">{item.name}</Link>
+                        <span className="fz-single-product__category list-view-text">{item.brend.name}</span>
+                        <Link to="/shopDetails" className="fz-single-product__title">{item.brend.name} {item.nameModel}</Link>
                         <div className="fz-single-product__price-rating">
                             <p className="fz-single-product__price">
                                 <span className="current-price">${item.price}</span>
@@ -65,8 +61,7 @@ const ProductContainer = () => {
                         </div>
 
                         <p className="fz-single-product__desc list-view-text">
-                            2021 Latest G5 3200DPI Gaming Mouse 7-Color RGB Breathing
-                            Led Light for Notebook Laptop/PC RGB Backlit Universal.
+                            {item.description}
                         </p>
 
                         <div className="fz-single-product__actions list-view-text">
@@ -84,11 +79,6 @@ const ProductContainer = () => {
                             >
                                 <span className="btn-txt">add To cart</span>
                                 <span className="btn-icon"><i className="fa-light fa-cart-shopping"></i></span>
-                            </button>
-
-                            <button className="fz-add-to-compare-btn">
-                                <span className="btn-txt">select to compare</span>
-                                <span className="btn-icon"><i className="fa-light fa-arrow-right-arrow-left"></i></span>
                             </button>
                         </div>
                     </div>

@@ -199,11 +199,11 @@ const FarzaaContextProvider = ({ children }) => {
     setFilteredProducts(sortedProducts);
   };
   // category handle method
-  const handleCategoryFilter = (category) => {
-    if (category === null) {
+  const handleCategoryFilter = (brend) => {
+    if (brend === null) {
       setFilteredProducts(jeweleryArray); // Show all products
     } else {
-      const filtered = jeweleryArray.filter(product => product.category === category);
+      const filtered = jeweleryArray.filter(watch => watch.brend.name === brend);
       setFilteredProducts(filtered);
     }
     setCurrentPage(1);
@@ -641,7 +641,7 @@ useEffect(() => {
   };
   // Add to cart in jewelery shop
   const addToJeweleryCart = (itemId) => {
-    const itemToAdd = watches.find(item => item.id === itemId);
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
 
     if (itemToAdd) {
       const existingItemIndex = jeweleryAddToCart.findIndex(item => item.id === itemId);
