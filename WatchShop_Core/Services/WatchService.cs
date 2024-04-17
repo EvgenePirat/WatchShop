@@ -117,6 +117,7 @@ namespace WatchShop_Core.Services
                 w => w.Strap, 
                 w => w.Style, 
                 w => w.Strap.StrapMaterial,
+                w => w.Comments,
                 w => w.Images);
             return _mapper.Map<IEnumerable<WatchModel>>(watches);
         }
