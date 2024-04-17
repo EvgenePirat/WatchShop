@@ -53,8 +53,10 @@ function Sidebar() {
                     </Link>
 
                     <li className="sidebarListItemAdmin">
-                        <CommentIcon className='sidebarIcon' />
-                        Comments
+                        <Link to="/admin/comments" className="sidebarListItemAdmin">
+                            <CommentIcon className='sidebarIcon' />
+                            Comments
+                        </Link>
                     </li>
                 </ul>
             </div>

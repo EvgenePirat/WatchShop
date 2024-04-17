@@ -24,6 +24,7 @@ import Watch from "./admin/pages/watches/Watch"
 import CreateWatch from "./admin/pages/watches/CreateWatch"
 import User from "./admin/pages/users/User"
 import CreateUser from "./admin/pages/users/CreateUser"
+import CommentList from "./admin/pages/comments/CommentList"
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/admin" element={<Admin />}>
             <Route index element={<Home />} />
+            <Route path="comments" element={<CommentList />} />
             <Route path="users" element={<UserList />} />
             <Route path="user/:id" element={<User />} />
             <Route path="user/create" element={<CreateUser />} />
