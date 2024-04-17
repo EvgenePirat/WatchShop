@@ -1,4 +1,5 @@
 ﻿using WatchShop_Core.Models.Carts.Request;
+using WatchShop_Core.Models.Enums;
 
 namespace WatchShop_Core.Models.Orders.Request
 {
@@ -8,7 +9,7 @@ namespace WatchShop_Core.Models.Orders.Request
 
         public Guid UserId { get; set; }
 
-        public byte OrderStatusId { get; set; }
+        public OrderStatusEnum OrderStatus { get; set; }
 
         public IEnumerable<UpdateCartModel> Carts { get; set; }
 
