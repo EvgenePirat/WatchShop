@@ -44,7 +44,7 @@ const HotDealSection = () => {
                                 <div className="fz-2-single-product-txt">
                                     <span className="fz-2-single-product-category"><Link to="/shop">{item.brend.name}</Link></span>
                                     <h5 className="fz-2-single-product-title"><Link to="/shopDetails">{item.nameModel}</Link></h5>
-                                    <span className="fz-2-single-product-price">${item.price}<span className="prev-price">${item.discountPrice}</span></span>
+                                    <span className="fz-2-single-product-price">${item.discountPrice}<span className="prev-price">${item.price}</span></span>
                                 </div>
                             </div>
                         </div>  

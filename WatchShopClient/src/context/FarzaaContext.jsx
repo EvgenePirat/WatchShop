@@ -167,8 +167,6 @@ const FarzaaContextProvider = ({ children }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
 
-  console.log(filteredProducts)
-
   // Handle sort
   const handleSortChange = (event) => {
     const value = event.target.value;
@@ -320,12 +318,25 @@ useEffect(() => {
       // Check if the item is already in the cart
       if (!cartItems.some(item => item.id === itemId)) {
 
-        // Set initial quantity to 1 and total to item's price
-        const newItem = {
-          ...itemToAdd,
-          quantity: 1,
-          total: itemToAdd.price
+        let newItem = {
+          quantity: 0
         };
+
+        if(itemToAdd.isDiscounted == true){
+          newItem = {
+            ...itemToAdd,
+            quantity: 1,
+            total: itemToAdd.discountPrice
+          };
+        }
+        else{
+          newItem = {
+            ...itemToAdd,
+            quantity: 1,
+            total: itemToAdd.price
+          };
+        }
+        // Set initial quantity to 1 and total to item's price
 
         setCartItems(prevCartItems => [...prevCartItems, newItem]);
         toast.success("Item added in cart!")
@@ -333,7 +344,13 @@ useEffect(() => {
         // Increment quantity and update total
         const updatedCartItems = [...cartItems];
         updatedCartItems[existingItemIndex].quantity += 1;
-        updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+
+        if(itemToAdd.isDiscounted == true){
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.discountPrice;
+        }
+        else{
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+        }
 
         setCartItems(updatedCartItems);
         toast.success("Item list updated in cart!")
@@ -358,7 +375,7 @@ useEffect(() => {
   // Add to Wishlist
 
   const addToWishlist = (itemId) => {
-    const itemToAdd = filteredProducts.find(item => item.id === itemId);
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
 
     if (itemToAdd) {
       if (!wishlist.some(item => item.id === itemId)) {
