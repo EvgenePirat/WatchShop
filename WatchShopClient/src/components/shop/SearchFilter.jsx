@@ -5,7 +5,7 @@ const SearchFilter = () => {
   const {searchTerm,handleSearchChange} = useContext(FarzaaContext)
   return (
     <section className="sidebar-single-area product-search-area">
-    <h3 className="sidebar-single-area__title">Search Product</h3>
+    <h3 className="sidebar-single-area__title">Search Watches</h3>
     <form role="search" className="fz-product-search-form">
         <input
             type="search"

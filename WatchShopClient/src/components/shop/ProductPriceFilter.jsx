@@ -15,7 +15,7 @@ const ProductPriceFilter = () => {
                     valueLabelDisplay="auto"
                     valueLabelFormat={(price) => `$${price}`}
                     min={0}
-                    max={1000}
+                    max={100000}
                     sx={{
                         color: "#B8860B", // Replace with your desired color
                         '& .MuiSlider-thumb': {

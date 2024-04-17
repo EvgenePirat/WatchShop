@@ -4,7 +4,7 @@ import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 
 const CheckoutSection = () => {
-    const {subTotal, shipping, coupon, finalPrice} = useContext(FarzaaContext)
+    const {subTotal, finalPrice} = useContext(FarzaaContext)
   return (
     <div className="container">
         <div className="fz-checkout">
@@ -17,9 +17,6 @@ const CheckoutSection = () => {
                         </div>
                         <div className="col-6 col-xxs-12">
                             <input type="text" name="last-name" id="checkout-last-name" placeholder="Last Name"/>
-                        </div>
-                        <div className="col-12">
-                            <input type="text" name="company-name" id="checkout-company-name" placeholder="Company Name"/>
                         </div>
 
                         <div className="col-12">
@@ -45,23 +42,6 @@ const CheckoutSection = () => {
 
                         <div className="col-12">
                             <input type="text" name="city-name" id="checkout-city-name" placeholder="Town / City"/>
-                        </div>
-
-                        <div className="col-6 col-xxs-12">
-                            <Form.Select className='state-select' name="states" id="checkout-states">
-                                <option value="Alabama">Alabama</option>
-                                <option value="Alaska">Alaska</option>
-                                <option value="California">California</option>
-                                <option value="Delaware">Delaware</option>
-                                <option value="Florida">Florida</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Hawaii">Hawaii</option>
-                                <option value="Idaho">Idaho</option>
-                            </Form.Select>
-                        </div>
-
-                        <div className="col-6 col-xxs-12">
-                            <input type="text" name="zip-code" id="checkout-zip-code" placeholder="Zip Code"/>
                         </div>
 
                         <div className="col-6 col-xxs-12">
@@ -92,16 +72,6 @@ const CheckoutSection = () => {
                                 <li>
                                     <span className="checkout-summary__key">Subtotal</span>
                                     <span className="checkout-summary__value"><span>$</span>{subTotal}</span>
-                                </li>
-
-                                <li>
-                                    <span className="checkout-summary__key">Shipping</span>
-                                    <span className="checkout-summary__value"><span>$</span>{shipping}</span>
-                                </li>
-
-                                <li>
-                                    <span className="checkout-summary__key">Coupon discount</span>
-                                    <span className="checkout-summary__value">-<span>$</span>{coupon}</span>
                                 </li>
 
                                 <li className="cart-checkout-total">

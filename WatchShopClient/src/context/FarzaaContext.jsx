@@ -211,7 +211,8 @@ const FarzaaContextProvider = ({ children }) => {
 
   // Price Filter
   const handlePriceFilter = () => {
-    const filtered = jeweleryArray.filter(product => product.price >= price[0] && product.price <= price[1]);
+    const filtered = jeweleryArray.filter(watch => watch.price >= price[0] && watch.price <= price[1]);
+    console.log(filtered)
     setFilteredProducts(filtered);
   };
 
@@ -226,8 +227,8 @@ const FarzaaContextProvider = ({ children }) => {
   };
 
   const performSearch = (term) => {
-    const filtered = jeweleryArray.filter(product =>
-      product.name.toLowerCase().includes(term.toLowerCase())
+    const filtered = jeweleryArray.filter(watch =>
+      watch.name.toLowerCase().includes(term.toLowerCase())
     );
     setSearchedProducts(filtered);
   };
@@ -456,9 +457,7 @@ useEffect(() => {
 
   // Total Price
   const subTotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
-  const shipping = cartItems.length === 0 ? 0.00 : 50.00;
-  const coupon = cartItems.length === 0 ? 0.00 : 60.00;
-  const finalPrice = subTotal - (shipping + coupon)
+  const finalPrice = subTotal
 
   // Blog List Category Filter
   const [filteredBlogList, setFilteredBlogList] = useState(blogList);
@@ -939,8 +938,6 @@ useEffect(() => {
       cartItemAmount,
       addToWishlist,
       subTotal,
-      shipping,
-      coupon,
       finalPrice,
       filteredBlogList,
       handleBlogCategoryFilter,

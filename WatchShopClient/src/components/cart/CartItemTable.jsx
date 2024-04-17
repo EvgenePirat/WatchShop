@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import defaultCartImage from '../../../public/assets/images/card-img-1.png'
 
 const CartItemTable = ({cartArray,remove,quantity}) => {
     return (
@@ -13,7 +14,7 @@ const CartItemTable = ({cartArray,remove,quantity}) => {
                 </tr>
                 {cartArray.length === 0 ? (
                     <tr className='no-item-msg'>
-                        <td className='no-item-msg-text'>No items in the cart</td>
+                        <td className='no-item-msg-text'>No watches in the cart</td>
                     </tr>
                 ) : (
                     cartArray.map((item) => (
@@ -21,7 +22,7 @@ const CartItemTable = ({cartArray,remove,quantity}) => {
                             <td>
                                 <div className="cart-product">
                                     <div className="cart-product__img">
-                                        <img src={item.imgSrc} alt="Product Image"/>
+                                        <img src={item.images.length > 0 ? item.images[0].path : defaultCartImage} alt="Product Image"/>
                                     </div>
                                     <div className="cart-product__txt">
                                         <h6><Link to="/shopDetails">{item.name}</Link></h6>
