@@ -12,5 +12,8 @@ namespace WatchShop_UI.Dtos.Comments.Request
 
         [Required]
         public string Comment { get; set; }
+
+        [Required]
+        public int Grade { get; set; }
     }
 }

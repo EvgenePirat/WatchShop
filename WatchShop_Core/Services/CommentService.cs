@@ -90,6 +90,7 @@ namespace WatchShop_Core.Services
                 throw new CommentWatchArgumentException($"Comment by id {id} not found for delete");
 
             commentToUpdate.Comment = model.Comment;
+            commentToUpdate.Grade = model.Grade;
 
             _unitOfWork.WatchCommentRepository.Update(commentToUpdate);
 

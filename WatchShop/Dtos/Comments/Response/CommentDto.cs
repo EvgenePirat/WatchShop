@@ -10,6 +10,8 @@
 
         public string Comment { get; set; }
 
+        public int Grade { get; set; }
+
         public DateTime CreatedAt { get; set; }
     }
 }
