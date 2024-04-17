@@ -57,7 +57,7 @@ namespace WatchShop_Infrastructure.DbContext
             builder.Entity<Order>()
                 .HasMany(o => o.Carts)
                 .WithOne(c => c.Order)
-                .HasForeignKey(c => c.WatchId)
+                .HasForeignKey(c => c.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Watch>()
