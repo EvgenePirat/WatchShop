@@ -2,13 +2,20 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useLoginMutation } from '../../apis/admin/authApi';
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser } from '../../Storage/Redux/Slices/userAuthSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignInFormSection = () => {
     const [userName,setUserName] = useState('')
     const [password,setPassword] = useState('')
     const [error, setError] = useState('')
+    const dispatch = useDispatch();
 
     const [loginInSystem] = useLoginMutation();
+
+    const navigate = useNavigate()
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -29,9 +36,14 @@ const SignInFormSection = () => {
 
             if(response.data){
                 toast.success('Signed In successfully!', { position: 'top-right' });
+                const {token} = response.data.result;
                 setUserName('');
                 setPassword('');
-                console.log(response.data)
+                setError('')
+                const {username, id, email, role} = jwtDecode(token);
+                dispatch(setLoggedInUser({id, username, email, role}));
+                localStorage.setItem("token", token);
+                navigate("/account")
             } else if(response.error){
                 toast.error(response.error.data.description, { position: 'top-right' });
                 setError(response.error.data.description);

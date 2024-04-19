@@ -31,8 +31,9 @@ namespace WatchShop_Core.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("username", applicationUser.UserName),
                     new Claim("id", applicationUser.Id.ToString()),
+                    new Claim("username", applicationUser.UserName),                  
+                    new Claim("email", applicationUser.Email),                  
                     new Claim(ClaimTypes.Role, roles.FirstOrDefault()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
