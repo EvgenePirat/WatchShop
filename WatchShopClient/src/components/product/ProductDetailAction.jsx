@@ -6,7 +6,7 @@ const ProductDetailAction = ({watch}) => {
     const [quantity, setQuantity] = useState(defaultQuantity);
 
     const {
-        addToCart,
+        addToCartWithQuantity,
         addToWishlist,
     } = useContext(FarzaaContext)
 
@@ -33,7 +33,7 @@ const ProductDetailAction = ({watch}) => {
                 <i className="fa-light fa-plus"></i>
             </button>
         </div>
-        <button className="fz-product-details__add-to-cart" onClick={() => addToCart(watch.id)}>Add to cart</button>
+        <button className="fz-product-details__add-to-cart" onClick={() => addToCartWithQuantity(watch.id,quantity)}>Add to cart</button>
         <button className="fz-product-details__add-to-wishlist" onClick={() => addToWishlist(watch.id)}><i className="fa-light fa-heart"></i></button>
     </div>
   )

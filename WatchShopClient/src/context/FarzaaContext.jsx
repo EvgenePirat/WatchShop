@@ -308,6 +308,56 @@ useEffect(() => {
     }
   };
 
+  const addToCartWithQuantity = (itemId, quantity) => {
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
+
+    if (itemToAdd) {
+      const existingItemIndex = cartItems.findIndex(item => item.id === itemId);
+
+      if (!cartItems.some(item => item.id === itemId)) {
+
+        let newItem = {
+          quantity: quantity
+        };
+
+        if(itemToAdd.isDiscounted == true){
+          newItem = {
+            ...itemToAdd,
+            quantity: quantity,
+            total: itemToAdd.discountPrice
+          };
+        }
+        else{
+          newItem = {
+            ...itemToAdd,
+            quantity: quantity,
+            total: itemToAdd.price
+          };
+        }
+
+        setCartItems(prevCartItems => [...prevCartItems, newItem]);
+        toast.success("Item added in cart!")
+      } else if (existingItemIndex !== -1) {
+        // Increment quantity and update total
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[existingItemIndex].quantity += quantity;
+
+        if(itemToAdd.isDiscounted == true){
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.discountPrice;
+        }
+        else{
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+        }
+
+        setCartItems(updatedCartItems);
+        toast.success("Item list updated in cart!")
+
+      }
+    } else {
+      toast.warning('Item not found in watchesList.');
+    }
+  };
+
   // Add to Cart
   const addToCart = (itemId) => {
     // Find the item from allProductList using itemId
@@ -446,6 +496,7 @@ useEffect(() => {
     setWishlist([]); // Clear the wishlist after adding to cart
     toast.success("Wishlist items added to cart!");
   };
+  
   
 
   const addToCartFromWishlist = (item) => {
@@ -991,6 +1042,7 @@ useEffect(() => {
       cakeListArray,
       addWishlistToCart,
       addToCartFromWishlist,
+      addToCartWithQuantity,
       isSidebarOpen,
       handleSidebarOpen,
       handleSidebarClose,
