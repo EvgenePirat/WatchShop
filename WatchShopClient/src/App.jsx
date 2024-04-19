@@ -26,7 +26,7 @@ import User from "./admin/pages/users/User"
 import CreateUser from "./admin/pages/users/CreateUser"
 import CommentList from "./admin/pages/comments/CommentList"
 import Login from "./pages/Login"
-import Registr from "./pages/Registr"
+import Register from "./pages/Register"
 
 function App() {
 
@@ -42,7 +42,7 @@ function App() {
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/account" element={<Account/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/registration" element={<Registr/>}/>
+        <Route path="/registration" element={<Register/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/blog" element={<Blog/>}/>
         <Route path="/blogDetails" element={<BlogDetails/>}/>

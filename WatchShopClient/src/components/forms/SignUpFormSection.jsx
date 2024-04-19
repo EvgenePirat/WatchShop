@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { useRegisterNewUserMutation } from '../../apis/admin/authApi';
 
 const SignUpFormSection = () => {
     const [userName,setUserName] = useState('')
     const [password,setPassword] = useState('')
     const [email,setEmail] = useState('')
+
+    const [registrationNewUser] = useRegisterNewUserMutation()
+
     const isValidEmail = (email) => {
-    // Basic email validation
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
     };
-    const handleFormSubmit = (e) => {
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
     
         if (!userName && !password && !email) {
@@ -24,11 +29,26 @@ const SignUpFormSection = () => {
             toast.warning('Please provide a valid email address.', { position: 'top-right' });
         } else {
     
-            // If the form is successfully submitted, show a success toast
-            toast.success('Registered successfully!', { position: 'top-right' });
-            setUserName('');
-            setPassword('');
-            setEmail('');
+            try{
+                const response = await registrationNewUser({
+                    username: userName,
+                    password: password,
+                    email: email,
+                    role: 'Client'
+                });
+                
+                if(response.data){
+                    toast.success('Registered successfully!', { position: 'top-right' });
+                    setUserName('');
+                    setPassword('');
+                    setEmail('');
+                } else if(response.error){
+                    toast.error(response.error.data.description, { position: 'top-right' });
+                }
+            }catch (error){
+                toast.error('Error registration', { position: 'top-right' });
+            }
+
         }
       };
 
@@ -40,6 +60,7 @@ const SignUpFormSection = () => {
         name="register-username" 
         id="register-username" 
         placeholder="Phone number"
+        required
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         />
@@ -48,6 +69,7 @@ const SignUpFormSection = () => {
         name="register-email" 
         id="register-email" 
         placeholder="Email Address"
+        required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         />
@@ -56,6 +78,7 @@ const SignUpFormSection = () => {
         name="register-password" 
         id="register-password" 
         placeholder="Password"
+        required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />

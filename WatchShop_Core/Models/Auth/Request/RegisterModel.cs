@@ -8,6 +8,8 @@ namespace WatchShop_Core.Models.Auth.Request
 
         public string Password { get; set; }
 
+        public string Email { get; set; }
+
         public RoleEnum Role { get; set; }
     }
 }

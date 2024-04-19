@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useLoginMutation } from '../../apis/admin/authApi';
 
 const SignInFormSection = () => {
     const [userName,setUserName] = useState('')
     const [password,setPassword] = useState('')
-    const handleFormSubmit = (e) => {
+    const [error, setError] = useState('')
+
+    const [loginInSystem] = useLoginMutation();
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
     
         if (!userName && !password) {
@@ -17,10 +22,20 @@ const SignInFormSection = () => {
         }
          else {
     
-            // If the form is successfully submitted, show a success toast
-            toast.success('Signed In successfully!', { position: 'top-right' });
-            setUserName('');
-            setPassword('');
+            const response = await loginInSystem({
+                username: userName,
+                password: password
+            });
+
+            if(response.data){
+                toast.success('Signed In successfully!', { position: 'top-right' });
+                setUserName('');
+                setPassword('');
+                console.log(response.data)
+            } else if(response.error){
+                toast.error(response.error.data.description, { position: 'top-right' });
+                setError(response.error.data.description);
+            }
         }
       };
     
@@ -31,6 +46,7 @@ const SignInFormSection = () => {
         name="login-username" 
         id="login-username" 
         placeholder="Phone number"
+        required
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         />
@@ -38,6 +54,7 @@ const SignInFormSection = () => {
         type="password" 
         name="login-password" 
         id="login-password" 
+        required
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -45,6 +62,8 @@ const SignInFormSection = () => {
         <div className="sign-in-checkbox-container d-flex justify-content-between">
             <Link to="/registration" className="password-recovery-btn">Registration</Link>
         </div>
+
+        {error && <p className='text-danger'>{error}</p>}
 
         <button type="submit" className="fz-1-banner-btn single-form-btn">Log in</button>
     </form>

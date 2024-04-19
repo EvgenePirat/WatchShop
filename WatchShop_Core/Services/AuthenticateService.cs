@@ -62,6 +62,7 @@ namespace WatchShop_Core.Services
                 ApplicationUser user = new ApplicationUser()
                 {
                     UserName = model.Username,
+                    Email = model.Email,
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -77,7 +78,7 @@ namespace WatchShop_Core.Services
 
                 await _userManager.AddToRoleAsync(user, model.Role.ToString());
 
-                return new RegisterResponseModel() { Username = user.UserName, Role = model.Role.ToString() };
+                return new RegisterResponseModel() { Id = user.Id, Username = user.UserName, Email = user.Email, Role = model.Role.ToString() };
             }
             catch (Exception ex)
             {
