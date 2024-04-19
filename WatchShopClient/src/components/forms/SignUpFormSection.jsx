@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const SignUpFormSection = () => {
     const [userName,setUserName] = useState('')
@@ -38,7 +39,7 @@ const SignUpFormSection = () => {
         type="text" 
         name="register-username" 
         id="register-username" 
-        placeholder="Username"
+        placeholder="Phone number"
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         />
@@ -58,6 +59,10 @@ const SignUpFormSection = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />
+
+        <div className="sign-in-checkbox-container d-flex justify-content-between">
+            <Link to="/login" className="password-recovery-btn">Login</Link>
+        </div>
 
         <button type="submit" className="fz-1-banner-btn single-form-btn">Register</button>
     </form>

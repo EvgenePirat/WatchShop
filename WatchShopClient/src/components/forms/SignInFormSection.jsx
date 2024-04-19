@@ -30,7 +30,7 @@ const SignInFormSection = () => {
         type="text" 
         name="login-username" 
         id="login-username" 
-        placeholder="Username"
+        placeholder="Phone number"
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         />
@@ -43,11 +43,7 @@ const SignInFormSection = () => {
         onChange={(e) => setPassword(e.target.value)}
         />
         <div className="sign-in-checkbox-container d-flex justify-content-between">
-            <div className="stay-sign-in">
-                <input type="checkbox" name="sign-in-checkbox" id="sign-in-checkbox"/>
-                <label htmlFor="sign-in-checkbox">Stay Logged in</label>
-            </div>
-            <Link to="#" className="password-recovery-btn">Forgot Your Password?</Link>
+            <Link to="/registration" className="password-recovery-btn">Registration</Link>
         </div>
 
         <button type="submit" className="fz-1-banner-btn single-form-btn">Log in</button>
