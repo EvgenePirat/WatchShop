@@ -11,10 +11,8 @@ const FooterSection = () => {
                     <div className="col-xxl-4 col-lg-12 col-md-8">
                         <div className="fz-footer-about fz-footer-widget">
                             <div className="fz-logo fz-footer-widget__title">
-                                <Link to="/"><img src="assets/images/logo-3.png" alt="logo"/></Link>
+                                <Link to="/"><img src="assets/images/watch_shop_logo.jpg" alt="logo" className='footer_logo_img' /></Link>
                             </div>
-                            <p className="fz-footer-about__txt">There Are Many Different Styles Of Including Aviator, Wayfarer, Cat-Eye, Round, Some Sunglasses Also Have Polarized Lenses</p>
-                            <img src="assets/images/card.png" alt="Pyament Methods" className="fz-payment-methods"/>
                         </div>
                     </div>
 

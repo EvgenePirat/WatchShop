@@ -4,8 +4,17 @@ import ProductDetailTextSection from './ProductDetailTextSection';
 import ProductDescTabPane from './ProductDescTabPane';
 import ProductReviewTabPane from './ProductReviewTabPane';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+
 const ProductDetailSection = () => {
     const [activeTab, setActiveTab] = useState('description');
+
+    const location = useLocation();
+    const { item } = location.state;
+  
+    console.log(item)
+  
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -20,7 +29,7 @@ const ProductDetailSection = () => {
 
 
                 <div className="col-lg-7 col-md-6">
-                    <ProductDetailTextSection/>
+                    <ProductDetailTextSection watch={item}/>
                 </div>
 
                 <div className="col-12">

@@ -2,14 +2,23 @@ import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 import cartImage from '../../../public/assets/images/card-img-1.png'
+import { useNavigate } from 'react-router-dom';
 
 const ProductContainer = () => {
+
+    const navigate = useNavigate();
+
     const {
         isListView,
         paginatedProducts,
         addToCart,
         addToWishlist,
     } = useContext(FarzaaContext)
+
+    const handleClick = (item) => {
+        navigate('/shopDetails', { state: { item } });
+    }
+    
   return (
     <div className={`fz-inner-products-container ${isListView? 'list-view-on':''}`}>
         <div className="row justify-content-center">
@@ -45,7 +54,7 @@ const ProductContainer = () => {
 
                     <div className="fz-single-product__txt">
                         <span className="fz-single-product__category list-view-text">{item.brend.name}</span>
-                        <Link to="/shopDetails" className="fz-single-product__title">{item.brend.name} {item.nameModel}</Link>
+                        <p onClick={() => handleClick(item)}  className="fz-single-product__title">{item.brend.name} {item.nameModel}</p>
                         <div className="fz-single-product__price-rating">
                             <p className="fz-single-product__price">
                                 <span className="current-price">${item.price}</span>

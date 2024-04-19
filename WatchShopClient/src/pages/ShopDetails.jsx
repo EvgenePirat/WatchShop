@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout'
 import ShopDetailsMain from '../components/main/ShopDetailsMain'
 
 const ShopDetails = () => {
+
   return (
     <Layout>
         <ShopDetailsMain/>

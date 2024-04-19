@@ -1201,6 +1201,7 @@ img {
 .fz-1-single-product .fz-single-product__title {
   font-size: 18px;
   font-family: "Kanit", sans-serif;
+  cursor: pointer;
   font-weight: 400;
 }
 @media screen and (max-width: 1199px) {
@@ -3053,6 +3054,12 @@ a.fz-hamburger {
   translate: 0 -5px;
   color: #B8860B;
 }
+
+.footer_logo_img{
+  width: 200px;
+  height: 200px;
+}
+
 @media screen and (max-width: 1529px) {
   .fz-2-banner-section .fz-banner-txt {
     padding-left: 50px;

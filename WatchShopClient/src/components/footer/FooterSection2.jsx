@@ -11,14 +11,8 @@ const FooterSection2 = () => {
                     <div className="col-xl-3 col-lg-6 col-md-8">
                         <div className="fz-footer-about">
                             <div className="fz-logo">
-                                <Link to="/">
-                                    <img src="assets/images/logo-3.png" alt="logo"/>
-                                </Link>
+                                <img src="assets/images/watch_shop_logo.jpg" alt="logo" className='footer_logo_img' />
                             </div>
-
-                            <p className="fz-footer-about__txt">Made with the belief that home living should
-                                be easy and expressive. All of our products
-                                are designer made and rigorously tested.</p>
 
                             <div className="fz-footer-socials">
                                 <div className="fz-footer-socials-title">Follow Us</div>

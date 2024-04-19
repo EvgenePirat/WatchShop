@@ -1,12 +1,12 @@
 import React from 'react'
 import ProductDetailAction from './ProductDetailAction';
 
-const ProductDetailTextSection = () => {
+const ProductDetailTextSection = ({watch}) => {
   return (
     <div className="fz-product-details__txt">
-        <h2 className="fz-product-details__title">Contemporary 4 Panel White Primed Door (40mm)</h2>
+        <h2 className="fz-product-details__title">{watch.brend.name} {watch.nameModel}</h2>
         <div className="fz-product-details__price-rating">
-            <span className="price">$750.00</span>
+            <span className="price">${watch.isDiscounted == true ? watch.discountPrice : watch.price}</span>
             <div className="rating">
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
@@ -18,19 +18,23 @@ const ProductDetailTextSection = () => {
 
         <div className="fz-product-details__infos">
             <ul>
-                <li><span className="info-property"> SKU </span> : <span className="info-value">D890f</span></li>
-                <li><span className="info-property"> Category </span> : <span className="info-value">Security Door</span></li>
-                <li><span className="info-property"> Availablity </span> : <span className="info-value">in Stock</span></li>
+                <li><span className="info-property"> Brend </span> : <span className="info-value">{watch.brend.name}</span></li>
+                <li><span className="info-property"> Country </span> : <span className="info-value">{watch.country.name}</span></li>
+                <li><span className="info-property"> Glass Type </span> : <span className="info-value">{watch.glassType.name}</span></li>
+                <li><span className="info-property"> Strap </span> : <span className="info-value">{watch.strap.name}</span></li>
+                <li><span className="info-property"> Style </span> : <span className="info-value">{watch.style.name}</span></li>
+                <li><span className="info-property"> Gender </span> : <span className="info-value">{watch.gender}</span></li>
+                <li><span className="info-property"> Mechanism Type </span> : <span className="info-value">{watch.mechanismType.name}</span></li>
             </ul>
         </div>
 
+        {
+            watch.description == null || watch.description.length > 0 ? <p>{watch.description}</p> : <br/>
+        }
         <p className="fz-product-details__short-descr">
-            Each controller comes with adjustable in-built dual shock mechanism. They can be
-            toggled on/off and shock setting of 1,2 and 3 Auxiliary buttons around the home
-            button enable more key bindings to be designated.
         </p>
 
-        <ProductDetailAction/>
+        <ProductDetailAction watch={watch} />
 
         <div className="fz-product-details__payment-methods">
             <img src="assets/images/card.png" alt="Pyament Methods"/>

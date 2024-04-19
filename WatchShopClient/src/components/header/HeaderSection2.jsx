@@ -39,7 +39,7 @@ const HeaderSection2 = () => {
                     <div className="col-lg-3 col-md-6 col-9">
                         <div className="fz-logo-container">
                             <Link to="/">
-                                <img src="assets/images/logo-3.png" alt="logo" className="fz-logo"/>
+                                <img src="assets/images/watch_shop_logo.jpg" alt="logo" className="fz-logo"/>
                             </Link>
                         </div>
                     </div>
