@@ -1,4 +1,6 @@
-﻿using WatchShop_UI.Dtos.Carts.Request;
+﻿using WatchShop_Core.Models.Shipments.Request;
+using WatchShop_UI.Dtos.Carts.Request;
+using WatchShop_UI.Dtos.Shipments.Request;
 
 namespace WatchShop_UI.Dtos.Orders.Request
 {
@@ -7,6 +9,8 @@ namespace WatchShop_UI.Dtos.Orders.Request
         public double Sum { get; set; }
 
         public Guid UserId { get; set; }
+
+        public CreateShipmentDto Shipment { get; set; }
 
         public IEnumerable<CreateCartDto> Carts { get; set; }
 

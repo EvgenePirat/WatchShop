@@ -1,5 +1,7 @@
-﻿using WatchShop_UI.Dtos.Carts.Response;
+﻿using WatchShop_Core.Models.Shipments.Response;
+using WatchShop_UI.Dtos.Carts.Response;
 using WatchShop_UI.Dtos.OrderStatuses.Response;
+using WatchShop_UI.Dtos.Shipments.Response;
 
 namespace WatchShop_UI.Dtos.Orders.Response
 {
@@ -14,6 +16,8 @@ namespace WatchShop_UI.Dtos.Orders.Response
         public Guid UserId { get; set; }
 
         public OrderStatusDto OrderStatus { get; set; }
+
+        public ShipmentDto Shipment { get; set; }
 
         public IEnumerable<CartDto>? Carts { get; set; }
 
