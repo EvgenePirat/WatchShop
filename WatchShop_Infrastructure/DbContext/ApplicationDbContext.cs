@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Reflection.Emit;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.Entities.Identities;
 using WatchShop_Core.Domain.Enums;
@@ -34,6 +32,7 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<Strap> Straps { get; set; }
         public DbSet<StrapMaterial> StrapMaterials { get; set; }
         public DbSet<Style> Styles { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
         public DbSet<Watch> Watches { get; set; }
         public DbSet<WatchAdditionalCharacteristic> WatchAdditionalCharacteristics { get; set; }
         public DbSet<WatchComment> WatchComments { get; set; }
@@ -53,6 +52,12 @@ namespace WatchShop_Infrastructure.DbContext
                 .WithOne(c => c.User)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Order>()
+                .HasOne(o => o.Shipment)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(o => o.ShipmentId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Order>()
                 .HasMany(o => o.Carts)

@@ -7,11 +7,18 @@ namespace WatchShop_Core.Domain.Entities.Identities
     public class ApplicationUser : IdentityUser<Guid>, IEntity
     {
         [StringLength(100)]
-        public string? FullName { get; set; }
+        public string? FirstName { get; set; }
+
+        [StringLength(100)]
+        public string? LastName { get; set; }
 
         [StringLength(30)]
         public string? City { get; set; }
 
+        public DateTime CreateAccountDate { get; set; }
+
         public IEnumerable<WatchComment>? Comments { get; set; }
+
+        public IEnumerable<Shipment>? Shipments { get; set; }
     }
 }
