@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FarzaaContext } from '../../context/FarzaaContext';
 import { useGetBrendsQuery } from '../../apis/admin/brendApi';
 
-const ProductCategoryList = () => {
-    const { handleCategoryFilter, jeweleryArray } = useContext(FarzaaContext);
-    const [activeBrend, setActiveBrend] = useState(null);
+const ProductBrendList = () => {
+    const { handleCategoryFilter, jeweleryArray, active, setActive  } = useContext(FarzaaContext);
 
     const {data, isLoading} = useGetBrendsQuery();
     const [brends, setBrends] = useState([])
@@ -17,7 +16,7 @@ const ProductCategoryList = () => {
 
     const handleBrendClick = (brend) => {
         handleCategoryFilter(brend);
-        setActiveBrend(brend);
+        setActive(brend);
     };
 
     return (
@@ -28,7 +27,7 @@ const ProductCategoryList = () => {
                     <li
                         key={brend.id}
                         onClick={() => handleBrendClick(brend.name)}
-                        className={activeBrend === brend.name ? 'active' : ''}
+                        className={active === brend.name ? 'active' : ''}
                     >
                         {brend.name} ({brend.name === null ? jeweleryArray.length : jeweleryArray.filter(watch => watch.brend.name === brend.name).length})
                     </li>
@@ -38,4 +37,4 @@ const ProductCategoryList = () => {
     );
 }
 
-export default ProductCategoryList;
+export default ProductBrendList;

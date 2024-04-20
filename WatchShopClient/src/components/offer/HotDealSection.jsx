@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 import CountdownSection from '../timer/CountdownSection'
-import { useSelector } from 'react-redux'
 
 const HotDealSection = () => {
 

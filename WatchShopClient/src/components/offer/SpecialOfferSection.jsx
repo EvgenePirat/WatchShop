@@ -12,7 +12,7 @@ const SpecialOfferSection = () => {
                             <h6 className="fz-special-offer-sub-title">Perfect Christmas Gift</h6>
                             <h2 className="fz-special-offer-title">Up to 70 OFF</h2>
                             <p className="fz-special-offer-description">Limited stock only! Only the listed size is available to ship within 24hrs.</p>
-                            <Link to="/shop" className="fz-special-offer-btn">shop now</Link>
+                            <Link to={{ pathname: '/shop', search: '?filter=discount' }} className="fz-special-offer-btn">shop now</Link>
                         </div>
                     </div>
 

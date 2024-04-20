@@ -1,10 +1,12 @@
 import React from 'react'
 import SearchFilter from './SearchFilter'
-import ProductCategoryList from './ProductCategoryList'
 import ProductPriceFilter from './ProductPriceFilter'
 import ProductViewFilter from './ProductViewFilter'
 import ProductContainer from './ProductContainer'
 import ProductPagination from './ProductPagination'
+import ProductStyleList from './ProductStyleList'
+import ProductBrendList from './ProductBrendList'
+import ProductGenderList from './ProductGenderList'
 
 const ShopAreaSection = () => {
   return (
@@ -15,7 +17,11 @@ const ShopAreaSection = () => {
                     <div className="fz-sidebar">
                         <SearchFilter/>
 
-                        <ProductCategoryList/>
+                        <ProductBrendList/>
+
+                        <ProductStyleList />
+
+                        <ProductGenderList />
 
                         <ProductPriceFilter/>
                     </div>

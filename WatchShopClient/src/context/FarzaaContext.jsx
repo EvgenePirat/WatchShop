@@ -160,12 +160,10 @@ const FarzaaContextProvider = ({ children }) => {
     setPrice(newPrice);
   };
 
-  const dispatch = useDispatch();
-  const watchesList = useSelector(state => state.watches);
-
   // All Product Filter
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  const [active, setActive] = useState('');
 
   // Handle sort
   const handleSortChange = (event) => {
@@ -202,6 +200,27 @@ const FarzaaContextProvider = ({ children }) => {
       setFilteredProducts(jeweleryArray); // Show all products
     } else {
       const filtered = jeweleryArray.filter(watch => watch.brend.name === brend);
+      setFilteredProducts(filtered);
+    }
+    setCurrentPage(1);
+  };
+
+  const handleGenderFilter = (gender) => {
+    if (gender === null) {
+      setrFilteredProducts(jeweleryArray);
+    } else {
+      const filtered = jeweleryArray.filter(watch => watch.gender === gender);
+      setFilteredProducts(filtered);
+    }
+    setCurrentPage(1);
+  };
+
+  //style handle method
+  const handleStyleFilter = (style) => {
+    if (style === null) {
+      setFilteredProducts(jeweleryArray);
+    } else {
+      const filtered = jeweleryArray.filter(watch => watch.style.name === style);
       setFilteredProducts(filtered);
     }
     setCurrentPage(1);
@@ -989,7 +1008,11 @@ useEffect(() => {
       sortBy,
       handleSortChange,
       sortProducts,
+      active,
+      setActive,
       handleCategoryFilter,
+      handleGenderFilter,
+      handleStyleFilter,
       handlePriceFilter,
       currentPage,
       handlePageChange,

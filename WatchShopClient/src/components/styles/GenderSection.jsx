@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const CategorySection2 = () => {
+const GenderSection = () => {
 
   return (
     <section className="fz-2-category-section">
@@ -20,7 +20,7 @@ const CategorySection2 = () => {
                             <div className="fz-single-category__img">
                                 <img src="assets/images/men_watch.jpeg" alt="category image"/>
                                 <div className="fz-overlay"></div>
-                                <Link to="/shop" className="fz-def-btn">
+                                <Link to={{ pathname: '/shop', search: '?filter=Men' }} className="fz-def-btn">
                                     <span></span>
                                     Shop Now
                                     <i className="fa-light fa-arrow-up-right"></i>
@@ -28,7 +28,7 @@ const CategorySection2 = () => {
                             </div>
 
                             <div className="fz-single-category__txt">
-                                <h5><Link to="/shop">Men <span className="fz-category-amount">(24)</span></Link></h5>
+                                <h5><Link to={{ pathname: '/shop', search: '?filter=Men' }}>Men <span className="fz-category-amount">(24)</span></Link></h5>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ const CategorySection2 = () => {
                             <div className="fz-single-category__img">
                                 <img src="assets/images/women_watch.jpg" alt="category image"/>
                                 <div className="fz-overlay"></div>
-                                <Link to="/shop" className="fz-def-btn">
+                                <Link to={{ pathname: '/shop', search: '?filter=Women' }} className="fz-def-btn">
                                     <span></span>
                                     Shop Now
                                     <i className="fa-light fa-arrow-up-right"></i>
@@ -46,7 +46,7 @@ const CategorySection2 = () => {
                             </div>
 
                             <div className="fz-single-category__txt">
-                                <h5><Link to="/shop">Women <span className="fz-category-amount">(20)</span></Link></h5>
+                                <h5><Link to={{ pathname: '/shop', search: '?filter=Women' }}>Women <span className="fz-category-amount">(20)</span></Link></h5>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ const CategorySection2 = () => {
                             <div className="fz-single-category__img">
                                 <img src="assets/images/unisex_watch.webp" alt="category image"/>
                                 <div className="fz-overlay"></div>
-                                <Link to="/shop" className="fz-def-btn">
+                                <Link to={{ pathname: '/shop', search: '?filter=Unisex' }} className="fz-def-btn">
                                     <span></span>
                                     Shop Now
                                     <i className="fa-light fa-arrow-up-right"></i>
@@ -65,7 +65,7 @@ const CategorySection2 = () => {
 
                             <div className="fz-single-category__txt">
                                 <h5>
-                                    <Link to="/shop">Unisex <span className="fz-category-amount">(30)</span></Link>
+                                    <Link to={{ pathname: '/shop', search: '?filter=Unisex' }}>Unisex <span className="fz-category-amount">(30)</span></Link>
                                 </h5>
                             </div>
                         </div>
@@ -76,4 +76,4 @@ const CategorySection2 = () => {
   )
 }
 
-export default CategorySection2
+export default GenderSection
