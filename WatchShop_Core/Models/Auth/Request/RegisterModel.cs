@@ -10,6 +10,8 @@ namespace WatchShop_Core.Models.Auth.Request
 
         public string Email { get; set; }
 
+        public DateTime CreateAccountDate { get; set; } = DateTime.Now;
+
         public RoleEnum Role { get; set; }
     }
 }

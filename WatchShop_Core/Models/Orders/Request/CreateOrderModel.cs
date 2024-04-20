@@ -1,4 +1,5 @@
 ﻿using WatchShop_Core.Models.Carts.Request;
+using WatchShop_Core.Models.Shipments.Request;
 
 namespace WatchShop_Core.Models.Orders.Request
 {
@@ -11,6 +12,8 @@ namespace WatchShop_Core.Models.Orders.Request
         public Guid UserId { get; set; }
 
         public byte OrderStatusId { get; set; }
+
+        public CreateShipmentModel Shipment { get; set; }
 
         public IEnumerable<CreateCartModel> Carts { get; set; }
 
