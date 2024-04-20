@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import SearchFilter from './SearchFilter'
 import ProductPriceFilter from './ProductPriceFilter'
 import ProductViewFilter from './ProductViewFilter'
@@ -7,8 +7,24 @@ import ProductPagination from './ProductPagination'
 import ProductStyleList from './ProductStyleList'
 import ProductBrendList from './ProductBrendList'
 import ProductGenderList from './ProductGenderList'
+import { useLocation } from 'react-router-dom';
+import { FarzaaContext } from '../../context/FarzaaContext';
 
 const ShopAreaSection = () => {
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const filter = searchParams.get('filter');
+
+    const { setFilteredProducts, jeweleryArray, setActive } = useContext(FarzaaContext);
+
+    useEffect(() => {
+        if(filter == null){
+            setFilteredProducts(jeweleryArray);
+            setActive('');
+        }
+    }, [filter]);
+
   return (
     <div className="shop-area">
         <div className="container">

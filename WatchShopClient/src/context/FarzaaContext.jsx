@@ -1025,6 +1025,7 @@ useEffect(() => {
       handleRemoveItem,
       wishlist,
       handleRemoveItemWishlist,
+      setFilteredProducts,
       addToCart,
       cartItemAmount,
       addToWishlist,

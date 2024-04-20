@@ -40,6 +40,7 @@ namespace WatchShop_Core.Services
             AuthResponseModel authResponseModel = new AuthResponseModel()
             {
                 Username = userExist.UserName,
+
                 Token = await _jwtService.CreateJwtTokenAsync(userExist)
             };
 
