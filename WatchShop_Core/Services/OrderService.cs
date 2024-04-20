@@ -27,7 +27,7 @@ namespace WatchShop_Core.Services
 
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
 
-            mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == Domain.Enums.OrderStatusEnum.Processing).Id;
+            mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == OrderStatusEnum.Processing).Id;
 
             _unitOfWork.OrderRepository.Add(mappedEntity);
 
@@ -50,7 +50,7 @@ namespace WatchShop_Core.Services
 
         public async Task<IEnumerable<OrderModel>> GetAllOrdersAsync()
         {
-            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus, o => o.Carts);
+            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus, o => o.Shipment);
             return _mapper.Map<IEnumerable<OrderModel>>(orders);
         }
 

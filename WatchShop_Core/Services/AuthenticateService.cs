@@ -63,6 +63,7 @@ namespace WatchShop_Core.Services
                 ApplicationUser user = new ApplicationUser()
                 {
                     UserName = model.Username,
+                    CreateAccountDate = model.CreateAccountDate,
                     Email = model.Email,
                 };
 

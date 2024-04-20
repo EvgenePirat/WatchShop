@@ -93,7 +93,8 @@ namespace WatchShop_Core.Services
             }
 
             user.UserName = model.UserName;
-            user.FullName = model.FullName;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
             user.City = model.City;
             user.Email = model.Email;
 
