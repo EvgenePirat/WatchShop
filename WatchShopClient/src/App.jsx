@@ -27,8 +27,22 @@ import CreateUser from "./admin/pages/users/CreateUser"
 import CommentList from "./admin/pages/comments/CommentList"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { setLoggedInUser } from "./Storage/Redux/Slices/userAuthSlice"
+import { jwtDecode } from "jwt-decode";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if(localToken){
+      const {username, id, email, role} = jwtDecode(localToken);
+      dispatch(setLoggedInUser({id, username, email, role}));
+    }
+  })
 
   return (
     <Router>

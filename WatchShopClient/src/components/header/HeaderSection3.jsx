@@ -7,6 +7,7 @@ import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 
 const HeaderSection3 = () => {
+
     const {
         handleWishlistShow,
         handleCartShow,
@@ -20,6 +21,7 @@ const HeaderSection3 = () => {
         handleSidebarOpen,
         wishlistItemAmount
     } = useContext(FarzaaContext)
+
   return (
     <header className={`fz-header-section fz-2-header-section to-be-fixed ${isHeaderFixed? 'fixed':''}`}>
         <div className="row m-0 align-items-center">
