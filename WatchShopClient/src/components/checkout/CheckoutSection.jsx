@@ -37,10 +37,6 @@ const CheckoutSection = () => {
                         </div>
 
                         <div className="col-12">
-                            <input type="text" name="apartment-name" id="checkout-apartment-name" placeholder="Apartment, Suite, Unit, etc. (optional)"/>
-                        </div>
-
-                        <div className="col-12">
                             <input type="text" name="city-name" id="checkout-city-name" placeholder="Town / City"/>
                         </div>
 

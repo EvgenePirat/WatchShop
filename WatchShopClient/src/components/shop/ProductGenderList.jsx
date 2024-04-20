@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FarzaaContext } from '../../context/FarzaaContext';
 import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
-import { useLocation } from 'react-router-dom';
 
-const ProductGenderList = () => {
+const ProductGenderList = ({filter}) => {
     const { handleGenderFilter, jeweleryArray, active, setActive } = useContext(FarzaaContext);
 
     const {data, isLoading} = useGetWatchCharacteristicsQuery()
     const [genders, setGenders] = useState([])
-
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const filter = searchParams.get('filter');
 
     useEffect(() => {
         if (!isLoading && data) {
@@ -20,7 +15,6 @@ const ProductGenderList = () => {
       }, [isLoading, data]);
     
       useEffect(() => {
-        console.log(filter)
         if (filter != null) {
             if(filter == 'Men' || filter == 'Women' || filter == 'Unisex'){
                 handleGenderClick(filter);

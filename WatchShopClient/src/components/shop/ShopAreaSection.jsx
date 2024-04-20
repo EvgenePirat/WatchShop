@@ -33,11 +33,11 @@ const ShopAreaSection = () => {
                     <div className="fz-sidebar">
                         <SearchFilter/>
 
-                        <ProductBrendList/>
+                        <ProductBrendList filter={filter} />
 
-                        <ProductStyleList />
+                        <ProductStyleList filter={filter} />
 
-                        <ProductGenderList />
+                        <ProductGenderList filter={filter} />
 
                         <ProductPriceFilter/>
                     </div>

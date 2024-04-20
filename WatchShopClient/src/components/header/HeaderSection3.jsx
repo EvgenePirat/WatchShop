@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import HeaderNav from '../navigation/HeaderNav'
 import WishlistModal from '../modal/WishlistModal'
 import CartModal from '../modal/CartModal'
-import HeaderCategoryArea from './HeaderCategoryArea'
+import HeaderBrendArea from './HeaderBrendArea'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 
@@ -30,7 +30,7 @@ const HeaderSection3 = () => {
                             <img src="assets/images/watch_shop_logo.jpg" alt="logo" className="fz-logo"/>
                         </Link>
                     </div>
-                    <HeaderCategoryArea header={''} title={''}/>
+                    <HeaderBrendArea header={''} title={''}/>
                 </div>
             </div>
 

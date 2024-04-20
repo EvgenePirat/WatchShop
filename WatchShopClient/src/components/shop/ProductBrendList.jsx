@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FarzaaContext } from '../../context/FarzaaContext';
-import { useGetBrendsQuery } from '../../apis/admin/brendApi';
+import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 
-const ProductBrendList = () => {
+const ProductBrendList = ({filter}) => {
     const { handleCategoryFilter, jeweleryArray, active, setActive  } = useContext(FarzaaContext);
 
     const {data, isLoading} = useGetBrendsQuery();
@@ -18,6 +18,12 @@ const ProductBrendList = () => {
         handleCategoryFilter(brend);
         setActive(brend);
     };
+
+    useEffect(() => {
+        if (filter != null && brends.some(brend => brend.name === filter)) {
+          handleBrendClick(filter);
+        }
+      }, [filter, brends]);
 
     return (
         <section className="sidebar-single-area product-categories-area">

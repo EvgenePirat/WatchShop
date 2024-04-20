@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { useGetBrendsQuery } from '../../apis/admin/brendApi'
+import { Link } from 'react-router-dom'
 
-const HeaderCategoryArea = ({header}) => {
+const HeaderBrendArea = ({header}) => {
 
     const {data, isLoading} = useGetBrendsQuery(null)
 
@@ -28,7 +29,7 @@ const HeaderCategoryArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(0, Math.ceil(data.result.length / 3)).map((brend, index) => (
-                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
                             ))
                         }
                     </ul>
@@ -37,7 +38,7 @@ const HeaderCategoryArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(Math.ceil(data.result.length / 3), Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
-                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
                             ))
                         }
                     </ul>
@@ -46,7 +47,7 @@ const HeaderCategoryArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
-                                <li key={index}>{brend.name}({brend.countWatches})</li>
+                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
                             ))
                         }
                     </ul>
@@ -61,4 +62,4 @@ const HeaderCategoryArea = ({header}) => {
   )
 }
 
-export default HeaderCategoryArea
+export default HeaderBrendArea

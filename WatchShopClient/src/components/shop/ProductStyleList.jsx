@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FarzaaContext } from '../../context/FarzaaContext';
 import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
-import { useLocation } from 'react-router-dom';
 
-const ProductStyleList = () => {
+const ProductStyleList = ({filter}) => {
     const { handleStyleFilter, jeweleryArray, active, setActive  } = useContext(FarzaaContext);
 
     const {data, isLoading} = useGetWatchCharacteristicsQuery()
     const [styles, setStyles] = useState([])
-
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const filter = searchParams.get('filter');
 
     useEffect(() => {
         if (!isLoading && data) {
