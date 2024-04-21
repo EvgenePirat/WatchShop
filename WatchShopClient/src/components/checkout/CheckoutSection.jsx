@@ -2,9 +2,17 @@ import React, { useContext } from 'react'
 import { Form } from 'react-bootstrap'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const CheckoutSection = () => {
+
     const {subTotal, finalPrice} = useContext(FarzaaContext)
+
+    const userAuth = useSelector(state => state.userAuthStore);
+
+    
+
+
   return (
     <div className="container">
         <div className="fz-checkout">
