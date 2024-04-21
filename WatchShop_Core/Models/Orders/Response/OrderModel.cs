@@ -1,5 +1,7 @@
-﻿using WatchShop_Core.Models.Carts.Response;
+﻿using WatchShop_Core.Domain.Entities;
+using WatchShop_Core.Models.Carts.Response;
 using WatchShop_Core.Models.OrderStatuses.Response;
+using WatchShop_Core.Models.Payments.Response;
 using WatchShop_Core.Models.Shipments.Response;
 
 namespace WatchShop_Core.Models.Orders.Response
@@ -17,6 +19,8 @@ namespace WatchShop_Core.Models.Orders.Response
         public OrderStatusModel OrderStatus { get; set; }
 
         public ShipmentModel Shipment { get; set; }
+
+        public PaymentModel Payment { get; set; }
 
         public IEnumerable<CartModel>? Carts { get; set; }
 
