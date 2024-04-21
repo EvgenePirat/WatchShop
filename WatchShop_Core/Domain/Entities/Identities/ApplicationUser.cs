@@ -20,5 +20,7 @@ namespace WatchShop_Core.Domain.Entities.Identities
         public IEnumerable<WatchComment>? Comments { get; set; }
 
         public IEnumerable<Shipment>? Shipments { get; set; }
+
+        public IEnumerable<Payment>? Payments { get; set; }
     }
 }

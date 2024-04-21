@@ -2,29 +2,32 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using WatchShop_Core.Domain.Contracts;
 using WatchShop_Core.Domain.Entities.Identities;
+using WatchShop_Core.Domain.Enums;
 
 namespace WatchShop_Core.Domain.Entities
 {
-    [Table("shipments")]
-    public class Shipment : IEntity
+    [Table("payments")]
+    public class Payment : IEntity
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string? Address { get; set; }
+        public DateTime PaymentDate { get; set; }
+
+        public string? StripeIntendId { get; set; }
 
         [Required]
-        public string? City { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
 
         [Required]
-        public string? Country { get; set; }
+        public double Amount { get; set; }
 
-        [Required]
+        [Required] 
         public Guid ApplicationUserId { get; set; }
 
         [ForeignKey("ApplicationUserId")]
-        public ApplicationUser ApplicationUser {  get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public Order Order { get; set; }
     }
