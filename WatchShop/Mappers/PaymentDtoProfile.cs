@@ -12,6 +12,7 @@ namespace WatchShop_UI.Mappers
         {
             CreateMap<CreatePaymentDto, CreatePaymentModel>();
             CreateMap<PaymentModel, PaymentDto>();
+            CreateMap<PaymentIntentModel, PaymentIntentDto>();
         }
     }
 }
