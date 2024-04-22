@@ -29,6 +29,9 @@ namespace WatchShop_Core.Services
 
             mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == OrderStatusEnum.Processing).Id;
 
+            if (mappedEntity.Sum != mappedEntity.Payment.Amount)
+                throw new OrderArgumentException("Sum order not equals payment amount");
+
             _unitOfWork.OrderRepository.Add(mappedEntity);
 
             await _unitOfWork.SaveAsync();
@@ -50,7 +53,7 @@ namespace WatchShop_Core.Services
 
         public async Task<IEnumerable<OrderModel>> GetAllOrdersAsync()
         {
-            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus, o => o.Shipment);
+            var orders = await _unitOfWork.OrderRepository.GetAllAsync(o => o.Carts, o => o.OrderStatus, o => o.Shipment, o => o.Payment);
             return _mapper.Map<IEnumerable<OrderModel>>(orders);
         }
 
