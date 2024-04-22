@@ -15,14 +15,20 @@ import { FarzaaContextProvider } from './context/FarzaaContext.jsx'
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from './Storage/Redux/store.js';
+import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from './utilities/Scroll.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <FarzaaContextProvider>
-        <App />
-        <ToastContainer/>
-      </FarzaaContextProvider>
-    </Provider>
+    <BrowserRouter>
+
+      <Provider store={store}>
+        <FarzaaContextProvider>
+          <ScrollToTop />
+          <App />
+          <ToastContainer />
+        </FarzaaContextProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
 )

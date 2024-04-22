@@ -1,6 +1,6 @@
 
-import { BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import JewelleryShop from "./pages/JewelleryShop"
+import { Routes, Route } from "react-router-dom"
+import WatchShop from "./pages/WatchShop"
 import Shop from "./pages/Shop"
 import ShopDetails from "./pages/ShopDetails"
 import About from "./pages/About"
@@ -38,45 +38,43 @@ function App() {
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
-    if(localToken){
-      const {username, id, email, role} = jwtDecode(localToken);
-      dispatch(setLoggedInUser({id, username, email, role}));
+    if (localToken) {
+      const { username, id, email, role } = jwtDecode(localToken);
+      dispatch(setLoggedInUser({ id, username, email, role }));
     }
   }, [])
 
   return (
-    <Router>
       <Routes>
-        <Route path="/" element={<JewelleryShop/>}/>
-        <Route path="/shop/:filter?" element={<Shop/>}/>
-        <Route path="/shopDetails" element={<ShopDetails/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/faq" element={<Faq/>}/>
-        <Route path="/wishlist" element={<Wishlist/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/account" element={<Account/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/registration" element={<Register/>}/>
-        <Route path="/checkout" element={<Checkout/>}/>
-        <Route path="/blog" element={<Blog/>}/>
-        <Route path="/blogDetails" element={<BlogDetails/>}/>
-        <Route path="/contact" element={<Contact/>}/>
+        <Route path="/" element={<WatchShop />} />
+        <Route path="/shop/:filter?" element={<Shop />} />
+        <Route path="/shopDetails" element={<ShopDetails />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Register />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blogDetails" element={<BlogDetails />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />}>
-            <Route index element={<Home />} />
-            <Route path="comments" element={<CommentList />} />
-            <Route path="users" element={<UserList />} />
-            <Route path="user/:id" element={<User />} />
-            <Route path="user/create" element={<CreateUser />} />
-            <Route path="brends" element={<BrendList />} />
-            <Route path="brend/:id" element={<Brend />} />
-            <Route path="brend/create" element={<CreateBrend />} />
-            <Route path="watches" element={<WatchList />} />
-            <Route path="watch/:id" element={<Watch />} />
-            <Route path="watch/create" element={<CreateWatch />} />
+          <Route index element={<Home />} />
+          <Route path="comments" element={<CommentList />} />
+          <Route path="users" element={<UserList />} />
+          <Route path="user/:id" element={<User />} />
+          <Route path="user/create" element={<CreateUser />} />
+          <Route path="brends" element={<BrendList />} />
+          <Route path="brend/:id" element={<Brend />} />
+          <Route path="brend/create" element={<CreateBrend />} />
+          <Route path="watches" element={<WatchList />} />
+          <Route path="watch/:id" element={<Watch />} />
+          <Route path="watch/create" element={<CreateWatch />} />
         </Route>
-        <Route path="*" element={<Error/>}/>
+        <Route path="*" element={<Error />} />
       </Routes>
-    </Router>
   )
 }
 
