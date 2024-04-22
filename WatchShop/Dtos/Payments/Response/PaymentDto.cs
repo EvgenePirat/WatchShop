@@ -14,6 +14,9 @@ namespace WatchShop_UI.Dtos.Payments.Response
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PaymentMethod PaymentMethod { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public PaymentStatus Status { get; set; }
+
         public double Amount { get; set; }
 
         public Guid ApplicationUserId { get; set; }

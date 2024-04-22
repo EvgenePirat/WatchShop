@@ -12,6 +12,8 @@ namespace WatchShop_Core.Models.Payments.Response
 
         public PaymentMethod PaymentMethod { get; set; }
 
+        public PaymentStatus Status { get; set; }
+
         public double Amount { get; set; }
 
         public Guid ApplicationUserId { get; set; }
