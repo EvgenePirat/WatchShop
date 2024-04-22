@@ -21,6 +21,9 @@ namespace WatchShop_Core.Domain.Entities
         public PaymentMethod PaymentMethod { get; set; }
 
         [Required]
+        public PaymentStatus Status { get; set; }
+
+        [Required]
         public double Amount { get; set; }
 
         [Required] 
