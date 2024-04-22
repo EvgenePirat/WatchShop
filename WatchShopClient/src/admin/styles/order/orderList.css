@@ -1,19 +1,19 @@
-.brendList{
-    width: 87%;
+.orderList{
+    flex: 4;
 }
 
-.brendTitle{
+.orderTitle{
     padding: 20px;
     font-size: 30px;
 }
 
-.brendTitleContainer{
+.orderTitleContainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.brendAddButton{
+.orderAddButton{
     background-color: green;
     color: white;
     padding: 10px;
@@ -23,12 +23,12 @@
 }
 
 @media screen and (max-width: 1500px) {
-    .brendTitleContainer {
+    .orderTitleContainer {
       flex-direction: column;
       align-items: flex-start;
     }
   
-    .brendAddButton{
+    .orderAddButton{
       margin-top: 10px;
     }
   }

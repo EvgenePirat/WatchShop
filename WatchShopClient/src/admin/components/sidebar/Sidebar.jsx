@@ -21,8 +21,10 @@ function Sidebar() {
                         <Link to="/admin" >Home</Link>
                     </li>
                     <li className="sidebarListItemAdmin">
-                        <ShoppingBagIcon className='sidebarIcon' />
-                        Orders
+                        <Link to="/admin/orders">
+                            <ShoppingBagIcon className='sidebarIcon' />
+                            Orders
+                        </Link>
                     </li>
                     <li className="sidebarListItemAdmin">
                         <TrendingUpIcon className='sidebarIcon' />

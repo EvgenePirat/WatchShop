@@ -29,6 +29,7 @@ import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { setLoggedInUser } from "./Storage/Redux/Slices/userAuthSlice"
 import { jwtDecode } from "jwt-decode";
+import OrderList from "./admin/pages/orders/OrderList"
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Home />} />
           <Route path="comments" element={<CommentList />} />
+          <Route path="orders" element={<OrderList />} />
           <Route path="users" element={<UserList />} />
           <Route path="user/:id" element={<User />} />
           <Route path="user/create" element={<CreateUser />} />
