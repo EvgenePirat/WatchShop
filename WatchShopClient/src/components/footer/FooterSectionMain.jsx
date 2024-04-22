@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const FooterSection2 = () => {
+const FooterSectionMain = () => {
     const currentYear = new Date().getFullYear();
   return (
     <footer className="fz-2-footer-section">
@@ -93,4 +93,4 @@ const FooterSection2 = () => {
   )
 }
 
-export default FooterSection2
+export default FooterSectionMain

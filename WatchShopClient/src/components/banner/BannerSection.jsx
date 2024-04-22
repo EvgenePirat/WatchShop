@@ -3,7 +3,7 @@ import VideoModal from '../modal/VideoModal'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 
-const BannerSection2 = () => {
+const BannerSection = () => {
     const {handleVideoShow} = useContext(FarzaaContext)
   return (
     <section className="fz-2-banner-section">
@@ -64,4 +64,4 @@ const BannerSection2 = () => {
   )
 }
 
-export default BannerSection2
+export default BannerSection

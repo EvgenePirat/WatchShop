@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import BannerSection2 from '../banner/BannerSection2'
+import BannerSection from '../banner/BannerSection'
 import LuxurySection from '../product/LuxurySection'
 import SpecialOfferSection from '../offer/SpecialOfferSection'
 import HotDealSection from '../offer/HotDealSection'
@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { setWatchItems } from '../../Storage/Redux/Slices/watchItemClise'
 import GenderSection from '../styles/GenderSection'
 
-const JewelleryShopMain = () => {
+const WatchShopMain = () => {
 
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetWatchesQuery()
@@ -27,7 +27,7 @@ const JewelleryShopMain = () => {
 
   return (
     <main>
-        <BannerSection2/>
+        <BannerSection/>
         <GenderSection/>
         <LuxurySection/>
         <SpecialOfferSection/>
@@ -38,4 +38,4 @@ const JewelleryShopMain = () => {
   )
 }
 
-export default JewelleryShopMain
+export default WatchShopMain

@@ -9,7 +9,7 @@ const GenderSection = () => {
                 <div className="fz-2-section-heading">
                     <div className="row gy-4 justify-content-between align-items-center">
                         <div className="col-lg-5 col-md-6">
-                            <h2 className="fz-section-title">Shop by <br/> <span>Styles</span></h2>
+                            <h2 className="fz-section-title">Shop by <br/> <span>Genders</span></h2>
                         </div>
                     </div>
                 </div>

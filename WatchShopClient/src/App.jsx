@@ -9,8 +9,6 @@ import Wishlist from "./pages/Wishlist"
 import Cart from "./pages/Cart"
 import Account from "./pages/Account"
 import Checkout from "./pages/Checkout"
-import Blog from "./pages/Blog"
-import BlogDetails from "./pages/BlogDetails"
 import Contact from "./pages/Contact"
 import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
@@ -57,8 +55,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Register />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blogDetails" element={<BlogDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Home />} />

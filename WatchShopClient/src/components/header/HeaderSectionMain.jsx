@@ -6,7 +6,7 @@ import HeaderBrendArea from './HeaderBrendArea'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 
-const HeaderSection3 = () => {
+const HeaderSectionMain = () => {
 
     const {
         handleWishlistShow,
@@ -67,4 +67,4 @@ const HeaderSection3 = () => {
   )
 }
 
-export default HeaderSection3
+export default HeaderSectionMain
