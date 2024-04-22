@@ -20,6 +20,7 @@ const FooterSectionMain = () => {
         }
         else{
             toast.success('You have subscribed to the news');
+            setEmail("")
         }
     }
 

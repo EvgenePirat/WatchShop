@@ -23,6 +23,11 @@ const ShopAreaSection = () => {
             setFilteredProducts(jeweleryArray);
             setActive('');
         }
+        if (filter === 'discount') {
+            const discountedProducts = jeweleryArray.filter(product => product.isDiscounted);
+            setFilteredProducts(discountedProducts);
+            setActive('');
+        }
     }, [filter]);
 
   return (

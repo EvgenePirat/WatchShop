@@ -13,7 +13,7 @@ const HotDealSection = () => {
             <div className="fz-2-section-heading">
                 <div className="row gy-4 align-items-center">
                     <div className="col-md-6">
-                        <h2 className="fz-section-title">Hot Deals For Jewelry</h2>
+                        <h2 className="fz-section-title">Hot Deals For Watches</h2>
                     </div>
                     <div className="col-md-6">
                         <CountdownSection/>

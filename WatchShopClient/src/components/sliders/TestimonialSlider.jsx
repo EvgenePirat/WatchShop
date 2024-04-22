@@ -20,7 +20,7 @@ const TestimonialSlider = () => {
     <section className="fz-2-testimonial-section">
       <div className="container">
         <div className="fz-2-section-heading">
-          <h2 className="fz-section-title">Reviews From Customer</h2>
+          <h2 className="fz-section-title">Reviews From Clients</h2>
         </div>
 
         <div className="row justify-content-center">
@@ -63,18 +63,10 @@ const TestimonialSlider = () => {
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
                 <p className="fz-single-testimony-txt">
-                  It's important to ensure you're meeting your customers where
-                  they are. After all, you're not going to get a lot of
-                  informative feedback if you're running your surveys on social
-                  media unless your customers are many people heavy the social
-                  media users.
+                I just received my new watch from your store and I couldn't be happier with my purchase. The watch arrived promptly and was packaged securely, ensuring it arrived in pristine condition. From the moment I opened the box, I was impressed by the elegant design and craftsmanship of the timepiece. It's clear that a lot of thought and care went into creating this watch, as every detail is meticulously crafted. Not only does it elevate my style, but it also serves as a reliable companion throughout my busy day. Thank you for providing such a wonderful product and excellent customer service. I'll definitely be a repeat customer!
                 </p>
 
                 <div className="fz-reviewer">
-                  <div className="fz-reviewer-img">
-                    <img src="assets/images/user-1.png" alt="Person image" />
-                  </div>
-
                   <div className="fz-reviewer-info">
                     <div className="fz-rating">
                       <i className="fa-solid fa-star"></i>
@@ -84,7 +76,6 @@ const TestimonialSlider = () => {
                       <i className="fa-solid fa-star"></i>
                     </div>
                     <h6 className="fz-reviewer-name">Marisa Tomei</h6>
-                    <span className="fz-reviewer-label">Fashion Designer</span>
                   </div>
                 </div>
               </SwiperSlide>
@@ -93,18 +84,10 @@ const TestimonialSlider = () => {
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
                 <p className="fz-single-testimony-txt">
-                  It's important to ensure you're meeting your customers where
-                  they are. After all, you're not going to get a lot of
-                  informative feedback if you're running your surveys on social
-                  media unless your customers are many people heavy the social
-                  media users.
+                The watch not only looks fantastic on my wrist but also feels incredibly comfortable to wear throughout the day. The attention to detail in its design is evident, from the intricate dial to the sturdy yet stylish strap. What's more, the functionality of the watch is impeccable, providing me with accurate timekeeping and convenient features that make my daily routine a breeze. Thank you for offering such a high-quality product that exceeds my expectations in every way!
                 </p>
 
                 <div className="fz-reviewer">
-                  <div className="fz-reviewer-img">
-                    <img src="assets/images/user-1.png" alt="Person image" />
-                  </div>
-
                   <div className="fz-reviewer-info">
                     <div className="fz-rating">
                       <i className="fa-solid fa-star"></i>
@@ -114,7 +97,6 @@ const TestimonialSlider = () => {
                       <i className="fa-regular fa-star"></i>
                     </div>
                     <h6 className="fz-reviewer-name">Kilma Ani</h6>
-                    <span className="fz-reviewer-label">Fashion Designer</span>
                   </div>
                 </div>
               </SwiperSlide>
@@ -123,28 +105,20 @@ const TestimonialSlider = () => {
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
                 <p className="fz-single-testimony-txt">
-                  It's important to ensure you're meeting your customers where
-                  they are. After all, you're not going to get a lot of
-                  informative feedback if you're running your surveys on social
-                  media unless your customers are many people heavy the social
-                  media users.
+                I recently bought a watch from your store and I must say, it exceeded my expectations in every aspect. The quality of the timepiece is outstanding, reflecting the craftsmanship and attention to detail put into its design. Not only does it look stylish and elegant, but it also feels durable and well-made. The customer service provided by your team was exceptional, guiding me through the selection process and ensuring I made the right choice. I've received numerous compliments on my new watch, and I couldn't be happier with my purchase. Thank you for providing such a wonderful product and shopping experience. I will definitely be recommending your store to friends and family!
                 </p>
 
                 <div className="fz-reviewer">
-                  <div className="fz-reviewer-img">
-                    <img src="assets/images/user-1.png" alt="Person image" />
-                  </div>
 
                   <div className="fz-reviewer-info">
                     <div className="fz-rating">
                       <i className="fa-solid fa-star"></i>
                       <i className="fa-solid fa-star"></i>
                       <i className="fa-solid fa-star"></i>
-                      <i className="fa-regular fa-star"></i>
-                      <i className="fa-regular fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </div>
                     <h6 className="fz-reviewer-name">Daniel Liv</h6>
-                    <span className="fz-reviewer-label">Fashion Designer</span>
                   </div>
                 </div>
               </SwiperSlide>

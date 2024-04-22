@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
-import { Link } from 'react-router-dom'
 import cartImage from '../../../public/assets/images/card-img-1.png'
 import { useNavigate } from 'react-router-dom';
 
@@ -57,7 +56,16 @@ const ProductContainer = () => {
                         <p onClick={() => handleClick(item)}  className="fz-single-product__title">{item.brend.name} {item.nameModel}</p>
                         <div className="fz-single-product__price-rating">
                             <p className="fz-single-product__price">
-                                <span className="current-price">${item.price}</span>
+                            <span className="fz-2-single-product-price">
+                                {item.isDiscounted ? (
+                                    <>
+                                        <span className="current-price">${item.discountPrice}</span>
+                                        <span className="prev-price">${item.price}</span>
+                                    </>
+                                ) : (
+                                    <span className="current-price">${item.price}</span>
+                                )}
+                            </span>
                             </p>
 
                             <div className="rating list-view-text">
