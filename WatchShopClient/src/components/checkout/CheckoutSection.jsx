@@ -1,32 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { FarzaaContext } from '../../context/FarzaaContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../apis/admin/userApi';
-import toast, { Toaster } from 'react-hot-toast';
+import { useAddNewOrderMutation } from '../../apis/admin/orderApi';
+import { toast } from 'react-toastify';
 
 const CheckoutSection = () => {
 
-    const {subTotal, finalPrice} = useContext(FarzaaContext)
+    const {subTotal, finalPrice, cartItems, setCartItems } = useContext(FarzaaContext)
     const userAuth = useSelector(state => state.userAuthStore);
     const {data, isLoading} = useGetUserByIdQuery(userAuth.id);
     const [updateUserMutation] = useUpdateUserMutation();
+    const [createOrderMutation] = useAddNewOrderMutation();
+    const navigate = useNavigate();
+
 
     const orderTemplate = {
         sum: finalPrice,
-        userId: userAuth.id,
+        userId:"",
         shipment : {
             address : "",
             city: "",
             country: "Ukraine",
-            applicationUserId: userAuth.id
+            applicationUserId: ""
         },
         payment: {
             stripeIntend : "",
             paymentMethod: "",
-            amount: 0,
-            applicationUserId: userAuth.id
+            amount: finalPrice,
+            applicationUserId: ""
         },
         carts : [],
         comment : ""
@@ -42,12 +46,22 @@ const CheckoutSection = () => {
     const [order, setOrder] = useState(orderTemplate);
     const [isUpdate, setIsUpdate] = useState();
 
-
     useEffect(() => {
         if (!isLoading && data) {
           setUser(data.result);
+          setOrder((prev) => ({...prev, userId: data.result.id, 
+            shipment: {...prev.shipment, applicationUserId: data.result.id},
+             payment: {...prev.payment, applicationUserId: data.result.id} }));
         }
     }, [isLoading, data]);
+
+    useEffect(() => {
+        const carts  = cartItems.map(item => ({
+            watchId: item.id, 
+            count: item.quantity
+        }));
+        setOrder((prev) => ({...prev, carts: carts}))
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,8 +78,21 @@ const CheckoutSection = () => {
                 toast.error('User is not update');
         }
 
-        // console.log(user);
-        // console.log(order);
+        if(order.payment.paymentMethod == 'Cash'){
+
+            var result = await createOrderMutation(order);
+
+            if(result.data.isSuccess){
+                
+                toast.success('You made order, check his status in your account');
+                setCartItems([])
+                setOrder(orderTemplate)
+                localStorage.removeItem('cartItems');
+                navigate("/")
+            }
+            else
+                toast.error('Order is not make');
+        }
     } 
 
   return (
@@ -156,8 +183,6 @@ const CheckoutSection = () => {
                     </div>
                 </div>
             </form>
-
-            <Toaster position="top-right" reverseOrder={false} />
         </div>
     </div>
   )
