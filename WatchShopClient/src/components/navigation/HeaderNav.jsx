@@ -14,11 +14,7 @@ const HeaderNav = ({position}) => {
             <li className="fz-nav-item"><Link to="/contact" className="fz-nav-link">Contact</Link></li>
 
             {userAuth.role == 'Admin' && (
-              <div className="col-md-4 col-6 col-xxs-12">
-                  <div className="top-header-right-actions">
-                     <li className="fz-nav-item"><Link to="/admin/" className="fz-nav-link">Admin</Link></li>
-                  </div>
-              </div>
+              <li className="fz-nav-item"><Link to="/admin/" className="fz-nav-link">Admin</Link></li>
             )}
         </ul>
     </nav>
