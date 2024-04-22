@@ -245,7 +245,7 @@ const FarzaaContextProvider = ({ children }) => {
 
   const performSearch = (term) => {
     const filtered = jeweleryArray.filter(watch =>
-      watch.name.toLowerCase().includes(term.toLowerCase())
+      watch.nameModel.toLowerCase().includes(term.toLowerCase())
     );
     setSearchedProducts(filtered);
   };
