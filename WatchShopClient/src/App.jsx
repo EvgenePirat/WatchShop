@@ -42,7 +42,7 @@ function App() {
       const {username, id, email, role} = jwtDecode(localToken);
       dispatch(setLoggedInUser({id, username, email, role}));
     }
-  })
+  }, [])
 
   return (
     <Router>

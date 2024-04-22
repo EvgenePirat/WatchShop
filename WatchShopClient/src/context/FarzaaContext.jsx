@@ -306,8 +306,12 @@ useEffect(() => {
   const [paginatedProducts, setPaginatedProducts] = useState([]);
 
   // Cart Item Table 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')));
   const cartItemAmount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems])
 
   const handleRemoveItem = (itemId) => {
     const updatedItems = cartItems.filter(item => item.id !== itemId);
@@ -431,8 +435,12 @@ useEffect(() => {
   };
 
   // Wishlist Item Table 
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')));
   const wishlistItemAmount = wishlist.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }, [wishlist])
 
 
   const handleRemoveItemWishlist = (itemId) => {
@@ -1021,6 +1029,7 @@ useEffect(() => {
       productsPerPage,
       totalProducts,
       cartItems,
+      setCartItems,
       handleQuantityChange,
       handleRemoveItem,
       wishlist,
