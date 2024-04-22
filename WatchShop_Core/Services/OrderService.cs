@@ -29,7 +29,7 @@ namespace WatchShop_Core.Services
 
             mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == OrderStatusEnum.Processing).Id;
 
-            if (mappedEntity.Sum != mappedEntity.Payment.Amount)
+            if (mappedEntity.Sum > mappedEntity.Payment.Amount)
                 throw new OrderArgumentException("Sum order not equals payment amount");
 
             _unitOfWork.OrderRepository.Add(mappedEntity);

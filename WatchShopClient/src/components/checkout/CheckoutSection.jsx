@@ -1,16 +1,51 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import { useGetUserByIdQuery } from '../../apis/admin/userApi';
 
 const CheckoutSection = () => {
 
     const {subTotal, finalPrice} = useContext(FarzaaContext)
-
     const userAuth = useSelector(state => state.userAuthStore);
+    const {data, isLoading} = useGetUserByIdQuery(userAuth.id);
+
+    const orderTemplate = {
+        sum: 0,
+        userId: userAuth.id,
+        shipment : {
+            address : "",
+            city: "",
+            country: "Ukraine",
+            applicationUserId: userAuth.id
+        },
+        payment: {
+            stripeIntend : "",
+            paymentMethod: "",
+            amount: 0,
+            applicationUserId: userAuth.id
+        },
+        carts : [],
+        comment : ""
+    }
+
+    const [user, setUser] = useState();
+    const [order, setOrder] = useState(orderTemplate);
+
+
+    useEffect(() => {
+        if (!isLoading && data) {
+          setUser(data.result);
+        }
+    }, [isLoading, data]);
+
+    console.log(user);
+
 
     
+
+
 
 
   return (
@@ -21,18 +56,18 @@ const CheckoutSection = () => {
                     <div className="row gy-0 gx-3 gx-md-4">
                         <h3 className="fz-checkout-title">Billing Details</h3>
                         <div className="col-6 col-xxs-12">
-                            <input type="text" name="first-name" id="checkout-first-name" placeholder="First Name"/>
+                            <input type="text" name="firstName" id="checkout-first-name" placeholder="First Name" value={user.firstName}  onChange={(e) => setUser((prev) => ({...prev,firstName: e.target.value}))} />
                         </div>
                         <div className="col-6 col-xxs-12">
-                            <input type="text" name="last-name" id="checkout-last-name" placeholder="Last Name"/>
+                            <input type="text" name="lastName" id="checkout-last-name" placeholder="Last Name" value={user.lastName}  onChange={(e) => setUser((prev) => ({...prev,lastName: e.target.value}))} />
                         </div>
 
                         <div className="col-12">
-                            <Form.Select className='country-select' name="country" id="checkout-country">
+                            <Form.Select className='country-select' name="country" id="checkout-country" onChange={(e) => setOrder((prev) = ({...prev, shipment: }))} >
                                 <option value="United States">United States (US)</option>
                                 <option value="United Kingdom">United Kingdom (UK)</option>
                                 <option value="France">France</option>
-                                <option value="Russia">Russia</option>
+                                <option value="Russia">Ukraine</option>
                                 <option value="Iran">Iran</option>
                                 <option value="Bangladesh">Bangladesh</option>
                                 <option value="Bhutan">Bhutan</option>
