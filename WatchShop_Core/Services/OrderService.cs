@@ -27,10 +27,19 @@ namespace WatchShop_Core.Services
 
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
 
-            mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == OrderStatusEnum.Processing).Id;
+            mappedEntity.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name.Value == OrderStatusEnum.Create).Id;
 
             if (mappedEntity.Sum > mappedEntity.Payment.Amount)
                 throw new OrderArgumentException("Sum order not equals payment amount");
+
+            if(mappedEntity.Payment.PaymentMethod == PaymentMethod.Card)
+            {
+                mappedEntity.Payment.Status = PaymentStatus.Paid;
+            }
+            else
+            {
+                mappedEntity.Payment.Status = PaymentStatus.Upon_Receipt;
+            }
 
             _unitOfWork.OrderRepository.Add(mappedEntity);
 
