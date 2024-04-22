@@ -17,6 +17,11 @@ namespace WatchShop_Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
+        public async Task<ApplicationUser?> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
         public async Task<ApplicationUser?> GetByIdAsync(Guid id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);

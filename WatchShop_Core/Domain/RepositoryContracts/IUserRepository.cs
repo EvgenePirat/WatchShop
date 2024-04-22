@@ -5,6 +5,7 @@ namespace WatchShop_Core.Domain.RepositoryContracts
     public interface IUserRepository : IRepositoryBase<ApplicationUser>
     {
         Task<ApplicationUser?> GetByIdAsync(Guid id);
+        Task<ApplicationUser?> GetByEmailAsync(string email);
         Task<ApplicationUser?> FindUserByUserNameAsync(string username);
     }
 }
