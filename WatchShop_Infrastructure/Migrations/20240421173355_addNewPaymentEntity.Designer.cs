@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WatchShop_Infrastructure.DbContext;
 
@@ -11,9 +12,11 @@ using WatchShop_Infrastructure.DbContext;
 namespace WatchShop_Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240421173355_addNewPaymentEntity")]
+    partial class addNewPaymentEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1368,7 +1371,8 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<int>("PaymentMethod")
                         .HasColumnType("int");
 
-                    b.Property<string>("StripeIntendId")
+                    b.Property<string>("StripeIntend")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1822,13 +1826,13 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasOne("WatchShop_Core.Domain.Entities.Payment", "Payment")
                         .WithOne("Order")
                         .HasForeignKey("WatchShop_Core.Domain.Entities.Order", "PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("WatchShop_Core.Domain.Entities.Shipment", "Shipment")
                         .WithOne("Order")
                         .HasForeignKey("WatchShop_Core.Domain.Entities.Order", "ShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "User")
@@ -1851,7 +1855,7 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "ApplicationUser")
                         .WithMany("Payments")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
@@ -1862,7 +1866,7 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "ApplicationUser")
                         .WithMany("Shipments")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");

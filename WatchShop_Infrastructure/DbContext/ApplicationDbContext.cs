@@ -24,6 +24,7 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<FrameColor> FrameColors { get; set; }
         public DbSet<FrameMaterial> FrameMaterials { get; set; }
         public DbSet<GlassType> GlassTypes { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<IndicationKind> IndicationKinds { get; set; }
         public DbSet<IndicationType> IndicationTypes { get; set; }
         public DbSet<MechanismType> MechanismTypes { get; set; }
@@ -54,16 +55,22 @@ namespace WatchShop_Infrastructure.DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Order>()
-                .HasOne(o => o.Shipment)
-                .WithMany(s => s.Orders)
-                .HasForeignKey(o => o.ShipmentId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.Entity<Order>()
                 .HasMany(o => o.Carts)
                 .WithOne(c => c.Order)
                 .HasForeignKey(c => c.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Payment>()
+                .HasOne(o => o.ApplicationUser)
+                .WithMany(u => u.Payments)
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Shipment>()
+                .HasOne(o => o.ApplicationUser)
+                .WithMany(u => u.Shipments)
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Watch>()
                 .HasMany(w => w.Images)
