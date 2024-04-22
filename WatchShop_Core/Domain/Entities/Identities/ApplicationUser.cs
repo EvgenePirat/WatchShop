@@ -15,6 +15,8 @@ namespace WatchShop_Core.Domain.Entities.Identities
         [StringLength(30)]
         public string? City { get; set; }
 
+        public bool IsSubscriptionLetters { get; set; } = false;
+
         public DateTime CreateAccountDate { get; set; }
 
         public IEnumerable<WatchComment>? Comments { get; set; }
