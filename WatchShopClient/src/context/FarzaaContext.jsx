@@ -306,7 +306,7 @@ useEffect(() => {
   const [paginatedProducts, setPaginatedProducts] = useState([]);
 
   // Cart Item Table 
-  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')));
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')) == null ? [] : JSON.parse(localStorage.getItem('cartItems')));
   const cartItemAmount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
@@ -435,7 +435,7 @@ useEffect(() => {
   };
 
   // Wishlist Item Table 
-  const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')));
+  const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')) == null ? [] : JSON.parse(localStorage.getItem('wishlist')));
   const wishlistItemAmount = wishlist.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
@@ -551,7 +551,10 @@ useEffect(() => {
   };
 
   // Total Price
-  const subTotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+  const subTotal = cartItems.reduce((total, item) => {
+    const price = item.isDiscounted ? item.discountPrice : item.price;
+    return total + item.quantity * price;
+  }, 0);
   const finalPrice = subTotal
 
   // Blog List Category Filter

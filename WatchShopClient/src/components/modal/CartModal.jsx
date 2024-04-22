@@ -1,14 +1,13 @@
 import { Modal } from 'react-bootstrap';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import CartItemTable from '../cart/CartItemTable';
 import { FarzaaContext } from '../../context/FarzaaContext';
 
 const CartModal = ({ cartArray, remove, quantity }) => {
   const { showCart, handleCartClose } = useContext(FarzaaContext);
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate(); 
 
-  // Function to close the modal and navigate
   const closeAndNavigate = (path) => {
     handleCartClose();
     navigate(path);

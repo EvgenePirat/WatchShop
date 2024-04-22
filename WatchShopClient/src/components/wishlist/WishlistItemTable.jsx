@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
+import defaultCartImage from '../../../public/assets/images/card-img-1.png'
 
 const WishlistItemTable = ({wishlistArray,removeItem}) => {
     const {addToCartFromWishlist} = useContext(FarzaaContext)
@@ -24,14 +25,11 @@ const WishlistItemTable = ({wishlistArray,removeItem}) => {
                             <td>
                                 <div className="cart-product">
                                     <div className="cart-product__img">
-                                        <img src={item.imgSrc} alt="Product Image"/>
-                                    </div>
-                                    <div className="cart-product__txt">
-                                        <h6><Link to="/shopDetails">{item.name}</Link></h6>
+                                        <img src={item.images.length > 0 ? item.images[0].path : defaultCartImage}  alt="Product Image"/>
                                     </div>
                                 </div>
                             </td>
-                            <td>${item.price}</td>
+                            <td>${item.isDiscounted ? item.discountPrice : item.price}</td>
                             <td>
                                 <div className="fz-wishlist-action">
                                     <button 
