@@ -7,12 +7,14 @@ import { watchItemReducer } from "./Slices/watchItemClise";
 import commentApi from "../../apis/admin/commentApi";
 import { userAuthReducer } from "./Slices/userAuthSlice";
 import orderApi from "../../apis/admin/orderApi";
+import { userItemReducer } from "./Slices/userItemSlice";
 
 
 const store = configureStore({
     reducer:{
         watchItemsStore : watchItemReducer,
         userAuthStore : userAuthReducer,
+        userItemsStore : userItemReducer,
         [brendApi.reducerPath] : brendApi.reducer,
         [watchApi.reducerPath] : watchApi.reducer,
         [userApi.reducerPath] : userApi.reducer,

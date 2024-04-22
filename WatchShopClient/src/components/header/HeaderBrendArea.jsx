@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 import { Link } from 'react-router-dom'

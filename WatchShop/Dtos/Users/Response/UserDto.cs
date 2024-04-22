@@ -12,6 +12,8 @@
 
         public string? Email { get; set; }
 
+        public bool IsSubscriptionLetters { get; set; }
+
         public DateTime CreateAccountDate { get; set; }
 
         public string? City { get; set; }

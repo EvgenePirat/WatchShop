@@ -1,64 +1,44 @@
 import './widgetSmall.css'
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 function WidgetSmall() {
-  return (
-    <div className='widgetSm'>
-      <span className="widgetSmTitle">New Join Members</span>
-      <ul className='widgetSmList'>
-        <li className='widgetSmListItem'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' className='widgetSmImg' />
-            <div className='widgetSmUser'>
-                <span className='widgetSmUsername'>Anna Keller</span>
-                <span className='widgetSmTitle'>Software Enginner</span>
-            </div>
-            <button className="widgetSmButton">
-                <VisibilityIcon />
-            </button>
-        </li>
-        <li className='widgetSmListItem'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' className='widgetSmImg' />
-            <div className='widgetSmUser'>
-                <span className='widgetSmUsername'>Anna Keller</span>
-                <span className='widgetSmTitle'>Software Enginner</span>
-            </div>
-            <button className="widgetSmButton">
-                <VisibilityIcon />
-            </button>
-        </li>
-        <li className='widgetSmListItem'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' className='widgetSmImg' />
-            <div className='widgetSmUser'>
-                <span className='widgetSmUsername'>Anna Keller</span>
-                <span className='widgetSmTitle'>Software Enginner</span>
-            </div>
-            <button className="widgetSmButton">
-                <VisibilityIcon />
-            </button>
-        </li>
-        <li className='widgetSmListItem'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' className='widgetSmImg' />
-            <div className='widgetSmUser'>
-                <span className='widgetSmUsername'>Anna Keller</span>
-                <span className='widgetSmTitle'>Software Enginner</span>
-            </div>
-            <button className="widgetSmButton">
-                <VisibilityIcon />
-            </button>
-        </li>
-        <li className='widgetSmListItem'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' className='widgetSmImg' />
-            <div className='widgetSmUser'>
-                <span className='widgetSmUsername'>Anna Keller</span>
-                <span className='widgetSmTitle'>Software Enginner</span>
-            </div>
-            <button className="widgetSmButton">
-                <VisibilityIcon />
-            </button>
-        </li>
-      </ul>
-    </div>
-  )
+    const userItems = useSelector(state => state.userItemsStore.userItems);
+    const navigate = useNavigate();
+    const [latestUserItems, setLatestUserItems] = useState([]);
+
+    useEffect(() => {
+        const copiedUserItems = [...userItems];
+        
+        const sortedUserItems = copiedUserItems.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+
+        setLatestUserItems(sortedUserItems.slice(0, 5));
+    }, [userItems]);
+
+    return (
+        <div className='widgetSm'>
+            <span className="widgetLrTitle">New Join Members</span>
+            <ul className='widgetSmList'>
+                {latestUserItems.map((user) => (
+                    <li className='widgetSmListItem' key={user.id}>
+                        <div className='widgetSmUser'>
+                            <span className='widgetSmUsername'>{user.userName}</span>
+                        </div>
+                        <div className='widgetSmUser'>
+                            <span className='widgetSmUsername'>{user.email ? user.email : '-'}</span>
+                        </div>
+                        <button className="widgetSmButton">
+                            <VisibilityIcon onClick={() => navigate("/admin/user/"+user.id, {state: {user: user}})} />
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
-export default WidgetSmall
+export default WidgetSmall;
