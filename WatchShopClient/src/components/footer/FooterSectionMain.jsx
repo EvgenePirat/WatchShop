@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useSubscriptionLettersMutation } from '../../apis/admin/userApi';
+import { toast } from 'react-toastify';
 
 const FooterSectionMain = () => {
+
+    const [email, setEmail] = useState();
     const currentYear = new Date().getFullYear();
+
+    const [subscribeLetterMutation] = useSubscriptionLettersMutation()
+
+    const handleOnClick = async () =>{
+        var result = await subscribeLetterMutation({email: email, isActive: true});
+        
+        console.log(result)
+
+        if(result.error){
+            toast.error('Email not found');
+        }
+        else{
+            toast.success('You have subscribed to the news');
+        }
+    }
+
   return (
     <footer className="fz-2-footer-section">
         <div className="fz-footer-top">
@@ -62,10 +82,10 @@ const FooterSectionMain = () => {
 
                                 <div className="fz-footer-subscribe-form">
                                     <div className="fz-footer-subscribe-form-input">
-                                        <input type="email" name="footer-subs-email" id="fz-footer-subs-email" placeholder="Email"/>
+                                        <input type="email" name="footer-subs-email" id="fz-footer-subs-email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                         <span className="fz-footer-subs-icon"><i className="fa-light fa-envelope-open"></i></span>
                                     </div>
-                                    <button className="fz-footer-subs-btn">subscribe <i className="fa-light fa-paper-plane"></i></button>
+                                    <button className="fz-footer-subs-btn" onClick={handleOnClick}>subscribe <i className="fa-light fa-paper-plane"></i></button>
                                 </div>
                             </div>
                         </div>

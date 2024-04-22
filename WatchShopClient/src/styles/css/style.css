@@ -6619,6 +6619,7 @@ a.fz-hamburger {
   color: var(--clr-body-text);
 }
 .fz-2-footer-section .fz-footer-top .fz-footer-about .fz-footer-socials {
+  margin-top: 120px;
   color: var(--clr-body-text);
 }
 .fz-2-footer-section .fz-footer-top .fz-footer-about .fz-footer-socials-title {

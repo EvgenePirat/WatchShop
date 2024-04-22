@@ -9,6 +9,7 @@ function CreateUser() {
     const navigate = useNavigate();
     const [username, setUserName] = useState("")
     const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
     const [role, setRole] = useState("")
 
     const [addnewUserMutation] = useRegisterNewUserMutation();
@@ -16,7 +17,7 @@ function CreateUser() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const resultOperation = await addnewUserMutation({username,password, role});
+        const resultOperation = await addnewUserMutation({username,password,email, role});
 
         console.log(resultOperation)
 
@@ -27,6 +28,7 @@ function CreateUser() {
     
         setUserName("");
         setPassword("");
+        setEmail("");
     };
 
 
@@ -38,6 +40,10 @@ function CreateUser() {
             <div className="addUserItem">
                 <p>UserName</p>
                 <input type="text" placeholder="mops" className='inputBrendStyle' value={username} onChange={(e) => setUserName(e.target.value)} />
+            </div>
+            <div className="addUserItem">
+                <p>UserName</p>
+                <input type="text" placeholder="gogle@gmail.com" className='inputBrendStyle' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="addUserItem">
                 <p>Password</p>
