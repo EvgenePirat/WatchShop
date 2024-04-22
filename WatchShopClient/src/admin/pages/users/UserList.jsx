@@ -18,7 +18,8 @@ function UserList() {
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   { field: 'userName', headerName: 'Username', width: 150 },
-  { field: 'fullName', headerName: 'Full name', width: 170, renderCell: (params) => (params.value ? params.value : '-') },
+  { field: 'firstName', headerName: 'FirstName', width: 170, renderCell: (params) => (params.value ? params.value : '-') },
+  { field: 'lastName', headerName: 'LastName', width: 170, renderCell: (params) => (params.value ? params.value : '-') },
   { field: 'email', headerName: 'Email', width: 130, renderCell: (params) => (params.value ? params.value : '-') },
   { field: 'city', headerName: 'City', width: 100, renderCell: (params) => (params.value ? params.value : '-') },
   { field: 'role', headerName: 'Role', width: 80 },
