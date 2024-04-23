@@ -8,6 +8,7 @@ import commentApi from "../../apis/admin/commentApi";
 import { userAuthReducer } from "./Slices/userAuthSlice";
 import orderApi from "../../apis/admin/orderApi";
 import { userItemReducer } from "./Slices/userItemSlice";
+import messageApi from "../../apis/admin/messageApi";
 
 
 const store = configureStore({
@@ -20,9 +21,10 @@ const store = configureStore({
         [userApi.reducerPath] : userApi.reducer,
         [authApi.reducerPath] : authApi.reducer,
         [commentApi.reducerPath] : commentApi.reducer,
-        [orderApi.reducerPath] : orderApi.reducer
+        [orderApi.reducerPath] : orderApi.reducer,
+        [messageApi.reducerPath] : messageApi.reducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(brendApi.middleware).concat(watchApi.middleware).concat(userApi.middleware).concat(authApi.middleware).concat(commentApi.middleware).concat(orderApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(brendApi.middleware).concat(messageApi.middleware).concat(watchApi.middleware).concat(userApi.middleware).concat(authApi.middleware).concat(commentApi.middleware).concat(orderApi.middleware)
 });
 
 export default store;

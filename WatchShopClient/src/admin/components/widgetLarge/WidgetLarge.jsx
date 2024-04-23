@@ -21,9 +21,6 @@ function WidgetLarge() {
         }
     }, [data, isLoading]);
 
-
-    console.log(latestOrders)
-
     const Button = ({type}) => {
         return <button className={'widgetLrButton'+type}>{type}</button>
     }
