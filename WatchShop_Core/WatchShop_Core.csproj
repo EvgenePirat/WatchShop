@@ -18,6 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Stripe.net" Version="44.3.0" />
+    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
     <Folder Include="Models\IndicationKinds\Request\" />
     <Folder Include="Models\IndicationTypes\Request\" />
     <Folder Include="Models\MechanismTypes\Request\" />
+    <Folder Include="Models\Messages\Response\" />
     <Folder Include="Models\OrderStatuses\Request\" />
     <Folder Include="Models\StrapMaterials\Request\" />
     <Folder Include="Models\Styles\Request\" />
