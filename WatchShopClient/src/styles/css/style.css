@@ -5338,7 +5338,8 @@ a.fz-hamburger {
   margin-bottom: 5px;
   font-family: "Futura PT", sans-serif;
 }
-.fz-2-single-product-title a:hover {
+.fz-2-single-product-title p:hover {
+  cursor: pointer;
   color: #B8860B;
 }
 @media screen and (max-width: 575px) {
