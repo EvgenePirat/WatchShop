@@ -1,7 +1,7 @@
 import React from 'react'
 import './topbar.css'
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import SettingsIcon from '@mui/icons-material/Settings';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
 
 function Topbar() {
   return (
@@ -12,10 +12,7 @@ function Topbar() {
             </div>
             <div className="topRight">
                 <div className="topbarIconContainer">
-                    <NotificationsNoneIcon />
-                </div>
-                <div className="topbarIconContainer">
-                    <SettingsIcon />
+                    <Link to="/"><HomeIcon /></Link>
                 </div>
                 <img src='https://i.kinja-img.com/image/upload/c_fill,h_675,pg_1,q_80,w_1200/ijsi5fzb1nbkbhxa2gc1.png' alt='' className='topAvatar' />
             </div>
