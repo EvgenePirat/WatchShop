@@ -25,7 +25,6 @@ function WidgetSmall() {
             <ul className='widgetSmList'>
                 {latestUserItems.map((user) => (
                     <li className='widgetSmListItem' key={user.id}>
-                        {console.log(user)}
                         <div className='widgetSmUser'>
                             <span className='widgetSmUsername'>{user.userName}</span>
                         </div>
