@@ -13,7 +13,7 @@ function WidgetSmall() {
         const copiedUserItems = [...userItems];
         
         const sortedUserItems = copiedUserItems.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt);
+            return new Date(b.createAccountDate) - new Date(a.createAccountDate);
         });
 
         setLatestUserItems(sortedUserItems.slice(0, 5));
@@ -25,11 +25,12 @@ function WidgetSmall() {
             <ul className='widgetSmList'>
                 {latestUserItems.map((user) => (
                     <li className='widgetSmListItem' key={user.id}>
+                        {console.log(user)}
                         <div className='widgetSmUser'>
                             <span className='widgetSmUsername'>{user.userName}</span>
                         </div>
                         <div className='widgetSmUser'>
-                            <span className='widgetSmUsername'>{user.email ? user.email : '-'}</span>
+                            <span className='widgetSmUsername'>{user.createAccountDate}</span>
                         </div>
                         <button className="widgetSmButton">
                             <VisibilityIcon onClick={() => navigate("/admin/user/"+user.id, {state: {user: user}})} />
