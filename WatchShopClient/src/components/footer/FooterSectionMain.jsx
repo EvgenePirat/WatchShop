@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useSubscriptionLettersMutation } from '../../apis/admin/userApi';
 import { toast } from 'react-toastify';
+import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 const FooterSectionMain = () => {
 
     const [email, setEmail] = useState();
     const currentYear = new Date().getFullYear();
+    const [styles, setStyles] = useState([]);
+
+    const {data, isLoading} = useGetWatchCharacteristicsQuery();
+
+    useEffect(() => {
+        if (!isLoading && data) {
+          setStyles(data.result.styles);
+        }
+      }, [isLoading, data]);    
+
 
     const [subscribeLetterMutation] = useSubscriptionLettersMutation()
 
@@ -50,14 +61,11 @@ const FooterSectionMain = () => {
 
                     <div className="col-lg-3 col-md-4 col-6 col-xxs-12">
                         <div className="fz-footer-widget">
-                            <h5 className="fz-footer-widget__title">Customer Service</h5>
+                            <h5 className="fz-footer-widget__title">Styles</h5>
                             <ul>
-                                <li><Link to="#">Shipping and Returns</Link></li>
-                                <li><Link to="#">Product Care</Link></li>
-                                <li><Link to="#">Returns & Policy</Link></li>
-                                <li><Link to="#">Warranty & Lifetime Service</Link></li>
-                                <li><Link to="#">Jewelry Care Instruction</Link></li>
-                                <li><Link to="/faq">FAQ</Link></li>
+                                {styles.map((style, index) => {
+                                    return <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${style.name}` }} >{style.name}</Link></li>
+                                })}
                             </ul>
                         </div>
                     </div>
@@ -66,11 +74,10 @@ const FooterSectionMain = () => {
                         <div className="fz-footer-widget">
                             <h5 className="fz-footer-widget__title">Quick Link</h5>
                             <ul>
-                                <li><Link to="/about">Our Story</Link></li>
-                                <li><Link to="/blog">Blog & Press</Link></li>
-                                <li><Link to="#">Order History</Link></li>
-                                <li><Link to="#">Wish List</Link></li>
-                                <li><Link to="#">Terms & Conditions</Link></li>
+                                <li><Link to="/shop">Our Products</Link></li>
+                                <li><Link to="/about">About</Link></li>
+                                <li><Link to="/contact">Contact</Link></li>
+                                <li><Link to="/account">Account</Link></li>
                             </ul>
                         </div>
                     </div>
