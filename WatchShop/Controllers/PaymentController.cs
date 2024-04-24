@@ -23,10 +23,10 @@ namespace WatchShop_UI.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("{carttotal:double}")]
         public async Task<ActionResult<ApiResponse>> MakePayment(double carttotal)
         {
-            _logger.LogInformation("{controller}.{method} - Post, create payment, Task started",
+           _logger.LogInformation("{controller}.{method} - Post, create payment, Task started",
                 nameof(PaymentController), nameof(MakePayment));
 
             var result = _paymentService.MakePayment(carttotal);
