@@ -12,6 +12,7 @@ const HeaderBrendArea = ({header}) => {
         handleCategoryBtn,
         categoryBtnRef,
     } = useContext(FarzaaContext)
+    
   return (
     <div className={`fz-category-area ${header}`} ref={categoryBtnRef}>
         <button className="fz-category-btn" onClick={handleCategoryBtn}>
