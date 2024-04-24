@@ -1,11 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useLoginMutation } from '../../apis/admin/authApi';
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser } from '../../Storage/Redux/Slices/userAuthSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignInFormSection = () => {
     const [userName,setUserName] = useState('')
     const [password,setPassword] = useState('')
-    const handleFormSubmit = (e) => {
+    const [error, setError] = useState('')
+    const dispatch = useDispatch();
+
+    const [loginInSystem] = useLoginMutation();
+
+    const navigate = useNavigate()
+
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
     
         if (!userName && !password) {
@@ -17,10 +29,25 @@ const SignInFormSection = () => {
         }
          else {
     
-            // If the form is successfully submitted, show a success toast
-            toast.success('Signed In successfully!', { position: 'top-right' });
-            setUserName('');
-            setPassword('');
+            const response = await loginInSystem({
+                username: userName,
+                password: password
+            });
+
+            if(response.data){
+                toast.success('Signed In successfully!', { position: 'top-right' });
+                const {token} = response.data.result;
+                setUserName('');
+                setPassword('');
+                setError('')
+                const {username, id, email, role} = jwtDecode(token);
+                dispatch(setLoggedInUser({id, username, email, role}));
+                localStorage.setItem("token", token);
+                navigate("/account")
+            } else if(response.error){
+                toast.error(response.error.data.description, { position: 'top-right' });
+                setError(response.error.data.description);
+            }
         }
       };
     
@@ -30,7 +57,8 @@ const SignInFormSection = () => {
         type="text" 
         name="login-username" 
         id="login-username" 
-        placeholder="Username"
+        placeholder="Phone number"
+        required
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         />
@@ -38,17 +66,16 @@ const SignInFormSection = () => {
         type="password" 
         name="login-password" 
         id="login-password" 
+        required
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         />
         <div className="sign-in-checkbox-container d-flex justify-content-between">
-            <div className="stay-sign-in">
-                <input type="checkbox" name="sign-in-checkbox" id="sign-in-checkbox"/>
-                <label htmlFor="sign-in-checkbox">Stay Logged in</label>
-            </div>
-            <Link to="#" className="password-recovery-btn">Forgot Your Password?</Link>
+            <Link to="/registration" className="password-recovery-btn">Registration</Link>
         </div>
+
+        {error && <p className='text-danger'>{error}</p>}
 
         <button type="submit" className="fz-1-banner-btn single-form-btn">Log in</button>
     </form>

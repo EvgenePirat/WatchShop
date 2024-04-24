@@ -38,6 +38,8 @@ namespace WatchShop_UI.Utilities.Middleware.ExceptionsHandlers
                 WatchArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 ImageArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 OrderArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
+                MessageArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
+                OrderStatusArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 AuthArgumentException _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message),
                 ApplicationException _ => new ExceptionResponse(HttpStatusCode.BadRequest, "Application exception occurred."),
                 KeyNotFoundException _ => new ExceptionResponse(HttpStatusCode.NotFound, "The request key not found."),

@@ -104,7 +104,7 @@ html {
 }
 
 .img-cart-most-popular-watch{
-  max-height: 280px;
+  height: 280px;
 }
 
 body {
@@ -1201,6 +1201,7 @@ img {
 .fz-1-single-product .fz-single-product__title {
   font-size: 18px;
   font-family: "Kanit", sans-serif;
+  cursor: pointer;
   font-weight: 400;
 }
 @media screen and (max-width: 1199px) {
@@ -3053,6 +3054,12 @@ a.fz-hamburger {
   translate: 0 -5px;
   color: #B8860B;
 }
+
+.footer_logo_img{
+  width: 200px;
+  height: 200px;
+}
+
 @media screen and (max-width: 1529px) {
   .fz-2-banner-section .fz-banner-txt {
     padding-left: 50px;
@@ -5331,7 +5338,8 @@ a.fz-hamburger {
   margin-bottom: 5px;
   font-family: "Futura PT", sans-serif;
 }
-.fz-2-single-product-title a:hover {
+.fz-2-single-product-title p:hover {
+  cursor: pointer;
   color: #B8860B;
 }
 @media screen and (max-width: 575px) {
@@ -6612,6 +6620,7 @@ a.fz-hamburger {
   color: var(--clr-body-text);
 }
 .fz-2-footer-section .fz-footer-top .fz-footer-about .fz-footer-socials {
+  margin-top: 120px;
   color: var(--clr-body-text);
 }
 .fz-2-footer-section .fz-footer-top .fz-footer-about .fz-footer-socials-title {
@@ -7766,6 +7775,41 @@ a.fz-hamburger {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
+
+.fz-product-details__describtion{
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  gap: 20px;
+}
+
+.fz-product-details__describtion ul {
+  margin: 0;
+  padding: 0;
+}
+
+.fz-product-details__describtion li {
+  list-style-type: none;
+  font-size: 18px;
+  margin-bottom: 5px;
+  width: 300px;
+}
+
+.fz-product-details__describtion ul::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.fz-product-details__describtion h4::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ccc; 
+  width: 100%;
+}
+
 @media screen and (max-width: 479px) {
   .fz-product-details .fz-product-details__descr {
     font-size: 14px;
@@ -10402,7 +10446,7 @@ input[type=number].cart-product-quantity-input {
 .fz-checkout-sidebar .payment-area {
   border: 1px solid #eaeaea;
   padding: 0 15px;
-  height: 50px;
+  height: 150px;
   line-height: 50px;
 }
 @media screen and (max-width: 479px) {

@@ -39,7 +39,7 @@ namespace WatchShop_Core.Services
 
         public async Task<IEnumerable<UserModel>> GetAllUsersAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _unitOfWork.UserRepository.GetAllAsync(u => u.Orders);
 
             var modelUsers = _mapper.Map<IEnumerable<UserModel>>(users);
 
@@ -83,6 +83,34 @@ namespace WatchShop_Core.Services
             return userModel;
         }
 
+        public async Task<bool> SetSubscriptionLetters(string email, bool isActive)
+        {
+            try
+            {
+                var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+
+                if (user == null)
+                {
+                    throw new UserArgumentException("User by email not found");
+                }
+
+                if(user.IsSubscriptionLetters != isActive)
+                {
+                    user.IsSubscriptionLetters = isActive;
+
+                    await _userManager.UpdateAsync(user);
+
+                    await _unitOfWork.SaveAsync();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new UserArgumentException(ex.Message);
+            }
+        }
+
         public async Task<UserModel> UpdateUserAsync(Guid id, UpdateUserModel model)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
@@ -93,7 +121,8 @@ namespace WatchShop_Core.Services
             }
 
             user.UserName = model.UserName;
-            user.FullName = model.FullName;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
             user.City = model.City;
             user.Email = model.Email;
 

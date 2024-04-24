@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Reflection.Emit;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Domain.Entities.Identities;
 using WatchShop_Core.Domain.Enums;
@@ -26,6 +24,7 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<FrameColor> FrameColors { get; set; }
         public DbSet<FrameMaterial> FrameMaterials { get; set; }
         public DbSet<GlassType> GlassTypes { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<IndicationKind> IndicationKinds { get; set; }
         public DbSet<IndicationType> IndicationTypes { get; set; }
         public DbSet<MechanismType> MechanismTypes { get; set; }
@@ -34,6 +33,7 @@ namespace WatchShop_Infrastructure.DbContext
         public DbSet<Strap> Straps { get; set; }
         public DbSet<StrapMaterial> StrapMaterials { get; set; }
         public DbSet<Style> Styles { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
         public DbSet<Watch> Watches { get; set; }
         public DbSet<WatchAdditionalCharacteristic> WatchAdditionalCharacteristics { get; set; }
         public DbSet<WatchComment> WatchComments { get; set; }
@@ -57,8 +57,20 @@ namespace WatchShop_Infrastructure.DbContext
             builder.Entity<Order>()
                 .HasMany(o => o.Carts)
                 .WithOne(c => c.Order)
-                .HasForeignKey(c => c.WatchId)
+                .HasForeignKey(c => c.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Payment>()
+                .HasOne(o => o.ApplicationUser)
+                .WithMany(u => u.Payments)
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Shipment>()
+                .HasOne(o => o.ApplicationUser)
+                .WithMany(u => u.Shipments)
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Watch>()
                 .HasMany(w => w.Images)

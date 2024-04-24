@@ -35,10 +35,17 @@ const userApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags:["Users"],
+        }),
+        subscriptionLetters: builder.mutation({
+            query: (user) => ({
+                url:`subscription/${user.email}&${user.isActive}`,
+                method: "PUT"
+            }),
+            invalidatesTags:["Users"],
         })
     }),
 });
 
-export const {useGetUsersQuery, useGetUserByIdQuery, useAddNewUserMutation, useUpdateUserMutation, useDeleteUserMutation} = userApi;
+export const {useGetUsersQuery, useGetUserByIdQuery, useAddNewUserMutation, useUpdateUserMutation, useDeleteUserMutation, useSubscriptionLettersMutation} = userApi;
 
 export default userApi;

@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public CartDtoProfile()
         {
             CreateMap<CreateCartDto, CreateCartModel>();
+            CreateMap<UpdateCartDto, UpdateCartModel>();
             CreateMap<CartModel, CartDto>();
         }
     }

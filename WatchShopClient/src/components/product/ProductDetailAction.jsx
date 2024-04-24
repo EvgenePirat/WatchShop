@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { FarzaaContext } from '../../context/FarzaaContext'
 
-const ProductDetailAction = () => {
+const ProductDetailAction = ({watch}) => {
     const defaultQuantity = 1;
     const [quantity, setQuantity] = useState(defaultQuantity);
+
+    const {
+        addToCartWithQuantity,
+        addToWishlist,
+    } = useContext(FarzaaContext)
 
     const handleQuantityChange = (newQuantity) => {
         if (newQuantity >= 1) {
@@ -27,8 +33,8 @@ const ProductDetailAction = () => {
                 <i className="fa-light fa-plus"></i>
             </button>
         </div>
-        <button className="fz-product-details__add-to-cart">Add to cart</button>
-        <button className="fz-product-details__add-to-wishlist"><i className="fa-light fa-heart"></i></button>
+        <button className="fz-product-details__add-to-cart" onClick={() => addToCartWithQuantity(watch.id,quantity)}>Add to cart</button>
+        <button className="fz-product-details__add-to-wishlist" onClick={() => addToWishlist(watch.id)}><i className="fa-light fa-heart"></i></button>
     </div>
   )
 }

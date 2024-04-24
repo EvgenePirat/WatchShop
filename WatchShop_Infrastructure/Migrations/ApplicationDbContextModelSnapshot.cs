@@ -142,7 +142,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("additional_characteristics");
+                    b.ToTable("additional_characteristics", (string)null);
 
                     b.HasData(
                         new
@@ -474,7 +474,7 @@ namespace WatchShop_Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("brends");
+                    b.ToTable("brends", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Cart", b =>
@@ -492,7 +492,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("WatchId");
 
-                    b.ToTable("carts");
+                    b.ToTable("carts", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.ClockFace", b =>
@@ -520,7 +520,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("IndicationTypeId");
 
-                    b.ToTable("clock_faces");
+                    b.ToTable("clock_faces", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.ClockFaceColor", b =>
@@ -533,7 +533,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("clock_face_colors");
+                    b.ToTable("clock_face_colors", (string)null);
 
                     b.HasData(
                         new
@@ -613,7 +613,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("countries");
+                    b.ToTable("countries", (string)null);
 
                     b.HasData(
                         new
@@ -738,7 +738,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("dimensions");
+                    b.ToTable("dimensions", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Frame", b =>
@@ -772,7 +772,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("FrameMaterialId");
 
-                    b.ToTable("Frames");
+                    b.ToTable("Frames", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.FrameColor", b =>
@@ -785,7 +785,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("frame_colors");
+                    b.ToTable("frame_colors", (string)null);
 
                     b.HasData(
                         new
@@ -895,7 +895,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("frame_materials");
+                    b.ToTable("frame_materials", (string)null);
 
                     b.HasData(
                         new
@@ -994,7 +994,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("glass_types");
+                    b.ToTable("glass_types", (string)null);
 
                     b.HasData(
                         new
@@ -1059,6 +1059,9 @@ namespace WatchShop_Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreateAccountDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -1066,7 +1069,11 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -1138,7 +1145,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("WatchId");
 
-                    b.ToTable("images");
+                    b.ToTable("images", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.IndicationKind", b =>
@@ -1151,7 +1158,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("indication_kinds");
+                    b.ToTable("indication_kinds", (string)null);
 
                     b.HasData(
                         new
@@ -1206,7 +1213,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("indication_types");
+                    b.ToTable("indication_types", (string)null);
 
                     b.HasData(
                         new
@@ -1240,7 +1247,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("mechanism_types");
+                    b.ToTable("mechanism_types", (string)null);
 
                     b.HasData(
                         new
@@ -1276,6 +1283,12 @@ namespace WatchShop_Infrastructure.Migrations
                     b.Property<byte>("OrderStatusId")
                         .HasColumnType("tinyint");
 
+                    b.Property<Guid>("PaymentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ShipmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<double>("Sum")
                         .HasColumnType("float");
 
@@ -1286,9 +1299,15 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("OrderStatusId");
 
+                    b.HasIndex("PaymentId")
+                        .IsUnique();
+
+                    b.HasIndex("ShipmentId")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("orders");
+                    b.ToTable("orders", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.OrderStatus", b =>
@@ -1301,7 +1320,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("order_statuses");
+                    b.ToTable("order_statuses", (string)null);
 
                     b.HasData(
                         new
@@ -1331,6 +1350,65 @@ namespace WatchShop_Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StripeIntendId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("payments", (string)null);
+                });
+
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Shipment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("shipments", (string)null);
+                });
+
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
                 {
                     b.Property<int>("Id")
@@ -1349,7 +1427,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("StrapMaterialId");
 
-                    b.ToTable("straps");
+                    b.ToTable("straps", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.StrapMaterial", b =>
@@ -1362,7 +1440,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("strap_materials");
+                    b.ToTable("strap_materials", (string)null);
 
                     b.HasData(
                         new
@@ -1441,7 +1519,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("styles");
+                    b.ToTable("styles", (string)null);
 
                     b.HasData(
                         new
@@ -1551,7 +1629,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("watches");
+                    b.ToTable("watches", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.WatchAdditionalCharacteristic", b =>
@@ -1566,7 +1644,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("AdditionalCharacteristicsId");
 
-                    b.ToTable("watch_additional_characteristics");
+                    b.ToTable("watch_additional_characteristics", (string)null);
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.WatchComment", b =>
@@ -1598,7 +1676,7 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.HasIndex("WatchId");
 
-                    b.ToTable("watch_comments");
+                    b.ToTable("watch_comments", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -1744,6 +1822,18 @@ namespace WatchShop_Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WatchShop_Core.Domain.Entities.Payment", "Payment")
+                        .WithOne("Order")
+                        .HasForeignKey("WatchShop_Core.Domain.Entities.Order", "PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WatchShop_Core.Domain.Entities.Shipment", "Shipment")
+                        .WithOne("Order")
+                        .HasForeignKey("WatchShop_Core.Domain.Entities.Order", "ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -1752,7 +1842,33 @@ namespace WatchShop_Infrastructure.Migrations
 
                     b.Navigation("OrderStatus");
 
+                    b.Navigation("Payment");
+
+                    b.Navigation("Shipment");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "ApplicationUser")
+                        .WithMany("Payments")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Shipment", b =>
+                {
+                    b.HasOne("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", "ApplicationUser")
+                        .WithMany("Shipments")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>
@@ -1920,6 +2036,10 @@ namespace WatchShop_Infrastructure.Migrations
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Identities.ApplicationUser", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Shipments");
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.IndicationKind", b =>
@@ -1945,6 +2065,18 @@ namespace WatchShop_Infrastructure.Migrations
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.OrderStatus", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Payment", b =>
+                {
+                    b.Navigation("Order")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WatchShop_Core.Domain.Entities.Shipment", b =>
+                {
+                    b.Navigation("Order")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WatchShop_Core.Domain.Entities.Strap", b =>

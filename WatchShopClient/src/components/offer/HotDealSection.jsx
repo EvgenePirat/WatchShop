@@ -1,12 +1,16 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import CountdownSection from '../timer/CountdownSection'
-import { useSelector } from 'react-redux'
 
 const HotDealSection = () => {
 
+    const navigate = useNavigate();
     const {addToWishlist,addToCart,jeweleryArray} = useContext(FarzaaContext)
+
+    const handleClick = (item) => {
+        navigate('/shopDetails', { state: { item } });
+    }
 
   return (
     <section className="fz-2-hot-deal-section">
@@ -14,7 +18,7 @@ const HotDealSection = () => {
             <div className="fz-2-section-heading">
                 <div className="row gy-4 align-items-center">
                     <div className="col-md-6">
-                        <h2 className="fz-section-title">Hot Deals For Jewelry</h2>
+                        <h2 className="fz-section-title">Hot Deals For Watches</h2>
                     </div>
                     <div className="col-md-6">
                         <CountdownSection/>
@@ -42,9 +46,9 @@ const HotDealSection = () => {
                                     </div>
                                 </div>
                                 <div className="fz-2-single-product-txt">
-                                    <span className="fz-2-single-product-category"><Link to="/shop">{item.brend.name}</Link></span>
-                                    <h5 className="fz-2-single-product-title"><Link to="/shopDetails">{item.nameModel}</Link></h5>
-                                    <span className="fz-2-single-product-price">${item.price}<span className="prev-price">${item.discountPrice}</span></span>
+                                    <span className="fz-2-single-product-category"><Link to={{ pathname: '/shop', search: `?filter=${item.brend.name}` }}>{item.brend.name}</Link></span>
+                                    <h5 className="fz-2-single-product-title"><p onClick={() => handleClick(item)}>{item.nameModel}</p></h5>
+                                    <span className="fz-2-single-product-price">${item.discountPrice}<span className="prev-price">${item.price}</span></span>
                                 </div>
                             </div>
                         </div>  

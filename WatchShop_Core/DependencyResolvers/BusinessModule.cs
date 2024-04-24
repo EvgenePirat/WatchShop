@@ -17,6 +17,8 @@ namespace WatchShop_Core.DependencyResolvers
             builder.RegisterType<JwtService>().As<IJwtService>();
             builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<CommentService>().As<ICommentService>();
+            builder.RegisterType<PaymentService>().As<IPaymentService>();
+            builder.RegisterType<MessageService>().As<IMessageService>();
         }
     }
 }

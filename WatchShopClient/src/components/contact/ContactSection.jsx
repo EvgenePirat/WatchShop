@@ -2,6 +2,7 @@ import React from 'react'
 import ContactFormSection from '../forms/ContactFormSection'
 
 const ContactSection = () => {
+
   return (
     <div className="container">
         <div className="fz-inner-contact-details">
@@ -15,11 +16,6 @@ const ContactSection = () => {
             <div className="fz-inner-contact-details__info-card">
                 <h3 className="fz-inner-contact-details__title">Get In Touch</h3>
                 <ul>
-                    <li className="fz-single-contact-info">
-                        <i className="fa-light fa-location-dot"></i>
-                        <span className="contact-address">989 Bel Meadow Drive Los Angeles, CA 90017</span>
-                    </li>
-
                     <li className="fz-single-contact-info">
                         <i className="fa-light fa-phone"></i>
                         <div className="contact-numbers">

@@ -46,6 +46,26 @@ namespace WatchShop_UI.Controllers
             return Ok(response);
         }
 
+        [HttpPut("subscription/{email}&{isActive:bool}")]
+        public async Task<ActionResult<ApiResponse>> SubscriptionLetters(string email, bool isActive)
+        {
+            _logger.LogInformation("{controller}.{method} - Put, Set Subscription Letters, Task started",
+                nameof(UserController), nameof(SubscriptionLetters));
+
+            var result = await _userService.SetSubscriptionLetters(email, isActive);
+
+            ApiResponse response = new ApiResponse()
+            {
+                Result = result,
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+
+            _logger.LogInformation("{controller}.{method} - Put, Set Subscription Letters, Result - Ok, Task ended",
+                nameof(UserController), nameof(UpdateUserAsync));
+
+            return Ok(response);
+        }
+
         [HttpPut("{id:Guid}")]
         public async Task<ActionResult<ApiResponse>> UpdateUserAsync(Guid id, [FromBody] UpdateUserDto dto)
         {

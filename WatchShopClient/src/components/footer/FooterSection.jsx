@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 const FooterSection = () => {
+
     const currentYear = new Date().getFullYear();
+
+    const [styles, setStyles] = useState([]);
+
+    const {data, isLoading} = useGetWatchCharacteristicsQuery();
+
+    useEffect(() => {
+        if (!isLoading && data) {
+          setStyles(data.result.styles);
+        }
+      }, [isLoading, data]);    
+
+
+
   return (
     <footer className="fz-footer-section fz-1-footer-section">
         <div className="fz-footer-top">
@@ -11,36 +26,18 @@ const FooterSection = () => {
                     <div className="col-xxl-4 col-lg-12 col-md-8">
                         <div className="fz-footer-about fz-footer-widget">
                             <div className="fz-logo fz-footer-widget__title">
-                                <Link to="/"><img src="assets/images/logo-3.png" alt="logo"/></Link>
+                                <Link to="/"><img src="assets/images/watch_shop_logo.jpg" alt="logo" className='footer_logo_img' /></Link>
                             </div>
-                            <p className="fz-footer-about__txt">There Are Many Different Styles Of Including Aviator, Wayfarer, Cat-Eye, Round, Some Sunglasses Also Have Polarized Lenses</p>
-                            <img src="assets/images/card.png" alt="Pyament Methods" className="fz-payment-methods"/>
                         </div>
                     </div>
 
                     <div className="col-xxl-2 col-lg-3 col-md-4 col-6 col-xxs-12">
                         <div className="fz-footer-widget">
-                            <h5 className="fz-footer-widget__title">Ways to Shop</h5>
+                            <h5 className="fz-footer-widget__title">Styles</h5>
                             <ul>
-                                <li><Link to="#">Shop on Facebook</Link></li>
-                                <li><Link to="#">Shop on Ebay</Link></li>
-                                <li><Link to="/shop">Shop by Category</Link></li>
-                                <li><Link to="/shop">Shop All</Link></li>
-                                <li><Link to="#">Coupons and Discounts</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="col-xxl-2 col-lg-3 col-md-4 col-6 col-xxs-12">
-                        <div className="fz-footer-widget">
-                            <h5 className="fz-footer-widget__title">Customer Service</h5>
-                            <ul>
-                                <li><Link to="#">Shipping and Returns</Link></li>
-                                <li><Link to="#">Product Care</Link></li>
-                                <li><Link to="#">Returns & Policy</Link></li>
-                                <li><Link to="#">Warranty & Lifetime Service</Link></li>
-                                <li><Link to="#">Jewelry Care Instruction</Link></li>
-                                <li><Link to="/faq">FAQ</Link></li>
+                                {styles.map((style, index) => {
+                                    return <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${style.name}` }} >{style.name}</Link></li>
+                                })}
                             </ul>
                         </div>
                     </div>
@@ -49,11 +46,10 @@ const FooterSection = () => {
                         <div className="fz-footer-widget">
                             <h5 className="fz-footer-widget__title">Quick Links</h5>
                             <ul>
-                                <li><Link to="/about">Our Story</Link></li>
-                                <li><Link to="/blog">Blog & Press</Link></li>
-                                <li><Link to="#">Order History</Link></li>
-                                <li><Link to="#">Wish List</Link></li>
-                                <li><Link to="#">Terms & Conditions</Link></li>
+                                <li><Link to="/shop">Our Products</Link></li>
+                                <li><Link to="/about">About</Link></li>
+                                <li><Link to="/contact">Contact</Link></li>
+                                <li><Link to="/account">Account</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -63,13 +59,10 @@ const FooterSection = () => {
                             <h5 className="fz-footer-widget__title">Store Address</h5>
                             <ul>
                                 <li>
-                                    <Link to="#"><i className="fa-light fa-location-dot"></i> 16 Rr 2, Ketchikan, Alaska 99901, USA</Link>
-                                </li>
-                                <li>
                                     <Link to="tel:9072254144"><i className="fa-light fa-phone"></i> (907) 225-4144</Link>
                                 </li>
                                 <li>
-                                    <Link to="mailto:info@webmail.com"><i className="fa-light fa-envelope-open-text"></i>info@webmail.com</Link>
+                                    <Link to="mailto:info@webmail.com"><i className="fa-light fa-envelope-open-text"></i>eugene.brexyn@gmail.com</Link>
                                 </li>
                             </ul>
                         </div>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Topbar from '../components/topbar/Topbar'
 import Sidebar from '../components/sidebar/Sidebar'
 import "../styles/app.css"
 import { Outlet } from 'react-router-dom'
+import withAuthAdmin from '../../HOC/withAuthAdmin'
 
 function Admin() {
   return (
@@ -16,4 +17,4 @@ function Admin() {
   )
 }
 
-export default Admin
+export default withAuthAdmin(Admin);

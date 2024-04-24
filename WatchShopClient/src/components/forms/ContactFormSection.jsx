@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { usePostMessageTelegramMutation } from '../../apis/admin/messageApi';
 
 const ContactFormSection = () => {
+
+  const userAuth = useSelector(state => state.userAuthStore);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState(userAuth.email ? userAuth.email : '');
+  const [phoneNumber, setPhoneNumber] = useState(userAuth.username ? userAuth.username : '');
   const [comment, setComment] = useState('');
 
-  const handleFormSubmit = (e) => {
+  const [postMessageMutation] = usePostMessageTelegramMutation();
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (!firstName || !lastName || !email || !phoneNumber || !comment) {
@@ -17,13 +24,20 @@ const ContactFormSection = () => {
       toast.warning('Please provide a valid email address.', { position: 'top-right' });
     } else {
 
-      // If the form is successfully submitted, show a success toast
-      toast.success('Form submitted successfully!', { position: 'top-right' });
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setPhoneNumber('');
-      setComment('');
+      var result = await postMessageMutation({firstName: firstName, lastName: lastName, email: email, phone: phoneNumber, message: comment })
+
+      console.log(result)
+
+      if(result.error){
+        toast.error('Form not submitted. Try later!')
+      }else{
+        toast.success('Message submitted successfully! Check response on your email!', { position: 'top-right' });
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhoneNumber('');
+        setComment('');
+      }
     }
   };
 
@@ -68,7 +82,7 @@ const ContactFormSection = () => {
         </div>
         <div className="col-6 col-xxs-12">
           <input
-            type="number"
+            type="text"
             name="commenter-number"
             id="commenter-number"
             placeholder="Phone Number"

@@ -24,12 +24,9 @@ const CartItemTable = ({cartArray,remove,quantity}) => {
                                     <div className="cart-product__img">
                                         <img src={item.images.length > 0 ? item.images[0].path : defaultCartImage} alt="Product Image"/>
                                     </div>
-                                    <div className="cart-product__txt">
-                                        <h6><Link to="/shopDetails">{item.name}</Link></h6>
-                                    </div>
                                 </div>
                             </td>
-                            <td>${item.price}</td>
+                            <td>${item.isDiscounted ? item.discountPrice : item.price}</td>
                             <td>
                             <div className="cart-product__quantity">
                                 <div className="cart-product__quantity-btns">

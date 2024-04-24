@@ -11,6 +11,7 @@ namespace WatchShop_UI.Mappers
         public OrderDtoProfile()
         {
             CreateMap<CreateOrderDto, CreateOrderModel>();
+            CreateMap<UpdateOrderDto, UpdateOrderModel>();
             CreateMap<OrderModel, OrderDto>();
         }
     }

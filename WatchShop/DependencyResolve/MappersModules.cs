@@ -18,8 +18,16 @@ namespace WatchShop_UI.DependencyResolve
                 cfg.AddProfile(new OrderDtoProfile());
                 cfg.AddProfile(new OrderModelProfile());
 
+                cfg.AddProfile(new MessageDtoProfile());
+
                 cfg.AddProfile(new UserDtoProfile());
                 cfg.AddProfile(new UserModelProfile());
+
+                cfg.AddProfile(new ShipmentDtoProfile());
+                cfg.AddProfile(new ShipmentModelProfile());
+
+                cfg.AddProfile(new PaymentDtoProfile());
+                cfg.AddProfile(new PaymentModelProfile());
 
                 cfg.AddProfile(new OrderStatusDtoProfile());
                 cfg.AddProfile(new OrderStatusModelProfile());

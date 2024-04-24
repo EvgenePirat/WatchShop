@@ -2,7 +2,7 @@
 {
     public enum OrderStatusEnum
     {
-        Paid = 0,
+        Create = 0,
         Processing = 1,
         Sent = 2,
         Delivered = 3,

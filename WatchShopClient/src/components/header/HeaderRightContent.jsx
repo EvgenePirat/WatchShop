@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import WishlistModal from '../modal/WishlistModal'
 import CartModal from '../modal/CartModal'
 import { FarzaaContext } from '../../context/FarzaaContext'
+import { Link } from 'react-router-dom'
 
 const HeaderRightContent = () => {
     const {
@@ -34,6 +35,7 @@ const HeaderRightContent = () => {
                     <span className="count">{cartItemAmount}</span>
                 </button>
             </li>
+            <li><Link to="/account" className="d-none d-lg-block"><i className="fa-light fa-user"></i></Link></li>
             <li className="d-block d-lg-none"><a role="button" onClick={handleSidebarOpen} className="fz-hamburger"><i className="fa-light fa-bars-sort"></i></a></li>
         </ul>
     </div>

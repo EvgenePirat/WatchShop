@@ -1,14 +1,20 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const BestSellerTabContent = () => {
+
+    const navigate = useNavigate();
 
     const {
         addToWishlist,
         addToCart,
         jeweleryArray,
     } = useContext(FarzaaContext)
+
+    const handleClick = (item) => {
+        navigate('/shopDetails', { state: { item } });
+    }
 
   return (
     <div className="row gy-4 gx-3 justify-content-center">
@@ -30,9 +36,9 @@ const BestSellerTabContent = () => {
                         </div>
                     </div>
                     <div className="fz-2-single-product-txt">
-                        <span className="fz-2-single-product-category"><Link to="shop">{item.brend.name}</Link></span>
-                        <h5 className="fz-2-single-product-title"><Link to="shopDetails">{item.nameModel}</Link></h5>
-                    <span className="fz-2-single-product-price">${item.price}</span>
+                        <span className="fz-2-single-product-category"><Link to={{ pathname: '/shop', search: `?filter=${item.brend.name}` }}>{item.brend.name}</Link></span>
+                        <h5 className="fz-2-single-product-title"><p onClick={() => handleClick(item)}>{item.nameModel}</p></h5>
+                        <span className="fz-2-single-product-price">${item.price}</span>
                     </div>
                 </div>
             </div> 

@@ -1,6 +1,6 @@
 
-import { BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import JewelleryShop from "./pages/JewelleryShop"
+import { Routes, Route } from "react-router-dom"
+import WatchShop from "./pages/WatchShop"
 import Shop from "./pages/Shop"
 import ShopDetails from "./pages/ShopDetails"
 import About from "./pages/About"
@@ -9,8 +9,6 @@ import Wishlist from "./pages/Wishlist"
 import Cart from "./pages/Cart"
 import Account from "./pages/Account"
 import Checkout from "./pages/Checkout"
-import Blog from "./pages/Blog"
-import BlogDetails from "./pages/BlogDetails"
 import Contact from "./pages/Contact"
 import Error from "./pages/Error"
 import Admin from "./admin/pages/Admin"
@@ -25,40 +23,78 @@ import CreateWatch from "./admin/pages/watches/CreateWatch"
 import User from "./admin/pages/users/User"
 import CreateUser from "./admin/pages/users/CreateUser"
 import CommentList from "./admin/pages/comments/CommentList"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
+import { useEffect } from "react"
+import { setLoggedInUser } from "./Storage/Redux/Slices/userAuthSlice"
+import { jwtDecode } from "jwt-decode";
+import OrderList from "./admin/pages/orders/OrderList"
+import Order from "./admin/pages/orders/Order"
+import { useGetUsersQuery } from '../src/apis/admin/userApi';
+import { useDispatch } from 'react-redux';
+import { setUserItems } from '../src/Storage/Redux/Slices/userItemSlice';
+import Payment from "./pages/Payment"
 
 function App() {
 
+  
+  const dispatch = useDispatch();
+
+  const { data, isLoading } = useGetUsersQuery();
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      dispatch(setUserItems(data.result));
+    }
+  }, [isLoading, data]);
+
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if (localToken) {
+      const { exp } = jwtDecode(localToken);
+      const expirationTime = exp * 1000; 
+
+      if (Date.now() >= expirationTime) {
+        localStorage.removeItem("token");
+      } else {
+        const { username, id, email, role } = jwtDecode(localToken);
+        dispatch(setLoggedInUser({ id, username, email, role }));
+      }
+    }
+  }, []);
+
   return (
-    <Router>
       <Routes>
-        <Route path="/" element={<JewelleryShop/>}/>
-        <Route path="/shop" element={<Shop/>}/>
-        <Route path="/shopDetails" element={<ShopDetails/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/faq" element={<Faq/>}/>
-        <Route path="/wishlist" element={<Wishlist/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/account" element={<Account/>}/>
-        <Route path="/checkout" element={<Checkout/>}/>
-        <Route path="/blog" element={<Blog/>}/>
-        <Route path="/blogDetails" element={<BlogDetails/>}/>
-        <Route path="/contact" element={<Contact/>}/>
+        <Route path="/" element={<WatchShop />} />
+        <Route path="/shop/:filter?" element={<Shop />} />
+        <Route path="/shopDetails" element={<ShopDetails />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Register />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />}>
-            <Route index element={<Home />} />
-            <Route path="comments" element={<CommentList />} />
-            <Route path="users" element={<UserList />} />
-            <Route path="user/:id" element={<User />} />
-            <Route path="user/create" element={<CreateUser />} />
-            <Route path="brends" element={<BrendList />} />
-            <Route path="brend/:id" element={<Brend />} />
-            <Route path="brend/create" element={<CreateBrend />} />
-            <Route path="watches" element={<WatchList />} />
-            <Route path="watch/:id" element={<Watch />} />
-            <Route path="watch/create" element={<CreateWatch />} />
+          <Route index element={<Home />} />
+          <Route path="comments" element={<CommentList />} />
+          <Route path="orders" element={<OrderList />} />
+          <Route path="order/:id" element={<Order />} />
+          <Route path="users" element={<UserList />} />
+          <Route path="user/:id" element={<User />} />
+          <Route path="user/create" element={<CreateUser />} />
+          <Route path="brends" element={<BrendList />} />
+          <Route path="brend/:id" element={<Brend />} />
+          <Route path="brend/create" element={<CreateBrend />} />
+          <Route path="watches" element={<WatchList />} />
+          <Route path="watch/:id" element={<Watch />} />
+          <Route path="watch/create" element={<CreateWatch />} />
         </Route>
-        <Route path="*" element={<Error/>}/>
+        <Route path="*" element={<Error />} />
       </Routes>
-    </Router>
   )
 }
 

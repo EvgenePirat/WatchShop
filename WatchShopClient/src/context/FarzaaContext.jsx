@@ -160,14 +160,10 @@ const FarzaaContextProvider = ({ children }) => {
     setPrice(newPrice);
   };
 
-  const dispatch = useDispatch();
-  const watchesList = useSelector(state => state.watches);
-
   // All Product Filter
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortBy, setSortBy] = useState('');
-
-  console.log(filteredProducts)
+  const [active, setActive] = useState('');
 
   // Handle sort
   const handleSortChange = (event) => {
@@ -209,6 +205,27 @@ const FarzaaContextProvider = ({ children }) => {
     setCurrentPage(1);
   };
 
+  const handleGenderFilter = (gender) => {
+    if (gender === null) {
+      setrFilteredProducts(jeweleryArray);
+    } else {
+      const filtered = jeweleryArray.filter(watch => watch.gender === gender);
+      setFilteredProducts(filtered);
+    }
+    setCurrentPage(1);
+  };
+
+  //style handle method
+  const handleStyleFilter = (style) => {
+    if (style === null) {
+      setFilteredProducts(jeweleryArray);
+    } else {
+      const filtered = jeweleryArray.filter(watch => watch.style.name === style);
+      setFilteredProducts(filtered);
+    }
+    setCurrentPage(1);
+  };
+
   // Price Filter
   const handlePriceFilter = () => {
     const filtered = jeweleryArray.filter(watch => watch.price >= price[0] && watch.price <= price[1]);
@@ -228,7 +245,7 @@ const FarzaaContextProvider = ({ children }) => {
 
   const performSearch = (term) => {
     const filtered = jeweleryArray.filter(watch =>
-      watch.name.toLowerCase().includes(term.toLowerCase())
+      watch.nameModel.toLowerCase().includes(term.toLowerCase())
     );
     setSearchedProducts(filtered);
   };
@@ -289,8 +306,12 @@ useEffect(() => {
   const [paginatedProducts, setPaginatedProducts] = useState([]);
 
   // Cart Item Table 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems')) == null ? [] : JSON.parse(localStorage.getItem('cartItems')));
   const cartItemAmount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems])
 
   const handleRemoveItem = (itemId) => {
     const updatedItems = cartItems.filter(item => item.id !== itemId);
@@ -310,6 +331,56 @@ useEffect(() => {
     }
   };
 
+  const addToCartWithQuantity = (itemId, quantity) => {
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
+
+    if (itemToAdd) {
+      const existingItemIndex = cartItems.findIndex(item => item.id === itemId);
+
+      if (!cartItems.some(item => item.id === itemId)) {
+
+        let newItem = {
+          quantity: quantity
+        };
+
+        if(itemToAdd.isDiscounted == true){
+          newItem = {
+            ...itemToAdd,
+            quantity: quantity,
+            total: itemToAdd.discountPrice
+          };
+        }
+        else{
+          newItem = {
+            ...itemToAdd,
+            quantity: quantity,
+            total: itemToAdd.price
+          };
+        }
+
+        setCartItems(prevCartItems => [...prevCartItems, newItem]);
+        toast.success("Item added in cart!")
+      } else if (existingItemIndex !== -1) {
+        // Increment quantity and update total
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[existingItemIndex].quantity += quantity;
+
+        if(itemToAdd.isDiscounted == true){
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.discountPrice;
+        }
+        else{
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+        }
+
+        setCartItems(updatedCartItems);
+        toast.success("Item list updated in cart!")
+
+      }
+    } else {
+      toast.warning('Item not found in watchesList.');
+    }
+  };
+
   // Add to Cart
   const addToCart = (itemId) => {
     // Find the item from allProductList using itemId
@@ -320,12 +391,25 @@ useEffect(() => {
       // Check if the item is already in the cart
       if (!cartItems.some(item => item.id === itemId)) {
 
-        // Set initial quantity to 1 and total to item's price
-        const newItem = {
-          ...itemToAdd,
-          quantity: 1,
-          total: itemToAdd.price
+        let newItem = {
+          quantity: 0
         };
+
+        if(itemToAdd.isDiscounted == true){
+          newItem = {
+            ...itemToAdd,
+            quantity: 1,
+            total: itemToAdd.discountPrice
+          };
+        }
+        else{
+          newItem = {
+            ...itemToAdd,
+            quantity: 1,
+            total: itemToAdd.price
+          };
+        }
+        // Set initial quantity to 1 and total to item's price
 
         setCartItems(prevCartItems => [...prevCartItems, newItem]);
         toast.success("Item added in cart!")
@@ -333,7 +417,13 @@ useEffect(() => {
         // Increment quantity and update total
         const updatedCartItems = [...cartItems];
         updatedCartItems[existingItemIndex].quantity += 1;
-        updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+
+        if(itemToAdd.isDiscounted == true){
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.discountPrice;
+        }
+        else{
+          updatedCartItems[existingItemIndex].total = updatedCartItems[existingItemIndex].quantity * itemToAdd.price;
+        }
 
         setCartItems(updatedCartItems);
         toast.success("Item list updated in cart!")
@@ -345,8 +435,12 @@ useEffect(() => {
   };
 
   // Wishlist Item Table 
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem('wishlist')) == null ? [] : JSON.parse(localStorage.getItem('wishlist')));
   const wishlistItemAmount = wishlist.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }, [wishlist])
 
 
   const handleRemoveItemWishlist = (itemId) => {
@@ -358,7 +452,7 @@ useEffect(() => {
   // Add to Wishlist
 
   const addToWishlist = (itemId) => {
-    const itemToAdd = filteredProducts.find(item => item.id === itemId);
+    const itemToAdd = jeweleryArray.find(item => item.id === itemId);
 
     if (itemToAdd) {
       if (!wishlist.some(item => item.id === itemId)) {
@@ -430,6 +524,7 @@ useEffect(() => {
     toast.success("Wishlist items added to cart!");
   };
   
+  
 
   const addToCartFromWishlist = (item) => {
     const existingCartItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
@@ -456,7 +551,10 @@ useEffect(() => {
   };
 
   // Total Price
-  const subTotal = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+  const subTotal = cartItems.reduce((total, item) => {
+    const price = item.isDiscounted ? item.discountPrice : item.price;
+    return total + item.quantity * price;
+  }, 0);
   const finalPrice = subTotal
 
   // Blog List Category Filter
@@ -921,7 +1019,11 @@ useEffect(() => {
       sortBy,
       handleSortChange,
       sortProducts,
+      active,
+      setActive,
       handleCategoryFilter,
+      handleGenderFilter,
+      handleStyleFilter,
       handlePriceFilter,
       currentPage,
       handlePageChange,
@@ -930,10 +1032,12 @@ useEffect(() => {
       productsPerPage,
       totalProducts,
       cartItems,
+      setCartItems,
       handleQuantityChange,
       handleRemoveItem,
       wishlist,
       handleRemoveItemWishlist,
+      setFilteredProducts,
       addToCart,
       cartItemAmount,
       addToWishlist,
@@ -974,6 +1078,7 @@ useEffect(() => {
       cakeListArray,
       addWishlistToCart,
       addToCartFromWishlist,
+      addToCartWithQuantity,
       isSidebarOpen,
       handleSidebarOpen,
       handleSidebarClose,

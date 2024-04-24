@@ -3,9 +3,14 @@ import HeaderNav from '../navigation/HeaderNav'
 import HeaderRightContent from './HeaderRightContent'
 import { Link } from 'react-router-dom'
 import { FarzaaContext } from '../../context/FarzaaContext'
+import { useSelector } from 'react-redux';
 
 const HeaderSection2 = () => {
+
     const {isHeaderFixed} = useContext(FarzaaContext)
+
+    const userAuth = useSelector(state => state.userAuthStore);
+    
   return (
     <header className="fz-header-section fz-1-header-section inner-page-header">
         <div className="top-header">
@@ -15,7 +20,7 @@ const HeaderSection2 = () => {
                         <span className="mail-address">
                             <Link to="mailto:info@webmail.com">
                                 <i className="fa-regular fa-envelope-open" style={{paddingRight:5}}></i>
-                                info@webmail.com
+                                eugene.brexyn@webmail.com
                             </Link>
                         </span>
                     </div>
@@ -24,11 +29,14 @@ const HeaderSection2 = () => {
                         <h6>Shop events & save up to 65% off!</h6>
                     </div>
 
-                    <div className="col-md-4 col-6 col-xxs-12">
-                        <div className="top-header-right-actions">
-                            <Link to="account"><i className="fa-light fa-user"></i> Sign up</Link>
+                    {userAuth.id.length == 0 && (
+                        <div className="col-md-4 col-6 col-xxs-12">
+                            <div className="top-header-right-actions">
+                                <Link to="/registration"><i className="fa-light fa-user"></i> Sign up</Link>
+                            </div>
                         </div>
-                    </div>
+                    )}
+
                 </div>
             </div>
         </div>
@@ -39,7 +47,7 @@ const HeaderSection2 = () => {
                     <div className="col-lg-3 col-md-6 col-9">
                         <div className="fz-logo-container">
                             <Link to="/">
-                                <img src="assets/images/logo-3.png" alt="logo" className="fz-logo"/>
+                                <img src="assets/images/watch_shop_logo.jpg" alt="logo" className="fz-logo"/>
                             </Link>
                         </div>
                     </div>

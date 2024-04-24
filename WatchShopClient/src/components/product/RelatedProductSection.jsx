@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FarzaaContext } from '../../context/FarzaaContext'
 import { Link } from 'react-router-dom'
+import cartImage from '../../../public/assets/images/card-img-1.png'
 
 const RelatedProductSection = () => {
     const {
@@ -17,7 +18,7 @@ const RelatedProductSection = () => {
                    <div className="col-lg-3 col-md-4 col-6 col-xxs-12" key={item.id}>
                     <div className="fz-1-single-product">
                         <div className="fz-single-product__img">
-                            <img src={item.imgSrc} alt="Product Image"/>
+                            <img src={item.images.length > 0 ? item.images[0].path : cartImage} alt={item.nameModel}/>
                             <div className="fz-single-product__actions">
                                 <button 
                                 className="fz-add-to-wishlist-btn"
@@ -34,16 +35,11 @@ const RelatedProductSection = () => {
                                     <span className="btn-txt">add To cart</span>
                                     <span className="btn-icon"><i className="fa-light fa-cart-shopping"></i></span>
                                 </button>
-
-                                <button className="fz-add-to-compare-btn">
-                                    <span className="btn-txt">select to compare</span>
-                                    <span className="btn-icon"><i className="fa-light fa-arrow-right-arrow-left"></i></span>
-                                </button>
                             </div>
                         </div>
 
                         <div className="fz-single-product__txt">
-                            <Link to="#" className="fz-single-product__title">{item.name}</Link>
+                            <Link to="#" className="fz-single-product__title">{item.nameModel}</Link>
                             <div className="fz-single-product__price-rating">
                                 <p className="fz-single-product__price">
                                     <span className="current-price">${item.price}</span>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../styles/home.css'
 import FeaturedInfo from '../components/featuredInfo/FeaturedInfo'
 import Chart from '../components/chart/Chart'
@@ -6,7 +6,9 @@ import {userData} from '../helpers/dummyData'
 import WidgetSmall from '../components/widgetSmall/WidgetSmall'
 import WidgetLarge from '../components/widgetLarge/WidgetLarge'
 
+
 function Home() {
+
   return (
     <div className='home'>
        <FeaturedInfo />
