@@ -37,9 +37,17 @@ const orderApi = createApi({
             invalidatesTags:["Orders"]
         }),
         updateOrderStatus: builder.mutation({
-            query: (id, newOrderStatus) => ({
-                url:`status/${id}&${newOrderStatus}`,
+            query: (updateStatus) => ({
+                url:`status/${updateStatus.id}&${updateStatus.status}`,
                 method: "PUT"
+            }),
+            invalidatesTags:["Orders"],
+        }),
+        updateShipment: builder.mutation({
+            query: (updateShipment) => ({
+                url:`shipment/${updateShipment.id}`,
+                method: "PUT",
+                body: updateShipment
             }),
             invalidatesTags:["Orders"],
         }),
@@ -53,6 +61,6 @@ const orderApi = createApi({
     }),
 });
 
-export const {useGetOrdersQuery, useGetOrderByIdQuery, useGetOrdersByUsernameQuery, useAddNewOrderMutation, useUpdateOrderStatusMutation, useDeleteOrderMutation} = orderApi;
+export const {useGetOrdersQuery, useGetOrderByIdQuery, useGetOrdersByUsernameQuery, useAddNewOrderMutation, useUpdateOrderStatusMutation,useUpdateShipmentMutation, useDeleteOrderMutation} = orderApi;
 
 export default orderApi;
