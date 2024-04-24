@@ -5,9 +5,15 @@ import toast, { Toaster } from 'react-hot-toast';
 import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+
+
 
 function OrderList() {
 
+    const navigate = useNavigate();
     const {data, isLoading} = useGetOrdersQuery(null);
     const [deleteOrderMutation] = useDeleteOrderMutation();
 
@@ -26,7 +32,7 @@ function OrderList() {
           renderCell: (params) => {
             return (
               <>
-                {/* <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/brend/"+params.row.id, {state: {brend: params.row}})} /> */}
+                <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/order/"+params.row.id, {state: {order: params.row}})} />
                 <button onClick={() => handleDeleteOrder(params.row.id)}><DeleteIcon className='userListButtonDelete' /></button>
               </>
             )
