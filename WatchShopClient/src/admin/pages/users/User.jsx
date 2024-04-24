@@ -16,10 +16,11 @@ function User() {
   const [updateUserMutation] = useUpdateUserMutation();
 
   
+  console.log(userUpdate)
+
+  
   const handleUpdateUser= async (e) => {
     e.preventDefault();
-
-    console.log(userUpdate)
 
     var result = await updateUserMutation(userUpdate);
 
@@ -63,6 +64,7 @@ function User() {
               <span className="userShowInfoTitle">{userDetail.lastName ?? '-'}</span>
             </div>
           </div>
+
           <div className="userShowBottom">
             <span className="userShowTitle">Email</span>
             <div className="userShowInfo">
@@ -75,6 +77,12 @@ function User() {
               <span className="userShowInfoTitle">{userDetail.city ?? '-'}</span>
             </div>
           </div>
+
+          <div className="userShowBottom">
+            <span className="userShowTitle">Total Orders</span>
+            <span className="userShowInfoTitle">{userDetail.orders.length}</span>
+          </div>
+
         </div>
         <div className="userUpdate">
           <span className="userUpdateTitle">Edit</span>

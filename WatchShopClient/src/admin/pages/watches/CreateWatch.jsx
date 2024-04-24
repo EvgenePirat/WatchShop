@@ -3,7 +3,6 @@ import '../../styles/watch/createWatch.css'
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAddNewWatchMutation, useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
-import axios from 'axios';
 
 const watch = {
    nameModel : "",
