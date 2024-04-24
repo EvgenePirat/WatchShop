@@ -1,4 +1,6 @@
-﻿namespace WatchShop_Core.Models.Users.Response
+﻿using WatchShop_Core.Models.Orders.Response;
+
+namespace WatchShop_Core.Models.Users.Response
 {
     public class UserModel
     {
@@ -19,5 +21,7 @@
         public string? City { get; set; }
 
         public string Role { get; set; }
+
+        public IEnumerable<OrderModel?> Orders { get; set; }
     }
 }

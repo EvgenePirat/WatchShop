@@ -1,4 +1,7 @@
-﻿namespace WatchShop_UI.Dtos.Users.Response
+﻿using WatchShop_Core.Models.Orders.Response;
+using WatchShop_UI.Dtos.Orders.Response;
+
+namespace WatchShop_UI.Dtos.Users.Response
 {
     public class UserDto
     {
@@ -15,6 +18,8 @@
         public bool IsSubscriptionLetters { get; set; }
 
         public DateTime CreateAccountDate { get; set; }
+
+        public IEnumerable<OrderDto?> Orders { get; set; }
 
         public string? City { get; set; }
 

@@ -39,7 +39,7 @@ namespace WatchShop_Core.Services
 
         public async Task<IEnumerable<UserModel>> GetAllUsersAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
+            var users = await _unitOfWork.UserRepository.GetAllAsync(u => u.Orders);
 
             var modelUsers = _mapper.Map<IEnumerable<UserModel>>(users);
 

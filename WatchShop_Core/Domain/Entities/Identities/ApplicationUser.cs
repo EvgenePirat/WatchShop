@@ -24,5 +24,7 @@ namespace WatchShop_Core.Domain.Entities.Identities
         public IEnumerable<Shipment>? Shipments { get; set; }
 
         public IEnumerable<Payment>? Payments { get; set; }
+
+        public IEnumerable<Order?> Orders { get; set; }
     }
 }
