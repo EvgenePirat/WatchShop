@@ -5,6 +5,7 @@ using WatchShop_Core.Domain.RepositoryContracts;
 using WatchShop_Core.Exceptions;
 using WatchShop_Core.Models.Orders.Request;
 using WatchShop_Core.Models.Orders.Response;
+using WatchShop_Core.Models.Shipments.Request;
 using WatchShop_Core.ServiceContracts;
 
 namespace WatchShop_Core.Services
@@ -93,11 +94,40 @@ namespace WatchShop_Core.Services
 
                 orderToUpdate.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name == newStatusName).Id;
 
+                _unitOfWork.OrderRepository.Update(orderToUpdate);
+
                 await _unitOfWork.SaveAsync();
 
                 return _mapper.Map<OrderModel>(orderToUpdate);
             }
             catch(Exception ex)
+            {
+                throw new OrderStatusArgumentException(ex.Message);
+            }
+        }
+
+        public async Task<OrderModel> UpdateShipmentAsync(Guid id, UpdateShipmentModel model)
+        {
+            var orderToUpdate = await _unitOfWork.OrderRepository.GetByIdAsync(id);
+
+            if (orderToUpdate == null)
+                throw new OrderArgumentException($"Order by id {id} not found for update");
+
+            var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
+
+            try
+            {
+                orderToUpdate.Shipment.Address = model.Address;
+                orderToUpdate.Shipment.Country = model.Country;
+                orderToUpdate.Shipment.City = model.City;
+
+                _unitOfWork.OrderRepository.Update(orderToUpdate);
+
+                await _unitOfWork.SaveAsync();
+
+                return _mapper.Map<OrderModel>(orderToUpdate);
+            }
+            catch (Exception ex)
             {
                 throw new OrderStatusArgumentException(ex.Message);
             }
