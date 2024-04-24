@@ -25,15 +25,27 @@ import CreateUser from "./admin/pages/users/CreateUser"
 import CommentList from "./admin/pages/comments/CommentList"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
-import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { setLoggedInUser } from "./Storage/Redux/Slices/userAuthSlice"
 import { jwtDecode } from "jwt-decode";
 import OrderList from "./admin/pages/orders/OrderList"
+import Order from "./admin/pages/orders/Order"
+import { useGetUsersQuery } from '../src/apis/admin/userApi';
+import { useDispatch } from 'react-redux';
+import { setUserItems } from '../src/Storage/Redux/Slices/userItemSlice';
 
 function App() {
 
+  
   const dispatch = useDispatch();
+
+  const { data, isLoading } = useGetUsersQuery();
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      dispatch(setUserItems(data.result));
+    }
+  }, [isLoading, data]);
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
@@ -61,6 +73,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="comments" element={<CommentList />} />
           <Route path="orders" element={<OrderList />} />
+          <Route path="order/:id" element={<Order />} />
           <Route path="users" element={<UserList />} />
           <Route path="user/:id" element={<User />} />
           <Route path="user/create" element={<CreateUser />} />
