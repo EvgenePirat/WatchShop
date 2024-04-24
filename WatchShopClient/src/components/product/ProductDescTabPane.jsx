@@ -2,31 +2,27 @@ import React from 'react'
 
 const ProductDescTabPane = ({watch}) => {
 
-  console.log(watch)
-
     const transformString = (name) => {
-        // Разделяем строку на слова по регулярному выражению
         const words = name.match(/[A-Z]?[a-z0-9]+/g);
-      
-        // Проходим по каждому слову и выполняем преобразования
-        const transformedWords = words.map((word, index) => {
-          // Убираем черточку и делаем первую букву заглавной
-          const formattedWord = word.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
-          // Если это не первое слово и начинается с заглавной буквы,
-          // то вставляем пробел перед словом
-          if (index > 0 && /[A-Z]/.test(word[0])) {
-            return ` ${formattedWord}`;
-          }
-          return formattedWord;
-        });
-      
-        // Объединяем слова обратно в строку
-        const transformedString = transformedWords.join('');
-      
-        return transformedString;
-      }
-  
 
+        console.log(words)
+        if(words != null){
+            const transformedWords = words.map((word, index) => {
+                const formattedWord = word.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+                if (index > 0 && /[A-Z]/.test(word[0])) {
+                  return ` ${formattedWord}`;
+                }
+                return formattedWord;
+              });
+      
+              const transformedString = transformedWords.join('');
+            
+              return transformedString;
+        }
+
+        return name;
+    }
+  
   return (
     <div className="fz-product-details__describtion">
 

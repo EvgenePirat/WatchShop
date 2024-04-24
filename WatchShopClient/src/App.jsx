@@ -33,6 +33,7 @@ import Order from "./admin/pages/orders/Order"
 import { useGetUsersQuery } from '../src/apis/admin/userApi';
 import { useDispatch } from 'react-redux';
 import { setUserItems } from '../src/Storage/Redux/Slices/userItemSlice';
+import Payment from "./pages/Payment"
 
 function App() {
 
@@ -50,10 +51,17 @@ function App() {
   useEffect(() => {
     const localToken = localStorage.getItem("token");
     if (localToken) {
-      const { username, id, email, role } = jwtDecode(localToken);
-      dispatch(setLoggedInUser({ id, username, email, role }));
+      const { exp } = jwtDecode(localToken);
+      const expirationTime = exp * 1000; 
+
+      if (Date.now() >= expirationTime) {
+        localStorage.removeItem("token");
+      } else {
+        const { username, id, email, role } = jwtDecode(localToken);
+        dispatch(setLoggedInUser({ id, username, email, role }));
+      }
     }
-  }, [])
+  }, []);
 
   return (
       <Routes>
@@ -68,6 +76,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Register />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Home />} />
