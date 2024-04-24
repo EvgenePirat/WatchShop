@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.Models.Brends.Request;
 using WatchShop_Core.Models.Orders.Request;
+using WatchShop_Core.Models.Shipments.Request;
 using WatchShop_Core.ServiceContracts;
 using WatchShop_Core.Services;
 using WatchShop_UI.Dtos.Brends.Reequest;
 using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.Orders.Request;
 using WatchShop_UI.Dtos.Orders.Response;
+using WatchShop_UI.Dtos.Shipments.Request;
 using WatchShop_UI.Utilities.GeneralResponse;
 
 namespace WatchShop_UI.Controllers
@@ -117,7 +119,7 @@ namespace WatchShop_UI.Controllers
         [HttpPut("status/{id:Guid}&{newOrderStatus}")]
         public async Task<ActionResult<ApiResponse>> UpdateOrderStatusAsync(Guid id, string newOrderStatus)
         {
-            _logger.LogInformation("{controller}.{method} - Post, Update Brend, Task started",
+            _logger.LogInformation("{controller}.{method} - Post, Update order status, Task started",
                 nameof(OrderController), nameof(UpdateOrderStatusAsync));
 
             var result = await _orderService.UpdateOrderStatusAsync(id, newOrderStatus);
@@ -130,7 +132,31 @@ namespace WatchShop_UI.Controllers
                 StatusCode = System.Net.HttpStatusCode.OK
             };
 
-            _logger.LogInformation("{controller}.{method} - Post, Update Brend, Result - Ok, Task ended",
+            _logger.LogInformation("{controller}.{method} - Post, Update Order status, Result - Ok, Task ended",
+                nameof(OrderController), nameof(UpdateOrderStatusAsync));
+
+            return Ok(response);
+        }
+
+        [HttpPut("shipment/{id:Guid}")]
+        public async Task<ActionResult<ApiResponse>> UpdateOrderStatusAsync(Guid id,[FromBody] UpdateShipmentDto dto)
+        {
+            _logger.LogInformation("{controller}.{method} - Post, Update shipment for order, Task started",
+                nameof(OrderController), nameof(UpdateOrderStatusAsync));
+
+            var model = _mapper.Map<UpdateShipmentModel>(dto);
+
+            var result = await _orderService.UpdateShipmentAsync(id, model);
+
+            var mappedResult = _mapper.Map<OrderDto>(result);
+
+            ApiResponse response = new ApiResponse()
+            {
+                Result = mappedResult,
+                StatusCode = System.Net.HttpStatusCode.OK
+            };
+
+            _logger.LogInformation("{controller}.{method} - Post, Update shipment for order, Result - Ok, Task ended",
                 nameof(OrderController), nameof(UpdateOrderStatusAsync));
 
             return Ok(response);
