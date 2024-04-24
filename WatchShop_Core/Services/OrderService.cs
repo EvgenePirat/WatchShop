@@ -87,12 +87,22 @@ namespace WatchShop_Core.Services
                 throw new OrderArgumentException($"Order by id {id} not found for update");
 
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
+
+            if(orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled)
+            {
+                throw new OrderArgumentException("You can not update status for order, order was cancelled. You need create new order");
+            }
             
             try
             {
                 var newStatusName = Enum.Parse<OrderStatusEnum>(newOrderStatus);
 
                 orderToUpdate.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name == newStatusName).Id;
+
+                if(newStatusName == OrderStatusEnum.Cancelled)
+                {
+                    orderToUpdate.Payment.Status = PaymentStatus.Refund;
+                }
 
                 _unitOfWork.OrderRepository.Update(orderToUpdate);
 
