@@ -16,7 +16,6 @@ const CheckoutSection = () => {
     const [createOrderMutation] = useAddNewOrderMutation();
     const navigate = useNavigate();
 
-
     const orderTemplate = {
         sum: finalPrice,
         userId:"",
@@ -92,6 +91,9 @@ const CheckoutSection = () => {
             }
             else
                 toast.error('Order is not make');
+        }
+        else{
+            navigate('/payment', { state: order });
         }
     } 
 
