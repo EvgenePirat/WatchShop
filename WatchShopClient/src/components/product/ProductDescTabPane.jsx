@@ -4,6 +4,29 @@ const ProductDescTabPane = ({watch}) => {
 
   console.log(watch)
 
+    const transformString = (name) => {
+        // Разделяем строку на слова по регулярному выражению
+        const words = name.match(/[A-Z]?[a-z0-9]+/g);
+      
+        // Проходим по каждому слову и выполняем преобразования
+        const transformedWords = words.map((word, index) => {
+          // Убираем черточку и делаем первую букву заглавной
+          const formattedWord = word.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+          // Если это не первое слово и начинается с заглавной буквы,
+          // то вставляем пробел перед словом
+          if (index > 0 && /[A-Z]/.test(word[0])) {
+            return ` ${formattedWord}`;
+          }
+          return formattedWord;
+        });
+      
+        // Объединяем слова обратно в строку
+        const transformedString = transformedWords.join('');
+      
+        return transformedString;
+      }
+  
+
   return (
     <div className="fz-product-details__describtion">
 
@@ -16,43 +39,43 @@ const ProductDescTabPane = ({watch}) => {
 
         <h4>Strap</h4>
         <ul>
-            <li>Type: {watch.strap.name}</li>
-            <li>Material: {watch.strap.strapMaterial.name}</li>
+            <li>Type: {transformString(watch.strap.name)}</li>
+            <li>Material: {transformString(watch.strap.strapMaterial.name)}</li>
         </ul>
 
         <h4>MechanismType</h4>
         <ul>
-            <li>{watch.mechanismType.name}</li>
+            <li>{transformString(watch.mechanismType.name)}</li>
         </ul>
 
         <h4>Brend</h4>
         <ul>
-            <li>{watch.brend.name}</li>
+            <li>{transformString(watch.brend.name)}</li>
         </ul>
 
         <h4>Face</h4>
         <ul>
-            <li>Color: {watch.clockFace.clockFaceColor.name}</li>
-            <li>Kind: {watch.clockFace.indicationKind.name}</li>
-            <li>Type: {watch.clockFace.indicationType.name}</li>
+            <li>Color: {transformString(watch.clockFace.clockFaceColor.name)}</li>
+            <li>Kind: {transformString(watch.clockFace.indicationKind.name)}</li>
+            <li>Type: {transformString(watch.clockFace.indicationType.name)}</li>
         </ul> 
 
         <h4>Country</h4>
         <ul>
-            <li>{watch.country.name}</li>
+            <li>{transformString(watch.country.name)}</li>
         </ul>
 
         <h4>Frame</h4>
         <ul>
-            <li>Case Shape: {watch.frame.caseShape}</li>
-            <li>Diameter: {watch.frame.dimensions.caseDiameter}</li>
+            <li>Case Shape: {transformString(watch.frame.caseShape)}</li>
+            <li>Diameter: {transformString(watch.frame.dimensions.caseDiameter)}</li>
             <li>Length: {watch.frame.dimensions.length}</li>
             <li>Thickness: {watch.frame.dimensions.thickness}</li>
             <li>Weight: {watch.frame.dimensions.weight}</li>
             <li>Width: {watch.frame.dimensions.width}</li>
-            <li>Color: {watch.frame.frameColor.name}</li>
-            <li>Material: {watch.frame.frameMaterial.name}</li>
-            <li>{watch.frame.waterResistance}</li>
+            <li>Color: {transformString(watch.frame.frameColor.name)}</li>
+            <li>Material: {transformString(watch.frame.frameMaterial.name)}</li>
+            <li>Water Resistance: {transformString(watch.frame.waterResistance)}</li>
         </ul> 
 
         <h4>Gender</h4>
@@ -62,12 +85,12 @@ const ProductDescTabPane = ({watch}) => {
 
         <h4>Glass Type</h4>
         <ul>
-            <li>{watch.glassType.name}</li>
+            <li>{transformString(watch.glassType.name)}</li>
         </ul>
 
         <h4>Guarantee</h4>
         <ul>
-            <li>{watch.guarantee}</li>
+            <li>{transformString(watch.guarantee)}</li>
         </ul>
 
         <h4>Style</h4>
@@ -77,7 +100,7 @@ const ProductDescTabPane = ({watch}) => {
 
         <h4>Time Format</h4>
         <ul>
-            <li>{watch.timeFormat}</li>
+            <li>{transformString(watch.timeFormat)}</li>
         </ul>
 
     </div>
