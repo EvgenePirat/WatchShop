@@ -20,8 +20,7 @@ namespace WatchShop_Core.Domain.Entities
         [Required]
         public string? Country { get; set; }
 
-        [Required]
-        public Guid ApplicationUserId { get; set; }
+        public Guid? ApplicationUserId { get; set; }
 
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser {  get; set; }

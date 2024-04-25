@@ -16,9 +16,8 @@ namespace WatchShop_Core.Domain.Entities
 
         [Required]
         public double Sum { get; set; }
-
-        [Required]
-        public Guid UserId { get; set; }
+        
+        public Guid? UserId { get; set; }
 
         [ForeignKey("UserId")]
         public ApplicationUser?  User { get; set; }

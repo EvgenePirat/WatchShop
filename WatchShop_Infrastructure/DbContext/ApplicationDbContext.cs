@@ -54,6 +54,30 @@ namespace WatchShop_Infrastructure.DbContext
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<ApplicationUser>()
+                .HasMany(w => w.Payments)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey(c => c.ApplicationUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(w => w.Shipments)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey(c => c.ApplicationUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(w => w.Orders)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(w => w.Comments)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Order>()
                 .HasMany(o => o.Carts)
                 .WithOne(c => c.Order)
@@ -64,13 +88,13 @@ namespace WatchShop_Infrastructure.DbContext
                 .HasOne(o => o.ApplicationUser)
                 .WithMany(u => u.Payments)
                 .HasForeignKey(o => o.ApplicationUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Shipment>()
                 .HasOne(o => o.ApplicationUser)
                 .WithMany(u => u.Shipments)
                 .HasForeignKey(o => o.ApplicationUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Watch>()
                 .HasMany(w => w.Images)
