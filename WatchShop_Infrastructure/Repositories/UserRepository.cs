@@ -24,7 +24,7 @@ namespace WatchShop_Infrastructure.Repositories
 
         public async Task<ApplicationUser?> GetByIdAsync(Guid id)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await _context.Users.Include(u => u.Orders).FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }
