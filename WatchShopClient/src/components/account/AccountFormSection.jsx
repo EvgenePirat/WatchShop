@@ -6,6 +6,7 @@ const AccountFormSection = ({user}) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email ? user.email : '');
+  const [city, setCity] = useState(user.city ? user.city : '');
   const [phoneNumber, setPhoneNumber] = useState(user.userName ? user.userName : '');
 
   const handleFormSubmit = async (e) => {
@@ -16,13 +17,12 @@ const AccountFormSection = ({user}) => {
     } else if (!isValidEmail(email)) {
       toast.warning('Please provide a valid email address.', { position: 'top-right' });
     } else {
-
+        
 
     }
   };
 
   const isValidEmail = (email) => {
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -70,10 +70,25 @@ const AccountFormSection = ({user}) => {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
+
+        <div className="col-6 col-xxs-12">
+          <input
+            type="text"
+            name="commenter-number"
+            id="commenter-number"
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </div>
       </div>
 
       <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">
-        Update Account
+        Update
+      </button>
+
+      <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete">
+        Delete
       </button>
     </form>
   );
