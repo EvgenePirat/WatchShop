@@ -4,6 +4,7 @@ import AccountDetailSection from '../account/AccountDetailSection'
 import { useSelector } from 'react-redux';
 
 const AccountMain = () => {
+  
   const userAuth = useSelector(state => state.userAuthStore);
 
   if (!userAuth.id) {
