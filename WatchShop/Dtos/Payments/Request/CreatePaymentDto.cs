@@ -2,7 +2,7 @@
 {
     public class CreatePaymentDto
     {
-        public string? StripeIntend { get; set; }
+        public string? StripeIntendId { get; set; }
 
         public string PaymentMethod { get; set; }
 
