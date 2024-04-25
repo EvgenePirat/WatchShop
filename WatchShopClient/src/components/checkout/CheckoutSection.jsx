@@ -133,7 +133,7 @@ const CheckoutSection = () => {
                         </div>
 
                         <div className="col-6 col-xxs-12">
-                            <input type="text" required name="username" id="checkout-phone-number" placeholder="Phone Number" value={user.userName} onChange={(e) => setUser((prev) => ({...prev,username: e.target.value}))}  />
+                            <input disabled type="text" required name="username" id="checkout-phone-number" placeholder="Phone Number" value={user.userName} onChange={(e) => setUser((prev) => ({...prev,username: e.target.value}))}  />
                         </div>
 
                         <div className="col-6 col-xxs-12">

@@ -22,12 +22,14 @@ const PaymentSection = () => {
 
       const result = await createPaymentMutation(order.sum);
 
+      console.log(result)
+
       if(result.error){
         toast.error('Error with cart payment, try later!');
         navigate("/")
       }
       else{
-         setCreateOrder((prev) => ({...prev, payment : {...prev.payment, clientSecret: result.data.result.clientSecret, stripeIntend: result.data.result.stripePaymentIntentId, paymentMethod: "Card"  }}))
+         setCreateOrder((prev) => ({...prev, payment : {...prev.payment, clientSecret: result.data.result.clientSecret, stripeIntendId: result.data.result.stripePaymentIntentId, paymentMethod: "Card"  }}))
       }
   }
 

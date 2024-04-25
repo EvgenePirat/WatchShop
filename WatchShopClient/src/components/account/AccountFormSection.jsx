@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useUpdateUserMutation } from '../../apis/admin/userApi';
+import { useDeleteUserMutation, useUpdateUserMutation } from '../../apis/admin/userApi';
+import { useNavigate } from 'react-router-dom';
 
 const AccountFormSection = ({user}) => {
 
@@ -14,6 +15,24 @@ const AccountFormSection = ({user}) => {
     const [city, setCity] = useState(user.city ? user.city : '');
 
     const [userUpdateMutation] = useUpdateUserMutation();
+    const [deleteUserMutation] = useDeleteUserMutation();
+    const navigate = useNavigate();
+
+    const handleDeleteAccount = () => {
+        const result = deleteUserMutation(user.id)
+
+        result.then(response => {
+            console.log(response);
+            if (response.data) {
+                toast.success("Your account is deleted")
+            } else {
+                toast.error('Your account is not deleted. Try later!')
+            }
+        })
+
+        localStorage.removeItem("token");
+        navigate("/");
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -89,7 +108,7 @@ const AccountFormSection = ({user}) => {
             Update
         </button>
 
-        <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete">
+        <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete" onClick={handleDeleteAccount}>
             Delete
         </button>
         </form>

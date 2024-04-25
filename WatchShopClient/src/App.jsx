@@ -57,8 +57,8 @@ function App() {
       if (Date.now() >= expirationTime) {
         localStorage.removeItem("token");
       } else {
-        const { username, id, email, role } = jwtDecode(localToken);
-        dispatch(setLoggedInUser({ id, username, email, role }));
+        const { username, id, role } = jwtDecode(localToken);
+        dispatch(setLoggedInUser({ id, username, role }));
       }
     }
   }, []);
