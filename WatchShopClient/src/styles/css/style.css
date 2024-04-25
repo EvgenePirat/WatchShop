@@ -7775,6 +7775,41 @@ a.fz-hamburger {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
 }
+
+.fz-product-details__describtion{
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  gap: 20px;
+}
+
+.fz-product-details__describtion ul {
+  margin: 0;
+  padding: 0;
+}
+
+.fz-product-details__describtion li {
+  list-style-type: none;
+  font-size: 18px;
+  margin-bottom: 5px;
+  width: 300px;
+}
+
+.fz-product-details__describtion ul::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.fz-product-details__describtion h4::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #ccc; 
+  width: 100%;
+}
+
 @media screen and (max-width: 479px) {
   .fz-product-details .fz-product-details__descr {
     font-size: 14px;
