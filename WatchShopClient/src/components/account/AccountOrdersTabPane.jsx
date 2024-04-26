@@ -1,8 +1,24 @@
 import React from 'react'
+import AccountOrderTable from './AccountOrderTable'
 
-function AccountOrdersTabPane() {
+function AccountOrdersTabPane({user}) {
+
   return (
-    <div>AccountOrdersTabPane</div>
+    <div>
+        <div className="container">
+          <div className="cart-section">
+              <div className="cart-left inner-cart">
+                  <div className="cart-area">
+                      <div className="cart__body">
+                          <div className="table-responsive">
+                              <AccountOrderTable user={user}  />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
   )
 }
 
