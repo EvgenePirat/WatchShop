@@ -19,6 +19,7 @@ namespace WatchShop_Core.DependencyResolvers
             builder.RegisterType<CommentService>().As<ICommentService>();
             builder.RegisterType<PaymentService>().As<IPaymentService>();
             builder.RegisterType<MessageService>().As<IMessageService>();
+            builder.RegisterType<AnalyticService>().As<IAnalyticService>();
         }
     }
 }
