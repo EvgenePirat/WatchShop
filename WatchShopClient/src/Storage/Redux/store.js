@@ -10,6 +10,7 @@ import orderApi from "../../apis/admin/orderApi";
 import { userItemReducer } from "./Slices/userItemSlice";
 import messageApi from "../../apis/admin/messageApi";
 import paymentApi from "../../apis/admin/paymentApi";
+import analyticApi from "../../apis/admin/analyticApi";
 
 
 const store = configureStore({
@@ -18,6 +19,7 @@ const store = configureStore({
         userAuthStore : userAuthReducer,
         userItemsStore : userItemReducer,
         [brendApi.reducerPath] : brendApi.reducer,
+        [analyticApi.reducerPath] : analyticApi.reducer,
         [paymentApi.reducerPath] : paymentApi.reducer,
         [watchApi.reducerPath] : watchApi.reducer,
         [userApi.reducerPath] : userApi.reducer,
@@ -26,7 +28,7 @@ const store = configureStore({
         [orderApi.reducerPath] : orderApi.reducer,
         [messageApi.reducerPath] : messageApi.reducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(brendApi.middleware).concat(paymentApi.middleware).concat(messageApi.middleware).concat(watchApi.middleware).concat(userApi.middleware).concat(authApi.middleware).concat(commentApi.middleware).concat(orderApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(brendApi.middleware).concat(analyticApi.middleware).concat(paymentApi.middleware).concat(messageApi.middleware).concat(watchApi.middleware).concat(userApi.middleware).concat(authApi.middleware).concat(commentApi.middleware).concat(orderApi.middleware)
 });
 
 export default store;
