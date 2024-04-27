@@ -17,7 +17,7 @@ function BrendList() {
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     { field: 'name', headerName: 'Name', width: 150 },
-    { field: 'description', headerName: 'Description', width: 300 },
+    { field: 'description', headerName: 'Description', width: 300, renderCell: (params) => (params.value ? params.value : '-') },
     {
       field: "action",
       headerName: "Action",
