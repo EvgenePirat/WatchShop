@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import VideoModal from '../modal/VideoModal'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const BannerSection = () => {
-    const {handleVideoShow} = useContext(FarzaaContext)
+    const {handleVideoShow} = useContext(WatchContext)
   return (
     <section className="fz-2-banner-section">
         <div className="container position-relative">

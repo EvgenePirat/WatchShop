@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import cartImage from '../../../public/assets/images/card-img-1.png'
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const ProductContainer = () => {
         paginatedProducts,
         addToCart,
         addToWishlist,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
     const handleClick = (item) => {
         navigate('/shopDetails', { state: { item } });

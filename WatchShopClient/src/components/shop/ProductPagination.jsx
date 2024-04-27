@@ -1,4 +1,4 @@
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import React, { useContext } from 'react'
 
 const ProductPagination = () => {
@@ -6,7 +6,7 @@ const ProductPagination = () => {
         currentPage,
         handlePageChange,
         totalPages
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <nav className="fz-shop-pagination">
         <ul className="page-numbers">

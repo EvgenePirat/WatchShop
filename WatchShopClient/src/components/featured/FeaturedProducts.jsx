@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const FeaturedProducts = () => {
@@ -7,7 +7,7 @@ const FeaturedProducts = () => {
         addToCart,
         addToWishlist,
         filteredProducts
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <section className="featured-product-section">
         <div className="container">

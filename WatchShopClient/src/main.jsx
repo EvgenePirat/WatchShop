@@ -11,7 +11,7 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'react-toastify/dist/ReactToastify.css';
-import { FarzaaContextProvider } from './context/FarzaaContext.jsx'
+import { WatchContextProvider } from './context/WatchContext.jsx'
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from './Storage/Redux/store.js';
@@ -23,11 +23,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
 
       <Provider store={store}>
-        <FarzaaContextProvider>
+        <WatchContextProvider>
           <ScrollToTop />
           <App />
           <ToastContainer />
-        </FarzaaContextProvider>
+        </WatchContextProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

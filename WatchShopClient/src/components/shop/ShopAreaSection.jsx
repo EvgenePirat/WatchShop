@@ -8,7 +8,7 @@ import ProductStyleList from './ProductStyleList'
 import ProductBrendList from './ProductBrendList'
 import ProductGenderList from './ProductGenderList'
 import { useLocation } from 'react-router-dom';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 
 const ShopAreaSection = () => {
 
@@ -16,7 +16,7 @@ const ShopAreaSection = () => {
     const searchParams = new URLSearchParams(location.search);
     const filter = searchParams.get('filter');
 
-    const { setFilteredProducts, jeweleryArray, setActive } = useContext(FarzaaContext);
+    const { setFilteredProducts, jeweleryArray, setActive } = useContext(WatchContext);
 
     useEffect(() => {
         if(filter == null){

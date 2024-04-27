@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../apis/admin/userApi';
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 const CheckoutSection = () => {
 
-    const {subTotal, finalPrice, cartItems, setCartItems } = useContext(FarzaaContext)
+    const {subTotal, finalPrice, cartItems, setCartItems } = useContext(WatchContext)
     const userAuth = useSelector(state => state.userAuthStore);
     const {data, isLoading} = useGetUserByIdQuery(userAuth.id);
     const [updateUserMutation] = useUpdateUserMutation();
@@ -133,7 +133,7 @@ const CheckoutSection = () => {
                         </div>
 
                         <div className="col-6 col-xxs-12">
-                            <input type="text" required name="username" id="checkout-phone-number" placeholder="Phone Number" value={user.userName} onChange={(e) => setUser((prev) => ({...prev,username: e.target.value}))}  />
+                            <input disabled type="text" required name="username" id="checkout-phone-number" placeholder="Phone Number" value={user.userName} onChange={(e) => setUser((prev) => ({...prev,username: e.target.value}))}  />
                         </div>
 
                         <div className="col-6 col-xxs-12">

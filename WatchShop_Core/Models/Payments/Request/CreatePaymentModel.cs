@@ -6,7 +6,7 @@ namespace WatchShop_Core.Models.Payments.Request
     {
         public DateTime PaymentDate { get; set; } = DateTime.Now;
 
-        public string? StripeIntend { get; set; }
+        public string? StripeIntendId { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
 

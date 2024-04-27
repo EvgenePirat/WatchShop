@@ -3720,6 +3720,63 @@ a.fz-hamburger {
   z-index: 1;
   vertical-align: top;
 }
+
+.fz-1-banner-btn-delete {
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+  height: 60px;
+  padding: 0 45px;
+  line-height: 57px;
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  vertical-align: top;
+}
+
+
+@media screen and (max-width: 991px) {
+  .fz-1-banner-btn-delete {
+    font-size: 16px;
+    padding: 0 35px;
+    height: 50px;
+    line-height: 47px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .fz-1-banner-btn-delete {
+    font-size: 14px;
+    padding: 0 25px;
+    height: 40px;
+    line-height: 37px;
+  }
+}
+.fz-1-banner-btn-delete:hover {
+  color: #ffffff;
+}
+.fz-1-banner-btn-delete:hover::before {
+  width: 100%;
+  right: auto;
+  left: 0;
+}
+.fz-1-banner-btn-delete i {
+  margin-left: 5px;
+}
+.fz-1-banner-btn-delete::before {
+  content: "";
+  position: absolute;
+  background-color: #222222;
+  border-radius: 30px;
+  right: 0;
+  width: 0%;
+  top: 0;
+  height: 100%;
+  -webkit-transition: all 0.4s ease 0.1s;
+  transition: all 0.4s ease 0.1s;
+  z-index: -1;
+}
+
 @media screen and (max-width: 991px) {
   .fz-1-banner-btn {
     font-size: 16px;
@@ -7403,9 +7460,6 @@ a.fz-hamburger {
 }
 
 /*----- SHOP PAGE STYLES ENDS HERE -----*/
-.fz-product-details {
-  padding: 100px 0 60px;
-}
 @media screen and (max-width: 1199px) {
   .fz-product-details {
     padding: 50px 0;
@@ -8667,6 +8721,29 @@ a.fz-hamburger {
 .fz-blog-details__comment-form form textarea {
   height: 200px;
 }
+
+.fz-comment-form__btn_delete{
+  border-radius: 5px;
+  height: 45px;
+  line-height: 43px;
+  font-size: 16px;
+  padding: 0 30px;
+  margin-top: 20px;
+  margin-left: 40px;
+  background-color: #222222;
+  color: #ffffff;
+  border: 1px solid #222222;
+}
+
+.fz-blog-details__comment-form .fz-comment-form__btn_delete:hover {
+  color: #222222;
+}
+.fz-blog-details__comment-form .fz-comment-form__btn_delete::before {
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+
 .fz-blog-details__comment-form .fz-comment-form__btn {
   border-radius: 5px;
   height: 45px;

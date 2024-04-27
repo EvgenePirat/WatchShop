@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAddNewOrderMutation } from '../../apis/admin/orderApi';
 import React, { useContext} from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 
 
 const PaymentForm = ({order}) => {
 
-  const { setCartItems } = useContext(FarzaaContext)
+  const { setCartItems } = useContext(WatchContext)
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();

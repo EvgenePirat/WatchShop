@@ -1,11 +1,11 @@
 import { Modal } from 'react-bootstrap';
 import { useContext } from 'react';
 import WishlistItemTable from '../wishlist/WishlistItemTable';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import { useNavigate } from 'react-router-dom';
 
 const WishlistModal = ({ wishlistArray, removeItem }) => {
-  const { showWishlist, handleWishlistClose, addWishlistToCart } = useContext(FarzaaContext);
+  const { showWishlist, handleWishlistClose, addWishlistToCart } = useContext(WatchContext);
     const navigate = useNavigate(); // Initialize the useNavigate hook
 
     // Function to close the modal and navigate

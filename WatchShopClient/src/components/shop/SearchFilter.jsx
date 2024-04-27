@@ -1,8 +1,8 @@
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import React, { useContext } from 'react'
 
 const SearchFilter = () => {
-  const {searchTerm,handleSearchChange} = useContext(FarzaaContext)
+  const {searchTerm,handleSearchChange} = useContext(WatchContext)
   return (
     <section className="sidebar-single-area product-search-area">
     <h3 className="sidebar-single-area__title">Search Watches</h3>

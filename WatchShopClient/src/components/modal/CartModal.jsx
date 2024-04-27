@@ -2,10 +2,10 @@ import { Modal } from 'react-bootstrap';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import CartItemTable from '../cart/CartItemTable';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 
 const CartModal = ({ cartArray, remove, quantity }) => {
-  const { showCart, handleCartClose } = useContext(FarzaaContext);
+  const { showCart, handleCartClose } = useContext(WatchContext);
   const navigate = useNavigate(); 
 
   const closeAndNavigate = (path) => {

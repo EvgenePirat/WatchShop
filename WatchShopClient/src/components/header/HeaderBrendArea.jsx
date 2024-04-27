@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ const HeaderBrendArea = ({header}) => {
         isCategoryOpen,
         handleCategoryBtn,
         categoryBtnRef,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
     
   return (
     <div className={`fz-category-area ${header}`} ref={categoryBtnRef}>

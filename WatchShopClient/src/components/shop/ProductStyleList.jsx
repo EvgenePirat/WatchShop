@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 const ProductStyleList = ({filter}) => {
-    const { handleStyleFilter, jeweleryArray, active, setActive  } = useContext(FarzaaContext);
+    const { handleStyleFilter, jeweleryArray, active, setActive  } = useContext(WatchContext);
 
     const {data, isLoading} = useGetWatchCharacteristicsQuery()
     const [styles, setStyles] = useState([])

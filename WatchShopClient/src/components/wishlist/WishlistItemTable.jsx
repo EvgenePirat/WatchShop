@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 import defaultCartImage from '../../../public/assets/images/card-img-1.png'
 
 const WishlistItemTable = ({wishlistArray,removeItem}) => {
-    const {addToCartFromWishlist} = useContext(FarzaaContext)
+    const {addToCartFromWishlist} = useContext(WatchContext)
   return (
     <div className='wishlist-table'>
        <table >

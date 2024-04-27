@@ -4,7 +4,6 @@ import WatchShop from "./pages/WatchShop"
 import Shop from "./pages/Shop"
 import ShopDetails from "./pages/ShopDetails"
 import About from "./pages/About"
-import Faq from "./pages/Faq"
 import Wishlist from "./pages/Wishlist"
 import Cart from "./pages/Cart"
 import Account from "./pages/Account"
@@ -57,8 +56,8 @@ function App() {
       if (Date.now() >= expirationTime) {
         localStorage.removeItem("token");
       } else {
-        const { username, id, email, role } = jwtDecode(localToken);
-        dispatch(setLoggedInUser({ id, username, email, role }));
+        const { username, id, role } = jwtDecode(localToken);
+        dispatch(setLoggedInUser({ id, username, role }));
       }
     }
   }, []);
@@ -69,7 +68,6 @@ function App() {
         <Route path="/shop/:filter?" element={<Shop />} />
         <Route path="/shopDetails" element={<ShopDetails />} />
         <Route path="/about" element={<About />} />
-        <Route path="/faq" element={<Faq />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/account" element={<Account />} />

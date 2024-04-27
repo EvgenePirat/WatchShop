@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link, useNavigate } from 'react-router-dom'
 import CountdownSection from '../timer/CountdownSection'
 
 const HotDealSection = () => {
 
     const navigate = useNavigate();
-    const {addToWishlist,addToCart,jeweleryArray} = useContext(FarzaaContext)
+    const {addToWishlist,addToCart,jeweleryArray} = useContext(WatchContext)
 
     const handleClick = (item) => {
         navigate('/shopDetails', { state: { item } });

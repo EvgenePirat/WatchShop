@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import WishlistItemTable from './WishlistItemTable'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const WishlistSection = () => {
@@ -9,7 +9,7 @@ const WishlistSection = () => {
         handleRemoveItemWishlist,
         handleQuantityChangeWishlist,
         addWishlistToCart
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <div className="container">
         <div className="cart-section wishlist-section">

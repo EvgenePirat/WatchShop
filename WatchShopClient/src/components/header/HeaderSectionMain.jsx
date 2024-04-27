@@ -3,7 +3,7 @@ import HeaderNav from '../navigation/HeaderNav'
 import WishlistModal from '../modal/WishlistModal'
 import CartModal from '../modal/CartModal'
 import HeaderBrendArea from './HeaderBrendArea'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const HeaderSectionMain = () => {
@@ -20,7 +20,7 @@ const HeaderSectionMain = () => {
         handleQuantityChange,
         handleSidebarOpen,
         wishlistItemAmount
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
   return (
     <header className={`fz-header-section fz-2-header-section to-be-fixed ${isHeaderFixed? 'fixed':''}`}>

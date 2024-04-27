@@ -1,13 +1,12 @@
 import { useContext } from 'react';
 import MobileMenuSection from '../mobile-menu/MobileMenuSection'
 import { Link,useNavigate } from 'react-router-dom';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 
 const RightSideBar = () => {
-    const { isSidebarOpen, handleSidebarClose } = useContext(FarzaaContext);
-    const navigate = useNavigate(); // Initialize the useNavigate hook
+    const { isSidebarOpen, handleSidebarClose } = useContext(WatchContext);
+    const navigate = useNavigate();
 
-    // Function to close the modal and navigate
     const closeAndNavigate = (path) => {
       handleSidebarClose();
       navigate(path);

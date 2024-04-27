@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 
 const CountdownSection = () => {
-    const {isTimerState} = useContext(FarzaaContext)
+    const {isTimerState} = useContext(WatchContext)
   return (
     <div className="fz-hot-deal-countdown syotimer">
         <div className="syotimer__head"></div>

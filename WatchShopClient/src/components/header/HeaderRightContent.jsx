@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import WishlistModal from '../modal/WishlistModal'
 import CartModal from '../modal/CartModal'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const HeaderRightContent = () => {
@@ -16,7 +16,7 @@ const HeaderRightContent = () => {
         handleRemoveItemWishlist,
         handleSidebarOpen,
         wishlistItemAmount
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
   return (
     <>

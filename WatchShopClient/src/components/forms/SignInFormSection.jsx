@@ -40,8 +40,8 @@ const SignInFormSection = () => {
                 setUserName('');
                 setPassword('');
                 setError('')
-                const {username, id, email, role} = jwtDecode(token);
-                dispatch(setLoggedInUser({id, username, email, role}));
+                const {username, id, role} = jwtDecode(token);
+                dispatch(setLoggedInUser({id, username, role}));
                 localStorage.setItem("token", token);
                 navigate("/account")
             } else if(response.error){
