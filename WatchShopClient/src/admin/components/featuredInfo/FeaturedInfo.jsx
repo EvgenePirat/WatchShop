@@ -1,34 +1,34 @@
 import React from 'react'
 import './FeaturedInfo.css'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-function FeaturedInfo() {
+function FeaturedInfo({statistics}) {
+
+    if(!statistics){
+        return <div>Loading...</div>
+    }
+
   return (
     <div className='featured'>
         <div className="featuredItem">
-            <span className="featuredTitle">Revanue</span>
+            <span className="featuredTitle">Total Revanue</span>
             <div className="featuredMoneyContainer">
-                <span className="featuredMoney">$2.415</span>
-                <span className="featuredMoneyRate">-14 <ArrowDownwardIcon className='featuredIconNegative' /> </span>
+                <span className="featuredMoney">${statistics.totalRevenue}</span>
             </div>
-            <span className="featuredSub">Compared to last month</span>
+            <span className="featuredSub">Statictic to last {Math.abs(statistics.daysAgo)} days </span>
         </div>
         <div className="featuredItem">
-            <span className="featuredTitle">Sales</span>
+            <span className="featuredTitle">Total Sales</span>
             <div className="featuredMoneyContainer">
-                <span className="featuredMoney">$4.415</span>
-                <span className="featuredMoneyRate">-1 <ArrowDownwardIcon className='featuredIconNegative' /> </span>
+                <span className="featuredMoney">{statistics.totalSales}</span>
             </div>
-            <span className="featuredSub">Compared to last month</span>
+            <span className="featuredSub">Statictic to last {Math.abs(statistics.daysAgo)} days </span>
         </div>
         <div className="featuredItem">
-            <span className="featuredTitle">Cost</span>
+            <span className="featuredTitle">Average Order Price</span>
             <div className="featuredMoneyContainer">
-                <span className="featuredMoney">$2.3</span>
-                <span className="featuredMoneyRate">+2.4 <ArrowUpwardIcon className='featuredIcon' /> </span>
+                <span className="featuredMoney">${statistics.averageOrderValue}</span>     
             </div>
-            <span className="featuredSub">Compared to last month</span>
+            <span className="featuredSub">Statictic to last {Math.abs(statistics.daysAgo)} days </span>
         </div>
     </div>
   )

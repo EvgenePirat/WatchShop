@@ -35,6 +35,7 @@
     <Folder Include="Dtos\MechanismTypes\Request\" />
     <Folder Include="Dtos\Messages\Response\" />
     <Folder Include="Dtos\OrderStatuses\Request\" />
+    <Folder Include="Dtos\SalesStatistics\Request\" />
     <Folder Include="Dtos\StrapMaterials\Request\" />
     <Folder Include="Dtos\Styles\Request\" />
   </ItemGroup>

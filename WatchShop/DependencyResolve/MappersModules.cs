@@ -20,6 +20,8 @@ namespace WatchShop_UI.DependencyResolve
 
                 cfg.AddProfile(new MessageDtoProfile());
 
+                cfg.AddProfile(new AnalyticDtoProfile());
+
                 cfg.AddProfile(new UserDtoProfile());
                 cfg.AddProfile(new UserModelProfile());
 
