@@ -176,24 +176,44 @@ const WatchContextProvider = ({ children }) => {
     let sortedProducts = [...filteredProducts];
 
     switch (criteria) {
-      case 'name-az':
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'name-za':
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case 'price-low-high':
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high-low':
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        break;
+        case 'name-az':
+            sortedProducts.sort((a, b) => {
+                if (a.nameModel < b.nameModel) return 1;
+                if (a.nameModel > b.nameModel) return -1;
+                return 0;
+            });
+            break;
+        case 'name-za':
+            sortedProducts.sort((a, b) => {
+                if (a.nameModel > b.nameModel) return 1;
+                if (a.nameModel < b.nameModel) return -1;
+                return 0;
+            });
+            break;
+        case 'price-low-high':
+            sortedProducts.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-high-low':
+            sortedProducts.sort((a, b) => b.price - a.price);
+            break;
+        case 'default':
+              sortedProducts.sort((a, b) => {
+                if (a.brend.name < b.brend.name) return 1;
+                if (a.brend.name > b.brend.name) return -1;
+                return 0;
+              });
+              break;
+        default:
+            sortedProducts.sort((a, b) => {
+                if (a.brend.name < b.brend.name) return 1;
+                if (a.brend.name > b.brend.name) return -1;
+                return 0;
+              });
+            break;
     }
 
     setFilteredProducts(sortedProducts);
-  };
+};
   // category handle method
   const handleCategoryFilter = (brend) => {
     if (brend === null) {
