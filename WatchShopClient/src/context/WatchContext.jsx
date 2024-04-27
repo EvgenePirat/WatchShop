@@ -768,141 +768,6 @@ useEffect(() => {
     }
   };
 
-  // Cake Shop cart
-  // Main cake list array
-  const [cakeListArray, setCakeListArray] = useState(allCakeList)
-
-  // random cake array
-  const [randomizedCakes, setRandomizedCakes] = useState([]);
-  const [randomizedCakesSecond, setRandomizedCakesSecond] = useState([]);
-  const cakeSlice = cakeListArray.slice(-8);
-  useEffect(() => {
-    // Shuffle the array and store the shuffled order initially for the first state variable
-    const shuffledCakes = shuffleArray(cakeSlice);
-    setRandomizedCakes(shuffledCakes);
-
-    // Create a new shuffled array for the second state variable
-    const shuffledCakesSecond = shuffleArray(cakeSlice.slice()); // Create a copy of cakeSlice before shuffling
-    setRandomizedCakesSecond(shuffledCakesSecond);
-  }, []); // Empty dependency array, so the shuffle is done once on mount
-
-  // Wishlist
-
-  // Initiate cake shop wishlist array
-  const [wishlistCakes, setWishlistCakes] = useState([]);
-  const wishlistCakeAmount = wishlistCakes.reduce((total, item) => total + item.quantity, 0);
-
-  // Cake wishlist remove item method
-  const handleRemoveCakeWishlist = (itemId) => {
-    const updatedItems = wishlistCakes.filter(item => item.id !== itemId);
-    setWishlistCakes(updatedItems);
-    toast.error('Item deleted from wishlist!')
-  };
-
-  // Add to Cake wishlist
-  const addToCakeWishlist = (itemId) => {
-    // Find the item from allCakeList using itemId
-    const itemToAdd = cakeListArray.find(item => item.id === itemId);
-
-    if (itemToAdd) {
-      if (!wishlistCakes.some(item => item.id === itemId)) {
-        const newItem = {
-          ...itemToAdd,
-          quantity: 1,
-          total: itemToAdd.price,
-          isInWishlist: true
-        };
-
-        setWishlistCakes(prevWishlistItems => [...prevWishlistItems, newItem]);
-        toast.success("Item added to wishlist!");
-      } else {
-        toast.warning("Item already in wishlist!");
-      }
-    } else {
-      toast.error('Item not found in All Cake List.');
-    }
-  };
-  const updateIsInCakeWishlist = (itemsArray) => {
-    return itemsArray.map(item => {
-      if (wishlistCakes.some(wishlistItem => wishlistItem.id === item.id)) {
-        return {
-          ...item,
-          isInWishlist: true
-        };
-      } else {
-        return {
-          ...item,
-          isInWishlist: false
-        };
-      }
-    });
-  };
-
-  useEffect(() => {
-    setCakeListArray(prevFilteredProducts => updateIsInCakeWishlist(prevFilteredProducts));
-    setRandomizedCakes(prevRandomizedItems => updateIsInCakeWishlist(prevRandomizedItems));
-    setRandomizedCakesSecond(prevRandomizedItems => updateIsInCakeWishlist(prevRandomizedItems));
-  }, [wishlistCakes]);
-
-  // Cart
-    // Initiate cake shop cart array
-    const [cartCakes, setCartCakes] = useState([]);
-    // Cake cart quantity amount
-    const cartCakeAmount = cartCakes.reduce((total, item) => total + item.quantity, 0);
-    // Cake cart remove item method
-    const handleRemoveCake = (itemId) => {
-      const updatedItems = cartCakes.filter(item => item.id !== itemId);
-      setCartCakes(updatedItems);
-      toast.error('Item deleted from cart!')
-    };
-    // Cake quantity change method
-    const handleCakeQuantityChange = (itemId, newQuantity) => {
-      if (newQuantity >= 0) {
-        if (newQuantity === 0) {
-          handleRemoveCake(itemId); // Call the handleRemoveItem function
-        } else {
-          const updatedItems = cartCakes.map(item =>
-            item.id === itemId ? { ...item, quantity: newQuantity, total: item.price * newQuantity } : item
-          );
-          setCartCakes(updatedItems);
-        }
-      }
-    };
-  
-    // Add to Cake Cart
-    const addToCakeCart = (itemId) => {
-      // Find the item from allProductList using itemId
-      const itemToAdd = allCakeList.find(item => item.id === itemId);
-  
-      if (itemToAdd) {
-        const existingItemIndex = cartCakes.findIndex(item => item.id === itemId);
-        // Check if the item is already in the cart
-        if (!cartCakes.some(item => item.id === itemId)) {
-  
-          // Set initial quantity to 1 and total to item's price
-          const newItem = {
-            ...itemToAdd,
-            quantity: 1,
-            total: itemToAdd.price
-          };
-  
-          setCartCakes(prevCartItems => [...prevCartItems, newItem]);
-          toast.success("Item added in cart!")
-        } else if (existingItemIndex !== -1) {
-          // Increment quantity and update total
-          const updatedCartCakes = [...cartCakes];
-          updatedCartCakes[existingItemIndex].quantity += 1;
-          updatedCartCakes[existingItemIndex].total = updatedCartCakes[existingItemIndex].quantity * itemToAdd.price;
-  
-          setCartCakes(updatedCartCakes);
-          toast.success("Item list updated in cart!")
-  
-        }
-      } else {
-        toast.warning('Item not found in allProductList.');
-      }
-    };
-
   // Function to shuffle an array using Fisher-Yates algorithm
   const shuffleArray = (array) => {
     const shuffledArray = [...array];
@@ -1059,23 +924,12 @@ useEffect(() => {
       handleRemoveJeweleryItemWishlist,
       handleRemoveJeweleryCartItem,
       handleJeweleryCartQuantityChange,
-      randomizedCakes,
-      randomizedCakesSecond,
-      cartCakes,
-      cartCakeAmount,
-      handleRemoveCake,
-      handleCakeQuantityChange,
-      addToCakeCart,
-      wishlistCakes,
-      handleRemoveCakeWishlist,
-      addToCakeWishlist,
       searchTerm,
       handleSearchChange,
       searchQuery,
       handleSearch,
       jeweleryArray,
       randomizedItems,
-      cakeListArray,
       addWishlistToCart,
       addToCartFromWishlist,
       addToCartWithQuantity,
@@ -1091,8 +945,7 @@ useEffect(() => {
       handleBlogTagSelection,
       wishlistItemAmount,
       slidesBrand,
-      wishlistJewelleryItemAmount,
-      wishlistCakeAmount,
+      wishlistJewelleryItemAmount
     }}>
       {children}
     </WatchContext.Provider>
