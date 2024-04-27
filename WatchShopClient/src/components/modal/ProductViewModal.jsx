@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Modal } from 'react-bootstrap'
 import ProductDetailAction from '../product/ProductDetailAction'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const ProductViewModal = () => {
     const {
         isProductViewOpen,
         handleProductViewClose,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <Modal show={isProductViewOpen} onHide={handleProductViewClose} size='xl' centered className="fz-quick-view-modal">
         <Modal.Body className="container p-0">

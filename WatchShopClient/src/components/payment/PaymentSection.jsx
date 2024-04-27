@@ -7,7 +7,6 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import PaymentForm from '../payment/PaymentForm.jsx';
 
-
 const PaymentSection = () => {
 
   const location = useLocation();

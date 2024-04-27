@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import { useGetBrendsQuery } from '../../apis/admin/brendApi'
 
 const ProductBrendList = ({filter}) => {
-    const { handleCategoryFilter, jeweleryArray, active, setActive  } = useContext(FarzaaContext);
+    const { handleCategoryFilter, jeweleryArray, active, setActive  } = useContext(WatchContext);
 
     const {data, isLoading} = useGetBrendsQuery();
     const [brends, setBrends] = useState([])

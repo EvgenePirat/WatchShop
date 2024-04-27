@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux'
 import { useGetWatchesQuery } from '../apis/admin/watchApi';
 
-const FarzaaContext = createContext();
+const WatchContext = createContext();
 
 
-const FarzaaContextProvider = ({ children }) => {
+const WatchContextProvider = ({ children }) => {
   // Wishlist Modal
   const [showWishlist, setShowWishlist] = useState(false);
 
@@ -992,7 +992,7 @@ useEffect(() => {
     }, []);
 
   return (
-    <FarzaaContext.Provider value={{
+    <WatchContext.Provider value={{
       showWishlist,
       handleWishlistClose,
       handleWishlistShow,
@@ -1095,8 +1095,8 @@ useEffect(() => {
       wishlistCakeAmount,
     }}>
       {children}
-    </FarzaaContext.Provider>
+    </WatchContext.Provider>
   );
 }
 
-export { FarzaaContext, FarzaaContextProvider }
+export { WatchContext, WatchContextProvider }

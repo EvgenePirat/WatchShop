@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link, useNavigate } from 'react-router-dom'
 
 const BestSellerTabContent = () => {
@@ -10,7 +10,7 @@ const BestSellerTabContent = () => {
         addToWishlist,
         addToCart,
         jeweleryArray,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
     const handleClick = (item) => {
         navigate('/shopDetails', { state: { item } });

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 import cartImage from '../../../public/assets/images/card-img-1.png'
 
@@ -8,7 +8,7 @@ const RelatedProductSection = () => {
         paginatedProducts,
         addToCart,
         addToWishlist
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <section className="related-product-section">
         <div className="container">

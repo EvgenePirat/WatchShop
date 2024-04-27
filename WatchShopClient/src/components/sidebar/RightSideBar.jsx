@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import MobileMenuSection from '../mobile-menu/MobileMenuSection'
 import { Link,useNavigate } from 'react-router-dom';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 
 const RightSideBar = () => {
-    const { isSidebarOpen, handleSidebarClose } = useContext(FarzaaContext);
+    const { isSidebarOpen, handleSidebarClose } = useContext(WatchContext);
     const navigate = useNavigate();
 
     const closeAndNavigate = (path) => {

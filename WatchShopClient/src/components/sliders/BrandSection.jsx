@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules';
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import { brandList } from '../../data/Data';
 import { Link } from 'react-router-dom';
 
 const BrandSection = () => {
-    const {slidesBrand} = useContext(FarzaaContext)
+    const {slidesBrand} = useContext(WatchContext)
   
   return (
     <div className="clients-section fz-1-brands-section">

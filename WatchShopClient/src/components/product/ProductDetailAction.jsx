@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 
 const ProductDetailAction = ({watch}) => {
     const defaultQuantity = 1;
@@ -8,7 +8,7 @@ const ProductDetailAction = ({watch}) => {
     const {
         addToCartWithQuantity,
         addToWishlist,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
     const handleQuantityChange = (newQuantity) => {
         if (newQuantity >= 1) {

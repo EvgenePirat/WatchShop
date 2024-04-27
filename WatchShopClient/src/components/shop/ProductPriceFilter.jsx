@@ -1,9 +1,9 @@
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import { Slider } from '@mui/material';
 import React, { useContext } from 'react';
 
 const ProductPriceFilter = () => {
-    const {price,handlePriceChange,handlePriceFilter} = useContext(FarzaaContext)
+    const {price,handlePriceChange,handlePriceFilter} = useContext(WatchContext)
     return (
         <section className="sidebar-single-area price-filter-area">
             <h3 className="sidebar-single-area__title">Filter by price</h3>

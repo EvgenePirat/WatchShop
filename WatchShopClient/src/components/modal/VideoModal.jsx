@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Modal } from 'react-bootstrap'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 
 const VideoModal = () => {
     const {
         showVideo,
         handleVideoClose,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <Modal show={showVideo} onHide={handleVideoClose} size='lg' centered className="modal-video" id="LKQIY6EGFR9TU">
         <Modal.Header className='vidoe-modal-header' closeButton></Modal.Header>

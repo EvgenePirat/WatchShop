@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import HeaderNav from '../navigation/HeaderNav'
 import HeaderRightContent from './HeaderRightContent'
 import { Link } from 'react-router-dom'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { useSelector } from 'react-redux';
 
 const HeaderSection2 = () => {
 
-    const {isHeaderFixed} = useContext(FarzaaContext)
+    const {isHeaderFixed} = useContext(WatchContext)
 
     const userAuth = useSelector(state => state.userAuthStore);
     

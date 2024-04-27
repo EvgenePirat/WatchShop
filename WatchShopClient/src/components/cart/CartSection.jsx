@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import CartItemTable from './CartItemTable'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 
 const CartSection = () => {
@@ -10,7 +10,7 @@ const CartSection = () => {
         cartItems,
         handleQuantityChange,
         handleRemoveItem,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <div className="container">
         <div className="cart-section">

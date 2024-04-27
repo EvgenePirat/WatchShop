@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { useGetOrdersByUsernameQuery, useUpdateOrderStatusMutation } from '../../apis/admin/orderApi';
 import { toast } from 'react-toastify';
 
@@ -7,7 +7,7 @@ function AccountOrderTable({user}) {
 
     const {
         jeweleryArray
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
 
     if (!user) {
         return <div>...Loading</div>;

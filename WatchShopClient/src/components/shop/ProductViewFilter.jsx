@@ -1,4 +1,4 @@
-import { FarzaaContext } from '../../context/FarzaaContext';
+import { WatchContext } from '../../context/WatchContext';
 import React, { useContext } from 'react'
 import { Form } from 'react-bootstrap'
 
@@ -12,7 +12,7 @@ const ProductViewFilter = () => {
         currentPage,
         productsPerPage,
         totalProducts,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
     const startItem = (currentPage - 1) * productsPerPage + 1;
     const endItem = Math.min(currentPage * productsPerPage, totalProducts);
   return (

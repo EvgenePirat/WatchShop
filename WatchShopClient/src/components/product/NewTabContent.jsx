@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FarzaaContext } from '../../context/FarzaaContext'
+import { WatchContext } from '../../context/WatchContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -16,7 +16,7 @@ const NewTabContent = () => {
     const {
         addToWishlist,
         addToCart,
-    } = useContext(FarzaaContext)
+    } = useContext(WatchContext)
   return (
     <div className="row gy-4 gx-3 justify-content-center">
         {watchItems.filter((item) => item.state === "NEW").slice(0, 8).map((item) => (

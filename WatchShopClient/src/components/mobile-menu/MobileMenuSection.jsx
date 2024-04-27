@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { FarzaaContext } from "../../context/FarzaaContext";
+import { WatchContext } from "../../context/WatchContext";
 
 const MobileMenuSection = ({ navigate }) => {
-  const { isDropdownOpen, handleDropdownToggle } = useContext(FarzaaContext);
+  const { isDropdownOpen, handleDropdownToggle } = useContext(WatchContext);
   return (
     <div className="mean-bar">
       <a href="#nav" className="meanmenu-reveal">
