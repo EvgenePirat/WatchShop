@@ -26,10 +26,6 @@ function Sidebar() {
                             Orders
                         </Link>
                     </li>
-                    <li className="sidebarListItemAdmin">
-                        <TrendingUpIcon className='sidebarIcon' />
-                        Analytics
-                    </li>
                 </ul>
             </div>
             <div className="sidebarMenuAdmin">
