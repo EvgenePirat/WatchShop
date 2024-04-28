@@ -88,9 +88,9 @@ namespace WatchShop_Core.Services
 
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
 
-            if(orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled)
+            if(orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled || orderToUpdate.OrderStatus.Name == OrderStatusEnum.Delivered)
             {
-                throw new OrderArgumentException("You can not update status for order, order was cancelled. You need create new order");
+                throw new OrderArgumentException("You can not update status for order, order was cancelled or . You need create new order");
             }
             
             try
