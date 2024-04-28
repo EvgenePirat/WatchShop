@@ -22,6 +22,28 @@ const ProductReviewTabPane = ({watch}) => {
         setIsShowForm(false);
     }
 
+    const calculateAverageRating = (comments) => {
+        if (comments.length === 0) {
+          return 0;
+        }
+        let totalRating = 0;
+
+        comments.forEach(comment => {
+          totalRating += comment.grade;
+        });
+
+        const averageRating = totalRating / comments.length;
+      
+        return averageRating;
+      }
+
+    const getAmountOfReviewsByRating = (rating) => {
+        return watch.comments.filter(review => review.grade === rating).length;
+     };
+
+    console.log(watch);
+
+    const averageRating = calculateAverageRating(watch.comments);
 
   return (
     <div className="fz-product-details__review">
@@ -33,102 +55,34 @@ const ProductReviewTabPane = ({watch}) => {
                 {isShowForm && <CommentFormSection watchId={watch.id} userId={userAuth.id} onCommentSubmit={handleCommentSubmit}  /> } 
             </div>
             <div className="average-rating-area">
-                <h3><span>4.3</span><span>/5</span></h3>
-                <span className="rating-amount">24 ratings</span>
+                <h3><span>{averageRating}</span><span>/5</span></h3>
+                <span className="rating-amount">{watch.comments.length} ratings</span>
             </div>
 
             <div className="review-breakdown">
-                <ul className="individual-star-breakdown">
-                    <li className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                    </li>
-                    <li>
-                        <div className="bar">
-                            <div className="filled"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="each-star-amount">320</div>
-                    </li>
-                </ul>
-
-                <ul className="individual-star-breakdown individual-star-breakdown-2">
-                    <li className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                    </li>
-                    <li>
-                        <div className="bar">
-                            <div className="filled"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="each-star-amount">250</div>
-                    </li>
-                </ul>
-
-                <ul className="individual-star-breakdown individual-star-breakdown-3">
-                    <li className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                    </li>
-                    <li>
-                        <div className="bar">
-                            <div className="filled"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="each-star-amount">140</div>
-                    </li>
-                </ul>
-
-                <ul className="individual-star-breakdown individual-star-breakdown-4">
-                    <li className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                    </li>
-                    <li>
-                        <div className="bar">
-                            <div className="filled"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="each-star-amount">83</div>
-                    </li>
-                </ul>
-
-                <ul className="individual-star-breakdown individual-star-breakdown-5">
-                    <li className="star">
-                        <i className="fa-solid fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                        <i className="fa-light fa-star"></i>
-                    </li>
-                    <li>
-                        <div className="bar">
-                            <div className="filled"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="each-star-amount">11</div>
-                    </li>
-                </ul>
+                {[5, 4, 3, 2, 1].map((rating, index) => (
+                    <ul key={index} className={`individual-star-breakdown individual-star-breakdown-${rating}`}>
+                        <li className="star">
+                            {[...Array(rating)].map((_, i) => (
+                                <i key={i} className="fa-solid fa-star"></i>
+                            ))}
+                            {[...Array(5 - rating)].map((_, i) => (
+                                <i key={i} className="fa-light fa-star"></i>
+                            ))}
+                        </li>
+                        <li>
+                            <div className="bar">
+                                <div className="individual-star-breakdown-2 filled"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="each-star-amount">{getAmountOfReviewsByRating(rating)}</div>
+                        </li>
+                    </ul>
+                ))}
             </div>
         </div>
+
         <div className="user-reviews">
             <h4 className="reviews-title">Reviews of this product</h4>
             <div className="row g-4">

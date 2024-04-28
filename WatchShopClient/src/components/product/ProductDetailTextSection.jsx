@@ -3,19 +3,30 @@ import ProductDetailAction from './ProductDetailAction';
 import { Rating } from '@mui/material';
 
 const ProductDetailTextSection = ({watch}) => {
+
+    const calculateAverageRating = (comments) => {
+        if (comments.length === 0) {
+          return 0;
+        }
+        let totalRating = 0;
+
+        comments.forEach(comment => {
+          totalRating += comment.grade;
+        });
+
+        const averageRating = totalRating / comments.length;
+      
+        return averageRating;
+      }
+
+    const averageRating = calculateAverageRating(watch.comments);
+
   return (
     <div className="fz-product-details__txt">
         <h2 className="fz-product-details__title">{watch.brend.name} {watch.nameModel}</h2>
         <div className="fz-product-details__price-rating">
             <span className="price">${watch.isDiscounted == true ? watch.discountPrice : watch.price}</span>
-            <Rating name="read-only" value={3} readOnly />
-            <div className="rating">
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-light fa-star"></i>
-            </div>
+            <Rating name="read-only" value={averageRating} readOnly />
         </div>
 
         <div className="fz-product-details__infos">
