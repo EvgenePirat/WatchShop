@@ -1,9 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CommentFormSection from '../forms/CommentFormSection';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const ProductReviewTabPane = () => {
+const ProductReviewTabPane = ({watch}) => {
+
+    const [isShowForm, setIsShowForm] = useState(false);
+    const userAuth = useSelector(state => state.userAuthStore);
+    const navigate = useNavigate();
+
+    const handleToggleComment = () => {
+        if(userAuth.id.length != 0){
+            setIsShowForm(!isShowForm);
+        }
+        else{
+            navigate("/login")
+        }
+    };
+
+    const handleCommentSubmit = () => {
+        setIsShowForm(false);
+    }
+
+
   return (
     <div className="fz-product-details__review">
         <div className="review-overview">
+            <div className="average-rating-area">
+                {!isShowForm && <button className="fz-1-banner-btn fz-comment-form__btn" onClick={handleToggleComment}>
+                    Add Comment
+                </button>} 
+                {isShowForm && <CommentFormSection watchId={watch.id} userId={userAuth.id} onCommentSubmit={handleCommentSubmit}  /> } 
+            </div>
             <div className="average-rating-area">
                 <h3><span>4.3</span><span>/5</span></h3>
                 <span className="rating-amount">24 ratings</span>

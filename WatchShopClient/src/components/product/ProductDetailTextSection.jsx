@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductDetailAction from './ProductDetailAction';
+import { Rating } from '@mui/material';
 
 const ProductDetailTextSection = ({watch}) => {
   return (
@@ -7,6 +8,7 @@ const ProductDetailTextSection = ({watch}) => {
         <h2 className="fz-product-details__title">{watch.brend.name} {watch.nameModel}</h2>
         <div className="fz-product-details__price-rating">
             <span className="price">${watch.isDiscounted == true ? watch.discountPrice : watch.price}</span>
+            <Rating name="read-only" value={3} readOnly />
             <div className="rating">
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>

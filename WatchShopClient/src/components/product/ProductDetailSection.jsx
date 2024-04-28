@@ -66,7 +66,7 @@ const ProductDetailSection = () => {
 
 
                             <Tab.Pane eventKey='review' className={`tab-pane ${activeTab === 'review' ? 'show active' : ''}`}>
-                                <ProductReviewTabPane/>
+                                <ProductReviewTabPane watch={item} />
                             </Tab.Pane>
                         </Tab.Content>
                     </div>
