@@ -22,7 +22,7 @@ const ProductDetailSection = () => {
         <div className="container">
             <div className="row align-items-start justify-content-center">
                 <div className="col-lg-5 col-md-6 col-12 col-xxs-12">
-                    <ProductDetailSlider/>
+                    <ProductDetailSlider watch={item}/>
                 </div>
 
 
@@ -66,7 +66,7 @@ const ProductDetailSection = () => {
 
 
                             <Tab.Pane eventKey='review' className={`tab-pane ${activeTab === 'review' ? 'show active' : ''}`}>
-                                <ProductReviewTabPane/>
+                                <ProductReviewTabPane watch={item} />
                             </Tab.Pane>
                         </Tab.Content>
                     </div>

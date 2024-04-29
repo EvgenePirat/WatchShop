@@ -11005,3 +11005,52 @@ a.fz-nav-link.fz-submenu-nav-link.sub-menu-link:hover {
   }
 }
 
+.form-container {
+  max-width: 1000px; 
+  min-width: 600px;
+  margin: auto;
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  background-color: #f9f9f9; 
+}
+
+.form-container label {
+  font-weight: bold; 
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-container input[type="text"],
+.form-container textarea {
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  height: 100px;
+  border-radius: 4px; 
+  box-sizing: border-box; 
+  margin-bottom: 16px;
+}
+
+.form-container button:hover {
+  background-color: #333; 
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #024d9f;
+  color: #fff;
+}

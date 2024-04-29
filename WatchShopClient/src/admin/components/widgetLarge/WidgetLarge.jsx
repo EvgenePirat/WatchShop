@@ -28,6 +28,12 @@ function WidgetLarge() {
     if(isLoading){
         return <div>Loading...</div>
     }
+    else{
+        if(userItems.length == 0){
+            return <div>Loading...</div>
+        }
+
+    }
     
 
   return (
@@ -44,7 +50,7 @@ function WidgetLarge() {
                     <tr className='widgetLrTt' key={index}>
                         <td className="widgetlgUser">
                             <img className='widgetLrImg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' />
-                            <span className="widgetLrName">{userItems.find(user => user.id === order.userId).userName}</span>
+                            <span className="widgetLrName">{order.userId}</span>
                         </td>
                         <td className='widgetLrDate'>{order.createDate}</td>
                         <td className='widgetLrAmount'>{order.sum}</td>

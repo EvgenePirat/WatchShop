@@ -1,51 +1,32 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import 'react-slideshow-image/dist/styles.css'
+import { Fade } from 'react-slideshow-image';
 
-const ProductDetailSlider = () => {
-  const mainImageRef = useRef(null);
-  useEffect(() => {
-    // Set the asNavFor property after the mainImageRef is initialized
-    const imgNavSettings = {
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      focusOnSelect: true,
-      asNavFor: mainImageRef.current,
-      dots: false,
-    };
-    // Initialize the slider with the updated settings
-    setImgNavSettings(imgNavSettings);
-  }, []);
+const ProductDetailSlider = ({watch}) => {
 
-  const [imgNavSettings, setImgNavSettings] = useState({
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    asNavFor: null, // Initialize with null
-    dots: false,
-    focusOnSelect: true,
-  });
+  if(!watch){
+    return <div>Loading...</div>
+  }
 
-  const imgSliderSettings = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-  };
+  console.log(watch)
+
 
   return (
     <>
-      <Slider className="fz-product-details__img-slider" {...imgSliderSettings} ref={mainImageRef}>
-        <img src="assets/images/product-det-1.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-2.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-3.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-4.jpg" alt="Product Image" />
-      </Slider>
-
-      <Slider className="fz-product-details__img-nav" {...imgNavSettings}>
-        <img src="assets/images/product-det-1.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-2.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-3.jpg" alt="Product Image" />
-        <img src="assets/images/product-det-4.jpg" alt="Product Image" />
-      </Slider>
+      {watch.images.length === 1 ? (
+        <div>
+          <img style={{ width: '100%', height: '600px' }} src={watch.images[0].path} />
+        </div>
+      ) : (
+        <Fade>
+          {watch.images.map((image, index) => (
+            <div key={index}>
+              <img style={{ width: '100%', height: '600px' }} src={image.path} />
+            </div>
+          ))}
+        </Fade>
+      )}
     </>
   );
 };

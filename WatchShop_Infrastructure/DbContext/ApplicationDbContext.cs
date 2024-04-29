@@ -48,6 +48,18 @@ namespace WatchShop_Infrastructure.DbContext
                 .HasForeignKey(c => c.WatchId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Brend>()
+                .HasMany(w => w.Watches)
+                .WithOne(c => c.Brend)
+                .HasForeignKey(c => c.BrendId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Watch>()
+                .HasMany(w => w.Images)
+                .WithOne(i => i.Watch)
+                .HasForeignKey(i => i.WatchId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<ApplicationUser>()
                 .HasMany(w => w.Comments)
                 .WithOne(c => c.User)

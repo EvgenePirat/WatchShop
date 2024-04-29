@@ -2,8 +2,20 @@ import React, { useContext } from 'react'
 import { WatchContext } from '../../context/WatchContext'
 import { Link } from 'react-router-dom'
 import cartImage from '../../../public/assets/images/card-img-1.png'
+import { useNavigate } from 'react-router-dom';
 
 const RelatedProductSection = () => {
+
+    const navigate = useNavigate();
+
+    const handleClick = (item) => {
+        navigate('/shopDetails', { state: { item } });
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" 
+        });
+    }
+
     const {
         paginatedProducts,
         addToCart,
@@ -39,7 +51,7 @@ const RelatedProductSection = () => {
                         </div>
 
                         <div className="fz-single-product__txt">
-                            <Link to="#" className="fz-single-product__title">{item.nameModel}</Link>
+                            <p onClick={() => handleClick(item)} className="fz-single-product__title">{item.nameModel}</p>
                             <div className="fz-single-product__price-rating">
                                 <p className="fz-single-product__price">
                                     <span className="current-price">${item.price}</span>

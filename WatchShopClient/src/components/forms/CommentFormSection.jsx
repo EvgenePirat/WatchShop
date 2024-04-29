@@ -1,62 +1,68 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
+import { Rating } from '@mui/material';
+import { useAddNewCommentMutation, useUpdateCommentMutation } from '../../apis/admin/commentApi';
 
-const CommentFormSection = () => {
-  const [name, setName] = useState('');
+const CommentFormSection = ({watchId, userId, onCommentSubmit, alreadyComment}) => {
 
-  const [email, setEmail] = useState('');
+  if(!watchId && !userId && !alreadyComment){
+    return <div>Loading...</div>
+  }
 
-  const [comment, setComment] = useState('');
-  const handleFormSubmit = (e) => {
+  const [grade, setGrade] = useState(alreadyComment != null ? alreadyComment.grade : 0);
+  const [comment, setComment] = useState(alreadyComment != null ? alreadyComment.comment : '');
+
+  const [postCommentToWatchMutation] = useAddNewCommentMutation();
+  const [updateCommentMutation] = useUpdateCommentMutation();
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !comment) {
+    if (!comment) {
       toast.error('Please fill out all fields.', { position: 'top-right' });
-    } else if (!isValidEmail(email)) {
-      toast.warning('Please provide a valid email address.', { position: 'top-right' });
-    } else {
+    } 
+    else if(grade == 0){
+      toast.error('Please fill out all fields.', { position: 'top-right' });
+    }else {
 
-      // If the form is successfully submitted, show a success toast
-      toast.success('Form submitted successfully!', { position: 'top-right' });
-      setName('');
-      setEmail('');
+      var result = null;
+
+      if(alreadyComment != null){
+        result = await updateCommentMutation({id: alreadyComment.id, watchId:watchId, userId: userId, comment: comment, grade: grade});
+        updateCommentMutation.invalidateQueries('Comments');
+      }
+      else{
+        result = await postCommentToWatchMutation({watchId:watchId, userId: userId, comment: comment, grade: grade});
+        postCommentToWatchMutation.invalidateQueries('Comments');
+      }
+
+      if(result.error){
+        toast.error('Comment is not added. Try later!', { position: 'top-right' });
+      }
+      else{
+        toast.success('Comment is added!', { position: 'top-right' });
+      }     
+      setGrade(0);
       setComment('');
+      onCommentSubmit();
     }
   };
 
-  const isValidEmail = (email) => {
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
   return (
-    <form action="#" onSubmit={handleFormSubmit}>
-        <div className="row gx-4 gy-3">
-            <div className="col-6 col-xxs-12">
-                <label htmlFor="commenter-name">Name<span>*</span></label>
-                <input 
-                type="text" 
-                name="commenter-name" 
-                id="commenter-name" 
-                placeholder="Type Your Name Here"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+    <form onSubmit={handleFormSubmit} className='form-container'>
+        <div>
+          <div>
+                <label htmlFor="commenter-comment">Grade<span></span></label>
+                <Rating
+                  name="simple-controlled"
+                  value={grade}
+                  onChange={(event, newValue) => {
+                    setGrade(newValue);
+                  }}
                 />
             </div>
-            <div className="col-6 col-xxs-12">
-                <label htmlFor="commenter-email">Email<span>*</span></label>
-                <input 
-                type="email" 
-                name="commenter-email" 
-                id="commenter-email"
-                placeholder="Type Your Email Here"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="col-12">
-                <label htmlFor="commenter-comment">Comment<span>*</span></label>
+            <div>
+                <label htmlFor="commenter-comment">Comment<span></span></label>
                 <textarea 
                 name="commenter-comment" 
                 id="commenter-comment" 
@@ -67,7 +73,7 @@ const CommentFormSection = () => {
             </div>
         </div>
 
-        <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">Post Comment</button>
+        <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">{alreadyComment ? "Update Comment" : "Post Comment"}</button>
     </form>
   )
 }

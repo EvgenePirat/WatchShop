@@ -37,7 +37,7 @@ const ProductViewFilter = () => {
                     <div className="product-sorting d-inline-block">
                         <form className="" action="#">
                             <Form.Select className="nice-select" onChange={handleSortChange} value={sortBy}>
-                            <option value="">Default</option>
+                            <option value="default">Default</option>
                             <option value="name-az">By Name (A to Z)</option>
                             <option value="name-za">By Name (Z to A)</option>
                             <option value="price-low-high">By Price (Low to High)</option>
