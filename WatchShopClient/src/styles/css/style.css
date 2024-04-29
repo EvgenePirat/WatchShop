@@ -11033,5 +11033,24 @@ a.fz-nav-link.fz-submenu-nav-link.sub-menu-link:hover {
 }
 
 .form-container button:hover {
-  background-color: #333; /* Цвет кнопки при наведении */
+  background-color: #333; 
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #024d9f;
+  color: #fff;
 }

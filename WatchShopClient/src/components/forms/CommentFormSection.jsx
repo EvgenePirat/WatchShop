@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
 import { Rating } from '@mui/material';
-import { useAddNewCommentMutation } from '../../apis/admin/commentApi';
+import { useAddNewCommentMutation, useUpdateCommentMutation } from '../../apis/admin/commentApi';
 
-const CommentFormSection = ({watchId, userId, onCommentSubmit}) => {
+const CommentFormSection = ({watchId, userId, onCommentSubmit, alreadyComment}) => {
 
-  if(!watchId && !userId){
+  if(!watchId && !userId && !alreadyComment){
     return <div>Loading...</div>
   }
 
-  const [grade, setGrade] = useState(0);
-  const [comment, setComment] = useState('');
+  const [grade, setGrade] = useState(alreadyComment != null ? alreadyComment.grade : 0);
+  const [comment, setComment] = useState(alreadyComment != null ? alreadyComment.comment : '');
 
   const [postCommentToWatchMutation] = useAddNewCommentMutation();
+  const [updateCommentMutation] = useUpdateCommentMutation();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,16 @@ const CommentFormSection = ({watchId, userId, onCommentSubmit}) => {
       toast.error('Please fill out all fields.', { position: 'top-right' });
     }else {
 
-      var result = await postCommentToWatchMutation({watchId:watchId, userId: userId, comment: comment, grade: grade});
+      var result = null;
+
+      if(alreadyComment != null){
+        result = await updateCommentMutation({id: alreadyComment.id, watchId:watchId, userId: userId, comment: comment, grade: grade});
+        updateCommentMutation.invalidateQueries('Comments');
+      }
+      else{
+        result = await postCommentToWatchMutation({watchId:watchId, userId: userId, comment: comment, grade: grade});
+        postCommentToWatchMutation.invalidateQueries('Comments');
+      }
 
       if(result.error){
         toast.error('Comment is not added. Try later!', { position: 'top-right' });
@@ -63,7 +73,7 @@ const CommentFormSection = ({watchId, userId, onCommentSubmit}) => {
             </div>
         </div>
 
-        <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">Post Comment</button>
+        <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">{alreadyComment ? "Update Comment" : "Post Comment"}</button>
     </form>
   )
 }
