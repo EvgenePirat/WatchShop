@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductDetailAction from './ProductDetailAction';
 import { Rating } from '@mui/material';
+import { transformString } from '../../utilities/TransformString';
 
 const ProductDetailTextSection = ({watch}) => {
 
@@ -33,11 +34,11 @@ const ProductDetailTextSection = ({watch}) => {
             <ul>
                 <li><span className="info-property"> Brend </span> : <span className="info-value">{watch.brend.name}</span></li>
                 <li><span className="info-property"> Country </span> : <span className="info-value">{watch.country.name}</span></li>
-                <li><span className="info-property"> Glass Type </span> : <span className="info-value">{watch.glassType.name}</span></li>
+                <li><span className="info-property"> Glass Type </span> : <span className="info-value">{transformString(watch.glassType.name)}</span></li>
                 <li><span className="info-property"> Strap </span> : <span className="info-value">{watch.strap.name}</span></li>
                 <li><span className="info-property"> Style </span> : <span className="info-value">{watch.style.name}</span></li>
                 <li><span className="info-property"> Gender </span> : <span className="info-value">{watch.gender}</span></li>
-                <li><span className="info-property"> Mechanism Type </span> : <span className="info-value">{watch.mechanismType.name}</span></li>
+                <li><span className="info-property"> Mechanism Type </span> : <span className="info-value">{transformString(watch.mechanismType.name)}</span></li>
             </ul>
         </div>
 

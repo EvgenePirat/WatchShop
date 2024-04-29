@@ -9,16 +9,24 @@ const ProductDetailSlider = ({watch}) => {
     return <div>Loading...</div>
   }
 
+  console.log(watch)
+
 
   return (
     <>
-       <Fade>
-        {watch.images.map((image, index) => (
-          <div key={index}>
-            <img style={{ width: '100%', height: '600px' }} src={image.path} />
-          </div>
-        ))}
-      </Fade>
+      {watch.images.length === 1 ? (
+        <div>
+          <img style={{ width: '100%', height: '600px' }} src={watch.images[0].path} />
+        </div>
+      ) : (
+        <Fade>
+          {watch.images.map((image, index) => (
+            <div key={index}>
+              <img style={{ width: '100%', height: '600px' }} src={image.path} />
+            </div>
+          ))}
+        </Fade>
+      )}
     </>
   );
 };
