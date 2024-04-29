@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useDeleteUserMutation, useUpdateUserMutation } from '../../apis/admin/userApi';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setLoggedInUser } from '../../Storage/Redux/Slices/userAuthSlice';
 
 const AccountFormSection = ({user}) => {
 
@@ -17,6 +19,7 @@ const AccountFormSection = ({user}) => {
     const [userUpdateMutation] = useUpdateUserMutation();
     const [deleteUserMutation] = useDeleteUserMutation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleDeleteAccount = () => {
         const result = deleteUserMutation(user.id)
@@ -53,6 +56,12 @@ const AccountFormSection = ({user}) => {
             }
     };
 
+    const handleLogoutAccount = () => {
+        localStorage.removeItem('token');
+        dispatch(setLoggedInUser({id:"", username:"", role:""}));
+        navigate("/");
+    }
+
     const isValidEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -60,57 +69,62 @@ const AccountFormSection = ({user}) => {
 
     return (
         <form action="#" onSubmit={handleFormSubmit}>
-        <div className="row g-xl-4 g-3">
+            <div className="row g-xl-4 g-3">
             <div className="col-6 col-xxs-12">
-            <input
-                type="text"
-                name="commenter-first-name"
-                id="commenter-first-name"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
+                <input
+                    type="text"
+                    name="commenter-first-name"
+                    id="commenter-first-name"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
             </div>
             <div className="col-6 col-xxs-12">
-            <input
-                type="text"
-                name="commenter-last-name"
-                id="commenter-last-name"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-            />
+                <input
+                    type="text"
+                    name="commenter-last-name"
+                    id="commenter-last-name"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                />
             </div>
             <div className="col-6 col-xxs-12">
-            <input
-                type="email"
-                name="commenter-email"
-                id="commenter-email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
+                <input
+                    type="email"
+                    name="commenter-email"
+                    id="commenter-email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                </div>
+
+                <div className="col-6 col-xxs-12">
+                <input
+                    type="text"
+                    name="commenter-number"
+                    id="commenter-number"
+                    placeholder="City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                />
+                </div>
             </div>
 
-            <div className="col-6 col-xxs-12">
-            <input
-                type="text"
-                name="commenter-number"
-                id="commenter-number"
-                placeholder="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-            />
-            </div>
-        </div>
+            <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">
+                Update
+            </button>
 
-        <button type="submit" className="fz-1-banner-btn fz-comment-form__btn">
-            Update
-        </button>
+            <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete" onClick={handleDeleteAccount}>
+                Delete
+            </button>
 
-        <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete" onClick={handleDeleteAccount}>
-            Delete
-        </button>
+            <button className="fz-1-banner-btn-delete fz-comment-form__btn_delete" onClick={handleLogoutAccount}>
+                Logout
+            </button>
+
         </form>
     );
 };
