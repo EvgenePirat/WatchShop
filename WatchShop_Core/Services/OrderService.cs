@@ -90,7 +90,7 @@ namespace WatchShop_Core.Services
 
             if(orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled || orderToUpdate.OrderStatus.Name == OrderStatusEnum.Delivered)
             {
-                throw new OrderArgumentException("You can not update status for order, order was cancelled or . You need create new order");
+                throw new OrderArgumentException("You can not update status for order, order was cancelled or delivered. You need create new order");
             }
             
             try
@@ -122,6 +122,11 @@ namespace WatchShop_Core.Services
 
             if (orderToUpdate == null)
                 throw new OrderArgumentException($"Order by id {id} not found for update");
+
+            if (orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled || orderToUpdate.OrderStatus.Name == OrderStatusEnum.Delivered)
+            {
+                throw new OrderArgumentException("You can not update shipment for order, order was cancelled or delivered.");
+            }
 
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
 
