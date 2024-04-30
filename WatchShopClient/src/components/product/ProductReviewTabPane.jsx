@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import { useGetCommentByWatchNameModelQuery } from '../../apis/admin/commentApi';
+import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 const ProductReviewTabPane = ({watch}) => {
 
@@ -12,6 +13,7 @@ const ProductReviewTabPane = ({watch}) => {
     const navigate = useNavigate();
     const userItems = useSelector(state => state.userItemsStore.userItems);
     const [comments, setComments] = useState([])
+    
 
     const {data, isLoading} = useGetCommentByWatchNameModelQuery(watch.nameModel);
 

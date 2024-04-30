@@ -1,7 +1,11 @@
 import React from 'react'
 import { transformString } from '../../utilities/TransformString'
 
-const ProductDescTabPane = ({watch}) => {
+const ProductDescTabPane = ({watch, additionalCharacteristics}) => {
+
+    if(!additionalCharacteristics && additionalCharacteristics.length == 0){
+        return <div>Loading...</div>
+    }
   
   return (
     <div className="fz-product-details__describtion">
@@ -77,6 +81,23 @@ const ProductDescTabPane = ({watch}) => {
         <h4>Time Format</h4>
         <ul>
             <li>{transformString(watch.timeFormat)}</li>
+        </ul>
+
+        <h4>Additional Characteristics</h4>
+        <ul>
+            {watch.watchAdditionalCharacteristics.map((additionalCharacteristic) => {
+                const characteristic = additionalCharacteristics.find(characteristic => characteristic.id === additionalCharacteristic.additionalCharacteristicsId);
+                
+                if (characteristic) {
+                    return (
+                        <li key={characteristic.id}>
+                            {characteristic.name}
+                        </li>
+                    );
+                } else {
+                    return null;
+                }
+            })}
         </ul>
 
     </div>
