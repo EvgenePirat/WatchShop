@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WatchShop_Core.Models.Brends.Request;
 using WatchShop_Core.Models.Orders.Request;
 using WatchShop_Core.Models.Shipments.Request;
 using WatchShop_Core.ServiceContracts;
-using WatchShop_Core.Services;
-using WatchShop_UI.Dtos.Brends.Reequest;
-using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.Orders.Request;
 using WatchShop_UI.Dtos.Orders.Response;
 using WatchShop_UI.Dtos.Shipments.Request;
@@ -30,6 +27,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> CreateOrderAsync([FromBody] CreateOrderDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Create Order, Task started", nameof(OrderController), nameof(CreateOrderAsync));
@@ -53,6 +51,7 @@ namespace WatchShop_UI.Controllers
 
 
         [HttpGet("all")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetOrdersAsync()
         {
             _logger.LogInformation("{controller}.{method} - Get, get all orders, Task started",
@@ -75,6 +74,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:Guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteOrderAsync(Guid id)
         {
             _logger.LogInformation("{controller}.{method} - Delete, delete order, Task started",
@@ -95,6 +95,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpGet("{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetOrderByIdAsync(Guid id)
         {
             _logger.LogInformation("{controller}.{method} - Get, get order by id, Task started",
@@ -117,6 +118,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("status/{id:Guid}&{newOrderStatus}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> UpdateOrderStatusAsync(Guid id, string newOrderStatus)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update order status, Task started",
@@ -139,7 +141,8 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("shipment/{id:Guid}")]
-        public async Task<ActionResult<ApiResponse>> UpdateOrderStatusAsync(Guid id,[FromBody] UpdateShipmentDto dto)
+        [Authorize]
+        public async Task<ActionResult<ApiResponse>> UpdateOrderShipmentAsync(Guid id,[FromBody] UpdateShipmentDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update shipment for order, Task started",
                 nameof(OrderController), nameof(UpdateOrderStatusAsync));
@@ -163,6 +166,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpGet("user/{username}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetOrdersByUserNameAsync(string username)
         {
             _logger.LogInformation("{controller}.{method} - Get, get orders by username, Task started",

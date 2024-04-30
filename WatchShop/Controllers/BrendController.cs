@@ -26,6 +26,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> CreateBrendAsync([FromBody] CreateBrendDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Create Brend, Task started", nameof(BrendController), nameof(CreateBrendAsync));
@@ -70,6 +71,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> UpdateBrendAsync(int id, [FromBody] UpdateBrendDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update Brend, Task started",
@@ -94,6 +96,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteBrendAsync(int id)
         {
             _logger.LogInformation("{controller}.{method} - Delete, delete brend, Task started",
