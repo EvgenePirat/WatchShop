@@ -13,7 +13,6 @@ const ProductReviewTabPane = ({watch}) => {
     const navigate = useNavigate();
     const userItems = useSelector(state => state.userItemsStore.userItems);
     const [comments, setComments] = useState([])
-    
 
     const {data, isLoading} = useGetCommentByWatchNameModelQuery(watch.nameModel);
 
@@ -80,6 +79,8 @@ const ProductReviewTabPane = ({watch}) => {
 
     const alreadyComment = isUserAlreadyCommented();
 
+    console.log(comments)
+
   return (
     <div className="fz-product-details__review">
         <div className="review-overview">
@@ -124,6 +125,7 @@ const ProductReviewTabPane = ({watch}) => {
                             <div className="user">
                                 <div className="user-info">
                                     <h6 className="user-name">{userItems.filter((user) => user.id == comment.userId)[0].userName}</h6>
+                                    <h6 className="user-name">{new Date(comment.createdAt).toLocaleDateString()}</h6>
                                     <div className="user-rating">
                                         <Rating name="read-only" value={comment.grade} readOnly />
                                     </div>

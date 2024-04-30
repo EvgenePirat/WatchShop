@@ -17,7 +17,8 @@ const watchApi = createApi({
         getWatchCharacteristics: builder.query({
             query: () => ({
                 url:"characteristic",
-                method: "GET"
+                method: "GET",
+                providesTags: ["Watches"],
             })
         }),
         getWatchByNameModel: builder.query({
@@ -47,7 +48,7 @@ const watchApi = createApi({
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 }
             }),
-            invalidatesTags:["Watches"],
+            invalidatesTags:["Watches"]
         }),
         deleteWatch: builder.mutation({
             query: (id) => ({
@@ -57,7 +58,7 @@ const watchApi = createApi({
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 }
             }),
-            invalidatesTags:["Watches"],
+            invalidatesTags:["Watches"]
         })
     }),
 });

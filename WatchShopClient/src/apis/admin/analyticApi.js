@@ -9,12 +9,14 @@ const analyticApi = createApi({
             token && headers.append("Authorization", "Bearer " + token);
         },
     }),
+    tagTypes: ["Analystics"],
     endpoints: (builder) => ({
         getSalesStatistics: builder.query({
             query: () => ({
                 url:"",
                 method: "GET"
-            })
+            }),
+            providesTags: ["Analystics"],
         })
     }),
 });

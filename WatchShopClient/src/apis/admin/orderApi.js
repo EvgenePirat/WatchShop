@@ -45,7 +45,7 @@ const orderApi = createApi({
                 url:`status/${updateStatus.id}&${updateStatus.status}`,
                 method: "PUT"
             }),
-            invalidatesTags:["Orders"],
+            invalidatesTags:["Orders"]
         }),
         updateShipment: builder.mutation({
             query: (updateShipment) => ({
