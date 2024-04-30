@@ -21,10 +21,10 @@ function CreateUser() {
 
         console.log(resultOperation)
 
-        if(resultOperation.data.isSuccess)
-            toast.success('User is added');
-        else
+        if(resultOperation.error)
             toast.error('User is not added');
+        else
+            toast.success('User is added');
     
         setUserName("");
         setPassword("");

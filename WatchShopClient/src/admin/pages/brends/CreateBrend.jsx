@@ -16,10 +16,11 @@ function CreateBrend() {
 
         const resultOperation = await addNewBrendMutation({name,description});
 
-        if(resultOperation.data.isSuccess)
-            toast.success('Brend is add');
-        else
+        if(resultOperation.error)
             toast.error('Brend is not add');
+        else
+            toast.success('Brend is add');
+            
     
         setName("");
         setDescription("");

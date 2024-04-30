@@ -24,12 +24,13 @@ function User() {
 
     var result = await updateUserMutation(userUpdate);
 
-    if(result.data.isSuccess){
-        toast.success('User is update');
-        setUserDetail(userUpdate)
+    if(result.error){
+      toast.error('User is not update');
     }
-    else
-        toast.error('User is not update');
+    else{
+      toast.success('User is update');
+      setUserDetail(userUpdate)
+    }
 }
 
   return (

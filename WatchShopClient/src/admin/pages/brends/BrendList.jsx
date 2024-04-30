@@ -39,10 +39,10 @@ function BrendList() {
 
       result.then(response => {
         
-        if (response.data.isSuccess) {
-          toast.success(response.data.result)
-        } else {
+        if (response.error) {
           toast.error('brend is not deleted')
+        } else {
+          toast.success(response.data.result)
         }
       })
 

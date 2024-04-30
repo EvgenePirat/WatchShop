@@ -36,10 +36,10 @@ function CommentList() {
   
         result.then(response => {
           
-          if (response.data.isSuccess) {
-            toast.success(response.data.result)
-          } else {
+          if (response.error) {
             toast.error('Comment is not deleted')
+          } else {
+            toast.success(response.data.result)
           }
         })
   

@@ -111,9 +111,6 @@ function CreateWatch() {
   const handleSubmit = async (e) => {
       e.preventDefault();
 
-      console.log(newWatch)
-
-      
       const formData = new FormData();
 
       formData.append('nameModel', newWatch.nameModel);
@@ -163,10 +160,10 @@ function CreateWatch() {
 
         console.log(response)
 
-        if(response.data.isSuccess)
-            toast.success('Watch is add');
+        if(response.error)
+          toast.error('Watch is not add');
         else
-            toast.error('Watch is not add');
+          toast.success('Watch is add');
       
         setNewWatch(watch)      
         setImages([])
