@@ -17,7 +17,10 @@ const userApi = createApi({
         getUserById: builder.query({
             query: (id) => ({
                 url:`${id}`,
-                method: "GET"
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             providesTags: ["Users"],
         }),
@@ -26,20 +29,29 @@ const userApi = createApi({
                 url:`${user.id}`,
                 method: "PUT",
                 body: user,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Users"],
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
                 url:`${id}`,
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Users"],
         }),
         subscriptionLetters: builder.mutation({
             query: (user) => ({
                 url:`subscription/${user.email}&${user.isActive}`,
-                method: "PUT"
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Users"],
         })

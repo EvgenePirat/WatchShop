@@ -32,6 +32,9 @@ const watchApi = createApi({
                 url: "",
                 method:"POST",
                 body: newWatch,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Watches"]
         }),
@@ -40,13 +43,19 @@ const watchApi = createApi({
                 url:`${watch.id}`,
                 method: "PUT",
                 body: watch,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Watches"],
         }),
         deleteWatch: builder.mutation({
             query: (id) => ({
                 url:`${id}`,
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Watches"],
         })
