@@ -12,7 +12,7 @@ function Topbar() {
     <div className='topbar'>
         <div className='topbarWrapper'>
             <div className="topLeft">
-                <span className='logo'>AdminPage</span>
+                <span className='logo'>Admin Panel</span>
             </div>
             <div className="topRight">
                 <div className="topbarIconContainer">

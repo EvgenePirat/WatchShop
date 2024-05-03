@@ -63,6 +63,9 @@ function OrderList() {
 
   return (
     <div className='orderList'>
+        <div className='brendTitleContainer'>
+          <h3 className="brendTitle">Orders</h3>
+        </div>
         <div style={{ width: '100%', alignItems: 'end'}}>
                 <DataGrid
                 rows={data.result}
