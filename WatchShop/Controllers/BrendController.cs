@@ -27,7 +27,7 @@ namespace WatchShop_UI.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse>> CreateBrendAsync([FromBody] CreateBrendDto dto)
+        public async Task<ActionResult<ApiResponse>> CreateBrendAsync([FromBody] CreateBrendDto  dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Create Brend, Task started", nameof(BrendController), nameof(CreateBrendAsync));
 
