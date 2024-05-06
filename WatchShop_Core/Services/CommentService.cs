@@ -53,7 +53,7 @@ namespace WatchShop_Core.Services
             var comment = await _unitOfWork.WatchCommentRepository.GetByIdAsync(id);
 
             if (comment == null)
-                throw new CommentWatchArgumentException($"Comment by id {id} not found for delete");
+                throw new CommentWatchArgumentException($"Comment by id {id} not found");
 
             return _mapper.Map<CommentModel>(comment);
         }

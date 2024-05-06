@@ -121,10 +121,10 @@ namespace WatchShopTest.ModuleTests.CoreTest
             var mapperMock = new Mock<IMapper>();
 
             var brendsFromRepository = new List<Brend>
-        {
-            new Brend { Id = 1, Name = "Brend 1", Watches = new List<Watch>() },
-            new Brend { Id = 2, Name = "Brend 2", Watches = new List<Watch>() }
-        };
+            {
+                new Brend { Id = 1, Name = "Brend 1", Watches = new List<Watch>() },
+                new Brend { Id = 2, Name = "Brend 2", Watches = new List<Watch>() }
+            };
 
             brendRepositoryMock.Setup(repo => repo.GetAllAsync(It.IsAny<Expression<Func<Brend, object>>>()))
                 .ReturnsAsync(brendsFromRepository);
