@@ -363,7 +363,7 @@ function CreateWatch() {
                 </div>
 
                 <div className="addWatchItem">
-                  <label htmlFor="waterResistances">Frame Case Shape:</label>
+                  <label htmlFor="waterResistances">Water Resistance:</label>
                   <select id="waterResistances" name="waterResistances" value={newWatch.frame.waterResistance}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, waterResistance : e.target.value}}))}>
                     {data.result.waterResistanceEnums.map((index, waterResistance) => (
                       <option key={waterResistance} value={index}>{transformString(index)}</option>

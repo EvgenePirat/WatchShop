@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import '../../styles/brend/brend.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
-import { useGetWatchCharacteristicsQuery } from '../../../apis/admin/watchApi';
+import { useGetWatchCharacteristicsQuery, useUpdateWatchMutation } from '../../../apis/admin/watchApi';
 import { transformString } from '../../../utilities/TransformString';
 
 function Watch() {
@@ -16,6 +16,7 @@ function Watch() {
   const [watchDetail, setWatchDetail] = useState(watch);
   const [additionalCharacteristics, setAdditionalCharacteristics] = useState([]);
   const [characteristics, setCharacteristics] = useState([]);
+  const [updateWatchMutation] = useUpdateWatchMutation();
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -27,6 +28,68 @@ function Watch() {
   if(characteristics.length == 0){
     return <div>Loading...</div>
   }
+
+  const handleUpdateWatch = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append('nameModel', watchUpdate.nameModel);
+    formData.append('gender', watchUpdate.gender);
+    formData.append('guarantee', watchUpdate.guarantee);
+    formData.append('price', watchUpdate.price);
+    formData.append('description', watchUpdate.description);
+    formData.append('timeFormat', watchUpdate.timeFormat);
+    formData.append('brendId', watchUpdate.brend.id);
+    formData.append('isDiscounted', watchUpdate.isDiscounted);
+    formData.append('state', watchUpdate.state);
+    formData.append('DiscountPrice', watchUpdate.discountPrice);
+    formData.append('styleId', watchUpdate.style.id);
+    formData.append('countryId', watchUpdate.country.id);
+    formData.append('mechanismTypeId', watchUpdate.mechanismType.id);
+    formData.append('glassTypeId', watchUpdate.glassType.id);
+
+    formData.append('strap.name', watchUpdate.strap.name);
+    formData.append('strap.strapMaterialId', watchUpdate.strap.strapMaterial.id);
+
+    formData.append('clockFace.indicationTypeId', watchUpdate.clockFace.indicationType.id);
+    formData.append('clockFace.indicationKindId', watchUpdate.clockFace.indicationKind.id);
+    formData.append('clockFace.clockFaceColorId', watchUpdate.clockFace.clockFaceColor.id);
+
+    formData.append('frame.caseShape', watchUpdate.frame.caseShape);
+    formData.append('frame.waterResistance', watchUpdate.frame.waterResistance);
+    formData.append('frame.frameMaterialId', watchUpdate.frame.frameMaterial.id);
+    formData.append('frame.frameColorId', watchUpdate.frame.frameColor.id);
+    formData.append('frame.dimensions.length', watchUpdate.frame.dimensions.length);
+    formData.append('frame.dimensions.thickness', watchUpdate.frame.dimensions.thickness);
+    formData.append('frame.dimensions.width', watchUpdate.frame.dimensions.width);
+    formData.append('frame.dimensions.weight', watchUpdate.frame.dimensions.weight);
+    formData.append('frame.dimensions.caseDiameter', watchUpdate.frame.dimensions.caseDiameter);
+
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    // try {
+    //   const response = await updateWatchMutation(formData)
+
+    //   console.log(response)
+
+    //   if(response.error)
+    //     toast.error('Watch is not add');
+    //   else
+    //     toast.success('Watch is add');
+    
+    //   setNewWatch(watch)      
+    //   setImages([])
+    //   setWatchAdditionalCharacteristics([])
+
+    //   console.log('Response from server:', response);
+    // } catch (error) {
+    //   toast.error("Error after save");
+    //   console.error('Error while creating watch:', error);
+    // }
+}
 
 
   return (
@@ -158,6 +221,13 @@ function Watch() {
             </div>
 
             <div className="brendShowBottom">
+              <span className="brendShowTitle">State</span>
+              <div className="brendShowInfo">
+                <span className="brendShowInfoTitle">{transformString(watchDetail.state)}</span>
+              </div>
+            </div>
+
+            <div className="brendShowBottom">
               <span className="brendShowTitle">Frame case shape</span>
               <div className="brendShowInfo">
                 <span className="brendShowInfoTitle">{transformString(watchDetail.frame.caseShape)}</span>
@@ -244,7 +314,7 @@ function Watch() {
           </div>
             <div className="brendUpdate">
               <span className="brendUpdateTitle">Edit</span>
-              <form className="brendUpdateForm">
+              <form className="brendUpdateForm" onSubmit={handleUpdateWatch}>
                 <div className="brendUpdateLeft">
 
                   <div className="brendUpdateItem">
@@ -336,7 +406,7 @@ function Watch() {
 
                   <div className="brendUpdateItem">
                     <label>Brend</label>
-                    <select id="brends" name="brends" value={watchUpdate.styleId}  onChange={(e) => setWatchUpdate((prev) => ({...prev,brendId: parseInt(e.target.value)}))}>
+                    <select id="brends" name="brends" value={watchUpdate.brend.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,brendId: parseInt(e.target.value)}))}>
                       {characteristics.brends.map((brend) => (
                         <option key={brend.id} value={brend.id}>{brend.name}</option>
                       ))}
@@ -345,7 +415,7 @@ function Watch() {
 
                   <div className="brendUpdateItem">
                     <label>Style</label>
-                    <select id="styles" name="styles" value={watchUpdate.styleId}  onChange={(e) => setWatchUpdate((prev) => ({...prev,styleId: parseInt(e.target.value)}))}>
+                    <select id="styles" name="styles" value={watchUpdate.style.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,styleId: parseInt(e.target.value)}))}>
                       {characteristics.styles.map((style) => (
                         <option key={style.id} value={style.id}>{style.name}</option>
                       ))}
@@ -363,7 +433,7 @@ function Watch() {
 
                   <div className="brendUpdateItem">
                     <label>Strap Material</label>
-                    <select id="strapMaterials" name="strapMaterials" value={watchUpdate.strap.strapMaterialId}  onChange={(e) => setWatchUpdate((prev) => ({...prev,strap: {...prev.strap, strapMaterialId : parseInt(e.target.value)}}))}>
+                    <select id="strapMaterials" name="strapMaterials" value={watchUpdate.strap.strapMaterial.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,strap: {...prev.strap, strapMaterialId : parseInt(e.target.value)}}))}>
                       {characteristics.strapMaterials.map((strapMaterial) => (
                         <option key={strapMaterial.id} value={strapMaterial.id}>{transformString(strapMaterial.name)}</option>
                       ))}
@@ -372,20 +442,115 @@ function Watch() {
 
                   <div className="brendUpdateItem">
                     <label>Country</label>
-                    <select id="countries" name="countries" value={watchUpdate.countryId}  onChange={(e) => setWatchUpdate((prev) => ({...prev,countryId: e.target.value}))}>
+                    <select id="countries" name="countries" value={watchUpdate.country.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,countryId: e.target.value}))}>
                       {characteristics.countries.map((country) => (
                         <option key={country.id} value={country.id}>{country.name}</option>
                       ))}
                     </select>
                   </div>
 
+                  <div className="brendUpdateItem">
+                    <label>Mechanism Type</label>
+                    <select id="mechanismTypes" name="mechanismTypes" value={watchUpdate.mechanismType.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,mechanismTypeId: parseInt(e.target.value)}))}>
+                      {characteristics.mechanismTypes.map((mechanismType) => (
+                        <option key={mechanismType.id} value={mechanismType.id}>{transformString(mechanismType.name)}</option>
+                      ))}
+                    </select>
+                  </div>
 
+                  <div className="brendUpdateItem">
+                    <label>ClockFace Indication Kind</label>
+                    <select id="indicationKinds" name="indicationKinds" value={watchUpdate.clockFace.indicationKind.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,clockFace: {...prev.clockFace, indicationKindId : parseInt(e.target.value)}}))}>
+                      {characteristics.indicationKinds.map((indicationKind) => (
+                        <option key={indicationKind.id} value={indicationKind.id}>{transformString(indicationKind.name)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>ClockFace Indication Type</label>
+                    <select id="indicationTypes" name="indicationKinds" value={watchUpdate.clockFace.indicationType.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,clockFace: {...prev.clockFace, indicationTypeId : parseInt(e.target.value)}}))}>
+                      {characteristics.indicationTypes.map((indicationType) => (
+                        <option key={indicationType.id} value={indicationType.id}>{transformString(indicationType.name)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>Glass type</label>
+                    <select id="glassTypes" name="glassTypes" value={watchUpdate.glassType.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,glassTypeId: parseInt(e.target.value)}))}>
+                      {characteristics.glassTypes.map((glassType) => (
+                        <option key={glassType.id} value={glassType.id}>{transformString(glassType.name)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>ClockFace Color</label>
+                    <select id="clockFaceColors" name="indicationKinds" value={watchUpdate.clockFace.clockFaceColor.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,clockFace: {...prev.clockFace, clockFaceColorId : parseInt(e.target.value)}}))}>
+                      {characteristics.clockFaceColors.map((clockFaceColor) => (
+                        <option key={clockFaceColor.id} value={clockFaceColor.id}>{transformString(clockFaceColor.name)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>Frame Color</label>
+                    <select id="frameColors" name="frameColors" value={watchUpdate.frame.frameColor.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, frameColorId : parseInt(e.target.value)}}))}>
+                      {characteristics.frameColors.map((frameColor) => (
+                        <option key={frameColor.id} value={frameColor.id}>{transformString(frameColor.name)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>Water Resistance</label>
+                    <select id="waterResistances" name="waterResistances" value={watchUpdate.frame.waterResistance}  onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, waterResistance : e.target.value}}))}>
+                      {characteristics.waterResistanceEnums.map((index, waterResistance) => (
+                        <option key={waterResistance} value={index}>{transformString(index)}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="brendUpdateItem">
+                    <label>Frame material</label>
+                    <select id="frameMaterials" name="frameMaterials" value={watchUpdate.frame.frameMaterial.id}  onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, frameMaterialId : parseInt(e.target.value)}}))}>
+                      {characteristics.frameMaterials.map((frameMaterial) => (
+                        <option key={frameMaterial.id} value={frameMaterial.id}>{transformString(frameMaterial.name)}</option>
+                      ))}
+                    </select>
+                  </div>
 
                   
+                  <div className="brendUpdateItem">
+                    <label htmlFor='length'>Length</label>
+                    <input id='length' type="number" className='inputWatchStyle' value={watchUpdate.frame.dimensions.length} onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, dimensions : {...prev.frame.dimensions, length : e.target.value}}}))}/>
+                  </div>
 
+                  <div className="brendUpdateItem">
+                    <label htmlFor='thickness'>Thickness</label>
+                    <input id='thickness' type="numer" className='inputWatchStyle' value={watchUpdate.frame.dimensions.thickness} onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, dimensions : {...prev.frame.dimensions, thickness : e.target.value}}}))}/>
+                  </div>
 
+                  <div className="brendUpdateItem">
+                    <label htmlFor='width'>Width</label>
+                    <input id='width' type="number" className='inputWatchStyle' value={watchUpdate.frame.dimensions.width} onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, dimensions : {...prev.frame.dimensions, width : e.target.value}}}))}/>
+                  </div>
 
+                  <div className="brendUpdateItem">
+                    <label htmlFor='Weight'>Weight</label>
+                    <input id='Weight' type="number" className='inputWatchStyle' value={watchUpdate.frame.dimensions.weight} onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, dimensions : {...prev.frame.dimensions, weight : e.target.value}}}))}/>
+                  </div>
 
+                  <div className="brendUpdateItem">
+                    <label>Frame material</label>
+                    <select id="Diameter" name="Diameter" value={watchUpdate.frame.dimensions.caseDiameter}  onChange={(e) => setWatchUpdate((prev) => ({...prev,frame: {...prev.frame, dimensions : {...prev.frame.dimensions, caseDiameter : e.target.value}}}))}>
+                      {characteristics.caseDiameterEnums.map((index, caseDiameter) => (
+                        <option key={caseDiameter} value={index}>{transformString(index)}</option>
+                      ))}
+                    </select>
+                  </div>
+                  
                   <button className="brendUpdateButton">Update</button>
 
 
