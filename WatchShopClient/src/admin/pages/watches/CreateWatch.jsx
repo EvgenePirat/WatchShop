@@ -255,7 +255,7 @@ function CreateWatch() {
                 </div>
 
                 <div className="addWatchItem">
-                  <label htmlFor="timeFormats">TimeFormat:</label>
+                  <label htmlFor="timeFormats">Time Format:</label>
                   <select id="timeFormats" name="timeFormats" value={newWatch.timeFormat}  onChange={(e) => setNewWatch((prev) => ({...prev,timeFormat: e.target.value}))}>
                     {data.result.timeFormatEnums.map((index, timeFormat) => (
                       <option key={timeFormat} value={index}>{transformString(index)}</option>

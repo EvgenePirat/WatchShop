@@ -35,7 +35,7 @@ function WatchList() {
           renderCell: (params) => {
             return (
               <>
-                <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/watch/"+params.row.id, {state: {brend: params.row}})} />
+                <EditIcon className='userListButtonEdit' onClick={() => navigate("/admin/watch/"+params.row.id, {state: {watch: params.row}})} />
                 <button onClick={() => handleDeleteWatch(params.row.id)}><DeleteIcon className='userListButtonDelete' /></button>
               </>
             )
