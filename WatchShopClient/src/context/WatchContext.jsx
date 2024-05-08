@@ -1,4 +1,3 @@
-import { allCakeList, blogList } from '../data/Data';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux'
@@ -577,101 +576,6 @@ useEffect(() => {
   }, 0);
   const finalPrice = subTotal
 
-  // Blog List Category Filter
-  const [filteredBlogList, setFilteredBlogList] = useState(blogList);
-  const [activeBlogCategory, setActiveBlogCategory] = useState(null);
-  const [paginatedBlogPost, setPaginatedBlogPost] = useState([]);
-  // pagination
-  const itemsPerBlogPage = 3; // Number of items per page
-
-  const [currentBlogPage, setCurrentBlogPage] = useState(1);
-
-  const handleBlogPageChange = (newPage) => {
-    setCurrentBlogPage(newPage);
-    scrollToTop();
-  };
-  useEffect(() => {
-    const startIndex = (currentBlogPage - 1) * itemsPerBlogPage;
-    const endIndex = startIndex + itemsPerBlogPage;
-
-    const paginatedBlogSlice = filteredBlogList.slice(startIndex, endIndex);
-
-    setPaginatedBlogPost(paginatedBlogSlice);
-  }, [currentBlogPage, filteredBlogList]);
-
-
-
-  const totalBlogs = filteredBlogList.length
-  const totalBlogPage = Math.ceil(totalBlogs / itemsPerBlogPage);
-
-  // Search Filter
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    const filteredBlogs = blogList.filter(item =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredBlogList(filteredBlogs);
-    setCurrentBlogPage(1); // Reset to the first page when search is changed
-    setSelectedBlogTags([]); // Reset selected tags
-    setActiveBlogCategory(null); // Reset active category
-  };
-
-  // Blog Category Filter
-
-  const handleBlogCategoryFilter = (category) => {
-    if (category === null) {
-      setFilteredBlogList(blogList);
-    } else {
-      const filteredBlogs = blogList.filter(item => item.category === category);
-      setFilteredBlogList(filteredBlogs);
-    }
-    setActiveBlogCategory(category);
-    setCurrentBlogPage(1); // Reset to the first page when category is changed
-    setSelectedBlogTags([]); // Reset selected tags
-  };
-  // Blog Tag Filter
- const [selectedBlogTags, setSelectedBlogTags] = useState([]);
-
- const handleBlogTagSelection = (tag) => {
-  if (selectedBlogTags.includes(tag)) {
-    setSelectedBlogTags(selectedBlogTags.filter((selectedTag) => selectedTag !== tag));
-  } else {
-    setSelectedBlogTags([...selectedBlogTags, tag]);
-  }
-};
- // Filter products based on selected tags
-useEffect(() => {
-  // Apply all active filters together
-  let filteredBlogs = blogList;
-
-  // Apply category filter
-  if (activeBlogCategory !== null) {
-    filteredBlogs = filteredBlogs.filter(blog => blog.category === activeBlogCategory);
-  }
-
-  // Apply tag filter
-  if (selectedBlogTags.length > 0) {
-    filteredBlogs = filteredBlogs.filter(blog =>
-      selectedBlogTags.includes(blog.category)
-    );
-  }
-
-  // Apply search filter
-  if (searchQuery.trim() !== '') {
-    filteredBlogs = filteredBlogs.filter(blog =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
-
-  // Update filtered blog list and reset pagination
-  setFilteredBlogList(filteredBlogs);
-  setCurrentBlogPage(1);
-
-}, [searchQuery, selectedBlogTags, activeBlogCategory]);
-
   // jewelery shop
   const [jeweleryArray, setJeweleryArray] = useState([]);
   const [jeweleryWishlist, setJeweleryWishlist] = useState([]);
@@ -928,14 +832,6 @@ useEffect(() => {
       addToWishlist,
       subTotal,
       finalPrice,
-      filteredBlogList,
-      handleBlogCategoryFilter,
-      activeBlogCategory,
-      currentBlogPage,
-      handleBlogPageChange,
-      itemsPerBlogPage,
-      totalBlogPage,
-      paginatedBlogPost,
       jeweleryWishlist,
       addToJeweleryWishlist,
       jeweleryAddToCart,
@@ -946,8 +842,6 @@ useEffect(() => {
       handleJeweleryCartQuantityChange,
       searchTerm,
       handleSearchChange,
-      searchQuery,
-      handleSearch,
       jeweleryArray,
       randomizedItems,
       addWishlistToCart,
@@ -961,8 +855,6 @@ useEffect(() => {
       slides,
       selectedTags,
       handleTagSelection,
-      selectedBlogTags,
-      handleBlogTagSelection,
       wishlistItemAmount,
       slidesBrand,
       wishlistJewelleryItemAmount
