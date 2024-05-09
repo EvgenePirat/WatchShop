@@ -49,7 +49,7 @@ namespace WatchShopTest.IntegrationTests
             var client = _factory.CreateClient();
             var loginDto = new LoginDto
             {
-                Username = "testUser",
+                Username = "testadmin",
                 Password = "password",
             };
 
