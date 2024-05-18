@@ -105,7 +105,7 @@ namespace WatchShop_UI.Controllers
             ApiResponse response = new ApiResponse()
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
-                Result = $"Brend {id} - was deleted"
+                Result = $"User {id} - was deleted"
             };
 
             _logger.LogInformation("{controller}.{method} - Delete, delete user, Result - Ok, Task ended",

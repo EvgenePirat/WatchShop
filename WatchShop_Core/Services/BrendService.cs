@@ -68,6 +68,11 @@ namespace WatchShop_Core.Services
             var brendToUpdate = await _unitOfWork.IBrendRepository.GetByIdAsync(id)
                         ?? throw new BrendArgumentException("Brend with id not exist");
 
+            var brendExist = await _unitOfWork.IBrendRepository.FindByBrendNameAsync(model.Name);
+
+            if (brendExist != null)
+                throw new BrendArgumentException("Brend with name already exist");
+
             brendToUpdate.Name = model.Name;
             brendToUpdate.Description = model.Description;
 

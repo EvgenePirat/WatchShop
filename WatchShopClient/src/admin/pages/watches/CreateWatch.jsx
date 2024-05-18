@@ -162,12 +162,12 @@ function CreateWatch() {
 
         if(response.error)
           toast.error('Watch is not add');
-        else
+        else{
           toast.success('Watch is add');
-      
-        setNewWatch(watch)      
-        setImages([])
-        setWatchAdditionalCharacteristics([])
+          setNewWatch(watch)      
+          setImages([])
+          setWatchAdditionalCharacteristics([])
+        }
   
         console.log('Response from server:', response);
       } catch (error) {

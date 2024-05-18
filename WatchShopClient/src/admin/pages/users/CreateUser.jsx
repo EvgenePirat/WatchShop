@@ -38,8 +38,8 @@ function CreateUser() {
         <h1 className="addUserTitle">New User</h1>
         <form className="addUserForm" onSubmit={handleSubmit}>
             <div className="addUserItem">
-                <p>UserName</p>
-                <input type="text" placeholder="mops" className='inputBrendStyle' value={username} onChange={(e) => setUserName(e.target.value)} />
+                <p>Phone number</p>
+                <input type="number" placeholder="45678312" className='inputBrendStyle' value={username} onChange={(e) => setUserName(e.target.value)} />
             </div>
             <div className="addUserItem">
                 <p>UserName</p>

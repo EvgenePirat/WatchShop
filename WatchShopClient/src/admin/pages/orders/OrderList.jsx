@@ -6,10 +6,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-
-
 
 function OrderList() {
 
@@ -63,6 +59,9 @@ function OrderList() {
 
   return (
     <div className='orderList'>
+      <div className='userTitleContainer'>
+          <h3 className="userTitle">Orders</h3>
+      </div>
         <div style={{ width: '100%', alignItems: 'end'}}>
                 <DataGrid
                 rows={data.result}

@@ -95,7 +95,6 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> DeleteCommentAsync(Guid id)
         {
             _logger.LogInformation("{controller}.{method} - Delete, delete comment, Task started",
