@@ -15,6 +15,7 @@ using WatchShop_UI.Dtos.Straps.Request;
 using WatchShop_UI.Dtos.Watches.Request;
 using WatchShop_UI.Dtos.Watches.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
+using WatchShop_UI.Dtos.Brends.Response;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 namespace WatchShopTest.IntegrationTests
@@ -34,8 +35,8 @@ namespace WatchShopTest.IntegrationTests
             _factory = factory;
         }
 
-        [Fact, TestPriority(-5)]
-        public async Task Test1()
+        [Fact, TestPriority(-50)]
+        public async Task Create_BrendAsync_ReturnOk()
         {
             // Arrange
             var client = _factory.CreateClient();
@@ -70,9 +71,72 @@ namespace WatchShopTest.IntegrationTests
             BrendId = int.Parse(jsonObject["result"]["id"].ToString());
         }
 
+        [Fact, TestPriority(-45)]
+        public async Task GetBrendByIdAsync_ReturnsBrend()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var token = await GetAccessTokenAsync(client);
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            int brendId = BrendId;
+
+            // Act
+            var response = await client.GetAsync($"/api/Brend/{brendId}");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var createResponseContent = await response.Content.ReadAsStringAsync();
+
+            var jsonObject = JObject.Parse(createResponseContent);
+
+            Assert.NotNull(jsonObject);
+            Assert.Equal(brendId, int.Parse(jsonObject["result"]["id"].ToString()));
+        }
+
+        [Fact, TestPriority(-35)]
+        public async Task UpdateBrendAsync_ReturnsOk()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var token = await GetAccessTokenAsync(client);
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            int brendId = BrendId; 
+
+            var updateBrendDto = new
+            {
+                Name = "UpdatedBrendName",
+            };
+
+            var json = JsonConvert.SerializeObject(updateBrendDto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await client.PutAsync($"/api/Brend/{brendId}", content);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var createResponseContent = await response.Content.ReadAsStringAsync();
+
+            var jsonObject = JObject.Parse(createResponseContent);
+
+            Assert.NotNull(jsonObject);
+            Assert.Equal(brendId, int.Parse(jsonObject["result"]["id"].ToString()));
+            Assert.Equal("UpdatedBrendName", jsonObject["result"]["name"].ToString());
+        }
+
 
         [Fact, TestPriority(0)]
-        public async Task Test2()
+        public async Task Create_WatchAsync_ReturnOk()
         {
             // Arrange
             var client = _factory.CreateClient();
@@ -174,8 +238,38 @@ namespace WatchShopTest.IntegrationTests
             WatchId = int.Parse(jsonObject["result"]["id"].ToString());
         }
 
+        [Fact, TestPriority(5)]
+        public async Task GetWatchByNameModelAsync_ReturnsWatch()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var token = await GetAccessTokenAsync(client);
+
+            // Додавання токена доступу до заголовків запиту
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            string nameModel = "Test Watch"; // Замість цього значення встановіть реальну модель для тестування
+
+            // Act
+            var response = await client.GetAsync($"/api/Watch/{nameModel}");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var createResponseContent = await response.Content.ReadAsStringAsync();
+
+            var jsonObject = JObject.Parse(createResponseContent);
+
+            string nameModelResponse = jsonObject["result"]["id"].ToString();
+
+            Assert.NotNull(jsonObject);
+            Assert.Equal(nameModel, nameModelResponse);
+        }
+
         [Fact, TestPriority(15)]
-        public async Task Test3()
+        public async Task Delete_WatchAsync_ReturnOk()
         {
             var client = _factory.CreateClient();
 
@@ -197,7 +291,7 @@ namespace WatchShopTest.IntegrationTests
         }
 
         [Fact, TestPriority(20)]
-        public async Task Test4()
+        public async Task Delete_BrendAsync_ReturnOk()
         {
             var client = _factory.CreateClient();
 
