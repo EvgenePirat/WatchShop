@@ -11,7 +11,6 @@ using WatchShopTest.Utilities;
 
 namespace WatchShopTest.IntegrationTests
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
     public class BrendControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
@@ -22,7 +21,6 @@ namespace WatchShopTest.IntegrationTests
         }
 
         [Fact]
-        [Priority(1)]
         public async Task Create_Delete_BrendAsync_ReturnsCreatedResponse()
         {
             // Arrange
@@ -69,7 +67,6 @@ namespace WatchShopTest.IntegrationTests
         }
 
         [Fact]
-        [Priority(3)]
         public async Task Create_GetById_Delete_BrendAsync_ReturnsCreatedResponse()
         {
             var client = _factory.CreateClient();
@@ -125,7 +122,6 @@ namespace WatchShopTest.IntegrationTests
         }
 
         [Fact]
-        [Priority(5)]
         public async Task Create_GetByName_Delete_BrendAsync_ReturnsCreatedResponse()
         {
             var client = _factory.CreateClient();
