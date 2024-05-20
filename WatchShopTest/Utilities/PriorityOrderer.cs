@@ -10,36 +10,40 @@ namespace WatchShopTest.Utilities
 {
     public class PriorityOrderer : ITestCaseOrderer
     {
-        public IEnumerable<TTestCase> OrderTestCases<TTestCase>(
-            IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
+        public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
         {
-            string assemblyName = typeof(TestPriorityAttribute).AssemblyQualifiedName!;
             var sortedMethods = new SortedDictionary<int, List<TTestCase>>();
-            foreach (TTestCase testCase in testCases)
+
+            foreach (var testCase in testCases)
             {
-                int priority = testCase.TestMethod.Method
-                    .GetCustomAttributes(assemblyName)
-                    .FirstOrDefault()
-                    ?.GetNamedArgument<int>(nameof(TestPriorityAttribute.Priority)) ?? 0;
+                var priority = 0;
+
+                foreach (var attr in testCase.TestMethod.Method.GetCustomAttributes((typeof(TestPriorityAttribute).AssemblyQualifiedName)))
+                {
+                    priority = attr.GetNamedArgument<int>("Priority");
+                }
 
                 GetOrCreate(sortedMethods, priority).Add(testCase);
             }
 
-            foreach (TTestCase testCase in
-                sortedMethods.Keys.SelectMany(
-                    priority => sortedMethods[priority].OrderBy(
-                        testCase => testCase.TestMethod.Method.Name)))
+            foreach (var list in sortedMethods.Keys.Select(priority => sortedMethods[priority]))
             {
-                yield return testCase;
+                foreach (var testCase in list)
+                {
+                    yield return testCase;
+                }
             }
         }
 
-        private static TValue GetOrCreate<TKey, TValue>(
-            IDictionary<TKey, TValue> dictionary, TKey key)
-            where TKey : struct
-            where TValue : new() =>
-            dictionary.TryGetValue(key, out TValue? result)
-                ? result
-                : (dictionary[key] = new TValue());
+        private static List<TTestCase> GetOrCreate<TTestCase>(IDictionary<int, List<TTestCase>> dictionary, int priority)
+        {
+            if (!dictionary.TryGetValue(priority, out var result))
+            {
+                result = new List<TTestCase>();
+                dictionary[priority] = result;
+            }
+
+            return result;
+        }
     }
 }

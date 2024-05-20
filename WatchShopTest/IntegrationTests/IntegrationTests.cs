@@ -16,11 +16,12 @@ using WatchShop_UI.Dtos.Watches.Request;
 using WatchShop_UI.Dtos.Watches.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 namespace WatchShopTest.IntegrationTests
 {
     [TestCaseOrderer(
-        ordererTypeName: "WatchShopTest.Utilities.PriorityOrderer",
-        ordererAssemblyName: "WatchShopTest.IntegrationTests")]
+            ordererTypeName: "WatchShopTest.Utilities.PriorityOrderer",
+            ordererAssemblyName: "WatchShopTest")]
     public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
     {
 
