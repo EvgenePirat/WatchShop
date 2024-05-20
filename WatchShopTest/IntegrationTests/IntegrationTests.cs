@@ -16,8 +16,16 @@ using WatchShop_UI.Dtos.Watches.Request;
 using WatchShop_UI.Dtos.Watches.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 using WatchShop_UI.Dtos.Brends.Response;
+using System.Net.Http.Headers;
+using WatchShop_UI.Dtos.Users.Response;
+using System.ComponentModel.Design;
+using WatchShop_UI.Dtos.Comments.Request;
+using WatchShop_UI.Dtos.Orders.Request;
+using WatchShop_UI.Dtos.Carts.Request;
+using WatchShop_UI.Dtos.Payments.Request;
+using WatchShop_UI.Dtos.Shipments.Request;
+using WatchShop_UI.Dtos.Orders.Response;
 
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 namespace WatchShopTest.IntegrationTests
 {
     [TestCaseOrderer(
@@ -29,6 +37,9 @@ namespace WatchShopTest.IntegrationTests
         private readonly WebApplicationFactory<Program> _factory;
         public static int BrendId { get; private set; }
         public static int WatchId { get; private set; }
+        public static Guid UserId { get; private set; }
+        public static Guid ComentId { get; private set; }
+        public static Guid OrderId { get; private set; }
 
         public IntegrationTests(WebApplicationFactory<Program> factory)
         {
@@ -262,13 +273,304 @@ namespace WatchShopTest.IntegrationTests
 
             var jsonObject = JObject.Parse(createResponseContent);
 
-            string nameModelResponse = jsonObject["result"]["id"].ToString();
+            string nameModelResponse = jsonObject["result"]["nameModel"].ToString();
 
             Assert.NotNull(jsonObject);
             Assert.Equal(nameModel, nameModelResponse);
         }
 
-        [Fact, TestPriority(15)]
+        [Fact, TestPriority(10)]
+        public async Task GetUserByUserNameAsync_ReturnsUser()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var token = await GetAccessTokenAsync(client);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/user/testadmin");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var createResponseContent = await response.Content.ReadAsStringAsync();
+
+            var jsonObject = JObject.Parse(createResponseContent);
+
+            string username = jsonObject["result"]["userName"].ToString();
+
+            Assert.NotNull(jsonObject);
+            Assert.Equal("testadmin", username);
+
+            Guid userId = Guid.Parse(jsonObject["result"]["id"].ToString());
+
+            UserId = userId; 
+        }
+
+        [Fact, TestPriority(25)]
+        public async Task CreateCommentAsync_ReturnsCreatedResponse()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/comment");
+
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", adminToken);
+
+            var createCommentDto = new CreateCommentDto()
+            {
+                Comment = "This is a test comment",
+                Grade = 4,
+                UserId = UserId,
+                WatchId = WatchId
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(createCommentDto), Encoding.UTF8, "application/json");
+
+            request.Content = content;
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            ComentId = Guid.Parse(jsonObject["result"]["id"].ToString());
+
+            Assert.Equal("This is a test comment", jsonObject["result"]["comment"].ToString());
+        }
+
+        [Fact, TestPriority(35)]
+        public async Task GetCommentByIdAsync_ReturnsOkResponse()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/comment/{ComentId}");
+
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", adminToken);
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            Assert.Equal(ComentId.ToString(), jsonObject["result"]["id"].ToString());
+            Assert.Equal("This is a test comment", jsonObject["result"]["comment"].ToString());
+        }
+
+        [Fact, TestPriority(50)]
+        public async Task UpdateCommentAsync_ReturnsOkResponse()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Assume you have a method to get a valid token
+            var token = await GetAccessTokenAsync(client);
+
+            // Use a previously created comment ID for updating
+            var commentId = ComentId;
+
+            var updateCommentDto = new UpdateCommentDto()
+            {
+                Comment = "This is an updated test comment",
+                UserId = UserId,
+                WatchId = WatchId,
+                Grade = 3
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Put, $"/api/comment/{commentId}");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var content = new StringContent(JsonConvert.SerializeObject(updateCommentDto), Encoding.UTF8, "application/json");
+            request.Content = content;
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            Assert.Equal(commentId.ToString(), jsonObject["result"]["id"].ToString());
+            Assert.Equal("This is an updated test comment", jsonObject["result"]["comment"].ToString());
+        }
+
+        [Fact, TestPriority(75)]
+        public async Task CreateOrderAsync_ReturnsCreatedResponse()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Получение токена доступа
+            var token = await GetAccessTokenAsync(client);
+
+            var createOrderDto = new CreateOrderDto
+            {
+                Sum = 300.00,
+                UserId = UserId,
+                Shipment = new CreateShipmentDto
+                {
+                    Address = "123 Street, City, Country",
+                    ApplicationUserId = UserId,
+                    City = "Odessa",
+                    Country = "Ukraine"
+                },
+                Payment = new CreatePaymentDto
+                {
+                    PaymentMethod = "Cash",
+                    ApplicationUserId = UserId,
+                    Amount = 300.00,
+                    StripeIntendId = ""
+                },
+                Carts = new List<CreateCartDto>
+                {
+                    new CreateCartDto
+                    {
+                        WatchId = WatchId,
+                        Count = 1,
+                    }
+                },
+                Comment = "Please deliver between 9 AM and 5 PM."
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/order");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var content = new StringContent(JsonConvert.SerializeObject(createOrderDto), Encoding.UTF8, "application/json");
+            request.Content = content;
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            Assert.NotNull(jsonObject["result"]);
+            Assert.Equal(createOrderDto.Sum, (double)jsonObject["result"]["sum"]);
+            Assert.Equal(createOrderDto.UserId.ToString(), (string)jsonObject["result"]["userId"]);
+            Assert.Equal(createOrderDto.Shipment.Address, (string)jsonObject["result"]["shipment"]["address"]);
+            Assert.Equal(createOrderDto.Payment.PaymentMethod, (string)jsonObject["result"]["payment"]["paymentMethod"]);
+            Assert.Equal(createOrderDto.Carts.First().WatchId, (int)jsonObject["result"]["carts"].First()["watchId"]);
+            Assert.Equal(createOrderDto.Comment, (string)jsonObject["result"]["comment"]);
+
+            OrderId = Guid.Parse(jsonObject["result"]["id"].ToString());
+        }
+
+        [Fact, TestPriority(90)]
+        public async Task GetOrderByIdAsync_ReturnsOrderWithCorrectId()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+            var orderId = OrderId;
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {adminToken}");
+
+            // Act
+            var response = await client.GetAsync($"/api/order/{orderId}");
+
+            // Assert
+            response.EnsureSuccessStatusCode(); 
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            Assert.Equal(orderId, Guid.Parse(jsonObject["result"]["id"].ToString()));
+        }
+
+        [Fact, TestPriority(105)]
+        public async Task UpdateOrderStatusAsync_ChangesOrderStatusToSent()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+            var orderId = OrderId;
+            var newStatus = "Sent";
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {adminToken}");
+
+            // Act
+            var response = await client.PutAsync($"/api/order/status/{orderId}&{newStatus}", new StringContent(""));
+
+            // Assert
+            response.EnsureSuccessStatusCode(); // Проверка успешности ответа
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode); // Проверка статуса кода
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonObject = JObject.Parse(responseContent);
+
+            Assert.Equal(newStatus, jsonObject["result"]["orderStatus"]["name"].ToString());
+        }
+
+        [Fact, TestPriority(170)]
+        public async Task DeleteCommentAsync_ReturnsOkResponse()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/comment/{ComentId}");
+
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", adminToken);
+
+            // Act
+            var response = await client.SendAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains($"Comment {ComentId} - was deleted", responseContent);
+        }
+
+        [Fact, TestPriority(190)]
+        public async Task DeleteOrderAsync_DeletesOrder()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+            var orderId = OrderId;
+
+            var adminToken = await GetAccessTokenAsync(client);
+
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {adminToken}");
+
+            // Act
+            var response = await client.DeleteAsync($"/api/order/{orderId}");
+
+            // Assert
+            response.EnsureSuccessStatusCode(); 
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode); 
+        }
+
+        [Fact, TestPriority(200)]
         public async Task Delete_WatchAsync_ReturnOk()
         {
             var client = _factory.CreateClient();
@@ -290,7 +592,7 @@ namespace WatchShopTest.IntegrationTests
             Assert.Equal(System.Net.HttpStatusCode.OK, deleteApiResponse.StatusCode); // Проверяем, что статус код в ApiResponse равен 200
         }
 
-        [Fact, TestPriority(20)]
+        [Fact, TestPriority(250)]
         public async Task Delete_BrendAsync_ReturnOk()
         {
             var client = _factory.CreateClient();
@@ -308,8 +610,6 @@ namespace WatchShopTest.IntegrationTests
             deleteResponse.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.OK, deleteResponse.StatusCode);
         }
-
-
 
         private void AddComplexObjectToContent(MultipartFormDataContent content, object obj, string prefix)
         {
