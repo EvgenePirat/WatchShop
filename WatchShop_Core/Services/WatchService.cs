@@ -124,7 +124,7 @@ namespace WatchShop_Core.Services
 
         public async Task<WatchModel> GetByNameModelAsync(string nameModel)
         {
-            var watch = await _unitOfWork.WatchRepository.FindByNameModelAsync(nameModel) ?? throw new WatchArgumentException("watch by name model not found");
+            var watch = await _unitOfWork.WatchRepository.FindByNameModelAsync(nameModel) ?? throw new WatchArgumentException("Watch by name model not found");
             return _mapper.Map<WatchModel>(watch);
         }
 

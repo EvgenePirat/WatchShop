@@ -87,7 +87,7 @@ namespace WatchShop_Core.Services
             var commentToUpdate = await _unitOfWork.WatchCommentRepository.GetByIdAsync(id);
 
             if (commentToUpdate == null)
-                throw new CommentWatchArgumentException($"Comment by id {id} not found for delete");
+                throw new CommentWatchArgumentException($"Comment by id {id} not found for update");
 
             commentToUpdate.Comment = model.Comment;
             commentToUpdate.Grade = model.Grade;
