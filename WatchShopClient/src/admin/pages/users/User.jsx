@@ -24,12 +24,13 @@ function User() {
 
     var result = await updateUserMutation(userUpdate);
 
-    if(result.data.isSuccess){
-        toast.success('User is update');
-        setUserDetail(userUpdate)
+    if(result.error){
+      toast.error('User is not update');
     }
-    else
-        toast.error('User is not update');
+    else{
+      toast.success('User is update');
+      setUserDetail(userUpdate)
+    }
 }
 
   return (
@@ -41,7 +42,7 @@ function User() {
         <div className="userShow">
             <span className="userUpdateTitle">Details</span>
           <div className="userShowBottom">
-            <span className="userShowTitle">UserName</span>
+            <span className="userShowTitle">Phone number</span>
             <div className="userShowInfo">
               <span className="userShowInfoTitle">{userDetail.userName}</span>
             </div>
@@ -89,9 +90,9 @@ function User() {
           <form className="userUpdateForm" onSubmit={handleUpdateUser}>
             <div className="userUpdateLeft">
               <div className="userUpdateItem">
-                <label>UserName</label>
+                <label>Phone number</label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder={userUpdate.userName}
                   className="brendUpdateInput"
                   value={userUpdate.userName}

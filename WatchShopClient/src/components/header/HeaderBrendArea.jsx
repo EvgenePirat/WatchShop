@@ -30,7 +30,12 @@ const HeaderBrendArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(0, Math.ceil(data.result.length / 3)).map((brend, index) => (
-                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
+                                brend.countWatches > 0 &&
+                                <li key={index}>
+                                    <Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>
+                                        {brend.name}({brend.countWatches})
+                                    </Link>
+                                </li>
                             ))
                         }
                     </ul>
@@ -39,7 +44,12 @@ const HeaderBrendArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(Math.ceil(data.result.length / 3), Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
-                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
+                                brend.countWatches > 0 &&
+                                <li key={index}>
+                                    <Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>
+                                        {brend.name}({brend.countWatches})
+                                    </Link>
+                                </li>
                             ))
                         }
                     </ul>
@@ -48,7 +58,12 @@ const HeaderBrendArea = ({header}) => {
                     <ul className="fz-category-list">
                         {data.result.length > 0 && 
                             data.result.slice(Math.ceil(2 * data.result.length / 3)).map((brend, index) => (
-                                <li key={index}><Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>{brend.name}({brend.countWatches})</Link></li>
+                                brend.countWatches > 0 &&
+                                <li key={index}>
+                                    <Link to={{ pathname: '/shop', search: `?filter=${brend.name}` }}>
+                                        {brend.name}({brend.countWatches})
+                                    </Link>
+                                </li>
                             ))
                         }
                     </ul>

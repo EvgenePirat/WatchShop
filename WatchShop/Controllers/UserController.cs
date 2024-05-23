@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.Models.Users.Request;
 using WatchShop_Core.ServiceContracts;
@@ -47,6 +48,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("subscription/{email}&{isActive:bool}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> SubscriptionLetters(string email, bool isActive)
         {
             _logger.LogInformation("{controller}.{method} - Put, Set Subscription Letters, Task started",
@@ -67,6 +69,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> UpdateUserAsync(Guid id, [FromBody] UpdateUserDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update User, Task started",
@@ -91,6 +94,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:Guid}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUserAsync(Guid id)
         {
             _logger.LogInformation("{controller}.{method} - Delete, delete user, Task started",
@@ -101,7 +105,7 @@ namespace WatchShop_UI.Controllers
             ApiResponse response = new ApiResponse()
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
-                Result = $"Brend {id} - was deleted"
+                Result = $"User {id} - was deleted"
             };
 
             _logger.LogInformation("{controller}.{method} - Delete, delete user, Result - Ok, Task ended",
@@ -111,6 +115,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpGet("{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetUserByIdAsync(Guid id)
         {
             _logger.LogInformation("{controller}.{method} - Get, get user by id, Task started",
@@ -133,6 +138,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpGet("{username}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetUserByUserNameAsync(string username)
         {
             _logger.LogInformation("{controller}.{method} - Get, get user by username, Task started",

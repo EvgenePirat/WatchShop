@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.ServiceContracts;
-using WatchShop_Core.Services;
-using WatchShop_UI.Dtos.Brends.Response;
 using WatchShop_UI.Dtos.SalesStatistics.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 
@@ -11,6 +9,7 @@ namespace WatchShop_UI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class AnalyticController : ControllerBase
     {
         private readonly IAnalyticService _analyticService;

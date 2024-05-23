@@ -20,13 +20,14 @@ function Brend() {
 
         var result = await updateBrendMutation({id: brend.id, name: updateName, description: updateDescription});
 
-        if(result.data.isSuccess){
-            toast.success('Brend is update');
-            setCurrentName(result.data.result.name)
-            setCurrentDescription(result.data.result.description)
+        if(result.error){
+          toast.error('Brend is not update');
         }
-        else
-            toast.error('Brend is not update');
+        else{
+          toast.success('Brend is update');
+          setCurrentName(result.data.result.name)
+          setCurrentDescription(result.data.result.description)
+        }
     }
 
   return (

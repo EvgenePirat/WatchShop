@@ -40,6 +40,9 @@ const commentApi = createApi({
                 url: "",
                 method:"POST",
                 body: newComment,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                }
             }),
             invalidatesTags:["Comments"]
         }),
@@ -50,6 +53,9 @@ const commentApi = createApi({
                 body: comment,
             }),
             invalidatesTags:["Comments"],
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
         }),
         deleteComment: builder.mutation({
             query: (id) => ({
@@ -57,6 +63,9 @@ const commentApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags:["Comments"],
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
         })
     }),
 });

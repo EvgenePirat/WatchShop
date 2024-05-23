@@ -1,4 +1,3 @@
-import { allCakeList, blogList } from '../data/Data';
 import { createContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux'
@@ -336,7 +335,7 @@ useEffect(() => {
   const handleRemoveItem = (itemId) => {
     const updatedItems = cartItems.filter(item => item.id !== itemId);
     setCartItems(updatedItems);
-    toast.error('Item deleted from cart!')
+    toast.error('Watch deleted from cart!')
   };
   const handleQuantityChange = (itemId, newQuantity) => {
     if (newQuantity >= 0) {
@@ -379,9 +378,9 @@ useEffect(() => {
         }
 
         setCartItems(prevCartItems => [...prevCartItems, newItem]);
-        toast.success("Item added in cart!")
+        toast.success("Watch added in cart!")
       } else if (existingItemIndex !== -1) {
-        // Increment quantity and update total
+
         const updatedCartItems = [...cartItems];
         updatedCartItems[existingItemIndex].quantity += quantity;
 
@@ -393,11 +392,11 @@ useEffect(() => {
         }
 
         setCartItems(updatedCartItems);
-        toast.success("Item list updated in cart!")
+        toast.success("Watch list updated in cart!")
 
       }
     } else {
-      toast.warning('Item not found in watchesList.');
+      toast.warning('Watch not found in watchesList.');
     }
   };
 
@@ -432,7 +431,7 @@ useEffect(() => {
         // Set initial quantity to 1 and total to item's price
 
         setCartItems(prevCartItems => [...prevCartItems, newItem]);
-        toast.success("Item added in cart!")
+        toast.success("Watch added in cart!")
       } else if (existingItemIndex !== -1) {
         // Increment quantity and update total
         const updatedCartItems = [...cartItems];
@@ -446,11 +445,11 @@ useEffect(() => {
         }
 
         setCartItems(updatedCartItems);
-        toast.success("Item list updated in cart!")
+        toast.success("Watch list updated in cart!")
 
       }
     } else {
-      toast.warning('Item not found in watchesList.');
+      toast.warning('Watch not found in watchesList.');
     }
   };
 
@@ -466,7 +465,7 @@ useEffect(() => {
   const handleRemoveItemWishlist = (itemId) => {
     const updatedItems = wishlist.filter(item => item.id !== itemId);
     setWishlist(updatedItems);
-    toast.error("Item deleted from wishlist!")
+    toast.error("Watch deleted from wishlist!")
   };
 
   // Add to Wishlist
@@ -484,12 +483,12 @@ useEffect(() => {
         };
 
         setWishlist(prevWishlistItems => [...prevWishlistItems, newItem]);
-        toast.success("Item added to wishlist!");
+        toast.success("Watch added to wishlist!");
       } else {
-        toast.warning("Item already in wishlist!");
+        toast.warning("Watch already in wishlist!");
       }
     } else {
-      toast.error('Item not found in filteredProducts.');
+      toast.error('Watch not found in filteredProducts.');
     }
   };
 
@@ -515,7 +514,7 @@ useEffect(() => {
   // Function to add wishlist items to cart
   const addWishlistToCart = () => {
     if (wishlist.length === 0) {
-      toast.warning("No items in wishlist to add!");
+      toast.warning("No watches in wishlist to add!");
       return;
     }
   
@@ -541,7 +540,7 @@ useEffect(() => {
   
     setCartItems(updatedCartItems);
     setWishlist([]); // Clear the wishlist after adding to cart
-    toast.success("Wishlist items added to cart!");
+    toast.success("Wishlist watches added to cart!");
   };
   
   
@@ -556,7 +555,7 @@ useEffect(() => {
       updatedCartItems[existingCartItemIndex].quantity += 1;
       updatedCartItems[existingCartItemIndex].total += item.price;
       setCartItems(updatedCartItems);
-      toast.success("Item quantity updated in cart!");
+      toast.success("Watch quantity updated in cart!");
     } else {
       // If item does not exist in cart, add it with quantity 1
       const newCartItem = {
@@ -566,7 +565,7 @@ useEffect(() => {
       };
       setCartItems((prevCartItems) => [...prevCartItems, newCartItem]);
       setWishlist(updatedWishlist); // Update wishlist after removing the item
-      toast.success("Item added to cart!");
+      toast.success("Watch added to cart!");
     }
   };
 
@@ -576,101 +575,6 @@ useEffect(() => {
     return total + item.quantity * price;
   }, 0);
   const finalPrice = subTotal
-
-  // Blog List Category Filter
-  const [filteredBlogList, setFilteredBlogList] = useState(blogList);
-  const [activeBlogCategory, setActiveBlogCategory] = useState(null);
-  const [paginatedBlogPost, setPaginatedBlogPost] = useState([]);
-  // pagination
-  const itemsPerBlogPage = 3; // Number of items per page
-
-  const [currentBlogPage, setCurrentBlogPage] = useState(1);
-
-  const handleBlogPageChange = (newPage) => {
-    setCurrentBlogPage(newPage);
-    scrollToTop();
-  };
-  useEffect(() => {
-    const startIndex = (currentBlogPage - 1) * itemsPerBlogPage;
-    const endIndex = startIndex + itemsPerBlogPage;
-
-    const paginatedBlogSlice = filteredBlogList.slice(startIndex, endIndex);
-
-    setPaginatedBlogPost(paginatedBlogSlice);
-  }, [currentBlogPage, filteredBlogList]);
-
-
-
-  const totalBlogs = filteredBlogList.length
-  const totalBlogPage = Math.ceil(totalBlogs / itemsPerBlogPage);
-
-  // Search Filter
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    const filteredBlogs = blogList.filter(item =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredBlogList(filteredBlogs);
-    setCurrentBlogPage(1); // Reset to the first page when search is changed
-    setSelectedBlogTags([]); // Reset selected tags
-    setActiveBlogCategory(null); // Reset active category
-  };
-
-  // Blog Category Filter
-
-  const handleBlogCategoryFilter = (category) => {
-    if (category === null) {
-      setFilteredBlogList(blogList);
-    } else {
-      const filteredBlogs = blogList.filter(item => item.category === category);
-      setFilteredBlogList(filteredBlogs);
-    }
-    setActiveBlogCategory(category);
-    setCurrentBlogPage(1); // Reset to the first page when category is changed
-    setSelectedBlogTags([]); // Reset selected tags
-  };
-  // Blog Tag Filter
- const [selectedBlogTags, setSelectedBlogTags] = useState([]);
-
- const handleBlogTagSelection = (tag) => {
-  if (selectedBlogTags.includes(tag)) {
-    setSelectedBlogTags(selectedBlogTags.filter((selectedTag) => selectedTag !== tag));
-  } else {
-    setSelectedBlogTags([...selectedBlogTags, tag]);
-  }
-};
- // Filter products based on selected tags
-useEffect(() => {
-  // Apply all active filters together
-  let filteredBlogs = blogList;
-
-  // Apply category filter
-  if (activeBlogCategory !== null) {
-    filteredBlogs = filteredBlogs.filter(blog => blog.category === activeBlogCategory);
-  }
-
-  // Apply tag filter
-  if (selectedBlogTags.length > 0) {
-    filteredBlogs = filteredBlogs.filter(blog =>
-      selectedBlogTags.includes(blog.category)
-    );
-  }
-
-  // Apply search filter
-  if (searchQuery.trim() !== '') {
-    filteredBlogs = filteredBlogs.filter(blog =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
-
-  // Update filtered blog list and reset pagination
-  setFilteredBlogList(filteredBlogs);
-  setCurrentBlogPage(1);
-
-}, [searchQuery, selectedBlogTags, activeBlogCategory]);
 
   // jewelery shop
   const [jeweleryArray, setJeweleryArray] = useState([]);
@@ -689,7 +593,7 @@ useEffect(() => {
   const handleRemoveJeweleryItemWishlist = (itemId) => {
     const updatedItems = jeweleryWishlist.filter(item => item.id !== itemId);
     setJeweleryWishlist(updatedItems);
-    toast.error("Item deleted from wishlist!");
+    toast.error("Watch deleted from wishlist!");
   };
 
   const addToJeweleryWishlist = (itemId) => {
@@ -705,12 +609,12 @@ useEffect(() => {
         };
 
         setJeweleryWishlist(prevWishlistItems => [...prevWishlistItems, newItem]);
-        toast.success("Item added to wishlist!");
+        toast.success("Watch added to wishlist!");
       } else {
-        toast.warning("Item already in wishlist!");
+        toast.warning("Watch already in wishlist!");
       }
     } else {
-      toast.error('Item not found in filteredProducts.');
+      toast.error('Watch not found in filteredProducts.');
     }
   };
 
@@ -743,7 +647,7 @@ useEffect(() => {
   const handleRemoveJeweleryCartItem = (itemId) => {
     const updatedItems = jeweleryAddToCart.filter(item => item.id !== itemId);
     setJeweleryAddToCart(updatedItems);
-    toast.error("Item deleted from wishlist!")
+    toast.error("Watch deleted from wishlist!")
   };
   // handle quantity change for jewelery shop
   const handleJeweleryCartQuantityChange = (itemId, newQuantity) => {
@@ -773,7 +677,7 @@ useEffect(() => {
         };
 
         setJeweleryAddToCart(prevAddToCartItems => [...prevAddToCartItems, newItem]);
-        toast.success("Item added in AddToCart!")
+        toast.success("Watch added in AddToCart!")
       } else if (existingItemIndex !== -1) {
         // Increment quantity and update total
         const updatedAddToCartItems = [...jeweleryAddToCart];
@@ -781,10 +685,10 @@ useEffect(() => {
         updatedAddToCartItems[existingItemIndex].total = updatedAddToCartItems[existingItemIndex].quantity * itemToAdd.price;
 
         setJeweleryAddToCart(updatedAddToCartItems);
-        toast.success("Item list updated in AddToCart!")
+        toast.success("Watch list updated in AddToCart!")
       }
     } else {
-      toast.warning('Item not found in ornament list.');
+      toast.warning('Watch not found in ornament list.');
     }
   };
 
@@ -928,14 +832,6 @@ useEffect(() => {
       addToWishlist,
       subTotal,
       finalPrice,
-      filteredBlogList,
-      handleBlogCategoryFilter,
-      activeBlogCategory,
-      currentBlogPage,
-      handleBlogPageChange,
-      itemsPerBlogPage,
-      totalBlogPage,
-      paginatedBlogPost,
       jeweleryWishlist,
       addToJeweleryWishlist,
       jeweleryAddToCart,
@@ -946,8 +842,6 @@ useEffect(() => {
       handleJeweleryCartQuantityChange,
       searchTerm,
       handleSearchChange,
-      searchQuery,
-      handleSearch,
       jeweleryArray,
       randomizedItems,
       addWishlistToCart,
@@ -961,8 +855,6 @@ useEffect(() => {
       slides,
       selectedTags,
       handleTagSelection,
-      selectedBlogTags,
-      handleBlogTagSelection,
       wishlistItemAmount,
       slidesBrand,
       wishlistJewelleryItemAmount

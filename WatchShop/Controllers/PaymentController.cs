@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.ServiceContracts;
-using WatchShop_UI.Dtos.Brends.Reequest;
 using WatchShop_UI.Dtos.Payments.Response;
 using WatchShop_UI.Utilities.GeneralResponse;
 
@@ -10,6 +10,7 @@ namespace WatchShop_UI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PaymentController : ControllerBase
     {
         private readonly ILogger<PaymentController> _logger;

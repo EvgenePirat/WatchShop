@@ -3,12 +3,22 @@ import ProductDetailSlider from '../sliders/ProductDetailSlider';
 import ProductDetailTextSection from './ProductDetailTextSection';
 import ProductDescTabPane from './ProductDescTabPane';
 import ProductReviewTabPane from './ProductReviewTabPane';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 
 const ProductDetailSection = () => {
     const [activeTab, setActiveTab] = useState('description');
+    const [additionalCharacteristics, setAdditionalCharacteristics] = useState([]);
+
+    const { data, isLoading } = useGetWatchCharacteristicsQuery();
+
+    useEffect(() => {
+        if (!isLoading && data) {
+            setAdditionalCharacteristics(data.result.additionalCharacteristics)
+        }
+    }, [data, isLoading]);
 
     const location = useLocation();
     const { item } = location.state;
@@ -61,7 +71,7 @@ const ProductDetailSection = () => {
                         </Nav>
                         <Tab.Content>
                             <Tab.Pane eventKey='description' className={`tab-pane ${activeTab === 'description' ? 'show active' : ''}`}>
-                                <ProductDescTabPane watch={item} />
+                                <ProductDescTabPane watch={item} additionalCharacteristics={additionalCharacteristics} />
                             </Tab.Pane>
 
 

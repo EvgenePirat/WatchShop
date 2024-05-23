@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.Models.Comments.Request;
 using WatchShop_Core.ServiceContracts;
@@ -24,6 +25,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> CreateCommentAsync([FromBody] CreateCommentDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Create Comment, Task started", nameof(CommentController), nameof(CreateCommentAsync));
@@ -68,6 +70,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("{id:Guid}")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> UpdateCommentAsync(Guid id, [FromBody] UpdateCommentDto dto)
         {
             _logger.LogInformation("{controller}.{method} - Post, Update Comment, Task started",

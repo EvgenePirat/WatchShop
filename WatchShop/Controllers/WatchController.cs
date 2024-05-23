@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WatchShop_Core.Domain.Entities;
 using WatchShop_Core.Models.Watches.Request;
@@ -68,6 +69,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> CreateWatchAsync([FromForm]CreateWatchDto watchDto)
         {
             _logger.LogInformation("{controller}.{method} - POST, create new watch, Task started",
@@ -92,6 +94,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> UpdateWatchAsync(int id, UpdateWatchDto updateWatch)
         {
             _logger.LogInformation("{controller}.{method} - PUT, update exist watch, Task started",
@@ -138,6 +141,7 @@ namespace WatchShop_UI.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ApiResponse>> DeleteWatchByIdAsync(int id)
         {
             _logger.LogInformation("{controller}.{method} - DELETE, delete watch by id, Task started",

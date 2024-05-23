@@ -60,6 +60,7 @@ const AccountFormSection = ({user}) => {
         localStorage.removeItem('token');
         dispatch(setLoggedInUser({id:"", username:"", role:""}));
         navigate("/");
+        toast.success('You logout from your account');
     }
 
     const isValidEmail = (email) => {

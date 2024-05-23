@@ -6,10 +6,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-
-
 
 function OrderList() {
 
@@ -46,10 +42,10 @@ function OrderList() {
   
         result.then(response => {
           
-          if (response.data.isSuccess) {
-            toast.success(response.data.result)
-          } else {
+          if (response.error) {
             toast.error('order is not deleted')
+          } else {
+            toast.success(response.data.result)
           }
         })
     }
@@ -63,6 +59,9 @@ function OrderList() {
 
   return (
     <div className='orderList'>
+      <div className='userTitleContainer'>
+          <h3 className="userTitle">Orders</h3>
+      </div>
         <div style={{ width: '100%', alignItems: 'end'}}>
                 <DataGrid
                 rows={data.result}

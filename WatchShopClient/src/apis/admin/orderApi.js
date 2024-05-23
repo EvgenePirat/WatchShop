@@ -3,7 +3,11 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 const orderApi = createApi({
     reducerPath:"orderApi",
     baseQuery: fetchBaseQuery({
-        baseUrl:"https://localhost:7103/api/order/"
+        baseUrl:"https://localhost:7103/api/order/",
+        prepareHeaders: (headers, api) => {
+            const token = localStorage.getItem("token");
+            token && headers.append("Authorization", "Bearer " + token);
+        }
     }),
     tagTypes: ["Orders"],
     endpoints: (builder) => ({
@@ -41,7 +45,7 @@ const orderApi = createApi({
                 url:`status/${updateStatus.id}&${updateStatus.status}`,
                 method: "PUT"
             }),
-            invalidatesTags:["Orders"],
+            invalidatesTags:["Orders"]
         }),
         updateShipment: builder.mutation({
             query: (updateShipment) => ({

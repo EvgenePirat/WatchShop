@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import { useGetCommentByWatchNameModelQuery } from '../../apis/admin/commentApi';
+import { useGetWatchCharacteristicsQuery } from '../../apis/admin/watchApi';
 
 const ProductReviewTabPane = ({watch}) => {
 
@@ -78,6 +79,8 @@ const ProductReviewTabPane = ({watch}) => {
 
     const alreadyComment = isUserAlreadyCommented();
 
+    console.log(comments)
+
   return (
     <div className="fz-product-details__review">
         <div className="review-overview">
@@ -122,6 +125,7 @@ const ProductReviewTabPane = ({watch}) => {
                             <div className="user">
                                 <div className="user-info">
                                     <h6 className="user-name">{userItems.filter((user) => user.id == comment.userId)[0].userName}</h6>
+                                    <h6 className="user-name">{new Date(comment.createdAt).toLocaleDateString()}</h6>
                                     <div className="user-rating">
                                         <Rating name="read-only" value={comment.grade} readOnly />
                                     </div>

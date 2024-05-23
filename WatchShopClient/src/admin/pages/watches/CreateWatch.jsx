@@ -111,9 +111,6 @@ function CreateWatch() {
   const handleSubmit = async (e) => {
       e.preventDefault();
 
-      console.log(newWatch)
-
-      
       const formData = new FormData();
 
       formData.append('nameModel', newWatch.nameModel);
@@ -163,14 +160,14 @@ function CreateWatch() {
 
         console.log(response)
 
-        if(response.data.isSuccess)
-            toast.success('Watch is add');
-        else
-            toast.error('Watch is not add');
-      
-        setNewWatch(watch)      
-        setImages([])
-        setWatchAdditionalCharacteristics([])
+        if(response.error)
+          toast.error('Watch is not add');
+        else{
+          toast.success('Watch is add');
+          setNewWatch(watch)      
+          setImages([])
+          setWatchAdditionalCharacteristics([])
+        }
   
         console.log('Response from server:', response);
       } catch (error) {
@@ -258,7 +255,7 @@ function CreateWatch() {
                 </div>
 
                 <div className="addWatchItem">
-                  <label htmlFor="timeFormats">TimeFormat:</label>
+                  <label htmlFor="timeFormats">Time Format:</label>
                   <select id="timeFormats" name="timeFormats" value={newWatch.timeFormat}  onChange={(e) => setNewWatch((prev) => ({...prev,timeFormat: e.target.value}))}>
                     {data.result.timeFormatEnums.map((index, timeFormat) => (
                       <option key={timeFormat} value={index}>{transformString(index)}</option>
@@ -366,7 +363,7 @@ function CreateWatch() {
                 </div>
 
                 <div className="addWatchItem">
-                  <label htmlFor="waterResistances">Frame Case Shape:</label>
+                  <label htmlFor="waterResistances">Water Resistance:</label>
                   <select id="waterResistances" name="waterResistances" value={newWatch.frame.waterResistance}  onChange={(e) => setNewWatch((prev) => ({...prev,frame: {...prev.frame, waterResistance : e.target.value}}))}>
                     {data.result.waterResistanceEnums.map((index, waterResistance) => (
                       <option key={waterResistance} value={index}>{transformString(index)}</option>
