@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { formatDate } from '../../../utilities/TransformDate';
 
 
 
@@ -19,10 +19,10 @@ function OrderList() {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 200 },
-        { field: 'createDate', headerName: 'Create Date', width: 220 },
+        { field: 'createDate', headerName: 'Create Date', width: 150, renderCell: (params) => (params.value ? formatDate(params.value) : '-') },
         { field: 'sum', headerName: 'Sum', width: 70 },
         { field: 'userId', headerName: 'UserId', width: 160 },
-        { field: 'orderStatus', headerName: 'Status', width: 80, valueGetter:(value, row) => `${row.orderStatus.name}` }, 
+        { field: 'orderStatus', headerName: 'Status', width: 100, valueGetter:(value, row) => `${row.orderStatus.name}` }, 
         { field: 'paymentMethod', headerName: 'Method', width: 100, valueGetter:(value, row) => `${row.payment.paymentMethod}` }, 
         { field: 'paymentStatus', headerName: 'Pay Status', width: 130, valueGetter:(value, row) => `${row.payment.status}` }, 
         {

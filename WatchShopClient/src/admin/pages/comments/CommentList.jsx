@@ -4,6 +4,8 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDeleteCommentMutation, useGetCommentsQuery } from '../../../apis/admin/commentApi';
+import { useSelector } from 'react-redux';
+import { formatDate } from '../../../utilities/TransformDate';
 
 function CommentList() {
 
@@ -11,11 +13,12 @@ function CommentList() {
     const [deleteCommentMutation] = useDeleteCommentMutation();
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'comment', headerName: 'Comment', width: 150, renderCell: (params) => (params.value ? params.value : '-') },
-        { field: 'userId', headerName: 'User', width: 300, renderCell: (params) => (params.value ? params.value : '-') },
-        { field: 'watchId', headerName: 'Watch', width: 300, renderCell: (params) => (params.value ? params.value : '-') },
-        { field: 'grade', headerName: 'Grade', width: 300, renderCell: (params) => (params.value ? params.value : '-') },
+        { field: 'id', headerName: 'ID', width: 300 },
+        { field: 'comment', headerName: 'Comment', width: 300, renderCell: (params) => (params.value ? params.value : '-') },
+        { field: 'createdAt', headerName: 'Create date', width: 150, renderCell: (params) => (params.value ? formatDate(params.value) : '-') },
+        { field: 'userId', headerName: 'User', width: 150, renderCell: (params) => (params.value ? params.value : '-') },
+        { field: 'watchId', headerName: 'Watch', width: 100, renderCell: (params) => (params.value ? params.value : '-') },
+        { field: 'grade', headerName: 'Grade', width: 100, renderCell: (params) => (params.value ? params.value : '-') },
         {
           field: "action",
           headerName: "Action",

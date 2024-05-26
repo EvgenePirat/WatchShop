@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './widgetLarge.css'
 import { useGetOrdersQuery } from '../../../apis/admin/orderApi'
 import { useSelector } from 'react-redux';
+import { formatDate } from '../../../utilities/TransformDate';
 
 function WidgetLarge() {
 
@@ -52,7 +53,7 @@ function WidgetLarge() {
                             <img className='widgetLrImg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQElWKlvoKhNSd1xxgVK59sgjJgfoA00LuWkrYZv4jyvQ&s' />
                             <span className="widgetLrName">{order.userId}</span>
                         </td>
-                        <td className='widgetLrDate'>{order.createDate}</td>
+                        <td className='widgetLrDate'>{formatDate(order.createDate)}</td>
                         <td className='widgetLrAmount'>{order.sum}</td>
                         <td className='widgetLgStatus'><Button type={order.orderStatus.name} /></td>
                     </tr>

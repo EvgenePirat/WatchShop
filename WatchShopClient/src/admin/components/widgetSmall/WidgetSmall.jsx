@@ -3,6 +3,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { formatDate } from '../../../utilities/TransformDate';
 
 function WidgetSmall() {
     const userItems = useSelector(state => state.userItemsStore.userItems);
@@ -29,7 +30,7 @@ function WidgetSmall() {
                             <span className='widgetSmUsername'>{user.userName}</span>
                         </div>
                         <div className='widgetSmUser'>
-                            <span className='widgetSmUsername'>{user.createAccountDate}</span>
+                            <span className='widgetSmUsername'>{formatDate(user.createAccountDate)}</span>
                         </div>
                         <button className="widgetSmButton">
                             <VisibilityIcon onClick={() => navigate("/admin/user/"+user.id, {state: {user: user}})} />

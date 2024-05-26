@@ -3,6 +3,7 @@ import '../../styles/user/userEdit.css'
 import { useLocation } from 'react-router-dom';
 import { useUpdateUserMutation } from '../../../apis/admin/userApi';
 import toast, { Toaster } from 'react-hot-toast';
+import { formatDate } from '../../../utilities/TransformDate';
 
 function User() {
 
@@ -71,10 +72,18 @@ function User() {
               <span className="userShowInfoTitle">{userDetail.email ?? '-'}</span>
             </div>
           </div>
+
           <div className="userShowBottom">
             <span className="userShowTitle">City</span>
             <div className="userShowInfo">
               <span className="userShowInfoTitle">{userDetail.city ?? '-'}</span>
+            </div>
+          </div>
+
+          <div className="userShowBottom">
+            <span className="userShowTitle">Date create account</span>
+            <div className="userShowInfo">
+              <span className="userShowInfoTitle">{formatDate(userDetail.createAccountDate) ?? '-'}</span>
             </div>
           </div>
 
