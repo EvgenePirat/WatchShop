@@ -63,9 +63,7 @@ namespace WatchShop_Core.Services
             var comments = await _unitOfWork.WatchCommentRepository.FindCommentByUserNameAsync(username);
 
             if(comments.Count() == 0)
-            {
                 throw new CommentWatchArgumentException($"Comments by username not found");
-            }
 
             return _mapper.Map<IEnumerable<CommentModel>>(comments);
         }
@@ -75,9 +73,7 @@ namespace WatchShop_Core.Services
             var comments = await _unitOfWork.WatchCommentRepository.FindCommentByWatchNameModelAsync(nameModel);
 
             if (comments.Count() == 0)
-            {
                 throw new CommentWatchArgumentException($"Comments by watch nameModel {nameModel} not found");
-            }
 
             return _mapper.Map<IEnumerable<CommentModel>>(comments);
         }

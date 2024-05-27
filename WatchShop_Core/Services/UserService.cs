@@ -28,9 +28,7 @@ namespace WatchShop_Core.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
             if(user == null)
-            {
                 throw new UserArgumentException("User for delete with id not found");
-            }
 
             await _userManager.DeleteAsync(user);
 
@@ -48,6 +46,7 @@ namespace WatchShop_Core.Services
                 var modelUser = modelUsers.SingleOrDefault(m => m.Id == user.Id);
                 modelUser.Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
             }
+
             return modelUsers;
         }
 
@@ -56,9 +55,7 @@ namespace WatchShop_Core.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
             if (user == null)
-            {
                 throw new UserArgumentException("User by id not found");
-            }
 
             var userModel = _mapper.Map<UserModel>(user);
 
@@ -72,9 +69,7 @@ namespace WatchShop_Core.Services
             var user = await _unitOfWork.UserRepository.FindUserByUserNameAsync(username);
 
             if (user == null)
-            {
                 throw new UserArgumentException("User by username not found");
-            }
 
             var userModel = _mapper.Map<UserModel>(user);
 
@@ -85,30 +80,23 @@ namespace WatchShop_Core.Services
 
         public async Task<bool> SetSubscriptionLetters(string email, bool isActive)
         {
-            try
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+
+            if (user == null)
+                throw new UserArgumentException("User by email not found");
+
+            if (user.IsSubscriptionLetters != isActive)
             {
-                var user = await _unitOfWork.UserRepository.GetByEmailAsync(email);
+                user.IsSubscriptionLetters = isActive;
 
-                if (user == null)
-                {
-                    throw new UserArgumentException("User by email not found");
-                }
+                await _userManager.UpdateAsync(user);
 
-                if(user.IsSubscriptionLetters != isActive)
-                {
-                    user.IsSubscriptionLetters = isActive;
-
-                    await _userManager.UpdateAsync(user);
-
-                    await _unitOfWork.SaveAsync();
-                }
+                await _unitOfWork.SaveAsync();
 
                 return true;
             }
-            catch (Exception ex)
-            {
-                throw new UserArgumentException(ex.Message);
-            }
+
+            return false;
         }
 
         public async Task<UserModel> UpdateUserAsync(Guid id, UpdateUserModel model)
@@ -116,9 +104,7 @@ namespace WatchShop_Core.Services
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
             if (user == null)
-            {
                 throw new UserArgumentException("User by id not found for update");
-            }
 
             user.UserName = model.UserName;
             user.FirstName = model.FirstName;
@@ -128,11 +114,9 @@ namespace WatchShop_Core.Services
 
             if(await _userManager.IsInRoleAsync(user, model.Role.ToString()) == false)
             {
-                var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
-                await _userManager.RemoveFromRoleAsync(user, role);
-                await _userManager.AddToRoleAsync(user, model.Role.ToString());
+                await UpdateRoleForUser(model, user);
             }
-            
+
             await _userManager.UpdateAsync(user);
 
             await _unitOfWork.SaveAsync();
@@ -142,6 +126,13 @@ namespace WatchShop_Core.Services
             modelUser.Role = model.Role.ToString();
 
             return modelUser;
+        }
+
+        private async Task UpdateRoleForUser(UpdateUserModel model, ApplicationUser? user)
+        {
+            var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            await _userManager.RemoveFromRoleAsync(user, role);
+            await _userManager.AddToRoleAsync(user, model.Role.ToString());
         }
     }
 }

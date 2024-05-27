@@ -54,29 +54,23 @@ namespace WatchShop_Core.Services
             var userExist = users.FirstOrDefault(u => u.UserName.ToLower() == model.Username.ToLower());
 
             if (userExist != null)
-            {
                 throw new AuthArgumentException("User with username already exist");
-            }
+
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName = model.Username,
+                CreateAccountDate = model.CreateAccountDate,
+                Email = model.Email,
+            };
 
             try
             {
-                ApplicationUser user = new ApplicationUser()
-                {
-                    UserName = model.Username,
-                    CreateAccountDate = model.CreateAccountDate,
-                    Email = model.Email,
-                };
-
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (!result.Succeeded)
                     throw new AuthArgumentException("User creation failed!");
 
-                if (!_roleManager.RoleExistsAsync(RoleEnum.Client.ToString()).GetAwaiter().GetResult())
-                {
-                    await _roleManager.CreateAsync(new ApplicationRole() { Name = RoleEnum.Client.ToString() });
-                    await _roleManager.CreateAsync(new ApplicationRole() { Name = RoleEnum.Admin.ToString() });
-                }
+                await CreateRoleIfNotExist();
 
                 await _userManager.AddToRoleAsync(user, model.Role.ToString());
 
@@ -85,6 +79,15 @@ namespace WatchShop_Core.Services
             catch (Exception ex)
             {
                 throw new AuthArgumentException(ex.Message);
+            }
+        }
+
+        private async Task CreateRoleIfNotExist()
+        {
+            if (!_roleManager.RoleExistsAsync(RoleEnum.Client.ToString()).GetAwaiter().GetResult())
+            {
+                await _roleManager.CreateAsync(new ApplicationRole() { Name = RoleEnum.Client.ToString() });
+                await _roleManager.CreateAsync(new ApplicationRole() { Name = RoleEnum.Admin.ToString() });
             }
         }
     }

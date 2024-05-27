@@ -39,21 +39,21 @@ namespace WatchShop_Core.Services
 
         public async Task<WatchModel> CreateWatchAsync(CreateWatchModel createWatch)
         {
+            var watch = _mapper.Map<Watch>(createWatch);
+
+            Watch? checkWatch = await _unitOfWork.WatchRepository.FindByNameModelAsync(createWatch.NameModel);
+
+            if (checkWatch != null)
+                throw new WatchArgumentException("Watch with model name already exist");
+
+            for (int i = 0; i < createWatch.WatchAdditionalCharacteristicsList.Count; i++)
+            {
+                watch.WatchAdditionalCharacteristics.Add(new WatchAdditionalCharacteristic() { AdditionalCharacteristicsId = createWatch.WatchAdditionalCharacteristicsList[i] });
+            }
+
             try
             {
-                var watch = _mapper.Map<Watch>(createWatch);
-
-                Watch? checkWatch = await _unitOfWork.WatchRepository.FindByNameModelAsync(createWatch.NameModel);
-
-                if (checkWatch != null)
-                    throw new WatchArgumentException("Watch with model name already exist");
-
                 watch.Images = await SavePhotos(createWatch.Files, createWatch.NameModel);
-
-                for(int i = 0; i < createWatch.WatchAdditionalCharacteristicsList.Count; i++)
-                {
-                    watch.WatchAdditionalCharacteristics.Add(new WatchAdditionalCharacteristic() { AdditionalCharacteristicsId = createWatch.WatchAdditionalCharacteristicsList[i] });
-                }
 
                 _unitOfWork.WatchRepository.Add(watch);
 
@@ -81,6 +81,7 @@ namespace WatchShop_Core.Services
                     Path = await _blobService.UploadBlob(fileName, Storage_Container_Name, file),
                     UploadDateTime = DateTime.Now,
                 };
+
                 photos.Add(imageToSave);
             }
 
@@ -89,12 +90,15 @@ namespace WatchShop_Core.Services
 
         public async Task DeleteWatchByIdAsync(int watchId)
         {
-            Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) ?? throw new WatchArgumentException("Watch by id not found for delete");
+            Watch watchFromDb = await _unitOfWork.WatchRepository.GetByIdAsync(watchId) 
+                ?? throw new WatchArgumentException("Watch by id not found for delete");
+
             _unitOfWork.StrapRepositoryBase.Delete(watchFromDb.Strap);
             _unitOfWork.DimensionRepositoryBase.Delete(watchFromDb.Frame.Dimensions);
             _unitOfWork.FrameRepositoryBase.Delete(watchFromDb.Frame);
             _unitOfWork.ClockFaceRepositoryBase.Delete(watchFromDb.ClockFace);
             _unitOfWork.WatchRepository.Delete(watchFromDb);
+
             await _unitOfWork.SaveAsync();
         }
 
@@ -119,6 +123,7 @@ namespace WatchShop_Core.Services
                 w => w.Strap.StrapMaterial,
                 w => w.Comments,
                 w => w.Images);
+
             return _mapper.Map<IEnumerable<WatchModel>>(watches);
         }
 

@@ -64,7 +64,7 @@ namespace WatchShop_Core.Services
             statistics.SalesByDay = salesByDay;
         }
 
-        private static void CountingOrdersAndDays(DateTime startDate, DateTime endDate, Dictionary<DateTime, int> salesByDay, IEnumerable<Order> orders)
+        private void CountingOrdersAndDays(DateTime startDate, DateTime endDate, Dictionary<DateTime, int> salesByDay, IEnumerable<Order> orders)
         {
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
