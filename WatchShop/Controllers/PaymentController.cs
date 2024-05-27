@@ -30,7 +30,7 @@ namespace WatchShop_UI.Controllers
            _logger.LogInformation("{controller}.{method} - Post, create payment, Task started",
                 nameof(PaymentController), nameof(MakePayment));
 
-            var result = _paymentService.MakePayment(carttotal);
+            var result = _paymentService.CreatePayment(carttotal);
 
             var mappedResult = _mapper.Map<PaymentIntentDto>(result);
 

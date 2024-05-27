@@ -18,7 +18,7 @@ namespace WatchShopTest.ModuleTests.CoreTest
             var cartTotal = 100.0;
 
             // Act
-            var result = paymentService.MakePayment(cartTotal);
+            var result = paymentService.CreatePayment(cartTotal);
 
             // Assert
             Assert.NotNull(result);
