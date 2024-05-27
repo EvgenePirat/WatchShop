@@ -69,7 +69,9 @@ namespace WatchShop_Core.Services
 
         public async Task<OrderModel> GetOrderByIdAsync(Guid id)
         {
-            var order = await _unitOfWork.OrderRepository.GetByIdAsync(id) ?? throw new OrderArgumentException($"Order by {id} not found");
+            var order = await _unitOfWork.OrderRepository.GetByIdAsync(id) 
+                ?? throw new OrderArgumentException($"Order by {id} not found");
+
             return _mapper.Map<OrderModel>(order);
         }
 
@@ -89,21 +91,20 @@ namespace WatchShop_Core.Services
             var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
 
             if(orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled || orderToUpdate.OrderStatus.Name == OrderStatusEnum.Delivered)
+                throw new OrderArgumentException("You can not update status for order, order was cancelled or delivered. "
+                    +"You need create new order");
+
+            var newStatusName = Enum.Parse<OrderStatusEnum>(newOrderStatus);
+
+            orderToUpdate.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name == newStatusName).Id;
+
+            if (newStatusName == OrderStatusEnum.Cancelled)
             {
-                throw new OrderArgumentException("You can not update status for order, order was cancelled or delivered. You need create new order");
+                orderToUpdate.Payment.Status = PaymentStatus.Refund;
             }
-            
+
             try
             {
-                var newStatusName = Enum.Parse<OrderStatusEnum>(newOrderStatus);
-
-                orderToUpdate.OrderStatusId = orderStatuses.FirstOrDefault(os => os.Name == newStatusName).Id;
-
-                if(newStatusName == OrderStatusEnum.Cancelled)
-                {
-                    orderToUpdate.Payment.Status = PaymentStatus.Refund;
-                }
-
                 _unitOfWork.OrderRepository.Update(orderToUpdate);
 
                 await _unitOfWork.SaveAsync();
@@ -124,18 +125,14 @@ namespace WatchShop_Core.Services
                 throw new OrderArgumentException($"Order by id {id} not found for update");
 
             if (orderToUpdate.OrderStatus.Name == OrderStatusEnum.Cancelled || orderToUpdate.OrderStatus.Name == OrderStatusEnum.Delivered)
-            {
                 throw new OrderArgumentException("You can not update shipment for order, order was cancelled or delivered.");
-            }
 
-            var orderStatuses = await _unitOfWork.OrderStatusRepositoryBase.GetAllAsync();
+            orderToUpdate.Shipment.Address = model.Address;
+            orderToUpdate.Shipment.Country = model.Country;
+            orderToUpdate.Shipment.City = model.City;
 
             try
             {
-                orderToUpdate.Shipment.Address = model.Address;
-                orderToUpdate.Shipment.Country = model.Country;
-                orderToUpdate.Shipment.City = model.City;
-
                 _unitOfWork.OrderRepository.Update(orderToUpdate);
 
                 await _unitOfWork.SaveAsync();

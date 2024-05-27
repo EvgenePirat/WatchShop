@@ -4,6 +4,6 @@ namespace WatchShop_Core.ServiceContracts
 {
     public interface IPaymentService
     {
-         PaymentIntentModel MakePayment(double carttotal);
+         PaymentIntentModel CreatePayment(double carttotal);
     }
 }

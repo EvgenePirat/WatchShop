@@ -53,13 +53,17 @@ namespace WatchShop_Core.Services
 
         public async Task<BrendModel?> GetBrendByIdAsync(int id)
         {
-            var brend = await _unitOfWork.IBrendRepository.GetByIdAsync(id) ?? throw new BrendArgumentException("Brend by id not found");
+            var brend = await _unitOfWork.IBrendRepository.GetByIdAsync(id) 
+                ?? throw new BrendArgumentException("Brend by id not found");
+
             return _mapper.Map<BrendModel>(brend);
         }
 
         public async Task<BrendModel?> GetBrendByNameAsync(string name)
         {
-            var brend = await _unitOfWork.IBrendRepository.FindByBrendNameAsync(name) ?? throw new BrendArgumentException("Brend by name not found");
+            var brend = await _unitOfWork.IBrendRepository.FindByBrendNameAsync(name) 
+                ?? throw new BrendArgumentException("Brend by name not found");
+
             return _mapper.Map<BrendModel>(brend);
         }
 

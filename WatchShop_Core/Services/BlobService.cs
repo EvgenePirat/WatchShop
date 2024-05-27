@@ -36,14 +36,10 @@ namespace WatchShop_Core.Services
 
             var result = await blobClient.UploadAsync(file.OpenReadStream(), httpHeaders);
 
-            if(result != null)
-            {
-                return await GetBlob(blobName, containerName);
-            }
-            else
-            {
+            if(result == null)
                 throw new ImageArgumentException("Error with save photo");
-            }
+
+            return await GetBlob(blobName, containerName);
         }
 
         public async Task<string> GetBlob(string blobName, string containerName)
