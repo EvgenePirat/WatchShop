@@ -14,13 +14,18 @@ namespace WatchShop_Infrastructure.Repositories
 
         public async Task<IEnumerable<Order>?> FindOrdersByUserNameAsync(string username)
         {
-            var orders = await _context.Orders.IncludeMultiple(o => o.OrderStatus, o => o.Carts, o => o.Shipment, o => o.User, o => o.Payment).ToListAsync();
+            var orders = await _context.Orders
+                .IncludeMultiple(o => o.OrderStatus, o => o.Carts, o => o.Shipment, o => o.User, o => o.Payment)
+                .ToListAsync();
+
             return orders.FindAll(o => o?.User?.UserName == username);
         }
 
         public async Task<Order?> GetByIdAsync(Guid id)
         {
-            return await _context.Orders.IncludeMultiple(o => o.OrderStatus, o => o.Carts, o => o.User, o => o.Shipment, o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
+            return await _context.Orders
+                .IncludeMultiple(o => o.OrderStatus, o => o.Carts, o => o.User, o => o.Shipment, o => o.Payment)
+                .FirstOrDefaultAsync(o => o.Id == id);
         }
     }
 }

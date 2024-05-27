@@ -14,12 +14,14 @@ namespace WatchShop_Infrastructure.Repositories
         public async Task<IEnumerable<WatchComment>?> FindCommentByUserNameAsync(string username)
         {
             var commentWatches = await _context.WatchComments.Include(cw => cw.User).ToListAsync();
+
             return commentWatches.FindAll(cw => cw.User.UserName.ToLower() == username.ToLower());
         }
 
         public async Task<IEnumerable<WatchComment>?> FindCommentByWatchNameModelAsync(string nameModel)
         {
             var commentWatches = await _context.WatchComments.Include(cw => cw.Watch).ToListAsync();
+
             return commentWatches.FindAll(cw => cw.Watch.NameModel.ToLower() == nameModel.ToLower());
         }
 
