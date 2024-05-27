@@ -95,7 +95,7 @@ namespace WatchShop_UI.Controllers
 
         [HttpPut("{id:int}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ApiResponse>> UpdateWatchAsync(int id, UpdateWatchDto updateWatch)
+        public async Task<ActionResult<ApiResponse>> UpdateWatchAsync(int id, [FromForm] UpdateWatchDto updateWatch)
         {
             _logger.LogInformation("{controller}.{method} - PUT, update exist watch, Task started",
                 nameof(WatchController), nameof(UpdateWatchAsync));
