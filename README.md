@@ -32,3 +32,8 @@ To install and run the project locally, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/EvgenePirat/WatchShop.git
+
+## Images
+
+1. **Admin home page**:
+![adminHome](https://github.com/EvgenePirat/WatchShop/assets/91915175/3d7380ea-b7bc-4fc1-a4f8-bdab3404eb19)
